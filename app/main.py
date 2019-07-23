@@ -14,7 +14,7 @@ def data_base():
 users_db = data_base()['users']
 
 #Takes in the User DB, username and password to validate
-def validate_user(the_db, username, password):
+def validate_user_cred(the_db, username, password):
     # Go though the users in the db
     for user in the_db:
         # If the username given and password match
@@ -22,6 +22,29 @@ def validate_user(the_db, username, password):
             return True # Return true
             #Otherwise, keep going
     return False # If we reach the end, return false(Either user not found or not valid pw)
+#Takes in the User DB, username and password to validate
+def validate_user(the_db, username):
+    # Go though the users in the db
+    for user in the_db:
+        # If the username given and password match
+        if( user['username'].lower() == username.lower()):
+            return True # Return true
+            #Otherwise, keep going
+    return False # If we reach the end, return false
+
+
+@app.route('/delete/<user_given>', methods=['POST', 'GET'])
+def test(user_given):
+ if(request.method == 'POST'):
+    print(user_given)
+    # res = request.form
+    # user = res['username'].lower()
+    if(validate_user(users_db, user_given)): #if the user exists     
+        # Replace the list with an updated list
+        list1 = [user for user in data_base()['users'] if (user['username'] !=  user_given)]
+        print(list1)
+        return jsonify(list1)
+    return jsonify({"msg":"no result"})
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -33,7 +56,7 @@ def login():
         # Grab the user and pw
         user = res['username']
         password = res['password']
-        if(validate_user(users_db,user,password)):
+        if(validate_user_cred(users_db,user,password)):
             return render_template('home.html', loggedIn=loggedIn, username=user)
         return render_template('home.html')
     return render_template('home.html')
