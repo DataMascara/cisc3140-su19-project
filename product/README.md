@@ -1,4 +1,4 @@
-##Hello, team!
+Hello, team!
 
 This folder will contain all of the product team's materials.
 
