@@ -1,15 +1,23 @@
 from flask import Flask, render_template, request, redirect, jsonify
-import requests
+import requests, os, json
 
 app = Flask(__name__)
        
+def data_base():
+    filename = os.path.join(app.static_folder, 'db.json')
+    with open(filename, 'r') as dbfile:
+        data = json.load(dbfile)
+    return data
 
+users_db = data_base()['users']
 
-users_db = ["jonnyman"]
-# @app.route('/')
-# def home():
-#     return render_template('home.html')
+def validate_user(the_db, username, password):
+    for user in the_db:
+        if( user['username'].lower() == username.lower() and user['password'].lower() ==password.lower()):
+            return True
+    return False
 
+print(validate_user(users_db, 'appleMan', "1234"))
 
 @app.route('/', methods=['POST', 'GET'])
 def login():
@@ -25,6 +33,11 @@ def login():
     print(users_db)
     return render_template('home.html')
 
+
+
+
+if(__name__ == "__main__"):
+        app.run(debug=True)
 
 # @app.route('/signup')
 # def signup():
