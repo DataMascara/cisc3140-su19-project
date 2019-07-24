@@ -1,106 +1,54 @@
 from flask import Flask, render_template, request, redirect, jsonify
-import requests, os, json
-
+import requests
+import os
+import json
+from database import get_user
+from flask_mysqldb import MySQL
 app = Flask(__name__)
-       
-#Grab the dummy db from JSON file in static folder       
-def data_base():
-    filename = os.path.join(app.static_folder, 'db.json')
-    with open(filename, 'r') as dbfile:
-        data = json.load(dbfile)
-    return data
-
-# Grab the users from the "db"
-users_db = data_base()['users']
-
-#Takes in the User DB, username and password to validate
-def validate_user_cred(the_db, username, password):
-    # Go though the users in the db
-    for user in the_db:
-        # If the username given and password match
-        if( user['username'].lower() == username.lower() and user['password'].lower() ==password.lower()):
-            return True # Return true
-            #Otherwise, keep going
-    return False # If we reach the end, return false(Either user not found or not valid pw)
-#Takes in the User DB, username and password to validate
-def validate_user(the_db, username):
-    # Go though the users in the db
-    for user in the_db:
-        # If the username given and password match
-        if( user['username'].lower() == username.lower()):
-            return True # Return true
-            #Otherwise, keep going
-    return False # If we reach the end, return false
-
-
-@app.route('/delete/<user_given>', methods=['POST', 'GET'])
-def test(user_given):
- if(request.method == 'POST'):
-    print(user_given)
-    # res = request.form
-    # user = res['username'].lower()
-    if(validate_user(users_db, user_given)): #if the user exists     
-        # Replace the list with an updated list
-        list1 = [user for user in data_base()['users'] if (user['username'] !=  user_given)]
-        print(list1)
-        return jsonify(list1)
-    return jsonify({"msg":"no result"})
+app.config['MYSQL_HOST'] = 'sql9.freemysqlhosting.net'
+app.config['MYSQL_USER'] = 'sql9299677'
+app.config['MYSQL_PASSWORD'] = 'NpxJDZNdlX'
+app.config['MYSQL_DB'] = 'sql9299677'
+mysql = MySQL(app)
 
 
 @app.route('/', methods=['POST', 'GET'])
 def login():
-    if(request.method == 'POST'):
+    if request.method == 'POST':
         res = request.form
-        if (res): #Flag for being logged in or no
-            loggedIn = True
         # Grab the user and pw
         user = res['username']
+        # password = res['password']
+        #If db.validate_user_cred
+            # return jsonify({"msg": "login success"}), 200
+        # return jsonify({"error": "Credentials Not Valid!"})
+        return get_user(user)
+    return get_user(user)
+
+
+@app.route('/signup', methods=['POST', 'GET'])
+def sign_up():
+    if(request.method == 'POST'):
+        res = request.form  # Grab the form
+        email = res['email']
+        user = res['username']
         password = res['password']
-        if(validate_user_cred(users_db,user,password)):
-            return render_template('home.html', loggedIn=loggedIn, username=user)
-        return render_template('home.html')
-    return render_template('home.html')
+        # if(validate_user(users_db, user)):
+        #     return jsonify({"error": "User Already Registered"})
+        # Signal DB Of new record
+        return jsonify({"msg": "User Added"})
+    return jsonify({"msg": "User Already Exists"})
+
+
+@app.route('/delete', methods=['POST', 'GET'])
+def test():
+    if(request.method == 'POST'):
+        res = request.get_json()  # Grab the response as a python dict
+        print(type(res))
+        user = res['user'].lower()
+        print(user)
+        return jsonify({"msg": "no result"})
+
 
 if(__name__ == "__main__"):
-        app.run(debug=True)
-
-# @app.route('/signup')
-# def signup():
-#     return render_template('sign_up.html')
-
-
-# @app.route('/addUser', methods=['POST', 'GET'])
-# def addUser():
-#     req = request.form
-#     if controller.addUser(req['firstName'], req['lastName'], req['email'], req['password']):
-#         return redirect('/accountCreated')
-#     else:
-#         return render_template('account_error.html')
-
-
-# @app.route('/accountCreated')
-# def accountCreated():
-#     return render_template('account_created.html')
-
-
-# @app.route('/deleteUser', methods=['POST', 'GET'])
-# def deleteUser():
-#     req = request.form
-#     if controller.deleteUser(req['email']):
-#         return redirect('/accountDeleted')
-#     else:
-#         return render_template('account_error.html')
-
-
-# @app.route('/accountDeleted')
-# def accountDeleted():
-#     return render_template('account_deleted.html')
-
-
-# @app.route('/allAccounts')
-# def allAccounts():
-#     return controller.getAll()
-# #
-# # @login_manager.user_loader()
-# # def user_loader(user_id):
-# #     return controller.findUserByID(user_id)
+    app.run(debug=True)
