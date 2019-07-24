@@ -17,7 +17,6 @@ def get_user(username):
     cur.execute(new)
     rv = cur.fetchall()
     return str(rv)
-    
 
 
 if __name__ == '__main__':

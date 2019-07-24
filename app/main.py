@@ -19,8 +19,8 @@ def login():
         # Grab the user and pw
         user = res['username']
         # password = res['password']
-        #If db.validate_user_cred
-            # return jsonify({"msg": "login success"}), 200
+        # If db.validate_user_cred
+        # return jsonify({"msg": "login success"}), 200
         # return jsonify({"error": "Credentials Not Valid!"})
         return get_user(user)
     return get_user(user)

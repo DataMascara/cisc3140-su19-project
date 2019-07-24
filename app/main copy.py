@@ -14,7 +14,6 @@ mysql = MySQL(app)
 
 # Grab the dummy db from JSON file in static folder
 
-
 def data_base():
     filename = os.path.join(app.static_folder, 'db.json')
     with open(filename, 'r') as dbfile:
