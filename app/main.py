@@ -77,7 +77,7 @@ def user():
     if get_user(user_wanted) != '()':  # Currently, the get_user returns '()' if no user is found
         return jsonify({"msg": "User found!"}), 200
     else:
-        return jsonify({"error": "User Not Found!"})
+        return jsonify({"error": "User Not Found!"}), 404
     return jsonify({"error": "Credentials Not Valid!"})
 
 
