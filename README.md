@@ -13,7 +13,7 @@ Install dependencies from the `requirements.txt` file.
   and download your respective mysqlcleint.whl file (ie `mysqlclient‑1.4.2‑cp37‑cp37m‑win32.whl` is for python 3.7 on windows,) The numbers following cp are the version of python, so cp37 if you're using python 3.7. then `pip install <PATH TO THE .whl FILE>` and you should be able to `pip install flask-mysqldb` - For more info on flask mysql check out the docs at [https://flask-mysqldb.readthedocs.io/en/latest/](https://flask-mysqldb.readthedocs.io/en/latest/)
 
 ## Running
-
+First, navigate into a folder you want this project in and git clone via `git clone -b backend-experimental-bare-bones https://github.com/DataMascara/cisc3140-su19-project/`
 Navigate to the `app/` folder and execute `python main.py` or `python3 main.py` (depending on your setup)
 Use postman ([https://www.getpostman.com/](https://www.getpostman.com/)) to test the API.
 Debug user that already exists is :Mike1234 (it returns his password haha)
