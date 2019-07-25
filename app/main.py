@@ -13,7 +13,7 @@ mysql = MySQL(app)
 
 '''
 ALPHA Back-end API with CRUD(Create, read, update, delete)
-for a user-based loggin website
+for a user-based loggin website.
 '''
 
 '''
