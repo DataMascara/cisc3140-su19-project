@@ -8,6 +8,7 @@
 - Connect to a python module that directly interfaces with a SQL database
 - Make a barebones API that has CRUD functionality for the front end to hit
     - Understand how we can use JSON responses to signal success/failure of operation
+    - Create server to host our application on to make QA testing smoother
 
 **(Q2)** How is your team breaking down work, how are planning to tackle things in weekly increments, in what order, when do you expect to finish each feature?* 
 
