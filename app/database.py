@@ -16,6 +16,7 @@ def get_user(username):
     print(new)
     cur.execute(new)
     rv = cur.fetchall()
+    print(str(rv))
     return str(rv)
 
 
