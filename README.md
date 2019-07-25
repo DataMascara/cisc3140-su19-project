@@ -1,6 +1,4 @@
-# cisc3140-su19-project
-
-# Back-end Barebones Branch has a Barebones REST, CRUD (Create, Read, Update, Delete) API
+## Back-end Barebones Branch has a Barebones REST, CRUD (Create, Read, Update, Delete) API
 
 - Currently uses a minimal flask module `database.py` which makes a connection to a remote database
 
@@ -71,8 +69,6 @@ def takejson():	#Let's say we sent the following json: {"name":"Anton"}
 Try this out using a API interface such as Postman!
 
 # Going between json and python dictionaries
-
-## Loading JSON-String(python string that happens to be JSON format) into a python Object
 
 ## Use the `json.loads()` method to load a python string that is valid JSON into a python dictionary
 
