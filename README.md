@@ -1,57 +1,37 @@
 # cisc3140-su19-project
 
-This is the repository for the group project in CISC 3140 class at Brooklyn College.
+# Back-end Barebones Branch has a Barebones REST, CRUD (Create, Read, Update, Delete) API
 
-**Requirements**
+- Currently uses a minimal flask module `database.py` which makes a connection to a remote database
 
-- Python3
-- Flask Web Framework
+  - `main.py` imports and uses the one function currently described in the `database` module.
 
----
+## Dependencies
 
-# Setup
+Install dependencies from the `requirements.txt` file.
+`pip3 install -r requirements.txt`
 
-## Installation
-
-Installing from the `requirements.txt` file.
-
-```
-pip3 install -r requirements.txt
-```
-
-When new Python libraries are required, update the `requirements.txt` file using the command
-
-```
-pip3 freeze > requirements.txt
-git add requirements.txt
-git commit -m "updated requirements"
-```
+- If you're having trouble installing flask mysql go to [https://www.lfd.uci.edu/~gohlke/pythonlibs/#mysqlclient](https://www.lfd.uci.edu/~gohlke/pythonlibs/#mysqlclient)
+  and download your respective mysqlcleint.whl file (ie `mysqlclient‑1.4.2‑cp37‑cp37m‑win32.whl` is for python 3.7 on windows,) The numbers following cp are the version of python, so cp37 if you're using python 3.7. then `pip install <PATH TO THE .whl FILE>` and you should be able to `pip install flask-mysqldb` - For more info on flask mysql check out the docs at [https://flask-mysqldb.readthedocs.io/en/latest/](https://flask-mysqldb.readthedocs.io/en/latest/)
 
 ## Running
 
-# Flask-SQLAlchemy-REST
+Navigate to the `app/` folder and execute `python main.py` or `python3 main.py` (depending on your setup)
+Use postman ([https://www.getpostman.com/](https://www.getpostman.com/)) to test the API.
+Debug user that already exists is :Mike1234 (it returns his password haha)
 
-Small, Flask app that demonstrates skeleton of a Flask-SQLAlchemy RESTFul api
+## Try a GET Request
 
-# Understanding Serializing/De-serializing
+First, make sure you have the API running and you note down the url ie `127.0.0.0:5000`
 
-- https://stackoverflow.com/questions/7907596/json-dumps-vs-flask-jsonify
+- Open Postman and go to the header tab and your header Content-Type to "application/json"
+- Go to the "Body" tab and check the "raw" and "JSON(application/json) options under that tab
+- Now put `{"user":"mike1234"}` into the raw body (mike1234 exists, so you should get a response that indicates that)
+- Set the request to GET and the URL `http://YOURLOCALHOSTURL:5000/user` - TADA! You should see `{"msg": "User found!"}` in the response body below with a status of 200!
 
-# Introduction
+### Test on a user that doesn not exist
 
-- This Flask application uses SQLAlchemy and marshmallow(for serializing/de- serializing) to make a small, REST + CRUD(create, read, update, delete) API.
-
-# Getting started
-
-- `git clone` the repo!
-
-- If you're using a virtual environment activate it!(I'll assume virtualenv with the named environment "venv"),
-
-- Use `pip install -r requirements.txt` to get all the dependencies.
-
-- `python app.py` should get you up and running!
-
-- Try it out in Postman! (postman is a API development environment that lets you test PUT, GET, DELETE, POST functionality)
+- Follow the above steps but put `{"user":"notrealuser13"}` into the raw body (notrealuser13 does NOT exist, so you should get a response that indicates that) - TADA! You should see `{"error": "User Not found!"}` in the response body below with a status of 404!
 
 # Handling json and python dictionaries
 
