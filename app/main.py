@@ -2,14 +2,17 @@ from flask import Flask, render_template, request, redirect, jsonify
 import requests
 import os
 import json
-from database import get_user
-from flask_mysqldb import MySQL
+from database import test
+
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = 'sql9.freemysqlhosting.net'
-app.config['MYSQL_USER'] = 'sql9299677'
-app.config['MYSQL_PASSWORD'] = 'NpxJDZNdlX'
-app.config['MYSQL_DB'] = 'sql9299677'
-mysql = MySQL(app)
+
+
+@app.route('/test', methods=['GET'])
+def testsql():
+    print(type(test()))
+    # res = test().json()
+    return test()
+
 
 '''
 ALPHA Back-end API with CRUD(Create, read, update, delete)
