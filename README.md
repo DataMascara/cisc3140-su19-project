@@ -37,6 +37,25 @@ First, make sure you have the API running and you note down the url ie `127.0.0.
 - Now put `{"user":"chalshaff12"}` into the raw body (if chalshaff12 exists, so you should get a response that indicates that )
 - Set the request to GET and the URL `http://YOURLOCALHOSTURL:5000/user` 
   - TADA! You should see a json response with that user's information in the response body below with a status of 200!
+  - Currently looks like this, but will be cleaned up for easy data getting.
+    ``` 
+    {
+    "users": [
+    {
+      "avatarUrl": null,
+      "dateCreated": "2019-07-25 23:46:14",
+      "dateModified": null,
+      "email": "chalshaff12@gmail.com",
+      "first": "Michal",
+      "isActive": 1,
+      "last": "Shaffer",
+      "password": "hashedpassword",
+      "userid": 246815,
+      "username": "chalshaff12"
+    }
+    ]
+  }
+```
 
 ### Test on a user that doesn not exist
 
