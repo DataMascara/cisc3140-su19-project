@@ -20,7 +20,8 @@ Base-requirements: Python3, Flask Web Framework
 
 ## Running
 
-- **NOTE:** MinimalAPI functionality is currently implemented, with no VIEW/connecting link to the front end. - Alpha release will be served on a server soon so that features can be continuously implemented
+- **NOTE:** MinimalAPI functionality is currently implemented, with no VIEW/connecting link to the front end.
+- Alpha release will be served on a server soon so that features can be continuously implemented
 - Navigate to the `app/` folder and execute `python main.py` or `python3 main.py` (depending on your setup)
 - Use postman ([https://www.getpostman.com/](https://www.getpostman.com/)) to test the API.
 - Debug user that already exists is :chalshaff12 (it returns his password) - Currently, the API is just working in some cases and not linked to a view page
