@@ -24,8 +24,9 @@ Base-requirements: Python3, Flask Web Framework
 - Alpha release will be served on a server soon so that features can be continuously implemented
 - Navigate to the `app/` folder and execute `python main.py` or `python3 main.py` (depending on your setup)
 - Use postman ([https://www.getpostman.com/](https://www.getpostman.com/)) to test the API.
-- Debug user that already exists is :chalshaff12 (it returns his password) - Currently, the API is just working in some cases and not linked to a view page
-  yet - Server hosting for live demo is coming soon.
+- Debug user that already exists is :chalshaff12 (it returns their full record) - Currently, the API is just working in some cases and not linked to a view page
+  yet 
+    - Server hosting for live demo is coming soon.
 
 ## Try a GET Request
 
@@ -33,8 +34,9 @@ First, make sure you have the API running and you note down the url ie `127.0.0.
 
 - Open Postman and go to the header tab and your header Content-Type to "application/json"
 - Go to the "Body" tab and check the "raw" and "JSON(application/json) options under that tab
-- Now put `{"user":"mike1234"}` into the raw body (if mike1234 exists, so you should get a response that indicates that)
-- Set the request to GET and the URL `http://YOURLOCALHOSTURL:5000/user` - TADA! You should see `{"msg": "User found!"}` in the response body below with a status of 200!
+- Now put `{"user":"chalshaff12"}` into the raw body (if chalshaff12 exists, so you should get a response that indicates that )
+- Set the request to GET and the URL `http://YOURLOCALHOSTURL:5000/user` 
+  - TADA! You should see a json response with that user's information in the response body below with a status of 200!
 
 ### Test on a user that doesn not exist
 
