@@ -2,17 +2,19 @@ from flask import Flask, render_template, request, redirect, jsonify
 import requests
 import os
 import json
-from database import test
+from database import dbmodule
 
 app = Flask(__name__)
 
 
-@app.route('/test', methods=['GET'])
-def testsql():
-    print(type(test()))
+@app.route('/test/<user>', methods=['GET'])
+def testsql(user):
+    # print(type(dbmodule.allUsers()))
+    # # res = test().json()
+    # return dbmodule.allUsers()
+    print(type(dbmodule.findUsers(user)))
     # res = test().json()
-    return test()
-
+    return dbmodule.findUsers(user)
 
 '''
 ALPHA Back-end API with CRUD(Create, read, update, delete)
@@ -77,8 +79,11 @@ def user():
     res = request.get_json()  # Grab the response as a python dict from json sent
     # User Validation to DB goes here
     user_wanted = res['user']
-    if get_user(user_wanted) != '()':  # Currently, the get_user returns '()' if no user is found
-        return jsonify({"msg": "User found!"}), 200
+    print(type(dbmodule.findUsers(user_wanted)))
+    response = json.loads(dbmodule.findUsers(user_wanted))
+    found = len(response["users"]) > 0
+    if found:
+     return  jsonify(response), 200
     else:
         return jsonify({"error": "User Not Found!"}), 404
     return jsonify({"error": "Credentials Not Valid!"})
