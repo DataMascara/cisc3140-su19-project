@@ -2,46 +2,48 @@
 
 #users table saves user information
 CREATE TABLE `users` (
-  `userid` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(30) NOT NULL,
-  `first` varchar(30) DEFAULT NULL,
-  `last` varchar(30) DEFAULT NULL,
-  `email` varchar(128) NOT NULL,
+  `userid` int(11) NOT NULL AUTO_INCREMENT,   #auto generated
+  `username` varchar(30) NOT NULL,            
+  `first` varchar(30) DEFAULT NULL,           
+  `last` varchar(30) DEFAULT NULL,            
+  `email` varchar(128) NOT NULL,              
   `password` varchar(128) NOT NULL,
-  `isActive` boolean NOT NULL DEFAULT '1',
-  `avatarUrl` varchar(128) DEFAULT NULL,
-  `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `isActive` boolean NOT NULL DEFAULT '1',    #check for deleted account
+  `avatarUrl` varchar(128) DEFAULT NULL,      #hold image url for avatar or profile pic
+  `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, #auto updated
+  `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,        #auto generated on row insertion
   PRIMARY KEY (`userid`),
-  UNIQUE KEY `username` (`username`)
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=246815 DEFAULT CHARSET=utf8;
 
 #ports table saves port/forum information
 CREATE TABLE `ports`(
- `portid`       integer NOT NULL auto_increment,
- `isActive`     boolean NOT NULL default 1,
- `portname`     varchar(30) NOT NULL ,
- `userid`       integer  NULL,
- `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
- `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
+ `portid`       integer NOT NULL auto_increment,#auto generated
+ `isActive`     boolean NOT NULL default 1,     #is port currently active
+ `portname`     varchar(30) NOT NULL ,          #unique name for port
+ `userid`       integer  NULL,                  #(optional) user that created the port
+ `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, #auto updated
+  `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,        #auto generated on row insertion
+  
 PRIMARY KEY (`portid`),
 KEY `fkIdx_20` (`userid`),
-CONSTRAINT `FK_20` FOREIGN KEY `fkIdx_20` (`userid`) REFERENCES `users` (`userid`)
+CONSTRAINT `FK_20` FOREIGN KEY `fkIdx_20` (`userid`) REFERENCES `users` (`userid`),
+UNIQUE KEY `portname` (`portname`)
 );
 
 #posts table saves post information
 CREATE TABLE `posts`(
- `postid`       integer NOT NULL auto_increment,
+ `postid`       integer NOT NULL auto_increment,      #auto generated
  `posttext`     text NOT NULL ,
  `upvotes`      integer NULL ,
  `downvotes`    integer NULL ,
- `isDeleted`    boolean NOT NULL DEFAULT 0,
- `portid`       integer NOT NULL ,
- `userid`       integer NOT NULL ,
- `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
- `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
+ `isDeleted`    boolean NOT NULL DEFAULT 0,           #is post deleted or not
+ `portid`       integer NOT NULL ,                    #FK referencing the post
+ `userid`       integer NOT NULL ,                    #FK referencing the author from users table
+ `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, #auto updated
+`dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,        #auto generated on row insertion
+  
 PRIMARY KEY (`postid`),
 KEY `fkIdx_28` (`userid`),
 CONSTRAINT `FK_28` FOREIGN KEY `fkIdx_28` (`userid`) REFERENCES `users` (`userid`),
@@ -51,17 +53,17 @@ CONSTRAINT `FK_34` FOREIGN KEY `fkIdx_34` (`portid`) REFERENCES `ports` (`portid
 
 #comments table saves comment information
 CREATE TABLE `comments`(
- `commentid`    integer NOT NULL auto_increment,
- `postid`       integer NOT NULL ,
+ `commentid`    integer NOT NULL auto_increment,        #auto generated
+ `postid`       integer NOT NULL ,                      #FK referencing the post
  `commenttext`  text NOT NULL ,
- `parentid`     integer NOT NULL ,
+ `parentid`     integer NOT NULL ,                      #FK referencing the parent comment or post
  `upvotes`      integer NULL ,
  `downvotes`    integer NULL ,
- `isDeleted`    boolean NOT NULL default 0,
- `userid`       integer NOT NULL ,
- `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
- `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
+ `isDeleted`    boolean NOT NULL default 0,             #is comment deleted or not
+ `userid`       integer NOT NULL ,                      #FK referencing the author from users table
+ `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, #auto updated
+ `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,        #auto generated on row insertion
+  
 
 PRIMARY KEY (`commentid`),
 KEY `fkIdx_51` (`userid`),
@@ -72,13 +74,13 @@ CONSTRAINT `FK_54` FOREIGN KEY `fkIdx_54` (`postid`) REFERENCES `posts` (`postid
 
 #subscriptions table saves subscription information
 CREATE TABLE `subscriptions`(
- `lineid`       integer NOT NULL auto_increment,
- `isActive`     boolean NOT NULL default 1,
- `portid`       integer NOT NULL ,
- `userid`       integer NOT NULL ,
- `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
- `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
+ `lineid`       integer NOT NULL auto_increment,     #auto generated
+ `isActive`     boolean NOT NULL default 1,          #current subscription or deleted
+ `portid`       integer NOT NULL ,                   #FK referencing the port 
+ `userid`       integer NOT NULL ,                   #FK referencing the user
+ `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, #auto updated
+ `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,        #auto generated on row insertion
+  
 PRIMARY KEY (`lineid`),
 KEY `fkIdx_14` (`userid`),
 CONSTRAINT `FK_14` FOREIGN KEY `fkIdx_14` (`userid`) REFERENCES `users` (`userid`),
@@ -88,14 +90,14 @@ CONSTRAINT `FK_17` FOREIGN KEY `fkIdx_17` (`portid`) REFERENCES `ports` (`portid
 
 #ads table saves ad information
 CREATE TABLE `ads`(
- `adid`     integer NOT NULL auto_increment,
+ `adid`     integer NOT NULL auto_increment,    #auto generated
  `adurl`    varchar(128) NOT NULL ,
  `imageurl` varchar(128) NOT NULL ,
  `adtext`   varchar(700) NOT NULL ,
- `isActive` boolean not null default 0,
- `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
- `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
- 
+ `isActive` boolean not null default 0,          #is ad currently active on site or not
+ `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, #auto updated
+ `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,        #auto generated on row insertion
+  
 PRIMARY KEY (`adid`)
 );
 
