@@ -13,7 +13,7 @@ def dbconnection():
 	# )
 
 
-	webhosteddb
+	#webhosteddb
 	mydb = mysql.connector.connect(
 		host="35.239.141.59",
 		user="backendteam",
