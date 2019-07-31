@@ -24,7 +24,7 @@ CREATE TABLE `ports`(
  `portname`     varchar(30) NOT NULL ,          #unique name for port
  `userid`       integer  NULL,                  #(optional) user that created the port
  `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, #auto updated
-  `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,        #auto generated on row insertion
+`dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,        #auto generated on row insertion
   
 PRIMARY KEY (`portid`),
 KEY `fkIdx_20` (`userid`),
@@ -36,13 +36,11 @@ UNIQUE KEY `portname` (`portname`)
 CREATE TABLE `posts`(
  `postid`       integer NOT NULL auto_increment,      #auto generated
  `posttext`     text NOT NULL ,
- `upvotes`      integer NULL ,
- `downvotes`    integer NULL ,
  `isDeleted`    boolean NOT NULL DEFAULT 0,           #is post deleted or not
  `portid`       integer NOT NULL ,                    #FK referencing the post
  `userid`       integer NOT NULL ,                    #FK referencing the author from users table
  `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, #auto updated
-`dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,        #auto generated on row insertion
+ `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,        #auto generated on row insertion
   
 PRIMARY KEY (`postid`),
 KEY `fkIdx_28` (`userid`),
@@ -57,8 +55,6 @@ CREATE TABLE `comments`(
  `postid`       integer NOT NULL ,                      #FK referencing the post
  `commenttext`  text NOT NULL ,
  `parentid`     integer NOT NULL ,                      #FK referencing the parent comment or post
- `upvotes`      integer NULL ,
- `downvotes`    integer NULL ,
  `isDeleted`    boolean NOT NULL default 0,             #is comment deleted or not
  `userid`       integer NOT NULL ,                      #FK referencing the author from users table
  `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, #auto updated
@@ -101,9 +97,27 @@ CREATE TABLE `ads`(
 PRIMARY KEY (`adid`)
 );
 
+#table to record users' saved posts and upvoted or downvoted posts and comments
+CREATE TABLE `votes`
+(
+ `lineid`      integer NOT NULL AUTO_INCREMENT,    #auto generated
+ `userid`      integer NOT NULL , 					#FK referencing the user
+ `postid`      integer NULL ,						#FK referencing the post (optional)
+ `commentid`   integer NULL ,						#FK referencing the comment (optional) -->either the postid or commentid must be filled
+ `isSaved`     boolean NOT NULL DEFAULT 0,			#is comment or post saved
+ `isUpvoted`   boolean NOT NULL DEFAULT 0,			#is comment or post upvoted
+ `isDownvoted` boolean NOT NULL DEFAULT 0,			#is comment or post downvoted
+ `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, #auto updated
+ `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,        #auto generated on row insertion
 
-
-
+PRIMARY KEY (`lineid`),
+KEY `fkIdx_101` (`postid`),
+CONSTRAINT `FK_101` FOREIGN KEY `fkIdx_101` (`postid`) REFERENCES `posts` (`postid`),
+KEY `fkIdx_107` (`commentid`),
+CONSTRAINT `FK_107` FOREIGN KEY `fkIdx_107` (`commentid`) REFERENCES `comments` (`commentid`),
+KEY `fkIdx_98` (`userid`),
+CONSTRAINT `FK_98` FOREIGN KEY `fkIdx_98` (`userid`) REFERENCES `users` (`userid`)
+);
 
 
 
