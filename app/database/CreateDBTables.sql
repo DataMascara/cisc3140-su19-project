@@ -105,8 +105,7 @@ CREATE TABLE `votes`
  `postid`      integer NULL ,						#FK referencing the post (optional)
  `commentid`   integer NULL ,						#FK referencing the comment (optional) -->either the postid or commentid must be filled
  `isSaved`     boolean NOT NULL DEFAULT 0,			#is comment or post saved
- `isUpvoted`   boolean NOT NULL DEFAULT 0,			#is comment or post upvoted
- `isDownvoted` boolean NOT NULL DEFAULT 0,			#is comment or post downvoted
+ `vote`  	   tinyint NOT NULL DEFAULT 0,			#1 for upvote, -1 for downvote, 0 for no vote
  `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, #auto updated
  `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,        #auto generated on row insertion
 
