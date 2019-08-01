@@ -41,8 +41,7 @@ def allUsers():
 		cursor.execute(sql)
 	except mysql.connector.Error as err:
 		return json.dumps({'error':str(err)})
-	#execute sql statement
-	cursor.execute(sql)
+
 	resultSet = cursor.fetchall()		#save sql result set
 	#convert columns and rows into json data
 	jsonData = [dict(zip([key[0] for key in cursor.description], row)) for row in resultSet]
@@ -144,4 +143,31 @@ def deleteUser(username):
 			return o.__str__()
 
 	return f"user {username} deleted"
+	
+
+def showPortPosts(portName):
+
+	mydb = dbconnection()
+	cursor = mydb.cursor(buffered=True)
+
+	sql=  f"select p.posttext, u.username as author, v.vote as votes from posts p left join users u on p.userid = u.userid left join votes v on v.postid = p.postid where p.isDeleted = 0 and p.portid = (select portid from ports where portname = '{portName}')"
+
+	try:
+		cursor.execute(sql)
+	except mysql.connector.Error as err:
+		return json.dumps({'error':str(err)})
+
+	resultSet = cursor.fetchall()		#save sql result set
+	#convert columns and rows into json data
+	jsonData = [dict(zip([key[0] for key in cursor.description], row)) for row in resultSet]
+	#close database connection
+
+	cursor.close()
+	mydb.close()
+
+	#catch datetime datatype error for json
+	def myconverter(o):
+		if isinstance(o, datetime.datetime):
+			return o.__str__()
+	return json.dumps({'posts':jsonData}, default = myconverter)	
 	

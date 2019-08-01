@@ -48,3 +48,12 @@ def deleteUser():
 	#calling the insert statement function
 	resultSet = dbmodule.deleteUser(username)
 	return str(resultSet)
+
+#get all posts  by port name
+#input portname (String)
+#output tbd
+@app.route('/allPostsbyPort')
+def allPostsbyPort():
+	portName = request.args.get('portName')
+	resultSet = dbmodule.allPostsbyPort(portName)
+	return str(resultSet)
