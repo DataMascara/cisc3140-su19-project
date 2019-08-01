@@ -1,6 +1,6 @@
 #  Report #2 : **Back-end Weekly Checkpoint #2**
 
-# **Back-end Weekly Checkpoint #1**
+
 
 **(Q1)*What has your team accomplished in the past week?***
 
@@ -12,7 +12,7 @@
 - We've encountered many hurtles including ones in general python-functionality, communication, work allocation and cross-group architectural understanding.
     - Python has thrown us many new extensions to learn and try. With all the options and different ways of doing so, it's been a hard thing to be able to understand which ones to use when.
     - Work allocation has been difficult, our group has varying experience working on a back-end system, and the current file system of the whole project and back end project is somewhat confusing
-        - **Solution: (A)**Spend class time for all group's to come to a common understanding of the file system.
+        - **Solution: (A)** Spend class time for all group's to come to a common understanding of the file system.
             - (B) Set class time for groups to review their portion of the repository
 
 **(*Q3)What tools worked, what didn’t?***
@@ -34,32 +34,14 @@
 
 - Getting api calls from the front end's javascript, preferably sending the API/us JSON with identifiable information as to what should happen when.
 - Establishing a strategy of who/how authentication will happen, will the front end be handling this, if so with sessions or jasonwebtokens?
-- 
 
 **(Q4)**Your team will give a brief update to the class. A written version shall be submitted within a week, earlier is better. **
 
-### Current assumptions
 
-- The front end will handle all VIEWS (what the user sees), so our flask API will not return a jinja2 template based off the user input. This would be done in HTML and Javascript. Rather we will send the front end's javascript responses that they will process and use to make the HTML page interactive. If we were using jinja2 from the backend to render pages we would be limiting the front end's role of being able to use javascript's convenient ways to edit the page and grab elements ie  `element = document.querySelector("thing to select");`
-    - Please be in contact with us if you have other plans on how to render views.
-- Database team will make a  python module that connects to a MYSQL hosted database.
-    - The python module will include methods for full CRUD functionality including specific cases based off of the Product team's decided user actions.
-        - This way the backend flask API can call the methods of the database module based on what JSON we get from the front end requests.
-    - The database python module will respond in JSON or python dictionaries.
-        - Methods will be commented on what is expected as input (ie params and what they are, like python objects, json etc.) and what the responses can be expected to look like (ie JSON, python dictionary ect.)
-
-From a high level we imagine the database, back-end and front end relation ship to flow like this:
-
-![](Screen_Shot_2019-07-25_at_2-752fe4ab-df53-4f9b-bfba-28d8d2ce5143.50.18_PM.png)
-
-## Our ask for other teams:
-
+## Our ask from other teams:
 - Contact us if there is a feature that you could use our support with.
 - **Database team:** Finish documentation/Specifications on how they expect us to send data (ie a username to lookup) and how they will send it back (ie as a JSON).
     - Detailed comments from method headers + ReadMe with examples would be appreciated
-- **Front-end team :** Get Documentation/specs  on how they expect us to send data (ie a username to lookup) and how they will send it back (ie as a JSON).
+- **Front-end team :** Get Documentation/specs on how they expect us to send data (ie a username to lookup in json form) and how they will send it back (ie as a JSON).
 - Any feedback and suggestions on how we should set up the app's API/Backend architecture.
 
-As a team we are excited by this opportunity to work together with the class' teams. We look forward to learning together how quick, "start-up" style software development with teams work. Please feel free to open more channels of communication at anytime!  
-
-[]()
