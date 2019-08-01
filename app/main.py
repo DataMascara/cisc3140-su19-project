@@ -1,10 +1,16 @@
 from flask import Flask, render_template, request, redirect, jsonify
 import requests
+from flask_cors import CORS
 import os
 import json
 from database import dbmodule
+from flask_login import LoginManager, UserMixin
 
 app = Flask(__name__)
+CORS(app)
+
+
+
 
 
 @app.route('/test/<user>', methods=['GET'])
@@ -12,9 +18,9 @@ def testsql(user):
     # print(type(dbmodule.allUsers()))
     # # res = test().json()
     # return dbmodule.allUsers()
-    print(type(dbmodule.findUsers(user)))
     # res = test().json()
-    return dbmodule.findUsers(user)
+    res = json.loads(dbmodule.findUsers('username',user))
+    return res
 
 '''
 ALPHA Back-end API with CRUD(Create, read, update, delete)
@@ -31,12 +37,23 @@ for a user-based loggin website.
 @app.route('/login', methods=['POST'])
 def login():
     res = request.form
+
     # Grab the user and pw
     user = res['username']
     password = res['password']
+
+    #Get the db query into a python dict 
+    db_result = json.loads(dbmodule.findUsers('username',user))
+
+    #Grab the first result of users that match
+    dbuser = db_result['users'][0]
+    
     # User Validation to DB goes here
-    if get_user(user):
-        return jsonify({"msg": "Logged in"}), 200
+    if(dbuser):
+        #Now that we know the user exists, validate the password
+        if (dbuser['password'] == password):
+            #Send token to allow user to login
+            return jsonify({"msg": "Credentials Valid!"}), 200
     else:
         return jsonify({"error": "Credentials Not Valid!"})
     return jsonify({"error": "Credentials Not Valid!"})
@@ -55,15 +72,25 @@ def sign_up():
         # Grab the form
         res = request.form
         email = res['email']
-        user = res['username']
+        username = res['username']
         password = res['password']
+        first = res['first']
+        last = res['last']
+        avatarurl = res['avatarurl']
     # Validate Email is not taken!
     # Add user record to the db
-    if get_user(user):
-        return jsonify({"msg": "Signed up"}), 201
-    else:
-        return jsonify({"error": "Email Already Registered"}), 409
-    return jsonify({"msg": "Error"}), 401
+    added_user = json.loads(dbmodule.insertUser(email, username, password,  first, last, avatarurl))
+   
+    resdb = added_user['error'] or added_user['users'][0]
+    # is_err = added_user.keys()
+    
+    # print(res)
+    return jsonify({"response" : resdb})
+    # if added_user['users'][0]:
+    #     return jsonify({"msg": "Signed up"}), 201
+    # else:
+    #     return jsonify({"error": added_user['error']}), 409
+    # return jsonify({"msg": "Error"}), 401
 
 
 '''
@@ -79,8 +106,9 @@ def user():
     res = request.get_json()  # Grab the response as a python dict from json sent
     # User Validation to DB goes here
     user_wanted = res['user']
-    print(type(dbmodule.findUsers(user_wanted)))
-    response = json.loads(dbmodule.findUsers(user_wanted))
+    print(type(dbmodule.findUsers("username",user_wanted)))
+    response = json.loads(dbmodule.findUsers("username",user_wanted))
+    print(response)
     found = len(response["users"]) > 0
     if found:
      return  jsonify(response), 200
