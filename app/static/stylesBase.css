@@ -1,4 +1,8 @@
 /* CSS Styles for Base Templates: 'baseLoggedIn.html' and 'baseLoggedOut.html'
+Version 1.1
+    08.02.2019
+    Description: Selector 'errLogIn' added.
+
 Version 1.0
     08.02.2019
     Description: First Version. No Operating Media Queries Yet.
@@ -257,6 +261,15 @@ span, a{
     left: calc(2.2vh + 2.2vw);
     display: block;
     font-size: calc(0.45vh + 0.45vw);
+}
+
+.errLogIn{
+    font-size: calc(0.75vh + 0.75vw);
+    position: absolute;
+    top: calc(5.8vh + 5.8vw);
+    color: red;
+    margin: auto;
+    width: calc(13vh + 13vw);
 }
 
 /* ---------------------------------------------------
