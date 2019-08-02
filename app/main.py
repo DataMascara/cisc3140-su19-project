@@ -1,26 +1,10 @@
+import requests, json, os
 from flask import Flask, render_template, request, redirect, jsonify
-import requests
 from flask_cors import CORS
-import os
-import json
 from database import dbmodule
-from flask_login import LoginManager, UserMixin
 
 app = Flask(__name__)
 CORS(app)
-
-
-
-
-
-@app.route('/test/<user>', methods=['GET'])
-def testsql(user):
-    # print(type(dbmodule.allUsers()))
-    # # res = test().json()
-    # return dbmodule.allUsers()
-    # res = test().json()
-    res = json.loads(dbmodule.findUsers('username',user))
-    return res
 
 '''
 ALPHA Back-end API with CRUD(Create, read, update, delete)
@@ -28,7 +12,7 @@ for a user-based loggin website.
 '''
 
 '''
-!!Endpoint to login!!
+-------------Endpoint to login-------------
 1)Get the user details from front end (either from form or json)
     -Front end will do validation on length and ensure client-side error checking
     -Check to see if the email is taken
@@ -44,23 +28,23 @@ def login():
 
     #Get the db query into a python dict 
     db_result = json.loads(dbmodule.findUsers('username',user))
-
+    print("dbRes")
     #Grab the first result of users that match
-    dbuser = db_result['users'][0]
-    
+    db_usr = list(db_result['users'])
+    print(db_usr)
     # User Validation to DB goes here
-    if(dbuser):
-        #Now that we know the user exists, validate the password
-        if (dbuser['password'] == password):
-            #Send token to allow user to login
+    if(len(db_usr) > 0):
+    #     #Now that we know the user exists, validate the password
+        if (db_usr[0]['password'] == password):
+    #         #Send token to allow user to login and advance
             return jsonify({"msg": "Credentials Valid!"}), 200
-    else:
-        return jsonify({"error": "Credentials Not Valid!"})
-    return jsonify({"error": "Credentials Not Valid!"})
+        else:
+            return jsonify({"err": "Credentials Not Valid!"})
+    return jsonify({"err": "User Not Valid!"})
 
 
 '''
-!!Endpoint to CREATE a new user!! #CREATE (C)RUD
+-------------Endpoint to CREATE a new user------------- #CREATE (C)RUD
 1)Get the user details from front end (either from form or json)
     -Front end will do validation on length and ensure client-side error checking
     -Check to see if the email is taken
@@ -70,31 +54,29 @@ def login():
 def sign_up():
     if(request.method == 'POST'):
         # Grab the form
-        res = request.form
-        email = res['email']
-        username = res['username']
-        password = res['password']
-        first = res['first']
-        last = res['last']
-        avatarurl = res['avatarurl']
-    # Validate Email is not taken!
-    # Add user record to the db
-    added_user = json.loads(dbmodule.insertUser(email, username, password,  first, last, avatarurl))
-   
-    resdb = added_user['error'] or added_user['users'][0]
-    # is_err = added_user.keys()
+        try:
+            res = request.form
+            email = res['email']
+            username = res['username']
+            password = res['password']
+            first = res['first']
+            last = res['last']
+            avatarurl = res['avatarurl']
+            added_user = json.loads(dbmodule.insertUser(email, username, password,  first, last, avatarurl))
+            pass
+        except:
+            return jsonify({"err":"Missing Form Data"})
+        
+    try: 
+        return jsonify({"response" : added_user['users'][0]}), 201
+    except:
+        return jsonify({"err" : added_user['error']}) , 401
     
-    # print(res)
-    return jsonify({"response" : resdb})
-    # if added_user['users'][0]:
-    #     return jsonify({"msg": "Signed up"}), 201
-    # else:
-    #     return jsonify({"error": added_user['error']}), 409
-    # return jsonify({"msg": "Error"}), 401
+
 
 
 '''
-!!Endpoint to GET an existing user!!#READ from C(R)UD
+-------------Endpoint to GET an existing user-------------#READ from C(R)UD
 1)Get the user details from front end (either from form or json)
     -Front end will do validation on length and ensure client-side error checking
     -Check to see if the email is taken
@@ -106,7 +88,6 @@ def user():
     res = request.get_json()  # Grab the response as a python dict from json sent
     # User Validation to DB goes here
     user_wanted = res['user']
-    print(type(dbmodule.findUsers("username",user_wanted)))
     response = json.loads(dbmodule.findUsers("username",user_wanted))
     print(response)
     found = len(response["users"]) > 0
@@ -114,11 +95,14 @@ def user():
      return  jsonify(response), 200
     else:
         return jsonify({"error": "User Not Found!"}), 404
-    return jsonify({"error": "Credentials Not Valid!"})
 
+
+@app.route('/allusers')
+def all_users():
+    return dbmodule.allUsers()
 
 '''
-!!Endpoint to update a user's info!!
+-------------Endpoint to update a user's info-------------
 1)Get the user ID
     -Get things they want to change
         -We'll assume one thing changes at a time!
@@ -136,12 +120,12 @@ def update_user(user, field):
         return jsonify({"msg": "Update Success"}), 202
     else:
         # Signal DB Error
-        return jsonify({"error": "User Invalid"}), 409
-    return jsonify({"Error": "Bad request"}), 400
+        return jsonify({"err": "User Invalid"}), 409
+    return jsonify({"err": "Bad request"}), 400
 
 
 '''
-!!Endpoint to delete a user!!
+-------------Endpoint to delete a user-------------
 1)Get the user ID
     -Update the database with removing the delete
 2)Send json with success response or error if error (implement try blocks?)
@@ -156,8 +140,8 @@ def delete_user(user):
         return jsonify({"msg": "Delete Success"}), 202
     else:
         # Signal DB Error
-        return jsonify({"error": "User Invalid"}), 409
-    return jsonify({"Error": "Bad request"}), 400
+        return jsonify({"err": "User Invalid"}), 409
+    return jsonify({"err": "Bad request"}), 400
 
 
 if(__name__ == "__main__"):
