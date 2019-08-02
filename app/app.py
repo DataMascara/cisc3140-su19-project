@@ -1,23 +1,81 @@
-import requests
-import json
-import os
+
+#------------------------------------------------------------------------------#
+# Imports
+#------------------------------------------------------------------------------#
+
+# External imports first
+# from flask import * # do not use '*'; actually input the dependencies
 from flask import Flask, render_template, request, redirect, jsonify
+# from flask.ext.sqlalchemy import SQLAlchemy
+import logging
+from logging import Formatter, FileHandler
 from flask_cors import CORS
+
+# internal imports next
 from database import dbmodule
+from config import *
+
+#------------------------------------------------------------------------------#
+# App Config
+#------------------------------------------------------------------------------#
 
 app = Flask(__name__)
 CORS(app)
+
+app.config.from_object('config') # uses settings in config.py
+#------------------------------------------------------------------------------#
+# Controllers
+#------------------------------------------------------------------------------#
+#
+
+'''
+# Let's assume this app runs backend & front end concurrently
+# Thus the root URL / should display the website.
+# The api should be accessed from /api/
+'''
+
+@app.route('/')
+@app.route('/index')
+@app.route('/home')
+def index():
+
+    # TODO: if user is logged in, username is supplied
+    # Currently data comes from config.py's sample data
+    # maybe by cookies? username = request.cookies.get('username')
+
+
+    return render_template('page.html', current_user=current_user,
+                                        trendPorts=trending_ports,
+                                        user=None)
+
+@app.route('/demo')
+def view_demo():
+    current_user['username'] = "DEMO_USER" # example for with logged in user
+
+    return render_template('page.html', current_user=current_user,
+                                        trendPorts=trending_ports,
+                                        user=None)
+
+# Try with chalshaff12 ie /user/
+@app.route('/user/<username>')
+def test(username):
+    # Get the response from the API from the /user endpoint
+    res = (requests.get(f"{api}user", json={
+           "user": username}).json())['users'][0]
+    print(res)
+    name = res['first']
+    print(name)
+    return render_template('page.html', title="Logged In :)", name=name)
+
 
 '''
 ALPHA Back-end API with CRUD(Create, read, update, delete)
 for a user-based loggin website.
 '''
 
-
-@app.route('/')
-def test():
-    return jsonify({"msg": "hello"})
-
+@app.route('/api/', methods=['GET'])
+def api_index():
+    return {'hello': 'world'}
 
 '''
 -------------Endpoint to login-------------
@@ -26,8 +84,9 @@ def test():
     -Check to see if the email is taken
 2)Send json with success response or error if error (implement try blocks?)
 '''
-@app.route('/login/', methods=['POST'])
-def login():
+
+@app.route('/api/login/', methods=['POST'])
+def api_login():
     res = request.form
 
     # Grab the user and pw
@@ -56,9 +115,9 @@ def login():
 1)Get the user details from front end (either from form or json)
     -Front end will do validation on length and ensure client-side error checking
     -Check to see if the email is taken
-2)Send json with success response or error if error (implement try blocks?) 
+2)Send json with success response or error if error (implement try blocks?)
 '''
-@app.route('/signup/', methods=['POST', 'GET'])
+@app.route('/api/signup/', methods=['POST', 'GET'])
 def sign_up():
     if(request.method == 'POST'):
         # Grab the form
@@ -90,7 +149,7 @@ def sign_up():
 2)Send json with success response or error if error (implement try blocks?)
 
 '''
-@app.route('/user/', methods=['GET'])
+@app.route('/api/user/', methods=['GET'])
 def user():
     res = request.get_json()  # Grab the response as a python dict from json sent
     # User Validation to DB goes here
@@ -104,7 +163,7 @@ def user():
         return jsonify({"error": "User Not Found!"}), 404
 
 
-@app.route('/allusers/')
+@app.route('/api/allusers/')
 def all_users():
     return dbmodule.allUsers()
 
@@ -118,7 +177,7 @@ def all_users():
         -Front end will do validation?
 2)Send json with success response or error if error (implement try blocks?)
 '''
-@app.route('/update/', methods=['PUT'])
+@app.route('/api/update/', methods=['PUT'])
 def update_user(user, field):
         # Grab the form data(could also be a json, if we front end sends that instead)
     res = request.form
@@ -138,7 +197,7 @@ def update_user(user, field):
     -Update the database with removing the delete
 2)Send json with success response or error if error (implement try blocks?)
 '''
-@app.route('/deleteuser/', methods=['DELETE'])
+@app.route('/api/deleteuser/', methods=['DELETE'])
 def delete_user(user):
     # Grab the form data(could also be a json, if we front end sends that instead)
     res = request.form  # Grab the request's form
@@ -150,6 +209,10 @@ def delete_user(user):
         # Signal DB Error
         return jsonify({"err": "User Invalid"}), 409
     return jsonify({"err": "Bad request"}), 400
+
+#------------------------------------------------------------------------------#
+# Launch
+#------------------------------------------------------------------------------#
 
 
 if(__name__ == "__main__"):
