@@ -62,7 +62,7 @@ def sign_up():
             first = res['first']
             last = res['last']
             avatarurl = res['avatarurl']
-            added_user = json.loads(dbmodule.insertUser(email, username, password,  first, last, avatarurl))
+            added_user = json.loads(dbmodule.insertUser(email,  password, username,  first, last, avatarurl))
             pass
         except:
             return jsonify({"err":"Missing Form Data"})
