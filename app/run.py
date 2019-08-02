@@ -1,4 +1,6 @@
-import requests, json, os
+import requests
+import json
+import os
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_cors import CORS
 from database import dbmodule
@@ -14,6 +16,12 @@ ALPHA Back-end API with CRUD(Create, read, update, delete)
 for a user-based loggin website.
 '''
 
+
+@app.route('/')
+def test():
+    return jsonify({"msg": "hello"})
+
+
 '''
 -------------Endpoint to login-------------
 1)Get the user details from front end (either from form or json)
@@ -21,7 +29,7 @@ for a user-based loggin website.
     -Check to see if the email is taken
 2)Send json with success response or error if error (implement try blocks?)
 '''
-@app.route('/login', methods=['POST'])
+@app.route('/login/', methods=['POST'])
 def login():
     res = request.form
 
@@ -29,17 +37,17 @@ def login():
     user = res['username']
     password = res['password']
 
-    #Get the db query into a python dict 
-    db_result = json.loads(dbmodule.findUsers('username',user))
+    # Get the db query into a python dict
+    db_result = json.loads(dbmodule.findUsers('username', user))
     print("dbRes")
-    #Grab the first result of users that match
+    # Grab the first result of users that match
     db_usr = list(db_result['users'])
     print(db_usr)
     # User Validation to DB goes here
     if(len(db_usr) > 0):
-    #     #Now that we know the user exists, validate the password
+        #     #Now that we know the user exists, validate the password
         if (db_usr[0]['password'] == password):
-    #         #Send token to allow user to login and advance
+            #         #Send token to allow user to login and advance
             return jsonify({"msg": "Credentials Valid!"}), 200
         else:
             return jsonify({"err": "Credentials Not Valid!"})
@@ -53,7 +61,7 @@ def login():
     -Check to see if the email is taken
 2)Send json with success response or error if error (implement try blocks?) 
 '''
-@app.route('/signup', methods=['POST', 'GET'])
+@app.route('/signup/', methods=['POST', 'GET'])
 def sign_up():
     if(request.method == 'POST'):
         # Grab the form
@@ -65,17 +73,16 @@ def sign_up():
             first = res['first']
             last = res['last']
             avatarurl = res['avatarurl']
-            added_user = json.loads(dbmodule.insertUser(email,  password, username,  first, last, avatarurl))
+            added_user = json.loads(dbmodule.insertUser(
+                email,  password, username,  first, last, avatarurl))
             pass
         except:
-            return jsonify({"err":"Missing Form Data"})
-        
-    try: 
-        return jsonify({"response" : added_user['users'][0]}), 201
-    except:
-        return jsonify({"err" : added_user['error']}) , 401
-    
+            return jsonify({"err": "Missing Form Data"})
 
+    try:
+        return jsonify({"response": added_user['users'][0]}), 201
+    except:
+        return jsonify({"err": added_user['error']}), 401
 
 
 '''
@@ -86,23 +93,24 @@ def sign_up():
 2)Send json with success response or error if error (implement try blocks?)
 
 '''
-@app.route('/user', methods=['GET'])
+@app.route('/user/', methods=['GET'])
 def user():
     res = request.get_json()  # Grab the response as a python dict from json sent
     # User Validation to DB goes here
     user_wanted = res['user']
-    response = json.loads(dbmodule.findUsers("username",user_wanted))
+    response = json.loads(dbmodule.findUsers("username", user_wanted))
     print(response)
     found = len(response["users"]) > 0
     if found:
-     return  jsonify(response), 200
+        return jsonify(response), 200
     else:
         return jsonify({"error": "User Not Found!"}), 404
 
 
-@app.route('/allusers')
+@app.route('/allusers/')
 def all_users():
     return dbmodule.allUsers()
+
 
 '''
 -------------Endpoint to update a user's info-------------
@@ -113,7 +121,7 @@ def all_users():
         -Front end will do validation?
 2)Send json with success response or error if error (implement try blocks?)
 '''
-@app.route('/update', methods=['PUT'])
+@app.route('/update/', methods=['PUT'])
 def update_user(user, field):
         # Grab the form data(could also be a json, if we front end sends that instead)
     res = request.form
@@ -133,7 +141,7 @@ def update_user(user, field):
     -Update the database with removing the delete
 2)Send json with success response or error if error (implement try blocks?)
 '''
-@app.route('/deleteuser', methods=['DELETE'])
+@app.route('/deleteuser/', methods=['DELETE'])
 def delete_user(user):
     # Grab the form data(could also be a json, if we front end sends that instead)
     res = request.form  # Grab the request's form

@@ -60,7 +60,7 @@ def allUsers():
 #input: columnValue (string), valueValue (string or int) 
 #options and types:
 #columnValue: valueValue
-#userId: int
+#id: int
 #username: string
 #email: string
 #output: userid, username, email, first, last, avatarUrl
@@ -95,12 +95,12 @@ def findUsers(columnValue, valueValue):
 #email and username must be unique (use findUser)
 #password should be hashed
 #all fields are required!!
-def insertUser(email, password, username, first, last, avatarurl):
+def insertUser(email, password, username, first, last, avatarurl, description):
 
 	mydb = dbconnection()
 	cursor = mydb.cursor(buffered=True)
 
-	sql = f"INSERT INTO users (email, password, username, first, last, avatarurl) VALUES ('{email}','{password}','{username}','{first}','{last}','{avatarurl}')"
+	sql = f"INSERT INTO users (email, password, username, first, last, avatarurl, description) VALUES ('{email}','{password}','{username}','{first}','{last}','{avatarurl}',{description})"
 	
 	try:
 		cursor.execute(sql)
@@ -150,7 +150,7 @@ def showPortPosts(portName):
 	mydb = dbconnection()
 	cursor = mydb.cursor(buffered=True)
 
-	sql=  f"select p.posttext, u.username as author, v.vote as votes from posts p left join users u on p.userid = u.userid left join votes v on v.postid = p.postid where p.isDeleted = 0 and p.portid = (select portid from ports where portname = '{portName}')"
+	sql=  f"select p.text, u.username as author, v.vote as votes from posts p left join users u on p.userid = u.id left join votes v on v.postid = p.id where p.isDeleted = 0 and p.portid = (select id from ports where name = '{portName}')"
 
 	try:
 		cursor.execute(sql)

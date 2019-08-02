@@ -35,8 +35,10 @@ def addUser():
 	first = request.args.get('first')
 	last = request.args.get('last')
 	avatarurl = request.args.get('avatarurl')
+	description = request.args.get('description')
+
 	#calling the insert statement function
-	resultSet = dbmodule.insertUser(email, password, username, first, last, avatarurl)
+	resultSet = dbmodule.insertUser(email, password, username, first, last, avatarurl, description)
 	return str(resultSet)
 
 
