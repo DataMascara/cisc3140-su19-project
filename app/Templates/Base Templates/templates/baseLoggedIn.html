@@ -1,0 +1,169 @@
+﻿{# A simple code in Jinja2 comes within a brace and hashtag, and is closed thereby. It is not seen in the browser (also not by cr/hackers!) #}
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+        {%- block meta %}
+            <meta charset="UTF-8">
+        {% endblock meta -%}
+        {%- block theTitle %}
+            {%- if title %}
+                   <title>{{ title }}</title> 
+            {% else %}
+                   <title>logicPort</title>
+             {% endif -%}
+         {% endblock theTitle -%}
+         {%- block linkedStatics %}
+              <! -- JavaScript -->
+              <script src="{{ url_for('static',filename='scripts.js') }}"></script>
+              <! -- Website's Icon -->
+              <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}">
+              <!-- Imported Google Font Source Code Pro & Roboto -->
+              <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+              <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+              <!-- Custom CSS -->
+              <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='stylesBase.css') }}">
+          {% endblock linkedStatics -%}
+</head>
+
+<body {%- block onload %} onload = "displayYear()" {% endblock -%}>
+
+{%- block leftContainer %}
+    <div class = "leftContainer"> <!-- Beginning of the Left (Logo and Menu) Container -->
+
+        <div class = "siteLogo" ><a href = "" ><span class="a">logic</span><span class="b">Port</span></a></div>
+
+        <!-- Sidebar Holder -->
+        <nav class="sidebar" >
+
+                    <button type="button" class="sidebarCollapse" onclick = "openCloseSidebar()">
+                      <img class = "hamMenu" src = "{{ url_for('static',filename='ham-menu.gif') }}">
+                    </button>
+
+                    {%- if user %}{# If argument user was passed: #}
+                        <img src="{{ user['avatarUrl'] }}" class="logo">
+                        <a href = "" class = "username">{{ user['username'] }}</a>
+                    {% else -%}{# If it wasn't: #}
+                        <img src="{{ url_for('static',filename='profile_logo.png') }}" class="logo">
+                        <p class = "username">DEMO_USER</p>
+                    {% endif -%}
+
+                     <form method = "post" action = "">
+                                 <input type = "submit" name = "loggedIn" class="profile" value = "User Profile">
+                     </form>
+                     <form method = "post" action = "">
+                                 <input type = "submit" name = "loggedIn" class="dash" value = "Dashboard">
+                     </form>                      
+                     <form method = "post" action = "">
+                                 <input type = "submit" name = "loggedIn" class="settings" value = "Account Settings">
+                     </form>
+                    <a href = "" class = "signOut">sign out</a>
+
+                       <div class = "moreInfo">
+                           <a href="" class="w1">Our Team</a>
+                           <a href="" class="w2">Contact Us</a>
+                       </div>
+            </nav>
+
+    </div> <!-- End of the Left (Logo and Menu) Container -->
+
+ {% endblock leftContainer -%}
+
+ {# All the content from the templates that will inherit this 'base.html' will go into the 'content' block: #}
+ {%- block midContainer %}
+     <div class = "midContainer"> <!-- Beginning of the Middle Container -->
+         {%- block content %}
+         {% endblock content -%}
+         {%- block copyright %}
+            <div class = "copyright">
+                <p class = 'copyrightParag'>Copyright © <span class = "year"></span></p>
+            </div>
+         {% endblock copyright -%}
+      </div> <!-- End of the Middle Container -->
+ {% endblock midContainer -%}
+
+ {%- block rightContainer %}
+
+    <div class = "rightContainer"> <!-- Beginning of the Right Container -->
+
+        <form class = "searchform" 
+                   name = "searchform" 
+                   action = ""
+                   method = "post" > <!-- Submit Search w/ ENTER Key: -->
+                                                   <!-- Instead of pressing a button, just press ENTER or RETURN for the search to be processed. -->
+
+            <input type = "search" 
+                        class = "search" 
+                        name = "search" 
+                        title = "Type Your Search and Press ENTER to Submit"
+                        placeholder = "Search & ENTER"
+                        onkeydown = "submitSearch();">
+         </form>
+
+         <form action = "" method = "post">
+            <input type="submit" class = "viewPortIndex" title="View Port Index" value="VIEW PORT INDEX" name = "viewPortIndex"></button>
+         </form>
+
+        <div class = "trending"> <!-- Trending Ports Window: shows you all the trending ports and lets you subscribe to some. -->
+        <!-- This part will have exactly 5 trending ports, that will repeat among all users (that's what the Product Team said they want). Hence, we do not use a Jinja loop -->
+        <!-- here; we just use the names of the variables passed to this template in the JSON array. -->
+
+            <p class = "trendingTitle" >TRENDING PORTS</p>
+           {# The following iframe is used for an alternative to Ajax code for prevention of page reloading after form submission, but form is still submitted! :) #}
+            <iframe name="justframe" style="display:none;" type=  'hidden'></iframe>
+           {%- if trendPorts %}{# If argument trendPorts was passed: #}
+            <form class = "trendingForm" action = "" method = "post" target="justframe"> {# Here, the user is logged in, so the form works. #}
+               <a href = "" class = "trendingName" >p/{{ trendPorts[0]['name'] }}</a>
+               <p class = "trendingName trendingMem" >{{ trendPorts[0]['mem'] }} members</p>
+               <input type="button" class = "subscribe subscribe1" name  = "subscribe1" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+               <a href = "" class = "trendingName" >p/{{ trendPorts[1]['name'] }}</a>
+               <p class = "trendingName trendingMem" >{{ trendPorts[1]['mem'] }} members</p>
+               <input type="button" class = "subscribe subscribe2" name  = "subscribe2" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+               <a href = "" class = "trendingName" >p/{{ trendPorts[2]['name'] }}</a>
+               <p class = "trendingName trendingMem" >{{ trendPorts[2]['mem'] }} members</p>
+               <input type="button" class = "subscribe subscribe3" name  = "subscribe3" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+               <a href = "" class = "trendingName" >p/{{ trendPorts[3]['name'] }}</a>
+               <p class = "trendingName trendingMem" >{{ trendPorts[3]['mem'] }} members</p>
+               <input type="button" class = "subscribe subscribe4" name  = "subscribe4" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+               <a href = "" class = "trendingName" >p/{{ trendPorts[4]['name'] }}</a>
+               <p class = "trendingName trendingMem membersTrending5" >{{ trendPorts[4]['mem'] }} members</p>
+               <input type="button" class = "subscribe subscribe5" name  = "subscribe5" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+            </form>
+           {%- else %}{# If argument trendPorts was not passed, display demo stuff: #}
+            <form class = "trendingForm" action = "" method = "post" target="justframe"> {# Here, the user is logged in, so the form works. #}
+               <p class = "trendingName" >p/DEMO</p>
+               <p class = "trendingName trendingMem" >0 members</p>
+               <input type="button" class = "subscribe subscribe1" name  = "subscribe1" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+               <p class = "trendingName" >p/DEMO</p>
+               <p class = "trendingName trendingMem" >0 members</p>
+               <input type="button" class = "subscribe subscribe2" name  = "subscribe2" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+               <p class = "trendingName" >p/DEMO</p>
+               <p class = "trendingName trendingMem" >0 members</p>
+               <input type="button" class = "subscribe subscribe3" name  = "subscribe3" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+               <p class = "trendingName" >p/DEMO</p>
+               <p class = "trendingName trendingMem" >0 members</p>
+               <input type="button" class = "subscribe subscribe4" name  = "subscribe4" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+               <p class = "trendingName" >p/DEMO</p>
+               <p class = "trendingName trendingMem membersTrending5" >0 members</p>
+               <input type="button" class = "subscribe subscribe5" name  = "subscribe5" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+            </form>
+           {% endif -%}
+        </div>
+
+        <div class = "theAdYouCantRemoveThis"> <!-- Advertisement Area: an annoying and clickable ad will appear here (it is even more annoying to 
+                                                                                     realize we are not paid a penny for putting this here!) -->
+            <p>Advertisement</p>
+            {%- if ad %}{# If argument ad was passed: #} {# |e mean 'do escaping' for security! #}
+                  <a href = "{{ ad['adurl']|e }}" title = "{{ ad['adtext'] }}">
+                  <div class = "ad" style = "content: url({{ad['imageurl']|e}})"></div></a>
+            {%- else %}{# If argument ad was not passed, a demo ad of Brooklyn College is shown: #}
+                  <a href = "http://www.brooklyn.cuny.edu/web/home.php" title = "Go to the Brooklyn College's Website">
+                  <div class = "ad" style = "content: url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/2016_Brooklyn_College_Library.jpg/300px-2016_Brooklyn_College_Library.jpg);"></div></a>
+            {% endif -%}
+        </div>
+
+    </div> <!-- End of the Right Container -->
+
+ {% endblock rightContainer -%}
+
+</body>
+</html>
