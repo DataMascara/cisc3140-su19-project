@@ -1,4 +1,9 @@
-﻿{# A simple code in Jinja2 comes within a brace and hashtag, and is closed thereby. It is not seen in the browser (also not by cr/hackers!) #}
+{# 'baseLoggedOut.html' - version 1.1, 08.02.2019, 18:00 #}
+{# Description: addition of error message field if user enters bad username / password. #}
+{# Message appears if argument 'errLogIn = True' was passed to the template. #}
+{# CSS file has been changed accordingly - 'errLogIn' selector has been added to it. #}
+
+{# A simple code in Jinja2 comes within a brace and hashtag, and is closed thereby. It is not seen in the browser (also not by cr/hackers!) #}
 <!DOCTYPE html>
 <html lang = "en">
 <head>
@@ -40,6 +45,10 @@
                     </button>
 
                     <img src="{{ url_for('static',filename='profile_logo.png') }}" class="logo">
+                
+                    {%- if errLogIn %} {# Fires if 'errLogIn' is True; otherwise, does not fire. #}
+                         <p class = "errLogIn">! Invalid username or password !</p>
+                    {% endif -%}
 
                      <form action = "" method="POST"> 
                             <input type = "text" 
