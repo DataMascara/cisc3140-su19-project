@@ -1,0 +1,15 @@
+{% block meta %}
+    <meta charset="UTF-8">
+{% endblock meta %}
+     <title>{% if title %}{{ title }}{% else %}logicPort{% endif %}</title>
+ {%- block linkedStatics %}
+      <! -- JavaScript -->
+      <script src="{{ url_for('static',filename='scripts.js') }}"></script>
+      <! -- Website's Icon -->
+      <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}">
+      <!-- Imported Google Font Source Code Pro & Roboto -->
+      <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+      <!-- Custom CSS -->
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='stylesBase.css') }}">
+  {% endblock linkedStatics -%}
