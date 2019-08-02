@@ -1,4 +1,12 @@
-﻿{# A simple code in Jinja2 comes within a brace and hashtag, and is closed thereby. It is not seen in the browser (also not by cr/hackers!) #}
+{# 'baseLoggedIn.html' - version 1.1 - 08.02.2019, 16:27 #}
+{# - description of changes: #}
+{# (1) Addition of 'active' class to the 'sidebar' class so that the menu is closed by default when user is logged in. #}
+{# (2) Change in the title block - the python file of the back end team should pass an argument to the template, #}
+{# and it will be displayed as the title of the page, not a header of level one. I left the new name for that argument, 'name', #}
+{# since you probably prefer it. I am so sorry for the abrupt change! #}
+
+
+{# A simple code in Jinja2 comes within a brace and hashtag, and is closed thereby. It is not seen in the browser (also not by cr/hackers!) #}
 <!DOCTYPE html>
 <html lang = "en">
 <head>
@@ -7,10 +15,10 @@
         {% endblock meta -%}
         {%- block theTitle %}
             {%- if name %}
-                   <h1>{{ name }}</h1> 
+                   <title>{{ name }}</title> 
             {% else %}
                    <title>logicPort</title>
-             {% endif -%}
+            {% endif -%}
          {% endblock theTitle -%}
          {%- block linkedStatics %}
               <! -- JavaScript -->
@@ -33,7 +41,7 @@
         <div class = "siteLogo" ><a href = "" ><span class="a">logic</span><span class="b">Port</span></a></div>
 
         <!-- Sidebar Holder -->
-        <nav class="sidebar" >
+        <nav class="sidebar active" >
 
                     <button type="button" class="sidebarCollapse" onclick = "openCloseSidebar()">
                       <img class = "hamMenu" src = "{{ url_for('static',filename='ham-menu.gif') }}">
