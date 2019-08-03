@@ -38,7 +38,11 @@ def login():
     password = res['password']
 
     # Get the db query into a python dict
-    db_result = json.loads(dbmodule.findUsers('username', user))
+    # Checks if user is logging in with a email or username
+    if user.find('@') > -1 and user.find('.') > -1:
+        db_result = json.loads(dbmodule.findUsers('email', user))
+    else:
+        db_result = json.loads(dbmodule.findUsers('username', user))
     print("dbRes")
     # Grab the first result of users that match
     db_usr = list(db_result['users'])
