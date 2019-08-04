@@ -76,8 +76,10 @@ def sign_up():
             first = res['first']
             last = res['last']
             avatarurl = res['avatarurl']
+            description = res['description']
+            print(description)
             added_user = json.loads(dbmodule.insertUser(
-                email,  password, username,  first, last, avatarurl))
+                email,  password, username,  first, last, avatarurl, description))
             pass
         except:
             return jsonify({"err": "Missing Form Data"})
@@ -145,18 +147,17 @@ def update_user(user, field):
 2)Send json with success response or error if error (implement try blocks?)
 '''
 @app.route('/deleteuser/', methods=['DELETE'])
-def delete_user(user):
+def delete_user():
     # Grab the form data(could also be a json, if we front end sends that instead)
     res = request.form  # Grab the request's form
-    user_to_del = user
-    if get_user(user) != '()':  # Currently, the get_user returns '()' if no user is found
-        # Call db to delete that user's data
-        return jsonify({"msg": "Delete Success"}), 202
-    else:
-        # Signal DB Error
-        return jsonify({"err": "User Invalid"}), 409
-    return jsonify({"err": "Bad request"}), 400
+    user_to_del = res['username']
+    response = json.loads(dbmodule.findUsers("username", user_to_del))
 
+    found = len(response["users"]) > 0
+    if found:
+        return jsonify(dbmodule.deleteUser(user_to_del)), 200
+    else:
+        return jsonify({"error": "User Not Found!"}), 404
 
 if(__name__ == "__main__"):
     app.run(debug=True)
