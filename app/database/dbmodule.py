@@ -100,7 +100,7 @@ def insertUser(email, password, username, first, last, avatarurl, description):
 	mydb = dbconnection()
 	cursor = mydb.cursor(buffered=True)
 
-	sql = f"INSERT INTO users (email, password, username, first, last, avatarurl, description) VALUES ('{email}','{password}','{username}','{first}','{last}','{avatarurl}',{description})"
+	sql = f"INSERT INTO users (email, password, username, first, last, avatarurl, description) VALUES ('{email}','{password}','{username}','{first}','{last}','{avatarurl}','{description}')"
 	
 	try:
 		cursor.execute(sql)

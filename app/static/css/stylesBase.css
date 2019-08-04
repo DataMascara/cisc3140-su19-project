@@ -1,8 +1,4 @@
 /* CSS Styles for Base Templates: 'baseLoggedIn.html' and 'baseLoggedOut.html'
-Version 1.1
-    08.02.2019
-    Description: Selector 'errLogIn' added.
-
 Version 1.0
     08.02.2019
     Description: First Version. No Operating Media Queries Yet.
@@ -25,19 +21,19 @@ body {
     display: flex;
 }
 
-html{
+html {
     padding: 0;
     margin: 0;
 }
 
-.leftContainer{
+.leftContainer {
     display: inline-block;
     margin: 0;
     padding: 0;
     font-size: 0px;
 }
 
-.siteLogo{
+.siteLogo {
     position: relative;
     margin: calc(1.4vh + 1.4vw);
     margin-right: 0;
@@ -46,18 +42,18 @@ html{
     font-size: 0px;
 }
 
-.siteLogo a{
+.siteLogo a {
     text-decoration: none;
 }
 
-.a{
+.a {
     font-family: 'Source Code Pro';
     font-style: italic;
     font-size: calc(1.8vh + 1.8vw);
     color: #7B2240;
 }
 
-.b{
+.b {
     font-family: 'Source Code Pro';
     font-style: normal;
     font-size: calc(2vh + 2vw);
@@ -65,7 +61,7 @@ html{
     font-weight: bold;
 }
 
-.logo{
+.logo {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -76,13 +72,16 @@ html{
     border-radius: 100%;
 }
 
-a, a:hover, a:focus {
+a,
+a:hover,
+a:focus {
     color: inherit;
     text-decoration: none;
     transition: all 0.3s;
 }
 
-.button1, .button2{
+.button1,
+.button2 {
     text-align: center;
     display: block;
     position: absolute;
@@ -102,17 +101,17 @@ a, a:hover, a:focus {
     transition: all 1s;
 }
 
-.button1{
+.button1 {
     top: calc(13.8vh + 13.8vw);
     left: calc(6.7vh + 6.7vw);
 }
 
-.button2{
+.button2 {
     top: calc(16vh + 16vw);
     left: calc(6.7vh + 6.7vw);
 }
 
-.text{
+.text {
     border: 1px solid white;
     width: calc(8.2vh + 8.2vw);
     border-radius: calc(0.15vh + 0.15vw);
@@ -128,20 +127,21 @@ a, a:hover, a:focus {
 }
 
 .text::placeholder {
-    color:  black !important;
+    color: black !important;
 }
 
-.sidebarCollapse{
+.sidebarCollapse {
     background-color: #7B2240;
     padding: 0;
     border: none;
 }
 
-span, a{
+span,
+a {
     padding: 0;
 }
 
-.username{
+.username {
     font-size: calc(0.5vh + 0.5vw);
     text-align: center;
     text-decoration: none;
@@ -150,15 +150,17 @@ span, a{
     top: calc(-1vh - 1vw);
 }
 
-.profile, .dash, .settings
-{
+.profile,
+.dash,
+.settings {
     text-align: center;
     display: block;
     font-size: calc(0.5vh + 0.5vw);
     color: #ECECEC;
     border: 0;
     border-bottom: solid 1px;
-    border-bottom-color: #ECECEC; /* gray */
+    border-bottom-color: #ECECEC;
+    /* gray */
     border-bottom-width: calc(0.08vh + 0.08vw);
     background-color: #863550;
     padding: calc(0.4vh + 0.4vw);
@@ -171,7 +173,7 @@ span, a{
     overflow: hidden;
 }
 
-.signOut{
+.signOut {
     text-align: center;
     font-size: calc(0.5vh + 0.5vw);
     color: #ECECEC;
@@ -185,37 +187,37 @@ span, a{
     SIDEBAR STYLE
 ----------------------------------------------------- */
 
-.hamMenu{
+.hamMenu {
     width: calc(1.7vh + 1.7vw);
     height: calc(1vh + 1vw);
     display: block;
     padding: 0;
     margin: 0;
-    user-drag: none; 
+    user-drag: none;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    outline: inherit; 
+    outline: inherit;
     font-size: 0;
 }
 
-.moreInfo{
+.moreInfo {
     position: absolute;
     bottom: 0;
     bottom: calc(1.7vh + 1.7vw);
     left: calc(4vh + 4vw);
 }
 
-.w2{
-   font-size: calc(0.45vh + 0.45vw);
+.w2 {
+    font-size: calc(0.45vh + 0.45vw);
 }
 
-.w1{
-   margin-left: calc(-1.3vh - 1.3vw);
-   margin-right: calc(3.5vh + 3.5vw);
-   font-size: calc(0.45vh + 0.45vw);
+.w1 {
+    margin-left: calc(-1.3vh - 1.3vw);
+    margin-right: calc(3.5vh + 3.5vw);
+    font-size: calc(0.45vh + 0.45vw);
 }
 
 .sidebar {
@@ -232,7 +234,7 @@ span, a{
     border-top-right-radius: calc(1.8vh + 1.8vw) calc(1.7vh + 1.7vw);
     position: relative;
     display: block;
-    
+
 }
 
 .sidebar.active {
@@ -240,11 +242,15 @@ span, a{
     text-align: center;
 }
 
-.sidebar.active form, .sidebar.active .passAndRegistr,  .sidebar.active .moreInfo, .sidebar.active p, .sidebar.active a{
+.sidebar.active form,
+.sidebar.active .passAndRegistr,
+.sidebar.active .moreInfo,
+.sidebar.active p,
+.sidebar.active a {
     display: none;
 }
 
-.forgotPass{
+.forgotPass {
     position: absolute;
     text-decoration: none;
     display: block;
@@ -254,22 +260,13 @@ span, a{
     top: calc(14.1vh + 14.1vw);
 }
 
-.notAMem{
+.notAMem {
     position: absolute;
     text-align: left;
     top: calc(15.85vh + 15.85vw);
     left: calc(2.2vh + 2.2vw);
     display: block;
     font-size: calc(0.45vh + 0.45vw);
-}
-
-.errLogIn{
-    font-size: calc(0.75vh + 0.75vw);
-    position: absolute;
-    top: calc(5.8vh + 5.8vw);
-    color: red;
-    margin: auto;
-    width: calc(13vh + 13vw);
 }
 
 /* ---------------------------------------------------
@@ -328,12 +325,13 @@ span, a{
         display: none;
     }
 */
-} /*Close the Media Query*/
+}
+
+/*Close the Media Query*/
 
 /* Attributes for Right Side:*/
 
-.middleContainer
-{
+.middleContainer {
     position: absolute;
     left: 21vw;
     width: 53vw;
@@ -342,17 +340,15 @@ span, a{
     margin-right: 0;
 }
 
-.portIndex
-{
-    background-color: rgb(227,227,227);
+.portIndex {
+    background-color: rgb(227, 227, 227);
     width: 71%;
     height: 100vh;
     margin-top: 25%;
     margin-left: 1%;
 }
 
-.rightContainer
-{
+.rightContainer {
     font-family: 'Roboto', Sans-Serif;
     width: calc(17vh + 17vw);
     height: 100vh;
@@ -366,16 +362,14 @@ span, a{
     margin-left: 0;
 }
 
-.searchform
-{
+.searchform {
     position: relative;
     margin: 0;
     padding: 0;
     font-size: 0px;
 }
 
-.search
-{
+.search {
     margin-top: calc(1.9vh + 1.9vw);
     margin-left: calc(1.3vh + 1.3vw);
     font-family: 'Roboto', Sans-Serif;
@@ -385,18 +379,16 @@ span, a{
     border-radius: calc(0.15vh + 0.15vw);
     border-width: calc(0.05vh + 0.05vw);
     border-style: solid;
-    border-color: rgb(192,192,192);
+    border-color: rgb(192, 192, 192);
     border-image: none;
     width: 83%;
 }
 
-.search::placeholder 
-{
-    color:  black !important;
+.search::placeholder {
+    color: black !important;
 }
 
-.viewPortIndex
-{
+.viewPortIndex {
     font-family: 'Roboto', sans-serif;
     padding: calc(0.5vh + 0.5vw);
     font-size: calc(0.65vh + 0.65vw);
@@ -404,12 +396,14 @@ span, a{
     margin: auto;
     width: 65%;
     background-color: rgb(222, 211, 215);
-    color: #7B2240; /* maroon */
+    color: #7B2240;
+    /* maroon */
     text-align: center;
     letter-spacing: calc(0.05vh + 0.05vw);
     border: 0;
     border-bottom: solid 1px;
-    border-bottom-color: #7B2240; /* maroon */
+    border-bottom-color: #7B2240;
+    /* maroon */
     border-bottom-width: calc(0.08vh + 0.08vw);
     display: flex;
     justify-content: center;
@@ -417,16 +411,15 @@ span, a{
     word-spacing: calc(0.1vh + 0.1vw);
 }
 
-.viewPortIndex:hover
-{
+.viewPortIndex:hover {
     background-color: lightgray !important;
     cursor: pointer !important;
-    -webkit-transition: all 0.25s !important; /* Safari */
+    -webkit-transition: all 0.25s !important;
+    /* Safari */
     transition: all 0.25s !important;
 }
 
-.trending
-{
+.trending {
     font-size: calc(0.65vh + 0.65vw);
     margin: auto;
     width: 65%;
@@ -439,44 +432,40 @@ span, a{
     overflow-y: auto;
 }
 
-.trendingTitle
-{
+.trendingTitle {
     font-weight: bold;
     padding-top: calc(0.65vh + 0.65vw);
     padding-left: calc(0.8vh + 0.8vw);
-    color: #7B2240; /* maroon */
+    color: #7B2240;
+    /* maroon */
     margin-bottom: calc(0.5vh + 0.5vw);
     margin-top: 0px;
 }
 
-.trendingName, .trendingMem
-{
+.trendingName,
+.trendingMem {
     color: rgb(80, 80, 80);
     margin-top: 0px;
     margin-bottom: 0px;
     margin-left: calc(1.2vh + 1.2vw);
 }
 
-.trendingName
-{
+.trendingName {
     font-size: calc(0.56vh + 0.56vw);
 }
 
-.trendingMem
-{
+.trendingMem {
     font-size: calc(0.45vh + 0.45vw);
     margin-top: 0%;
     margin-bottom: 8%;
 }
 
-.membersTrending5
-{
+.membersTrending5 {
     margin-bottom: 0px;
     padding-bottom: 0px;
 }
 
-.subscribe
-{
+.subscribe {
     float: right;
     position: relative;
     top: calc(-2.0vh - 2.0vw);
@@ -497,13 +486,11 @@ span, a{
     text-align: center;
 }
 
-.subscribe5
-{
+.subscribe5 {
     top: calc(-1.1vh - 1.1vw);
 }
 
-.theAdYouCantRemoveThis
-{
+.theAdYouCantRemoveThis {
     display: block;
     background-color: white;
     margin: auto;
@@ -519,8 +506,7 @@ span, a{
     border-bottom-right-radius: calc(0.1vh + 0.1vw);
 }
 
-.ad
-{
+.ad {
     background-color: white;
     margin: auto;
     width: 96%;
@@ -531,9 +517,8 @@ span, a{
     margin-bottom: 1%;
 }
 
-.theAdYouCantRemoveThis p
-{
-    color:  black; 
+.theAdYouCantRemoveThis p {
+    color: black;
     font-size: calc(0.5vh + 0.5vw);
     letter-spacing: calc(0.06vh + 0.06vw);
     margin-left: 3%;
@@ -543,16 +528,14 @@ span, a{
 
 /* Attributes for Copyrights Div: */
 
-.copyrightParag
-{
+.copyrightParag {
     font-size: calc(0.65vh + 0.65vw);
     text-align: center;
     margin: 0;
     padding: 0;
 }
 
-.copyright
-{
+.copyright {
     position: absolute;
     width: 58vw;
     display: inline-block;
@@ -560,7 +543,6 @@ span, a{
     padding: 0;
 }
 
-.midContainer
-{
+.midContainer {
     float: right;
 }
