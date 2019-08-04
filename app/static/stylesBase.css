@@ -1,4 +1,9 @@
 /* CSS Styles for Base Templates: 'baseLoggedIn.html' and 'baseLoggedOut.html'
+Version 1.1.1
+   08.04.2019
+   Description: (1) 'margin-bottom' of 'forms' set to 0.
+                        (2) 'border' of the 'text' class set to 0.
+
 Version 1.1
     08.02.2019
     Description: Selector 'errLogIn' added.
@@ -113,7 +118,7 @@ a, a:hover, a:focus {
 }
 
 .text{
-    border: 1px solid white;
+    border: 0;
     width: calc(8.2vh + 8.2vw);
     border-radius: calc(0.15vh + 0.15vw);
     padding: calc(0.6vh + 0.6vw);
@@ -563,4 +568,9 @@ span, a{
 .midContainer
 {
     float: right;
+}
+
+form
+{
+    margin-bottom: 0;
 }
