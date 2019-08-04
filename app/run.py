@@ -1,12 +1,7 @@
-import requests
-import json
-import os
+import json, os, requests
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_cors import CORS
 from database import dbmodule
-
-
-
 ## This is the file that is invoked to start up a development server. It gets a copy of the app from your package and runs it. This won’t be used in production, but it will see a lot of mileage in development.
 app = Flask(__name__)
 CORS(app)
@@ -16,10 +11,33 @@ ALPHA Back-end API with CRUD(Create, read, update, delete)
 for a user-based loggin website.
 '''
 
+#Test route if sending username directly
+@app.route('/test/<username>', methods=['GET'])
+def usertest(username):
+    # res = request.get_json()  # Grab the response as a python dict from json sent
+    # # User Validation to DB goes here
+    user_wanted = username
+    response = json.loads(dbmodule.findUsers("username", user_wanted))
+    print(response)
+    found = len(response["users"]) > 0
+    if found:
+        return jsonify(response), 200
+    else:
+        return jsonify({"error": "User Not Found!"}), 404
 
-@app.route('/')
-def test():
-    return jsonify({"msg": "hello"})
+#Test route if sending username and password via json 
+@app.route('/test/testuser', methods=['GET'])
+def usertest(username):
+    res = request.get_json()  # Grab the response as a python dict from json sent
+    # # User Validation to DB goes here
+    user_wanted = res["username"]
+    response = json.loads(dbmodule.findUsers("username", user_wanted))
+    print(response)
+    found = len(response["users"]) > 0
+    if found:
+        return jsonify(response), 200
+    else:
+        return jsonify({"error": "User Not Found!"}), 404
 
 
 '''

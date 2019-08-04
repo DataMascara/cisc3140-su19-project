@@ -22,14 +22,16 @@ def test(username):
     print(res)
     name = res['first']
     print(name)
-    return render_template('baseLoggedIn.html', title="Logged In :)", name=name)
+    return render_template('baseLoggedIn.html', title="Logged In :)")
 
 
 @app.route('/login/')
 def login():
-
     return render_template('baseLoggedOut.html', title="Logged Out :) ")
 
+@app.route('/home/')
+def home():
+    return render_template('baseLoggedIn.html', title="Logged In :)")
 
 if __name__ == "__main__":
     app.run('localhost', 8080, debug=True,)
