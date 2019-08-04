@@ -1,16 +1,17 @@
-{# Version 1.1.1 - 08.03.2019, 23:10 #}
-{# Description: (1) addition of 'title' attributes to all images, input fields, and links (2) addition of 'alt' attributes to images, and #}
-{# (3) addition of a conditional (Jinja 'if' statement) to the user avatar (because it's optional; this argument might be empty, and must be checked.) #}
-
-{# 'baseLoggedIn.html' - version 1.1 - 08.02.2019, 16:27 #}
-{# - description of changes: #}
-{# (1) Addition of 'active' class to the 'sidebar' class so that the menu is closed by default when user is logged in. #}
-{# (2) Change in the title block - the python file of the back end team should pass an argument to the template, #}
-{# and it will be displayed as the title of the page, not a header of level one. I left the new name for that argument, 'name', #}
-{# since you probably prefer it. I am so sorry for the abrupt change! #}
-
-
-{# A simple code in Jinja2 comes within a brace and hashtag, and is closed thereby. It is not seen in the browser (also not by cr/hackers!) #}
+{#- Version 1.1.2 - 08.04.2019, 18:45 #}
+{#- Description: (1) addition of minuses (-) inside Jinja comments to eliminate the appearance of spaces in their place in the browser #}
+{#- #}
+{#- Version 1.1.1 - 08.03.2019, 23:10 #}
+{#- Description: (1) addition of 'title' attributes to all images, input fields, and links (2) addition of 'alt' attributes to images, and #}
+{#- (3) addition of a conditional (Jinja 'if' statement) to the user avatar (because it's optional; this argument might be empty, and must be checked.) #}
+{#- #}
+{#- 'baseLoggedIn.html' - version 1.1 - 08.02.2019, 16:27 #}
+{#- - description of changes: #}
+{#- (1) Addition of 'active' class to the 'sidebar' class so that the menu is closed by default when user is logged in. #}
+{#- (2) Change in the title block - the python file of the back end team should pass an argument to the template, #}
+{#- and it will be displayed as the title of the page, not a header of level one. I left the new name for that argument, 'name', #}
+{#- since you probably prefer it. I am so sorry for the abrupt change! #}
+{#- A simple code in Jinja2 comes within a brace and hashtag, and is closed thereby. It is not seen in the browser (also not by cr/hackers!) #}
 <!DOCTYPE html>
 <html lang = "en">
 <head>
@@ -84,7 +85,7 @@
 
  {% endblock leftContainer -%}
 
- {# All the content from the templates that will inherit this 'base.html' will go into the 'content' block: #}
+ {#- All the content from the templates that will inherit this 'base.html' will go into the 'content' block: #}
  {%- block midContainer %}
      <div class = "midContainer"> <!-- Beginning of the Middle Container -->
          {%- block content %}
@@ -124,7 +125,7 @@
         <!-- here; we just use the names of the variables passed to this template in the JSON array. -->
 
             <p class = "trendingTitle" >TRENDING PORTS</p>
-           {# The following iframe is used for an alternative to Ajax code for prevention of page reloading after form submission, but form is still submitted! :) #}
+           {#- The following iframe is used for an alternative to Ajax code for prevention of page reloading after form submission, but form is still submitted! :) #}
             <iframe name="justframe" style="display:none;" type=  'hidden'></iframe>
            {%- if trendPorts %}{# If argument trendPorts was passed: #}
             <form class = "trendingForm" action = "" method = "post" target="justframe"> {# Here, the user is logged in, so the form works. #}
