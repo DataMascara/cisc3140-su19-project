@@ -146,17 +146,17 @@ def update_user(user, field):
 2)Send json with success response or error if error (implement try blocks?)
 '''
 @app.route('/deleteuser/', methods=['DELETE'])
-def delete_user(user):
+def delete_user():
     # Grab the form data(could also be a json, if we front end sends that instead)
     res = request.form  # Grab the request's form
-    user_to_del = user
-    if get_user(user) != '()':  # Currently, the get_user returns '()' if no user is found
-        # Call db to delete that user's data
-        return jsonify({"msg": "Delete Success"}), 202
+    user_to_delete = res['username']
+    response = json.loads(dbmodule.findUsers("username", user_to_delete))
+    # print(response)
+    found = len(response["users"]) > 0
+    if found:
+        return jsonify(dbmodule.deleteuser(user_to_delete)), 200
     else:
-        # Signal DB Error
-        return jsonify({"err": "User Invalid"}), 409
-    return jsonify({"err": "Bad request"}), 400
+        return jsonify({"error": "User Not Found!"}), 404
 
 
 if(__name__ == "__main__"):
