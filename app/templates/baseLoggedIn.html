@@ -21,15 +21,15 @@
             {% endif -%}
          {% endblock theTitle -%}
          {%- block linkedStatics %}
-              <! -- JavaScript -->
-              <script src="{{ url_for('static',filename='scripts.js') }}"></script>
-              <! -- Website's Icon -->
-              <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}">
+            
+              <script src="{{ url_for('static',filename='js/scripts.js') }}"></script>
+              
+              <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
               <!-- Imported Google Font Source Code Pro & Roboto -->
               <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
               <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
               <!-- Custom CSS -->
-              <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='stylesBase.css') }}">
+              <link rel="stylesheet"  href="{{ url_for('static',filename='css/stylesBase.css') }}">
           {% endblock linkedStatics -%}
 </head>
 
@@ -44,14 +44,14 @@
         <nav class="sidebar active" >
 
                     <button type="button" class="sidebarCollapse" onclick = "openCloseSidebar()">
-                      <img class = "hamMenu" src = "{{ url_for('static',filename='ham-menu.gif') }}">
+                      <img class = "hamMenu" src = "{{ url_for('static',filename='img/ham-menu.gif') }}">
                     </button>
 
                     {%- if user %}{# If argument user was passed: #}
                         <img src="{{ user['avatarUrl'] }}" class="logo">
                         <a href = "" class = "username">{{ user['username'] }}</a>
                     {% else -%}{# If it wasn't: #}
-                        <img src="{{ url_for('static',filename='profile_logo.png') }}" class="logo">
+                        <img src="{{ url_for('static',filename='img/profile_logo.png') }}" class="logo">
                         <p class = "username">DEMO_USER</p>
                     {% endif -%}
 
