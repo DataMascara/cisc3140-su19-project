@@ -5,6 +5,9 @@ from flask import Flask, render_template, request, redirect, jsonify
 from flask_cors import CORS
 from database import dbmodule
 
+
+
+## This is the file that is invoked to start up a development server. It gets a copy of the app from your package and runs it. This won’t be used in production, but it will see a lot of mileage in development.
 app = Flask(__name__)
 CORS(app)
 
@@ -56,7 +59,7 @@ def login():
 1)Get the user details from front end (either from form or json)
     -Front end will do validation on length and ensure client-side error checking
     -Check to see if the email is taken
-2)Send json with success response or error if error (implement try blocks?) 
+2)Send json with success response or error if error (implement try blocks?)
 '''
 @app.route('/signup/', methods=['POST', 'GET'])
 def sign_up():
@@ -150,6 +153,22 @@ def delete_user(user):
         # Signal DB Error
         return jsonify({"err": "User Invalid"}), 409
     return jsonify({"err": "Bad request"}), 400
+
+
+#try to get the port that user subscribed.
+#it should return the name of port and number of menber in port
+#the database module hasn't such function yet.
+#if they did it, I can try to implement it.
+# @app.route('/port/', methods=['GET'])
+# def port():
+#     res = request.get_json()
+#     username = res['user']
+    #response = json.loads(dbmodule.findPort("username", user_wanted))
+    #found = len(response["name"]) > 0
+    # if found:
+    #     return jsonify(response), 200
+    # else:
+    #     return jsonify({"error": "User Not Found!"}), 404
 
 
 if(__name__ == "__main__"):
