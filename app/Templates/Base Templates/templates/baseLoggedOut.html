@@ -1,12 +1,14 @@
-{# Version 1.1.1, 08.03.2019, 22:45 #}
-{# Description: addition of 'title' attributes to all images, input fields, and links, and 'alt' attributes to images for accessibility. #}
-
-{# 'baseLoggedOut.html' - version 1.1, 08.02.2019, 18:00 #}
-{# Description: addition of error message field if user enters bad username / password. #}
-{# Message appears if argument 'errLogIn = True' was passed to the template. #}
-{# CSS file has been changed accordingly - 'errLogIn' selector has been added to it. #}
-
-{# A simple code in Jinja2 comes within a brace and hashtag, and is closed thereby. It is not seen in the browser (also not by cr/hackers!) #}
+{#- Version 1.1.2, 08.04.2019, 18:50 #}
+{#- Description: (1) addition of minuses (-) inside Jinja comments to eliminate the appearance of spaces in their place in the browser #}
+{#- #}
+{#- Version 1.1.1, 08.03.2019, 22:45 #}
+{#- Description: addition of 'title' attributes to all images, input fields, and links, and 'alt' attributes to images for accessibility. #}
+{#- #}
+{#- 'baseLoggedOut.html' - version 1.1.0, 08.02.2019, 18:00 #}
+{#- Description: addition of error message field if user enters bad username / password. #}
+{#- Message appears if argument 'errLogIn = True' was passed to the template. #}
+{#- CSS file has been changed accordingly - 'errLogIn' selector has been added to it. #}
+{#- A simple code in Jinja2 comes within a brace and hashtag, and is closed thereby. It is not seen in the browser (also not by cr/hackers!) #}
 <!DOCTYPE html>
 <html lang = "en">
 <head>
@@ -90,7 +92,7 @@
 
  {% endblock leftContainer -%}
 
- {# All the content from the templates that will inherit this 'base.html' will go into the 'content' block: #}
+ {#- All the content from the templates that will inherit this 'base.html' will go into the 'content' block: #}
  {%- block midContainer %}
      <div class = "midContainer"> <!-- Beginning of the Middle Container -->
          {%- block content %}
