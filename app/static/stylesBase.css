@@ -1,4 +1,10 @@
 /* CSS Styles for Base Templates: 'baseLoggedIn.html' and 'baseLoggedOut.html'
+Version 1.1.2
+   08.04.2019
+   Description: (1) 'copyright' class was added: 'bottom: calc(1vh + 1vw);'
+                (2) 'midContainer' class was added: 'width: 60vmax; height: 90vh; overflow: auto'
+                (3) 'rightContainer' class: 'position' and 'left' attributes were deleted
+
 Version 1.1.1
    08.04.2019
    Description: (1) 'margin-bottom' of 'forms' set to 0.
@@ -363,9 +369,7 @@ span, a{
     height: 100vh;
     transition: all 0.3s;
     background-color: #E3E3E3;
-    position: absolute;
     top: 0px;
-    left: 75vw;
     overflow-y: auto;
     display: inline-block;
     margin-left: 0;
@@ -559,6 +563,7 @@ span, a{
 .copyright
 {
     position: absolute;
+    bottom: calc(1vh + 1vw);
     width: 58vw;
     display: inline-block;
     margin: 0;
@@ -568,6 +573,9 @@ span, a{
 .midContainer
 {
     float: right;
+    width: 60vmax;
+    height: 90vh;
+    overflow: auto;
 }
 
 form
