@@ -1,7 +1,8 @@
 ﻿# Templates Folder README
 ### Version
-1.0
+1.1.0
 ### Log
+08.05.2019 - Multi-Purpose General Links Template (+ corresponding CSS) added.
 08.02.2019 - Two base templates were added.
 ### For the Back End Team (Base Templates):
  - All templates will 'extend' the base templates 'baseLoggedIn.html' and 'baseLoggedOut.html'.
@@ -26,6 +27,17 @@ Note that you could choose **any** 5 ports, and that there is no need to order (
 - Inside every of the two base templates are empty 'action' and 'href' attributes. Once you decide on the names of the routes to which various buttons / links will redirect the page, you should fill in this attributes. You are given the full freedom to choose your own route names! 
 - Please note, that some of the forms across the base templates do not have an action attribute. These are **fake forms**. Do not add a new 'action' attribute to them. Just fill in where you see an empty 'action = "" ' attribute or empty 'href = "" ' attribute.
 - Please upload your updates / changes to the repo after you make them so that the front end team could see the most relevant files. Thank you!
+
+### Stuff for the Multi-Purpose General Links Template
+- There is nothing additional to fill-into the Multi-Purpose General Links Template.
+- Just decide (at a time) which argument to pass into the 'render-template' function:
+  (1) If you pass 'about = True', the 'Our Team' page will be displayed to the user.
+  (2) If you pass 'contact = True', the 'Contact Us' page will be displayed to the user.
+  (3) If you pass 'terms = True', the 'Terms and Conditions' page will be displayed to the user.
+  (4) If you pass none of these arguments, a 'nothing to display' message will be displayed to the user.
+- The template was filled up with fake (and hopefully funny) info. You are welcome to take a look (and laugh if its really funny).
+- The corresponding CSS file for this template was deposited in the 'static' folder.
+- For any additional details, see the Jinja comments within the template itself.
 
 ### Forms in Every Template and the Info They Pass to You
 - When the user is logged out, each template will have a sign in form. It has 3 input fields. The 1st two have the names 'username' and 'password', and the third is a sign in button with the unchanging value 'Sign in'.
