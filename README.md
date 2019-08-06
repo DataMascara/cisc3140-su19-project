@@ -57,6 +57,6 @@ First, make sure you have the API running and you note down the url ie `127.0.0.
 }
 ```
 
-### Test on a user that doesn not exist
+### Test on a user that doesn't exist
 
 - Follow the above steps but put `{"user":"notrealuser13"}` into the raw body (notrealuser13 does NOT exist, so you should get a response that indicates that) - TADA! You should see `{"error": "User Not found!"}` in the response body below with a status of 404!
