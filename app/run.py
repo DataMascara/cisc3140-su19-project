@@ -27,7 +27,7 @@ def usertest(username):
 
 #Test route if sending username and password via json 
 @app.route('/test/testuser', methods=['GET'])
-def usertest(username):
+def usertest1(username):
     res = request.get_json()  # Grab the response as a python dict from json sent
     # # User Validation to DB goes here
     user_wanted = res["username"]
