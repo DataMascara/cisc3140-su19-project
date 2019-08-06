@@ -1,0 +1,31 @@
+﻿{#- Version 1.0 - 08.05.2019, 21:00 #}
+{#- This is the 'registPending.html' template. When a user submits a registration form, he or she is redirected to this page. #}
+{#- If is quite unclear how confirmation emails could be send through thsi localhost-implemented website, but since we #}
+{#- build a real-life application, this page should be created. #}
+{#- It extends either of the base templates, depending on if the user is registered or not (if 'user' is passed as an argument to the template, then #}
+{#- the user is registered. #}
+{#- Note: if an argument called 'about = True' is passed to this template, then the 'About' page is displayed. If an argument called 'contact = True' is #}
+{#- passed to this template, then the 'Contact' page is displayed. Thirdly, if an argument called 'terms = True' is passed to this template, then the #}
+{#- 'Terms' page is displayed. #}
+{#- The links below must have been included in the 'head' tag before 'extends'; otherwise, they won't be noticed by the application. #}
+<head>
+              <! -- Website's Icon -->
+              <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}">
+              <!-- CSS files: -->
+              <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='stylesRegistPending.css') }}">
+</head>
+{#- Assume that after the registration, the user is logged in automatically: #}
+{%- extends "baseLoggedIn.html" %}
+
+{#- Since this template inherits everything from a base template, all we modify here is the 'content' block: #}
+{%- block content %}
+              <div class = "page">
+                  <p class = "welcome">Welcome!</p>
+                  <p class = "parag">You should receive a confirmation email from us shortly.<br>Please click on the link to confirm your account.</p>
+              </div>
+              <div class = "bottomLinks">
+                    <a href = "" class = "termsConds">Terms and Conditions</a>
+                    <a href = "" class = "ourTeam">Our Team</a>
+                    <a href = "" class = "contactUs">Contact Us</a>
+              </div>
+{% endblock content -%}
