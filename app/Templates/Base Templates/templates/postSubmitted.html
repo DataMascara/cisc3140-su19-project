@@ -1,0 +1,30 @@
+﻿{#- Version 1.0 - 08.06.2019, 16:00 #}
+{#- This is the 'postSubmitted.html' template. When a user submits a post, he or she is redirected to this page. #}
+{#- It, hence, extends only the 'baseLoggedIn.html' template #}
+{#- The links below must have been included in the 'head' tag before 'extends'; otherwise, they won't be noticed by the application. #}
+<head>
+              <! -- Website's Icon -->
+              <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}">
+              <!-- CSS files: -->
+              <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='stylesPostSubmitted.css') }}">
+</head>
+{#- Assume that after the registration, the user is logged in automatically: #}
+{%- extends "baseLoggedIn.html" %}
+
+{#- Since this template inherits everything from a base template, all we modify here is the 'content' block: #}
+{%- block content %}
+              <div class = "page">
+                  <p class = "welcome">Post submitted.</p>
+                  <form action  =""> {#- Note: no info besides 'action' redirection is submitted by this form. Don't add 'method = post' here! #}
+                      <input type="submit" name ="viewPost" class = "viewPost" value = "View Post" title = "View your post">
+                  </form>
+                  <form action  =""> {#- Note: no info besides 'action' redirection is submitted by this form. Don't add 'method = post' here! #}
+                      <input type="submit" name ="homepage" class = "homepage" value = "Return to Post Feed" title = "Return to Post Feed (Homepage)">
+                  </form>
+              </div>
+              <div class = "bottomLinks">
+                    <a href = "" class = "termsConds">Terms and Conditions</a>
+                    <a href = "" class = "ourTeam">Our Team</a>
+                    <a href = "" class = "contactUs">Contact Us</a>
+              </div>
+{% endblock content -%}
