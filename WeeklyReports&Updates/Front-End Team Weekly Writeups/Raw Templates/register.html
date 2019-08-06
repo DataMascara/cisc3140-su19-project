@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="register.css">
+    <script src="register.js"></script>
+
+  </head>
+  <body>
+
+    <div class="signup-wrap">
+      <div class="panel-frame">
+        <div class="panel-content">
+          <header class="header-wrapper">
+            <h1>Sign Up!</h1>
+            <p style="color:red;">* - required</p>
+          </header>
+          <span></span>
+          <form action=" " method="post">
+            <div class="row1">
+              <input type="text" id="first_name" name="First Name" placeholder="First Name">
+              <input type="text" id="last_name" name="Last Name" placeholder="Last Name">
+            </div>
+            <div class="row2">
+              <input type="text" id="username" name="Username" placeholder="Username" required><label id="required">*</label>
+            </div>
+            <div class="row3">
+              <input type="email" id="email" name="Email" placeholder="Email Address" required><label id="required">*</label>
+            </div>
+            <div class="row4">
+              <input type="password" name="password" id="password" placeholder="Password" onchange="validatePassword()" required /><label id="required">*</label>
+              <input type="password" name="confirm_password" id="confirm_password" placeholder="Re-enter Password" onkeyup="validatePassword()" required /><label id="required">*</label>
+            </div>
+            <input type="submit" value="Register">
+          </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <a href="" id="terms_conditions">Terms and Conditions</a>
+    <a href="" id="our_Team">Our Team</a>
+    <a href="" id="contact_Us">Contact Us</a>
+  </div>
+
+  </body>
+</html>
