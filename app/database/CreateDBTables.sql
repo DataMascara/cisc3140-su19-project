@@ -108,10 +108,10 @@ CREATE TABLE `votes`
  `postId`      integer NULL ,						#FK referencing the post (optional)
  `commentId`   integer NULL ,						#FK referencing the comment (optional) -->either the postid or commentid must be filled
  `isSaved`     boolean NOT NULL DEFAULT 0,			#is comment or post saved
- `vote`  	   tinyint NOT NULL DEFAULT 0,			#1 for upvote, -1 for downvote, 0 for no vote
+ `vote`  	   integer NOT NULL DEFAULT 0,			#1 for upvote, -1 for downvote, 0 for no vote
  `dateModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, #auto updated
  `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,        #auto generated on row insertion
-
+ 
 PRIMARY KEY (`id`),
 KEY `fkIdx_101` (`postId`),
 CONSTRAINT `FK_101` FOREIGN KEY `fkIdx_101` (`postId`) REFERENCES `posts` (`id`),
@@ -192,15 +192,53 @@ DELIMITER ;
 
 
 
+create view posts_vw as
+select pr.name as portName, p.id as postId, p.text as postText, u.username as author, sum(vote) as votes
+from posts p
+left join users u on p.userid = u.id
+left join votes v on v.postid = p.id
+left join ports pr on pr.id = p.portid
+where isDeleted = 0
+group by p.id;
 
 
+create view comments_vw as
+select p.postId, c.id as commentId, c.text as commentText, u.username as author, sum(vote) as votes, parentId
+from comments c 
+left join posts_vw p on c.postid = p.postId
+left join votes v on v.commentid = c.id
+left join users u on u.id = c.userid
+where c.isDeleted = 0
+group by c.id;
 
 
+create view subscriptions_vw as
+select username, p.id as portId, p.name as portName
+from subscriptions s 
+join users u on u.id = s.userid
+join ports p on p.id = s.portid
+where s.isActive = 1;
 
-
-
-
-
+create view votes_vw as
+select distinct p.id as postId, p.text as Text, u.username as author, uv.username as voteUsername, vote, isSaved, 'Post' as type
+from posts p
+left join users u on p.userid = u.id
+left join votes v on v.postid = p.id
+join users uv on uv.id = v.userid
+where isDeleted = 0
+union
+select distinct c.id as commentId, c.text as Text, u.username as author, uv.username as voteUsername, vote, isSaved, 'Comment' as type
+from comments c
+left join users u on u.id = c.userid
+left join votes v on v.commentid = c.id
+join users uv on uv.id = v.userid
+where c.isDeleted = 0;
+create view users_vw as
+select u.id as userId, username, first, last, email, description, avatarUrl, sum(vote) as votes
+from users u
+left join votes_vw v on u.username = v.author
+where u.isActive = 1
+group by u.id;
 
 
 
