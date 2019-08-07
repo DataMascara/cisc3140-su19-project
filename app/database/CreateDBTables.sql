@@ -193,7 +193,7 @@ DELIMITER ;
 
 
 create view posts_vw as
-select pr.name as portName, p.id as postId, p.text as postText, u.username as author, sum(vote) as votes
+select pr.name as portName, p.id as postId, p.text as postText, u.username as author, cast(sum(vote) as char(10)) as votes
 from posts p
 left join users u on p.userid = u.id
 left join votes v on v.postid = p.id
@@ -203,7 +203,7 @@ group by p.id;
 
 
 create view comments_vw as
-select p.postId, c.id as commentId, c.text as commentText, u.username as author, sum(vote) as votes, parentId
+select p.postId, c.id as commentId, c.text as commentText, u.username as author, cast(sum(vote) as char(10)) as votes, parentId
 from comments c 
 left join posts_vw p on c.postid = p.postId
 left join votes v on v.commentid = c.id
@@ -234,7 +234,7 @@ left join votes v on v.commentid = c.id
 join users uv on uv.id = v.userid
 where c.isDeleted = 0;
 create view users_vw as
-select u.id as userId, username, first, last, email, description, avatarUrl, sum(vote) as votes
+select u.id as userId, username, first, last, email, description, avatarUrl, cast(sum(vote) as char(10)) as votes
 from users u
 left join votes_vw v on u.username = v.author
 where u.isActive = 1
