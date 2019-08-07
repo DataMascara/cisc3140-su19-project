@@ -193,6 +193,7 @@ DELIMITER ;
 
 
 create view posts_vw as
+    #votes are being cast as char(10) because the integer sums were not showing up through the python functions for some reason
 select pr.name as portName, p.id as postId, p.text as postText, u.username as author, cast(sum(vote) as char(10)) as votes
 from posts p
 left join users u on p.userid = u.id
@@ -203,6 +204,7 @@ group by p.id;
 
 
 create view comments_vw as
+    #votes are being cast as char(10) because the integer sums were not showing up through the python functions for some reason
 select p.postId, c.id as commentId, c.text as commentText, u.username as author, cast(sum(vote) as char(10)) as votes, parentId
 from comments c 
 left join posts_vw p on c.postid = p.postId
@@ -220,6 +222,7 @@ join ports p on p.id = s.portid
 where s.isActive = 1;
 
 create view votes_vw as
+  #votes are being cast as char(10) because the integer sums were not showing up through the python functions for some reason
 select distinct p.id as postId, p.text as Text, u.username as author, uv.username as voteUsername, vote, isSaved, 'Post' as type
 from posts p
 left join users u on p.userid = u.id
@@ -239,7 +242,6 @@ from users u
 left join votes_vw v on u.username = v.author
 where u.isActive = 1
 group by u.id;
-
 
 
 
