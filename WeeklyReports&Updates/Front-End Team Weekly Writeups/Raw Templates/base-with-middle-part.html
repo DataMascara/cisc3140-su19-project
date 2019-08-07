@@ -1,0 +1,304 @@
+﻿<!DOCTYPE html>
+<html lang = "en">
+<head>
+        <meta charset="UTF-8">
+
+        <title>rightContainer</title> <!-- Jinja2 -->
+        <script src="scripts.js"></script><!-- Jinja2 -->
+        <link rel="shortcut icon" href="favicon.ico"> <!-- Jinja2 -->
+
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" type="text/css" href="stylesBase.css"><!-- Jinja2 -->
+
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+     <!-- Johnny -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel="stylesheet" href="MiddlePart-Front-end-main.css">
+      <script src="MiddlePart-Front-end-main.js"></script>
+     <!-- Optional JavaScript -->
+     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ <script src="MiddlePart-Front-end-main.js"></script>      
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+ <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+
+<!-- Johnny -->
+
+
+</head>
+<body>
+
+    <div class = "leftContainer"> <!-- Beginning of the Left (Logo and Menu) Container -->
+
+        <header>
+            <span></span>
+            <span></span>
+            <span class="a">logic</span>
+            <span class="b">Port</span>
+        </header>
+
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar" >
+
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+
+                    <h1><img src="profile_logo.png" class="logo"></h1>
+                </div>
+
+                <ul class="list-unstyled">
+                    <li >
+                        <a href="#" aria-expanded="false">
+                       <form action='' method="POST"> 	
+                            <input href="#" type="tsext" name="username" 
+                            class="list-unstyled CTAs text" 
+                            placeholder="Username/Email"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"><input type="text" name="password"
+                            class="list-unstyled CTAs text" 
+                            placeholder="Password"/></a>
+                       </form>     
+                        <a href="" aria-expanded="false" 
+                           class="list-unstyled CTAs">
+                            Forgot Password? 
+                            <button class="button1">Sign in</button>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a  href="" aria-expanded="false" 
+                            class="list-unstyled CTAs">
+                            Not a member?
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <button class="button1">Register</button>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="list-unstyled CTAs">
+                    <li><a href="" id="w1">Our Team</a></li>
+                    <li><a href="" id="w2">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <!-- Page Content Holder -->
+            <div id="content"> </div>
+    
+
+        <!-- jQuery CDN -->
+         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+         <!-- Bootstrap Js CDN -->
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+         <script type="text/javascript">
+             $(document).ready(function () {
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').toggleClass('active');
+                 });
+             });
+         </script>
+
+    </div> <!-- End of the Left (Logo and Menu) Container -->
+
+   
+    <div class="container">
+      <div class="row align-items-start">
+        <div class="col">
+            <div class="right-btn">
+         CURRENT PORT: P/HOME
+                </div>
+        </div>
+         
+        <div class="creat-post">
+<button type="button" class="btn btn-danger" >CREATE POST</button>
+        </div>
+        
+<div class="dropdown">
+<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  Dropdown
+</button>
+<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+  <button class="dropdown-item" type="button">Action</button>
+  <button class="dropdown-item" type="button">Another action</button>
+  <button class="dropdown-item" type="button">Something else here</button>
+</div>
+</div>
+
+  </div>
+      </div>
+
+
+<div class=" post-border post-section">
+
+<div class="vote">
+<input type="button" id="bt" value="++"/> 
+     <br>
+     <div id="antzone">0</div>
+  <span class="font-weight-bold dash" id="btm"> --</span>
+  </div>
+<div class="media">
+   
+<img src="img/Screen%20Shot%202019-07-23%20at%2011.00.28%20PM.png"alt="..." class="img-thumbnail">  
+<div class="media-body">
+<p class="font-weight-lighter">p/csMemes</p>
+  <p class="font-weight-bold">Marge Sort</p>
+    <div class="body-text"> <p classs="font-weight-lighter" >Sample text from body of post</p></div>
+   
+  <div class="comment"><p class="font-weight-lighter"><span id="count">0</span>Comment</p> </div> 
+</div>
+<p class="post">Posted By:</p><div class="icon-img"><img src="img/p2.jpg" class="ml-3" alt="..."><p class="post-name">jtroia</p></div>
+      <p class="text-right date">7/19/19</p>
+</div>        
+
+ </div>     
+    
+    
+    <div class=" post-border post-section2">
+ <div class="vote">
+     ++<br>
+   <span id="count1">0</span><br>
+  <span class="font-weight-bold dash"> --</span>
+  </div>
+<div class="media">
+   
+<img src="img/Screen%20Shot%202019-07-23%20at%2011.00.28%20PM.png"alt="..." class="img-thumbnail">  
+<div class="media-body">
+<p class="font-weight-lighter">p/csMemes</p>
+  <p class="font-weight-bold">Marge Sort</p>
+    <div class="body-text"> <p classs="font-weight-lighter" >Sample text from body of post</p></div>
+   
+  <div class="comment"><p class="font-weight-lighter"><span id="count">0</span>Comment</p> </div> 
+</div>
+<p class="post">Posted By:</p><div class="icon-img"><img src="img/p2.jpg" class="ml-3" alt="..."><p class="post-name">jtroia</p></div>
+      <p class="text-right date">7/19/19</p>
+</div>        
+
+ </div>    
+    
+ <div class=" post-border post-section3">
+  <div class="vote">
+      ++<br>
+    <span id="count1">0</span><br>
+   <span class="font-weight-bold dash"> --</span>
+   </div>
+ <div class="media">
+    
+<img src="img/Screen%20Shot%202019-07-23%20at%2011.00.28%20PM.png"alt="..." class="img-thumbnail">  
+ <div class="media-body">
+ <p class="font-weight-lighter">p/csMemes</p>
+   <p class="font-weight-bold">Marge Sort</p>
+     <div class="body-text"> <p classs="font-weight-lighter" >Sample text from body of post</p></div>
+    
+   <div class="comment"><p class="font-weight-lighter"><span id="count">0</span>Comment</p> </div> 
+ </div>
+<p class="post">Posted By:</p><div class="icon-img"><img src="img/p2.jpg" class="ml-3" alt="..."><p class="post-name">jtroia</p></div>
+       <p class="text-right date">7/19/19</p>
+</div>        
+
+  </div>   
+    
+  <div class=" post-border post-section4">
+    <div class="vote">
+        ++<br>
+      <span id="count1">0</span><br>
+     <span class="font-weight-bold dash"> --</span>
+     </div>
+   <div class="media">
+      
+  <img src="img/Screen%20Shot%202019-07-23%20at%2011.00.28%20PM.png"alt="..." class="img-thumbnail">  
+   <div class="media-body">
+   <p class="font-weight-lighter">p/csMemes</p>
+     <p class="font-weight-bold">Marge Sort</p>
+       <div class="body-text"> <p classs="font-weight-lighter" >Sample text from body of post</p></div>
+      
+     <div class="comment"><p class="font-weight-lighter"><span id="count">0</span>Comment</p> </div> 
+   </div>
+ <p class="post">Posted By:</p><div class="icon-img"><img src="img/p2.jpg" class="ml-3" alt="..."><p class="post-name">jtroia</p></div>
+         <p class="text-right date">7/19/19</p>
+ </div>        
+ 
+    </div>   
+ <!-- End of middle part -->
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class = "rightContainer"> <!-- Beginning of the Right Container -->
+
+        <form class = "searchform" 
+                   name = "searchform" 
+                   action = "http://www.brooklyn.cuny.edu/web/home.php"
+                   method = "post" 
+                   target="justframe"> <!-- Submit Search w/ ENTER Key: -->
+                                                   <!-- Instead of pressing a button, just press ENTER or RETURN for the search to be processed. -->
+
+            <input type = "search" 
+                        class = "search" 
+                        name = "search" 
+                        title = "Type Your Search and Press ENTER to Submit"
+                        placeholder = "Search"
+                        onkeydown = "submitSearch();">
+         </form>
+
+         <button type="button" class = "viewPortIndex" title="View Port Index" onclick="window.location.href='../port_index/'">VIEW PORT INDEX</button><!-- Jinja2 -->
+
+        <div class = "trending"> <!-- Trending Ports Window: shows you all the trending ports and lets you subscribe to some. -->
+        <!-- This part will have exactly 5 trending ports, that will repeat among all users (that's what the Product Team said they want). Hence, we do not use a Jinja loop -->
+        <!-- here; we just use the names of the variables passed to this template in the JSON array. -->
+
+            <p class = "trendingTitle" >TRENDING PORTS</p>
+
+            <iframe name="justframe" style="display:none;"></iframe>
+            <form class = "trendingForm" action = "about:blank" method = "post" target="justframe">
+               <p class = "trendingName" >p/sellBooks</p> <!-- Jinja2 -->
+               <p class = "trendingName trendingMem" >16 members</p><!-- Jinja2 -->
+              <input type="submit" class = "subscribe subscribe1" name  = "subscribe1" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+               <p class = "trendingName" >p/bcNews</p><!-- Jinja2 -->
+               <p class = "trendingName trendingMem" >45 members</p><!-- Jinja2 -->
+               <input type="submit" class = "subscribe subscribe2" name  = "subscribe2" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+               <p class = "trendingName" >p/offTopic</p><!-- Jinja2 -->
+               <p class = "trendingName trendingMem" >84 members</p><!-- Jinja2 -->
+               <input type="submit" class = "subscribe subscribe3" name  = "subscribe3" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+               <p class = "trendingName" >p/CISC3130</p><!-- Jinja2 -->
+               <p class = "trendingName trendingMem" >36 members</p><!-- Jinja2 -->
+               <input type="submit" class = "subscribe subscribe4" name  = "subscribe4" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+               <p class = "trendingName" >p/mathHelp</p><!-- Jinja2 -->
+               <p class = "trendingName trendingMem membersTrending5" >49 members</p><!-- Jinja2 -->
+               <input type="submit" class = "subscribe subscribe5" name  = "subscribe5" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+            </form>
+        </div>
+
+        <div class = "adframe"> <!-- Advertisement Area: an annoying and clickable ad will appear here (it is even more annoying to 
+                                           realize we are not paid a penny for puttingthis here!) -->
+            <p>Advertisement</p>
+            <a href = "http://www.brooklyn.cuny.edu/web/home.php" title = "Go to the Brooklyn College's Website"><!-- Jinja2 -->
+            <div class = "ad"></div></a>
+        </div>
+
+    </div> <!-- End of the Right Container -->
+
+</body>
+</html>
