@@ -1,0 +1,29 @@
+/* CSS Styles for the template: 'registPending.html'
+Version 1.0
+
+    08.05.2019
+
+    Description: Creation of file
+
+- Front End Team
+*/
+
+.page
+{
+    width: 70%;
+    margin-top: 23vmin;
+    margin-left: 21.5vmin;
+}
+
+.welcome
+{
+     font-size: 24px;
+     text-align: left;
+     padding-bottom: 5px;
+}
+
+.parag
+{
+     font-size: 12px;
+     text-align: left;
+}
