@@ -1,9 +1,9 @@
 import unittest
 
-from base import BaseTestCase
+from backend import backend
 
 
-class FlaskTestCase(BaseTestCase):
+class FlaskTestCase(backend):
 
     # Ensure that Flask was set up correctly
     def test_index(self):
