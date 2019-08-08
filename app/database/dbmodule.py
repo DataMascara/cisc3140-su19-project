@@ -34,7 +34,7 @@ class subscriptions_db:
 		#create db cursor
 		cursor = mydb.cursor(buffered=True)
 		#sql statement
-		sql = f"SELECT * FROM subscriptions_vs WHERE {column_name} = '{data_value}'"
+		sql = f"SELECT * FROM subscriptions_vw WHERE {column_name} = '{data_value}'"
 
 		try:
 			cursor.execute(sql)
