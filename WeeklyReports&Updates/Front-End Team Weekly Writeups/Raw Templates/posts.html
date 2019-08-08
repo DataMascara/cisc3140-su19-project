@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+
+<head> 
+  {% extends "base.html" %}
+  <title>Example Post</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <div class="page">
+    <section class="thread">
+      <div class="date">7/19/19</div>
+      <div class="post">
+        <div class="population">
+          <span class="increase">++</span>
+          <span class="value">78</span>
+          <span class="decrease">--</span>
+        </div>
+        <div class="wrap">
+          <div class="group">p/csMemes</div>
+          <div class="head">
+            <div class="topic">{{ post['name'] }}</div>
+            <div class="poster">
+              <small>{{post[]}}</small>
+              <div>
+                <img class="avatar" src="https://via.placeholder.com/35">
+                <span class="username">andrewM</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <img src="https://via.placeholder.com/400x450">
+          </div>
+          <textarea placeholder="Comment"></textarea>
+          <button>Submit Comment</button>
+        </div>
+      </div>
+    </section>
+    <section class="replies">
+      <div class="post">
+        <div class="population">
+          <span class="increase">++</span>
+          <span class="value">10</span>
+          <span class="decrease">--</span>
+        </div>
+        <div class="wrap">
+          <img class="avatar" src="https://via.placeholder.com/35">
+          <div class="message">
+            <span class="username">superdev</span>
+            <p>I'm more of a kwik-e sort guy myself.</p>
+            <span class="reply">Reply</span>
+          </div>
+        </div>
+        <div class="post">
+          <div class="population">
+            <span class="increase">++</span>
+            <span class="value">8</span>
+            <span class="decrease">--</span>
+          </div>
+          <div class="wrap">
+            <img class="avatar" src="https://via.placeholder.com/35">
+            <div class="message">
+              <span class="username">jtroia</span>
+              <p>The big-moe analysis for these two is DO'H(n log n) and DO'H(n^2)</p>
+              <span class="reply">Reply</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</body>
+
+</html>

@@ -48,17 +48,3 @@ form
      padding: 0;
      margin: 0;
 }
-
-.bottomLinks
-{
-    margin-top: 10px;
-}
-
-.termsConds, .ourTeam, .contactUs
-{
-    text-decoration: none;
-    color: #7B2240;
-    font-size: calc(0.45vh + 0.45vw);
-    display: block;
-    text-align: center;
-}

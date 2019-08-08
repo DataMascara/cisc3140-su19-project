@@ -27,17 +27,3 @@ Version 1.0
      font-size: 12px;
      text-align: left;
 }
-
-.bottomLinks
-{
-    margin-top: 10px;
-}
-
-.termsConds, .ourTeam, .contactUs
-{
-    text-decoration: none;
-    color: #7B2240;
-    font-size: calc(0.45vh + 0.45vw);
-    display: block;
-    text-align: center;
-}

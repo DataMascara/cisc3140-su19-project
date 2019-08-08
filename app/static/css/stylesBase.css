@@ -4,10 +4,13 @@ Version 1.1.3
    Description: Addition of 'outline: inherit' to classes 'a' and 'b'
 
 Version 1.1.2
+
    08.04.2019
+
    Description: (1) 'copyright' class was added: 'bottom: calc(1vh + 1vw);'
-                (2) 'midContainer' class was added: 'width: 60vmax; height: 90vh; overflow: auto'
-                (3) 'rightContainer' class: 'position' and 'left' attributes were deleted
+
+                        (2) 'midContainer' class was added: 'width: 60vmax; height: 90vh; overflow: auto'
+                        (3) 'rightContainer' class: 'position' and 'left' attributes were deleted
 
 Version 1.1.1
    08.04.2019
@@ -15,8 +18,11 @@ Version 1.1.1
                         (2) 'border' of the 'text' class set to 0.
 
 Version 1.1
+
     08.02.2019
+
     Description: Selector 'errLogIn' added.
+
 
 Version 1.0
     08.02.2019
@@ -59,6 +65,7 @@ html{
     display: inline-block;
     padding: 0;
     font-size: 0px;
+    transition: all 0.3s;
 }
 
 .siteLogo a{
@@ -512,11 +519,6 @@ span, a{
     text-align: center;
 }
 
-.subscribe5
-{
-    top: calc(-1.1vh - 1.1vw);
-}
-
 .theAdYouCantRemoveThis
 {
     display: block;
@@ -575,6 +577,24 @@ span, a{
     margin: 0;
     padding: 0;
 }
+
+/* Attributes for General Links: */
+
+.bottomLinks
+{
+    margin-top: 10px;
+}
+
+.termsConds, .ourTeam, .contactUs
+{
+    text-decoration: none;
+    color: #7B2240;
+    font-size: calc(0.45vh + 0.45vw);
+    display: block;
+    text-align: center;
+}
+
+/* Attributes for Middle Container: */
 
 .midContainer
 {
