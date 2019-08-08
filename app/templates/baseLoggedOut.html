@@ -41,20 +41,23 @@
 
                     <img src="{{ url_for('static',filename='img/profile_logo.png') }}" class="logo">
 
-                     <form action = "" method="POST"> 
+                     <!-- <form > action = "" method="POST" -->
+                         <form >
                             <input type = "text" 
                                         name = "username" 
                                         class = "text" 
                                         autocomplete = "off"
-                                        placeholder = "Username/Email"/>
+                                        placeholder = "Username/Email"
+                                        id="username"/>
 
-                            <input type = "text" 
+                            <input type = "password" 
                                        name = "password"
                                        class = "text" 
                                        autocomplete = "off"
-                                       placeholder = "Password"/>
+                                       placeholder = "Password"
+                                       id= "password"/>
 
-                             <input type = "submit" class = "button1" value = "Sign in" name = "submit">
+                             <input onclick="validate(username.value, password.value)"  class = "button1" value = "Sign in" name = "submit"> <!-- Removed this for testing, so redirect doesnt happen: type = "submit"-->
                       </form> 
                        
                        <div class = "passAndRegistr">

@@ -1,26 +1,43 @@
-import requests
-import json
-import os
+import json, os, requests
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_cors import CORS
-from app.database import dbmodule
-
-
-
+from database import dbmodule
 ## This is the file that is invoked to start up a development server. It gets a copy of the app from your package and runs it. This won’t be used in production, but it will see a lot of mileage in development.
 app = Flask(__name__)
 CORS(app)
-
 
 '''
 ALPHA Back-end API with CRUD(Create, read, update, delete)
 for a user-based loggin website.
 '''
 
+#Test route if sending username directly
+@app.route('/test/<username>', methods=['GET'])
+def usertest(username):
+    # res = request.get_json()  # Grab the response as a python dict from json sent
+    # # User Validation to DB goes here
+    user_wanted = username
+    response = json.loads(dbmodule.findUsers("username", user_wanted))
+    print(response)
+    found = len(response["users"]) > 0
+    if found:
+        return jsonify(response), 200
+    else:
+        return jsonify({"error": "User Not Found!"}), 404
 
-@app.route('/')
-def test():
-    return jsonify({"msg": "hello"})
+#Test route if sending username and password via json 
+@app.route('/test/testuser', methods=['GET'])
+def usertest1(username):
+    res = request.get_json()  # Grab the response as a python dict from json sent
+    # # User Validation to DB goes here
+    user_wanted = res["username"]
+    response = json.loads(dbmodule.findUsers("username", user_wanted))
+    print(response)
+    found = len(response["users"]) > 0
+    if found:
+        return jsonify(response), 200
+    else:
+        return jsonify({"error": "User Not Found!"}), 404
 
 
 '''
@@ -41,9 +58,9 @@ def login():
     # Get the db query into a python dict
     # Checks if user is logging in with a email or username
     if user.find('@') > -1 and user.find('.') > -1:
-        db_result = json.loads(dbmodule.users_db.find_users('email', user))
+        db_result = json.loads(dbmodule.findUsers('email', user))
     else:
-        db_result = json.loads(dbmodule.users_db.find_users('username', user))
+        db_result = json.loads(dbmodule.findUsers('username', user))
     print("dbRes")
     # Grab the first result of users that match
     db_usr = list(db_result['users'])
@@ -64,7 +81,7 @@ def login():
 1)Get the user details from front end (either from form or json)
     -Front end will do validation on length and ensure client-side error checking
     -Check to see if the email is taken
-2)Send json with success response or error if error (implement try blocks?) 
+2)Send json with success response or error if error (implement try blocks?)
 '''
 @app.route('/signup/', methods=['POST', 'GET'])
 def sign_up():
@@ -77,10 +94,9 @@ def sign_up():
             password = res['password']
             first = res['first']
             last = res['last']
-            description = res['description']
             avatarurl = res['avatarurl']
-            added_user = json.loads(dbmodule.users_db.add_user(
-                email,  password, username,  first, last, description, avatarurl))
+            added_user = json.loads(dbmodule.insertUser(
+                email,  password, username,  first, last, avatarurl))
             pass
         except:
             return jsonify({"err": "Missing Form Data"})
@@ -104,9 +120,9 @@ def user():
     res = request.get_json()  # Grab the response as a python dict from json sent
     # User Validation to DB goes here
     user_wanted = res['user']
-    response = json.loads(dbmodule.users_db.find_users("username", user_wanted))
+    response = json.loads(dbmodule.findUsers("username", user_wanted))
     print(response)
-    found = len(response["user"]) > 0
+    found = len(response["users"]) > 0
     if found:
         return jsonify(response), 200
     else:
@@ -115,7 +131,7 @@ def user():
 
 @app.route('/allusers/')
 def all_users():
-    return dbmodule.users_db.all_users()
+    return dbmodule.allUsers()
 
 
 '''
@@ -152,18 +168,29 @@ def delete_user():
     # Grab the form data(could also be a json, if we front end sends that instead)
     res = request.form  # Grab the request's form
     user_to_delete = res['username']
-    response = json.loads(dbmodule.find_users("username", user_to_delete))
+    response = json.loads(dbmodule.findUsers("username", user_to_delete))
     # print(response)
     found = len(response["users"]) > 0
     if found:
-        return jsonify(dbmodule.delete_user(user_to_delete)), 200
+        return jsonify(dbmodule.deleteuser(user_to_delete)), 200
     else:
         return jsonify({"error": "User Not Found!"}), 404
 
 
-@app.route('/allports/')
-def all_ports():
-    return dbmodule.ports_db.all_ports()
+#try to get the port that user subscribed.
+#it should return the name of port and number of menber in port
+#the database module hasn't such function yet.
+#if they did it, I can try to implement it.
+# @app.route('/port/', methods=['GET'])
+# def port():
+#     res = request.get_json()
+#     username = res['user']
+    #response = json.loads(dbmodule.findPort("username", user_wanted))
+    #found = len(response["name"]) > 0
+    # if found:
+    #     return jsonify(response), 200
+    # else:
+    #     return jsonify({"error": "User Not Found!"}), 404
 
 
 if(__name__ == "__main__"):
