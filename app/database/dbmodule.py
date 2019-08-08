@@ -336,11 +336,11 @@ class posts_db:
 
 
 
-	def add_post(title, text, port_id, author):
+	def add_post(title, text, port_id, author_id):
 
 		mydb = dbconnection()
 		cursor = mydb.cursor(buffered=True)
-		sql=  f"INSERT INTO posts (title, text, portid, userid) VALUES ('{title}','{text}',{port_id}, (select id from users where username = '{author}'))"
+		sql=  f"INSERT INTO posts (title, text, portid, userid) VALUES ('{title}','{text}',{port_id}, {author_id})"
 
 		try:
 			cursor.execute(sql)
@@ -500,3 +500,90 @@ class comments_db:
 				return o.__str__()
 
 		return posts_db.all_comments_by('comment_id', comment_id)
+
+class votes_db:
+
+
+	#type = 'post' or 'comment'
+	#column_name = 'saved' or 'vote'
+	#data_value = '1' for saved, '1' for upvotes, '-1' for downvotes
+	def all_votes_by(user_id, column_name, data_value, type):
+
+		mydb = dbconnection()
+		cursor = mydb.cursor(buffered=True)
+		sql=  f"SELECT * FROM votes_vw where userId = {user_id} and {column_name} = '{data_value}' and type = '{type}'"
+
+		try:
+			cursor.execute(sql)
+		except mysql.connector.Error as err:
+			return json.dumps({'error':str(err)})
+
+		result_set = cursor.fetchall()		#save sql result set
+		#convert columns and rows into json data
+		json_data = [dict(zip([key[0] for key in cursor.description], row)) for row in result_set]
+		#close database connection
+
+		cursor.close()
+		mydb.close()
+
+		#catch datetime datatype error for json
+		def myconverter(o):
+			if isinstance(o, datetime.datetime):
+				return o.__str__()
+		return json.dumps({'voted_data':json_data}, default = myconverter)	
+
+
+	#saved = 1 or 0
+	#vote = -1, 0 or 1
+	#type = 'post' or 'comment'
+	#item_id = the post or comment ID
+	#if saving the post or comment, set vote = 0 or null.
+	def add_vote(user_id, item_id, save, vote, type):
+
+		mydb = dbconnection()
+		cursor = mydb.cursor(buffered=True)
+		sql=  f"INSERT INTO votes (userid, post_id, isSaved, vote, type) VALUES ({user_id}, {item_id}, {save}, {vote}, {type}))"
+
+		try:
+			cursor.execute(sql)
+			mydb.commit()
+		except mysql.connector.Error as err:
+			return json.dumps({'error':str(err)})
+
+		#close database connection
+		cursor.close()
+		mydb.close()
+		
+		def myconverter(o):
+			if isinstance(o, datetime.datetime):
+				return o.__str__()
+
+		return posts_db.all_votes_by('userId', user_id)
+
+
+		#if it is a post, put null for comment_id
+		#if it is a comment, put null for post_id
+		#column_name = 'isSaved' or 'vote'
+		#data_value = 1 or 0 for 'isSaved', 1,0,-1 for 'vote'
+	def update_vote(user_id, post_id, comment_id, column_name, data_value):
+
+		mydb = dbconnection()
+		cursor = mydb.cursor(buffered=True)
+		sql = f"UPDATE votes SET {column_name} = {data_value} WHERE user_id = {user_id} and post_id = {post_id} or comment_id = {comment_id}"
+
+		try:
+			cursor.execute(sql)
+			mydb.commit()
+		except mysql.connector.Error as err:
+			return json.dumps({'error':str(err)})
+		
+		#close database connection
+		cursor.close()
+		mydb.close()
+			
+		def myconverter(o):
+			if isinstance(o, datetime.datetime):
+				return o.__str__()
+
+		return f"vote updated"
+
