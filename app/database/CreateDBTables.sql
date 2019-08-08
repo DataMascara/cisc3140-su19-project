@@ -192,6 +192,7 @@ DELIMITER ;
 
 
 
+
 create view posts_vw as
     #votes are being cast as char(10) because the integer sums were not showing up through the python functions for some reason
 select pr.name as portName, p.id as postId, p.text as postText, u.username as author, 
@@ -238,12 +239,14 @@ left join users u on u.id = c.userid
 left join votes v on v.commentid = c.id
 join users uv on uv.id = v.userid
 where c.isDeleted = 0;
+
 create view users_vw as
-select u.id as userId, username, first, last, email, description, avatarUrl, cast(sum(vote) as char(10)) as votes
+select u.id as userId, password, username, first, last, email, description, avatarUrl, cast(sum(vote) as char(10)) as votes
 from users u
 left join votes_vw v on u.username = v.author
 where u.isActive = 1
 group by u.id;
+
 
 
 
