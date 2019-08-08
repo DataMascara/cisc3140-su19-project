@@ -59,12 +59,12 @@ class subscriptions_db:
 	#email and username must be unique (use find_user)
 	#password should be hashed
 	#all fields are required!!
-	def add_subscription(username, port_id):
+	def add_subscription(username, port_name):
 
 		mydb = dbconnection()
 		cursor = mydb.cursor(buffered=True)
 
-		sql = f"INSERT INTO subscriptions (userId, portId) VALUES ((SELECT id FROM users WHERE username = '{username}'), {port_id})"
+		sql = f"INSERT INTO subscriptions (userId, portId) VALUES ((SELECT id FROM users WHERE username = '{username}'), (select id from ports where name = '{port_name}'))"
 		
 		try:
 			cursor.execute(sql)
@@ -85,12 +85,12 @@ class subscriptions_db:
 
 
 	#input: username (string)
-	def update_subscription(username, port_id, value):
+	def update_subscription(username, port_name, value):
 
 		mydb = dbconnection()
 		cursor = mydb.cursor(buffered=True)
 
-		sql = f"UPDATE subscriptions SET isActive = {value} WHERE userId = (SELECT id FROM users WHERE username = '{username}') and portId = {port_id}"
+		sql = f"UPDATE subscriptions SET isActive = {value} WHERE userId = (SELECT id FROM users WHERE username = '{username}') and portId = (select id from ports where name = '{port_name}')"
 		
 		try:
 			cursor.execute(sql)
@@ -106,7 +106,7 @@ class subscriptions_db:
 			if isinstance(o, datetime.datetime):
 				return o.__str__()
 
-		return f"subscription {username} to port {port_id} is updated"
+		return f"subscription {username} to port {port_name} is updated"
 		
 
 class ports_db:
@@ -142,7 +142,7 @@ class ports_db:
 
 		mydb = dbconnection()
 		cursor = mydb.cursor(buffered=True)
-		sql=  f"INSERT INTO ports (name, description) VALUES ('{name}', '{description}')"
+		sql =  f"INSERT INTO ports (name, description) VALUES ('{name}', '{description}')"
 
 		try:
 			cursor.execute(sql)
@@ -313,7 +313,7 @@ class posts_db:
 
 		mydb = dbconnection()
 		cursor = mydb.cursor(buffered=True)
-		sql=  f"SELECT * FROM posts_vw where {column_name} = '{data_value}'"
+		sql =  f"SELECT * FROM posts_vw where {column_name} = '{data_value}'"
 
 		try:
 			cursor.execute(sql)
@@ -336,11 +336,11 @@ class posts_db:
 
 
 
-	def add_post(title, text, port_id, author_id):
+	def add_post(title, text, port_name, author_id):
 
 		mydb = dbconnection()
 		cursor = mydb.cursor(buffered=True)
-		sql=  f"INSERT INTO posts (title, text, portid, userid) VALUES ('{title}','{text}',{port_id}, {author_id})"
+		sql =  f"INSERT INTO posts (title, text, portid, userid) VALUES ('{title}','{text}',(select id from ports where name = '{port_name}'), {author_id})"
 
 		try:
 			cursor.execute(sql)
@@ -385,7 +385,7 @@ class posts_db:
 
 		mydb = dbconnection()
 		cursor = mydb.cursor(buffered=True)
-		sql=  f"UPDATE posts SET {column_name} = '{data_value}' where id = {post_id}"
+		sql =  f"UPDATE posts SET {column_name} = '{data_value}' where id = {post_id}"
 
 		try:
 			cursor.execute(sql)
@@ -411,7 +411,7 @@ class comments_db:
 
 		mydb = dbconnection()
 		cursor = mydb.cursor(buffered=True)
-		sql=  f"SELECT * FROM comments_vw where {column_name} = '{data_value}'"
+		sql =  f"SELECT * FROM comments_vw where {column_name} = '{data_value}'"
 
 		try:
 			cursor.execute(sql)
@@ -438,7 +438,7 @@ class comments_db:
 
 		mydb = dbconnection()
 		cursor = mydb.cursor(buffered=True)
-		sql=  f"INSERT INTO comments ('{text}', {post_id}, {parent_id}, (select id from users where username = '{author}'))"
+		sql =  f"INSERT INTO comments ('{text}', {post_id}, {parent_id}, (select id from users where username = '{author}'))"
 
 		try:
 			cursor.execute(sql)
@@ -483,7 +483,7 @@ class comments_db:
 
 		mydb = dbconnection()
 		cursor = mydb.cursor(buffered=True)
-		sql=  f"UPDATE comments SET text = '{text}' where id = {comment_id}"
+		sql =  f"UPDATE comments SET text = '{text}' where id = {comment_id}"
 
 		try:
 			cursor.execute(sql)
@@ -507,11 +507,11 @@ class votes_db:
 	#type = 'post' or 'comment'
 	#column_name = 'saved' or 'vote'
 	#data_value = '1' for saved, '1' for upvotes, '-1' for downvotes
-	def all_votes_by(user_id, column_name, data_value, type):
+	def all_votes_by(username, column_name, data_value, type):
 
 		mydb = dbconnection()
 		cursor = mydb.cursor(buffered=True)
-		sql=  f"SELECT * FROM votes_vw where userId = {user_id} and {column_name} = '{data_value}' and type = '{type}'"
+		sql =  f"SELECT * FROM votes_vw where userId = (select id from users where username = '{username}') and {column_name} = '{data_value}' and type = '{type}'"
 
 		try:
 			cursor.execute(sql)
@@ -538,11 +538,11 @@ class votes_db:
 	#type = 'post' or 'comment'
 	#item_id = the post or comment ID
 	#if saving the post or comment, set vote = 0 or null.
-	def add_vote(user_id, item_id, save, vote, type):
+	def add_vote(username, item_id, save, vote, type):
 
 		mydb = dbconnection()
 		cursor = mydb.cursor(buffered=True)
-		sql=  f"INSERT INTO votes (userid, post_id, isSaved, vote, type) VALUES ({user_id}, {item_id}, {save}, {vote}, {type}))"
+		sql =  f"INSERT INTO votes (userid, post_id, isSaved, vote, type) VALUES ((select id from users where username = '{username}'), {item_id}, {save}, {vote}, {type}))"
 
 		try:
 			cursor.execute(sql)
@@ -558,18 +558,18 @@ class votes_db:
 			if isinstance(o, datetime.datetime):
 				return o.__str__()
 
-		return posts_db.all_votes_by('userId', user_id)
+		return posts_db.all_votes_by('author', username)
 
 
 		#if it is a post, put null for comment_id
 		#if it is a comment, put null for post_id
 		#column_name = 'isSaved' or 'vote'
 		#data_value = 1 or 0 for 'isSaved', 1,0,-1 for 'vote'
-	def update_vote(user_id, post_id, comment_id, column_name, data_value):
+	def update_vote(username, post_id, comment_id, column_name, data_value):
 
 		mydb = dbconnection()
 		cursor = mydb.cursor(buffered=True)
-		sql = f"UPDATE votes SET {column_name} = {data_value} WHERE user_id = {user_id} and post_id = {post_id} or comment_id = {comment_id}"
+		sql = f"UPDATE votes SET {column_name} = {data_value} WHERE userId = (select id from users where username = '{username}') AND post_id = {post_id} or comment_id = {comment_id}"
 
 		try:
 			cursor.execute(sql)
