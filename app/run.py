@@ -3,13 +3,14 @@ import json
 import os
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_cors import CORS
-from database import dbmodule
+from app.database import dbmodule
 
 
 
 ## This is the file that is invoked to start up a development server. It gets a copy of the app from your package and runs it. This won’t be used in production, but it will see a lot of mileage in development.
 app = Flask(__name__)
 CORS(app)
+
 
 '''
 ALPHA Back-end API with CRUD(Create, read, update, delete)
@@ -40,9 +41,9 @@ def login():
     # Get the db query into a python dict
     # Checks if user is logging in with a email or username
     if user.find('@') > -1 and user.find('.') > -1:
-        db_result = json.loads(dbmodule.findUsers('email', user))
+        db_result = json.loads(dbmodule.users_db.find_users('email', user))
     else:
-        db_result = json.loads(dbmodule.findUsers('username', user))
+        db_result = json.loads(dbmodule.users_db.find_users('username', user))
     print("dbRes")
     # Grab the first result of users that match
     db_usr = list(db_result['users'])
@@ -76,9 +77,10 @@ def sign_up():
             password = res['password']
             first = res['first']
             last = res['last']
+            description = res['description']
             avatarurl = res['avatarurl']
-            added_user = json.loads(dbmodule.insertUser(
-                email,  password, username,  first, last, avatarurl))
+            added_user = json.loads(dbmodule.users_db.add_user(
+                email,  password, username,  first, last, description, avatarurl))
             pass
         except:
             return jsonify({"err": "Missing Form Data"})
@@ -102,9 +104,9 @@ def user():
     res = request.get_json()  # Grab the response as a python dict from json sent
     # User Validation to DB goes here
     user_wanted = res['user']
-    response = json.loads(dbmodule.findUsers("username", user_wanted))
+    response = json.loads(dbmodule.users_db.find_users("username", user_wanted))
     print(response)
-    found = len(response["users"]) > 0
+    found = len(response["user"]) > 0
     if found:
         return jsonify(response), 200
     else:
@@ -113,7 +115,7 @@ def user():
 
 @app.route('/allusers/')
 def all_users():
-    return dbmodule.allUsers()
+    return dbmodule.users_db.all_users()
 
 
 '''
@@ -150,13 +152,18 @@ def delete_user():
     # Grab the form data(could also be a json, if we front end sends that instead)
     res = request.form  # Grab the request's form
     user_to_delete = res['username']
-    response = json.loads(dbmodule.findUsers("username", user_to_delete))
+    response = json.loads(dbmodule.find_users("username", user_to_delete))
     # print(response)
     found = len(response["users"]) > 0
     if found:
-        return jsonify(dbmodule.deleteuser(user_to_delete)), 200
+        return jsonify(dbmodule.delete_user(user_to_delete)), 200
     else:
         return jsonify({"error": "User Not Found!"}), 404
+
+
+@app.route('/allports/')
+def all_ports():
+    return dbmodule.ports_db.all_ports()
 
 
 if(__name__ == "__main__"):
