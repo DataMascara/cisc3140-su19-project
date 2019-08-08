@@ -1,0 +1,50 @@
+﻿{#- Version 1.0 - 08.08.2019, 06:00 #}
+{#- This is the 'writePost.html' template. A user can press the "CREATE POST" button on the homepage to open this page and write a new post.  #}
+
+{#- The links below must have been included in the 'head' tag before 'extends'; otherwise, they won't be noticed by the application. #}
+<head>
+              <! -- Website's Icon -->
+              <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
+              <!-- CSS files: -->
+              <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/stylesWritePost.css') }}">
+              <!-- Script files: -->
+              <script src="https://kit.fontawesome.com/58e99a314c.js"></script>
+              <script src= "{{ url_for('static',filename='js/scriptsWritePost.js') }}"></script>
+</head>
+{%- extends "base.html" %}
+
+{#- Since this template inherits everything from a base template, all we modify here is the 'content' block: #}
+{%- block content %}
+  <div class = "container">
+	<form class = "writePostForm" action ="" method = "post" enctype="multipart/form-data">
+	       <div class="header">
+		<h1>Create a post on p/</h1>
+		<input type="text" 
+                                              name="communitysearch" 
+                                              placeholder="Search Communities"
+                                              required>
+                                   <datalist class="communities">
+                                            {#- Please pass here an array of dicts called 'ports' of all existing ports, each of which dict has one attribute: 'portname' #}
+                                            {%- for port in ports %} 
+                                                         <option value="{{  port['portname']  }}">
+                                            {% endfor -%}
+                                   </datalist>
+                                   <p class = 'red'> *</p>
+	       </div>
+                        <span class = 'red'>*- required</span>
+                        <br>
+	       <input type="text" name="posttitle" placeholder="Post Title" required><span class = 'red'>  *</span>
+                        <br>
+	       <input type="text" name="addlink" placeholder="Add Link (optional)">
+                        <br>
+	       <textarea name="addtext" rows = "15" placeholder="Text"></textarea>
+                        <br>
+                        <div class="btncontainer">
+                            <label for="imageUpload" class = "imageLabel" >Add Image</label>
+                            <input type="file" id="imageUpload" name="pic" accept="image/*" class="btn imageUpload" style="display: none" onchange = "changeVal()">
+                            <br>
+	           <input type="submit" class="btn" name = "submit" value = "Submit Post">
+                        </div>
+	</form>	
+   </div>
+{% endblock content -%}
