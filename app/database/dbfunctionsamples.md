@@ -45,6 +45,7 @@ with Comments to the Comment.
 >`dbmodule.comments_db.all_comments_by('parentId','4')` 
 >
 >`#parentId is the comment ID of the parent comment`
+
 As you probably notice while reading this paragraph,
 there is a theoretical option for innitely many nested JSON bulbs, which is practically
 a disaster. Hence, I will ask the Product team if they will allow us to limit the nesting
@@ -60,7 +61,7 @@ address (5) password, and (6) image. Send this info into the database to create 
 User instance.
 >`#function dbmodule.users_db.add_user(email, password, username, first, last, description, avatarurl):`
 >
->`dbmodule.users_db.add_user('doctor_bad_w@gmail.com', 'hashedpasswordblue', 'badwolfisnotme', 'Doctor', 'Who', 'Im a cool doctor who flies through space and time','www.image.jpg'):)`
+>`dbmodule.users_db.add_user('doctor_bad_w@gmail.com', 'hashedpasswordblue', 'badwolfisnotme', 'Doctor', 'Who', 'Im a cool doctor who flies through space and time','www.image.jpg')`
 
 7. (User Login) Request information from a form on our template that will contain: (1)
 username, and (2) password. Authenticate this info with the database, and if it exists
