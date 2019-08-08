@@ -38,15 +38,18 @@ def login():
     password = res['password']
 
     # Get the db query into a python dict
-    db_result = json.loads(dbmodule.findUsers('username', user))
+    db_result = json.loads(dbmodule.users_db.find_users('username', user))
     print("dbRes")
     # Grab the first result of users that match
-    db_usr = list(db_result['users'])
+    print(db_result)
+    db_usr = list(db_result['user'])
     print(db_usr)
     # User Validation to DB goes here
     if(len(db_usr) > 0):
         #     #Now that we know the user exists, validate the password
-        if (db_usr[0]['password'] == password):
+        # dbmodule.users_db.find_users doesn't return password value
+        #if (db_usr[0]['password'] == password):
+        if(db_usr[0]['username'] == user):
             #         #Send token to allow user to login and advance
             return jsonify({"msg": "Credentials Valid!"}), 200
         else:
@@ -98,9 +101,9 @@ def user():
     res = request.get_json()  # Grab the response as a python dict from json sent
     # User Validation to DB goes here
     user_wanted = res['user']
-    response = json.loads(dbmodule.findUsers("username", user_wanted))
+    response = json.loads(dbmodule.users_db.find_users("username", user_wanted))
     print(response)
-    found = len(response["users"]) > 0
+    found = len(response["user"]) > 0
     if found:
         return jsonify(response), 200
     else:
@@ -154,21 +157,11 @@ def delete_user(user):
         return jsonify({"err": "User Invalid"}), 409
     return jsonify({"err": "Bad request"}), 400
 
-
-#try to get the port that user subscribed.
-#it should return the name of port and number of menber in port
-#the database module hasn't such function yet.
-#if they did it, I can try to implement it.
-# @app.route('/port/', methods=['GET'])
-# def port():
-#     res = request.get_json()
-#     username = res['user']
-    #response = json.loads(dbmodule.findPort("username", user_wanted))
-    #found = len(response["name"]) > 0
-    # if found:
-    #     return jsonify(response), 200
-    # else:
-    #     return jsonify({"error": "User Not Found!"}), 404
+# return ports from database
+@app.route('/ports/', methods=['GET'])
+def get_ad():
+    ports = dbmodule.ports_db.all_ports()
+    return ports
 
 
 if(__name__ == "__main__"):

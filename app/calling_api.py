@@ -7,7 +7,7 @@ import webbrowser
 # Example calling the API from another python file
 
 # Relative path to reach the templates folder
-app = Flask(__name__, template_folder=r'./templates/Base Templates/templates')
+app = Flask(__name__, template_folder=r'./templates')
 
 # Assuming the API is running at the local ip below
 api = "http://127.0.0.1:5000/"
@@ -35,6 +35,10 @@ def login():
 #do not use email loggin
 @app.route('/logout',methods=['POST', 'GET'])
 def logout():
+    #get ports info from run.py
+    ports = requests.get(f"{api}ports/").json()
+    ports = ports['all_ports']
+    
     if(request.method == 'POST'):
         #get form and send it to run.py @app.route('/login/', methods=['POST'])
         res = request.form
@@ -44,14 +48,17 @@ def logout():
             msg = r['msg']
             pass
         except:
-            print("login not successful.")
+            print("login  unsuccessful.")
         if(msg == 'Credentials Valid!'):
             #return the site with username title
-            return render_template('baseLoggedIn.html', title="Logged In :)", name=res['username'])
+            user = (requests.get(f"{api}user", json={
+           "user": res['username']}).json())['user'][0]
+            return render_template('base.html', title="Logged In :)", user=user, trendPorts =ports)
         else:
-            return render_template('baseLoggedOut.html', title="Logged Out :) ")
+            return render_template('base.html', title="Logged Out :) ", trendPorts =ports)
 
-    return render_template('baseLoggedOut.html', title="Logged Out :) ")
+    return render_template('base.html', title="Logged Out :) ", trendPorts =ports)
+
 
 
 if __name__ == "__main__":
