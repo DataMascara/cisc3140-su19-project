@@ -69,3 +69,10 @@ and accurate, redirect
 >`dbmodule.users_db.find_user('username','chalshaff12')`
 >
 >`#this will return username,password, email etc so you can verify the password from the returned fields`
+
+
+
+Add post:
+>`#function dbmodule.post_db.add_post(title, text, port_id, author_id)`
+>
+>`dbmodule.post_db.add_post('This is a new post','Here is the text of the post, it might be longer',3,2)`
