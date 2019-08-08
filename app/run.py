@@ -63,7 +63,7 @@ def login():
         db_result = json.loads(dbmodule.users_db.find_users('username', user))
     print("dbRes")
     # Grab the first result of users that match
-    db_usr = list(db_result['users'])
+    db_usr = list(db_result['user'])
     print(db_usr)
     # User Validation to DB goes here
     if(len(db_usr) > 0):
@@ -71,8 +71,8 @@ def login():
         if (db_usr[0]['password'] == password):
             #         #Send token to allow user to login and advance
             return jsonify({"msg": "Credentials Valid!"}), 200
-        else:
-            return jsonify({"err": "Credentials Not Valid!"})
+        # else:
+        #     return jsonify({"err": "Credentials Not Valid!"})
     return jsonify({"err": "User Not Valid!"})
 
 
@@ -123,7 +123,7 @@ def user():
     user_wanted = res['user']
     response = json.loads(dbmodule.users_db.find_users("username", user_wanted))
     print(response)
-    found = len(response["users"]) > 0
+    found = len(response["user"]) > 0
     if found:
         return jsonify(response), 200
     else:
