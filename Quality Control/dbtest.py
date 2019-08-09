@@ -1,7 +1,7 @@
 from app import app, dbmodule
 import requests
 from flask import request
-from dbmodule import add_port
+from dbmodule import add_port,find_users,add_user,update_user,delete_user,add_post,delete_post
 
 def testport():
 	assert(add_port(StevenGinsberg,student)== str(resultset))
