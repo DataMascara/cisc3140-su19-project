@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import requests
 import json
 import urllib.request
@@ -78,6 +78,12 @@ def subm():
     return render_template('postSubmitted.html', name = "Bla", user = user, trendPorts = trendPorts)
 
 
+@app.route('/api/logout/',methods=['POST', 'GET'])
+def logout():
+    if(request.method == 'POST'):
+        return redirect('/api/login/', code=307)
+
+    return render_template('base.html', title="Logged Out :) ")
 
 
 if __name__ == "__main__":
@@ -97,35 +103,3 @@ def test(username):
     name = res['first']
     print(name)
     return render_template('baseLoggedIn.html', title="Logged In :)", name=name)
-
-
-
-
-    #login function
-#do not use email loggin
-@app.route('/logout',methods=['POST', 'GET'])
-def logout():
-    #get ports info from run.py
-    ports = requests.get(f"{api}ports/").json()
-    ports = ports['all_ports']
-    
-    if(request.method == 'POST'):
-        #get form and send it to run.py @app.route('/login/', methods=['POST'])
-        res = request.form
-        r = requests.post(f"{api}login/", data = res).json()
-        print(r)
-        msg = ''
-        try:
-            msg = r['msg']
-            pass
-        except:
-            print("login  unsuccessful.")
-        if(msg == 'Credentials Valid!'):
-            #return the site with username title
-            user = (requests.get(f"{api}user", json={
-           "user": res['username']}).json())['user'][0]
-            return render_template('base.html', title="Logged In :)", user=user, trendPorts =ports)
-        else:
-            return render_template('base.html', title="Logged Out :) ", trendPorts =ports)
-
-    return render_template('base.html', title="Logged Out :) ", trendPorts =ports)

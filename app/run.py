@@ -31,6 +31,7 @@ def test():
 @app.route('/login/', methods=['POST'])
 def login():
     res = request.get_json()
+    print(res)
 
     # Grab the user and pw
     user = res['user']
@@ -46,9 +47,7 @@ def login():
     # User Validation to DB goes here
     if(len(db_usr) > 0):
         #     #Now that we know the user exists, validate the password
-        # dbmodule.users_db.find_users doesn't return password value
-        # if (db_usr[0]['password'] == password):
-        if(db_usr[0]['username'] == user):
+        if (db_usr[0]['password'] == password):
             #         #Send token to allow user to login and advance
             return jsonify({"usr": db_usr[0]}), 200
         else:
@@ -67,7 +66,7 @@ def login():
 def sign_up():
     if(request.method == 'POST'):
         # Grab the form
-      
+
             res = request.get_json()
             email = res['email']
             username = res['username']
@@ -77,11 +76,11 @@ def sign_up():
             avatarurl = res['avatarurl']
             description = res["description"] = res["description"]
             print(f"{email},  {password}, {username},  {first}, {last}, {avatarurl}")
-         
+
             added_user = dbmodule.users_db.add_user(
                 email,  password, username,  first, last, avatarurl,description)
             print(added_user)
-          
+
 
     try:
         return jsonify({"response": added_user['users'][0]}), 201
