@@ -7,7 +7,7 @@ from dbmodule import add_port,find_users,add_user,update_user,delete_user,add_po
 def testport():
 	assert(add_port(StevenGinsberg,student)== str(resultset))
 
-	def test all_users():
+def test all_users():
 	assert(all_users(StevenGinsberg,student)== str(resultset))
 def test find_users():
 	assert(find_users(StevenGinsberg,student)== str(resultset))
