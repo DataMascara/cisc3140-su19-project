@@ -232,7 +232,7 @@ class users_db:
 	#email and username must be unique (use find_user)
 	#password should be hashed
 	#all fields are required!!
-	def add_user(email, password, username, first, last, avatarurl):
+	def add_user(email, password, username, first, last, avatarurl, description):
 
 		mydb = dbconnection()
 		cursor = mydb.cursor(buffered=True)

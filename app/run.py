@@ -6,8 +6,7 @@ from flask_cors import CORS
 from database import dbmodule
 
 
-
-## This is the file that is invoked to start up a development server. It gets a copy of the app from your package and runs it. This won’t be used in production, but it will see a lot of mileage in development.
+# This is the file that is invoked to start up a development server. It gets a copy of the app from your package and runs it. This won’t be used in production, but it will see a lot of mileage in development.
 app = Flask(__name__)
 CORS(app)
 
@@ -31,10 +30,10 @@ def test():
 '''
 @app.route('/login/', methods=['POST'])
 def login():
-    res = request.form
+    res = request.get_json()
 
     # Grab the user and pw
-    user = res['username']
+    user = res['user']
     password = res['password']
 
     # Get the db query into a python dict
@@ -48,10 +47,10 @@ def login():
     if(len(db_usr) > 0):
         #     #Now that we know the user exists, validate the password
         # dbmodule.users_db.find_users doesn't return password value
-        #if (db_usr[0]['password'] == password):
+        # if (db_usr[0]['password'] == password):
         if(db_usr[0]['username'] == user):
             #         #Send token to allow user to login and advance
-            return jsonify({"msg": "Credentials Valid!"}), 200
+            return jsonify({"usr": db_usr[0]}), 200
         else:
             return jsonify({"err": "Credentials Not Valid!"})
     return jsonify({"err": "User Not Valid!"})
@@ -68,24 +67,26 @@ def login():
 def sign_up():
     if(request.method == 'POST'):
         # Grab the form
-        try:
-            res = request.form
+      
+            res = request.get_json()
             email = res['email']
             username = res['username']
             password = res['password']
             first = res['first']
             last = res['last']
             avatarurl = res['avatarurl']
-            added_user = json.loads(dbmodule.insertUser(
-                email,  password, username,  first, last, avatarurl))
-            pass
-        except:
-            return jsonify({"err": "Missing Form Data"})
+            description = res["description"] = res["description"]
+            print(f"{email},  {password}, {username},  {first}, {last}, {avatarurl}")
+         
+            added_user = dbmodule.users_db.add_user(
+                email,  password, username,  first, last, avatarurl,description)
+            print(added_user)
+          
 
     try:
         return jsonify({"response": added_user['users'][0]}), 201
     except:
-        return jsonify({"err": added_user['error']}), 401
+        return jsonify({"err": added_user}), 401
 
 
 '''
@@ -101,7 +102,8 @@ def user():
     res = request.get_json()  # Grab the response as a python dict from json sent
     # User Validation to DB goes here
     user_wanted = res['user']
-    response = json.loads(dbmodule.users_db.find_users("username", user_wanted))
+    response = json.loads(
+        dbmodule.users_db.find_users("username", user_wanted))
     print(response)
     found = len(response["user"]) > 0
     if found:
