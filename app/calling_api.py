@@ -27,7 +27,7 @@ def login_api():
            "user": user, "password":pw }).json()["usr"]
         print(res)
         if(pw == api_res["password"]):
-            return render_template('base.html', title="Logged In :)", user=res)
+            return render_template('base.html', title="Logged In :)", user=api_res)
         name = res['first']
         print(name)
     except:
@@ -58,8 +58,16 @@ def signingup():
     res = requests.post(f"{api}/signup/", json={
            "email": email, "password":password, 'username':username, "first":first, "last":last, "avatarurl":avatarurl, "description":description
            }).json()
-    print(res['err'])
-    return render_template('base.html', title="Signed Up", user=res)
+    # prints -1 if the user doesn't already exist
+    print(res['err'].find('Duplicate'))
+    if res['err'].find('Duplicate') == -1:
+        # logs the user in
+        api_res = requests.post(f"{api}/login/", json={
+            "user": username, "password": password}).json()["usr"]
+        return render_template('base.html', title="Signed Up", user=api_res)
+    else:
+        # will redirect you back to signup page if user already exists
+        return redirect('/signup')
 
 @app.route('/api/submitpost/', methods=['POST'])
 def submit_post():
