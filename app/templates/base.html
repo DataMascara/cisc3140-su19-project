@@ -1,6 +1,9 @@
-﻿{#- Version 1.0 - 08.07.2019, 16:00 #}
+{#- Version 1.1 - 08.09.2019, 05:40 #}
+{#- Description: 'if' condition added to lines 22-26 to close menu if user is logged in. #}
+
+{#- Version 1.0 - 08.07.2019, 16:00 #}
 {#- Description: Refactoring based on Professor Chuang's advice. #}
-{#-                      'baseLoggedIn.html' and 'basedLoggedOut.html' were merged into this 'base.html' template! #}
+{#-              'baseLoggedIn.html' and 'basedLoggedOut.html' were merged into this 'base.html' template! #}
 
 <!DOCTYPE html>
 <html lang = "en">
@@ -16,7 +19,11 @@
         <div class = "siteLogo" ><a href = "" title = "Go to Homepage" ><span class="a">logic</span><span class="b">Port</span></a></div>
 
         <!-- Sidebar Holder -->
-        <nav class="sidebar active" >
+        {%- if user %}
+            <nav class="sidebar active" >
+        {%- else %}
+            <nav class="sidebar" >
+        {% endif -%}
 
                     <button type="button" class="sidebarCollapse" onclick = "openCloseSidebar()">
                       <img class = "hamMenu" src = "{{ url_for('static',filename='img/ham-menu.gif') }}" alt = "Menu" title = "Menu">
