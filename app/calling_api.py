@@ -12,8 +12,9 @@ app = Flask(__name__, template_folder=r'./templates')
 # Assuming the API is running at the local ip below
 api = "http://127.0.0.1:5000"
 
-
-
+@app.route('/')
+def home():
+    return render_template('base.html')
 
 @app.route('/api/login/', methods=['POST'])
 def login_api():
@@ -21,21 +22,21 @@ def login_api():
     # Grab the user and pw
     user = res['username']
     pw = res['password']
-    print(user)
-    res = requests.post(f"{api}/login/", json={
+    try:
+        api_res = requests.post(f"{api}/login/", json={
            "user": user, "password":pw }).json()["usr"]
-    print(res)
-    name = res['first']
-    print(name)
-    return render_template('base.html', title="Logged In :)", user=res)
+        print(res)
+        if(pw == api_res["password"]):
+            return render_template('base.html', title="Logged In :)", user=res)
+        name = res['first']
+        print(name)
+    except:
+        return render_template('base.html', title="", errLogIn=True )
 
 
-@app.route('/api/signup/', methods=['POST'])
+@app.route('/api/signup', methods=['POST'])
 def login():
-    res = request.form
-    # Grab the user and pw
-
-        # Grab the form
+    # Grab the form
     res = request.form
     email = res['email']
     username = res['username']
@@ -46,19 +47,30 @@ def login():
     description = res["description"]
     email, password, username, first, last, avatarurl
     res = requests.post(f"{api}/signup/", json={
-           "email": email, "password":password, 'username':username, "first":first, "last":last, "avatarurl":avatarurl, "description":description }).json()
+           "email": email, "password":password, 'username':username, "first":first, "last":last, "avatarurl":avatarurl, "description":description 
+           }).json()
     print(res)
-    # name = res['first']
-    # print(name)
-    return render_template('base.html', title="Logged In :)", user=res)
+    return render_template('base.html', title="Signed Up", user=res)
 
-
-
-@app.route('/Write_Post/')
-def create():
-    user = {'username': 'bla-bla-bla'}
+@app.route('/api/submitpost/', methods=['POST'])
+def submit_post():
     trendPorts = [{'name': 'port1', 'mem': 18},{'name': 'port2', 'mem': 17},{'name': 'port3', 'mem': 16},{'name': 'port4', 'mem': 15},{'name': 'port5', 'mem': 14}]
-    return render_template('writePost.html', name = "Bla", user = user, trendPorts = trendPorts)
+    res = request.form
+    title = res['title']
+    text = res['text']
+    portname = res['portname']
+    user = res["username"]
+    (title, text, portname, 1)
+    api_res = requests.post(f"{api}/newpost/", json={
+           "title": title, "text":text, 'portname':portname, "user":user
+           }).json()
+    print(api_res)
+    return render_template('postSubmitted.html', name = "Bla", trendPorts = trendPorts, user = "Logged in")
+
+@app.route('/newpost/')
+def create():
+    trendPorts = [{'name': 'port1', 'mem': 18},{'name': 'port2', 'mem': 17},{'name': 'port3', 'mem': 16},{'name': 'port4', 'mem': 15},{'name': 'port5', 'mem': 14}]
+    return render_template('writePost.html', name = "Bla", trendPorts = trendPorts, user = "Logged in")
 
 @app.route('/Regist_Pending/')
 def pending():
@@ -66,19 +78,20 @@ def pending():
     trendPorts = [{'name': 'port1', 'mem': 18},{'name': 'port2', 'mem': 17},{'name': 'port3', 'mem': 16},{'name': 'port4', 'mem': 15},{'name': 'port5', 'mem': 14}]
     return render_template('genLinks.html', name = "Bla", user = user, trendPorts = trendPorts)
 
-@app.route('/Our_Team/')
+@app.route('/our_team/')
 def team():
     trendPorts = [{'name': 'port1', 'mem': 18},{'name': 'port2', 'mem': 17},{'name': 'port3', 'mem': 16},{'name': 'port4', 'mem': 15},{'name': 'port5', 'mem': 14}]
     return render_template('genLinks.html', name = "Bla", trendPorts = trendPorts)
 
-@app.route('/Post_Submitted/')
-def subm():
-    user = {'username': 'bla-bla-bla'}
-    trendPorts = [{'name': 'port1', 'mem': 18},{'name': 'port2', 'mem': 17},{'name': 'port3', 'mem': 16},{'name': 'port4', 'mem': 15},{'name': 'port5', 'mem': 14}]
-    return render_template('postSubmitted.html', name = "Bla", user = user, trendPorts = trendPorts)
-
-
-
+@app.route('/user/<username>')
+def test(username):
+    # Get the response from the API from the /user endpoint
+    res = (requests.get(f"{api}/user", json={
+           "user": username}).json())['user'][0]
+    print(res)
+    name = res['first']
+    print(name)
+    return render_template('base.html', title="Logged In :)")
 
 if __name__ == "__main__":
     app.run('localhost', 8080, debug=True,)
@@ -86,46 +99,11 @@ if __name__ == "__main__":
 
 
 
-# Now run this file and navigate to the route below
-# Try with chalshaff12 ie /user/
-@app.route('/user/<username>')
-def test(username):
-    # Get the response from the API from the /user endpoint
-    res = (requests.get(f"{api}user", json={
-           "user": username}).json())['users'][0]
-    print(res)
-    name = res['first']
-    print(name)
-    return render_template('baseLoggedIn.html', title="Logged In :)", name=name)
-
 
 
 
     #login function
 #do not use email loggin
-@app.route('/logout',methods=['POST', 'GET'])
+@app.route('/logout/',methods=['POST', 'GET'])
 def logout():
-    #get ports info from run.py
-    ports = requests.get(f"{api}ports/").json()
-    ports = ports['all_ports']
-    
-    if(request.method == 'POST'):
-        #get form and send it to run.py @app.route('/login/', methods=['POST'])
-        res = request.form
-        r = requests.post(f"{api}login/", data = res).json()
-        print(r)
-        msg = ''
-        try:
-            msg = r['msg']
-            pass
-        except:
-            print("login  unsuccessful.")
-        if(msg == 'Credentials Valid!'):
-            #return the site with username title
-            user = (requests.get(f"{api}user", json={
-           "user": res['username']}).json())['user'][0]
-            return render_template('base.html', title="Logged In :)", user=user, trendPorts =ports)
-        else:
-            return render_template('base.html', title="Logged Out :) ", trendPorts =ports)
 
-    return render_template('base.html', title="Logged Out :) ", trendPorts =ports)

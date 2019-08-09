@@ -165,6 +165,19 @@ def get_ad():
     ports = dbmodule.ports_db.all_ports()
     return ports
 
+# return ports from database
+@app.route('/newpost/', methods=['POST'])
+def new_post():
+    res = request.get_json()  # Grab the response as a python dict from json sent
+    # User Validation to DB goes here
+    title = res['title']
+    text = res['text']
+    portname = res['portname']
+    username = res['user']
+
+    response = json.loads(
+        dbmodule.posts_db.add_post(title, text, 1, 1))
+    return response
 
 if(__name__ == "__main__"):
     app.run(debug=True)

@@ -29,7 +29,7 @@
                              <img src="{{ url_for('static',filename='img/profile_logo.png') }}" class="logo" alt = "the user {{ user['username'] }}" title = "{{ user['username'] }}" >
                        {% endif -%}
                         <a href = "" class = "username" title = "Go to your User Profile" >{{ user['username'] }}</a>
-
+ 
                         <form method = "post" action = "">
                                  <input type = "submit" name = "loggedIn" class="profile" value = "User Profile" title = "Go to your User Profile">
                         </form>
@@ -48,29 +48,32 @@
                             <p class = "errLogIn">! Invalid username or password !</p>
                        {% endif -%}
 
-                        <form action = "" method="POST"> 
+                        <form action = "/api/login/" method="POST"> 
                             <input type = "text" 
                                         name = "username" 
                                         class = "text" 
                                         autocomplete = "off"
                                         title = "Enter your username here"
-                                        placeholder = "Username/Email"/>
+                                        placeholder = "Username/Email"
+                                        required
+                                        />
 
                             <input type = "text" 
                                        name = "password"
                                        class = "text" 
                                        autocomplete = "off"
                                        title = "Enter your password here"
-                                       placeholder = "Password"/>
+                                       placeholder = "Password"
+                                       required
+                                       />
 
                              <input type = "submit" class = "button1" value = "Sign in" name = "submit" title = "Sign in">
                          </form> 
                        
                          <div class = "passAndRegistr">
                              <a href = "" class = "forgotPass" title = "Click here if you forgot your password" >Forgot Password?</a>
-                           
                              <p class = "notAMem">Not a member?</p>
-                             <form method = "post" action = "">
+                             <form method = "post" action = "/api/signup">
                                         <input type = "submit" name = "register" class="button2" value = "Register" title = "Register">
                              </form>
                          </div>

@@ -277,7 +277,7 @@ class users_db:
 			if isinstance(o, datetime.datetime):
 				return o.__str__()
 
-		return find_users('username', username)
+		return users_db.find_users('username', username)
 
 	#input: username (string)
 	def delete_user(username):
