@@ -46,7 +46,7 @@
                         <form method = "post" action = "">
                                  <input type = "submit" name = "loggedIn" class="settings" value = "Account Settings" title = "Go to your Account Settings">
                         </form>
-                        <a href = "" class = "signOut" title = "sign out" >sign out</a>
+                        <a href = "/" class = "signOut" title = "sign out" >sign out</a>
 
                     {% else -%}{# If it wasn't: treat as though as the user is logged out. #}
                         <img src="{{ url_for('static',filename='img/profile_logo.png') }}" class="logo" alt = "User Logo" title = "User Logo">
