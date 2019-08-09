@@ -34,22 +34,31 @@ def login_api():
         return render_template('base.html', title="", errLogIn=True )
 
 
-@app.route('/api/signup', methods=['POST'])
-def login():
+# renders the template to signup
+@app.route('/signup', methods=['GET'])
+def signup():
+    return render_template('register.html')
+
+# calls the api to sign the user up
+@app.route('/api/signup', methods=['POST', 'GET'])
+def signingup():
     # Grab the form
     res = request.form
-    email = res['email']
-    username = res['username']
+    email = res['Email']
+    username = res['Username']
     password = res['password']
-    first = res['first']
-    last = res['last']
-    avatarurl = res['avatarurl']
-    description = res["description"]
-    email, password, username, first, last, avatarurl
+    first = res['First Name']
+    last = res['Last Name']
+    # avatarurl = res['imageUpload']
+    avatarurl = ''
+    # currently signup page has no description box
+    # description = res["description"]
+    description = ''
+    # email, password, username, first, last, avatarurl
     res = requests.post(f"{api}/signup/", json={
-           "email": email, "password":password, 'username':username, "first":first, "last":last, "avatarurl":avatarurl, "description":description 
+           "email": email, "password":password, 'username':username, "first":first, "last":last, "avatarurl":avatarurl, "description":description
            }).json()
-    print(res)
+    print(res['err'])
     return render_template('base.html', title="Signed Up", user=res)
 
 @app.route('/api/submitpost/', methods=['POST'])
