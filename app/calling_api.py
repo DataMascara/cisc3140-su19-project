@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import requests
 import json
 import urllib.request
@@ -83,6 +83,32 @@ def team():
     trendPorts = [{'name': 'port1', 'mem': 18},{'name': 'port2', 'mem': 17},{'name': 'port3', 'mem': 16},{'name': 'port4', 'mem': 15},{'name': 'port5', 'mem': 14}]
     return render_template('genLinks.html', name = "Bla", trendPorts = trendPorts)
 
+<<<<<<< HEAD
+=======
+@app.route('/Post_Submitted/')
+def subm():
+    user = {'username': 'bla-bla-bla'}
+    trendPorts = [{'name': 'port1', 'mem': 18},{'name': 'port2', 'mem': 17},{'name': 'port3', 'mem': 16},{'name': 'port4', 'mem': 15},{'name': 'port5', 'mem': 14}]
+    return render_template('postSubmitted.html', name = "Bla", user = user, trendPorts = trendPorts)
+
+
+@app.route('/api/logout/',methods=['POST', 'GET'])
+def logout():
+    if(request.method == 'POST'):
+        return redirect('/api/login/', code=307)
+
+    return render_template('base.html', title="Logged Out :) ")
+
+
+if __name__ == "__main__":
+    app.run('localhost', 8080, debug=True,)
+
+
+
+
+# Now run this file and navigate to the route below
+# Try with chalshaff12 ie /user/
+>>>>>>> 2df17d5ffbf05f842275069a59764f7fe70d9756
 @app.route('/user/<username>')
 def test(username):
     # Get the response from the API from the /user endpoint
@@ -91,6 +117,7 @@ def test(username):
     print(res)
     name = res['first']
     print(name)
+<<<<<<< HEAD
     return render_template('base.html', title="Logged In :)")
 
 if __name__ == "__main__":
@@ -107,3 +134,6 @@ if __name__ == "__main__":
 @app.route('/logout/',methods=['POST', 'GET'])
 def logout():
 
+=======
+    return render_template('baseLoggedIn.html', title="Logged In :)", name=name)
+>>>>>>> 2df17d5ffbf05f842275069a59764f7fe70d9756
