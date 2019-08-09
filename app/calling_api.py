@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect,url_for
 import requests
 import json
 import urllib.request
@@ -16,6 +16,17 @@ api = "http://127.0.0.1:5000"
 def home():
     return render_template('base.html')
 
+# possible to make an endpoint private unless redirected to it?
+@app.route('/user/<username>', methods=['GET'])
+def user_logged_in(username):
+    try:
+        res = (requests.get(f"{api}/user", json={
+            "user": username}).json())['user'][0]
+        print(res)
+        return render_template('base.html', user=res)
+    except:
+        return redirect('/')
+
 @app.route('/api/login/', methods=['POST'])
 def login_api():
     res = request.form
@@ -27,7 +38,9 @@ def login_api():
            "user": user, "password":pw }).json()["usr"]
         print(res)
         if(pw == api_res["password"]):
-            return render_template('base.html', title="Logged In :)", user=api_res)
+            # return render_template('base.html', title="Logged In :)", user=api_res)
+            # redirects to /user/<username> endpoint
+            return redirect(url_for('user_logged_in', username=user))
         name = res['first']
         print(name)
     except:
@@ -61,10 +74,9 @@ def signingup():
     # prints -1 if the user doesn't already exist
     print(res['err'].find('Duplicate'))
     if res['err'].find('Duplicate') == -1:
-        # logs the user in
-        api_res = requests.post(f"{api}/login/", json={
-            "user": username, "password": password}).json()["usr"]
-        return render_template('base.html', title="Signed Up", user=api_res)
+        # logs the new user in
+        # redirects to /user/<username> endpoint
+        return redirect(url_for('user_logged_in', username=username))
     else:
         # will redirect you back to signup page if user already exists
         return redirect('/signup')
@@ -123,15 +135,15 @@ if __name__ == "__main__":
 
 # Now run this file and navigate to the route below
 # Try with chalshaff12 ie /user/
-@app.route('/user/<username>')
-def test(username):
-    # Get the response from the API from the /user endpoint
-    res = (requests.get(f"{api}/user", json={
-           "user": username}).json())['user'][0]
-    print(res)
-    name = res['first']
-    print(name)
-    return render_template('base.html', title="Logged In :)")
+# @app.route('/user/<username>')
+# def test(username):
+#     # Get the response from the API from the /user endpoint
+#     res = (requests.get(f"{api}/user", json={
+#            "user": username}).json())['user'][0]
+#     print(res)
+#     name = res['first']
+#     print(name)
+#     return render_template('base.html', title="Logged In :)")
 
 if __name__ == "__main__":
     app.run('localhost', 8080, debug=True,)
