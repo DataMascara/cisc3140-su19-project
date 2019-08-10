@@ -21,10 +21,10 @@ def home():
 @app.route('/user/<username>/', methods=['GET'])
 def user_logged_in(username):
     try:
-        res = (requests.get(f"{api}/user", json={
+        user = (requests.get(f"{api}/user", json={
             "user": username}).json())['user'][0]
-        print(res)
-        return render_template('base.html', user=res)
+        print(user)
+        return render_template('base.html', user=user)
     except:
         return redirect('/')
 
@@ -33,12 +33,13 @@ def user_logged_in(username):
 def post(username):
     # makes sure user posting exists
     try:
-        user_id = (requests.get(f"{api}/user", json={
-            "user": username}).json())['user'][0]['userId']
+        user = (requests.get(f"{api}/user", json={
+            "user": username}).json())['user'][0]
         # submitting the post
         if request.method == 'POST':
             try:
                 # Grab the form data
+                user_id = user['userId']
                 res = request.form
                 title = res['title']
                 portname = res['portname']
@@ -89,12 +90,12 @@ def login_api():
     pw = res['password']
     try:
         api_res = requests.post(f"{api}/login/", json={
-            "username": username, "password": pw}).json()["usr"]
+            "username": username, "password": pw}).json()["user"]
         print(res)
         if(pw == api_res["password"]):
             # return render_template('base.html', title="Logged In :)", user=api_res)
             # redirects to /user/<username> endpoint
-            return redirect(url_for('user_logged_in', username=user))
+            return redirect(url_for('user_logged_in', username=username))
         name = res['first']
         print(name)
     except:
