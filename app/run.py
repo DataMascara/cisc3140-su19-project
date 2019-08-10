@@ -34,7 +34,7 @@ def login():
     print(res)
 
     # Grab the user and pw
-    user = res['user']
+    user = res['username']
     password = res['password']
 
     # Get the db query into a python dict
@@ -49,7 +49,7 @@ def login():
         #     #Now that we know the user exists, validate the password
         if (db_usr[0]['password'] == password):
             #         #Send token to allow user to login and advance
-            return jsonify({"usr": db_usr[0]}), 200
+            return jsonify({"user": db_usr[0]}), 200
         else:
             return jsonify({"err": "Credentials Not Valid!"})
     return jsonify({"err": "User Not Valid!"})
@@ -59,14 +59,12 @@ def login():
 -------------Endpoint to CREATE a new user------------- #CREATE (C)RUD
 1)Get the user details from front end (either from form or json)
     -Front end will do validation on length and ensure client-side error checking
-    -Check to see if the email is taken
 2)Send json with success response or error if error (implement try blocks?)
 '''
 @app.route('/signup/', methods=['POST', 'GET'])
 def sign_up():
     if(request.method == 'POST'):
         # Grab the form
-
         res = request.get_json()
         email = res['email']
         username = res['username']
@@ -75,13 +73,11 @@ def sign_up():
         last = res['last']
         avatarurl = res['avatarurl']
         description = res["description"] = res["description"]
-        # print(f"{email},  {password}, {username},  {first}, {last}, {avatarurl}")
-
         added_user = dbmodule.users_db.add_user(
             email,  password, username,  first, last, description, avatarurl)
         print(added_user)
-
     try:
+        # Returning the added user
         return added_user, 201
     except:
         return jsonify({"err": added_user}), 401

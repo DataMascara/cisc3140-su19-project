@@ -85,11 +85,11 @@ def post(username):
 def login_api():
     res = request.form
     # Grab the user and pw
-    user = res['username']
+    username = res['username']
     pw = res['password']
     try:
         api_res = requests.post(f"{api}/login/", json={
-            "user": user, "password": pw}).json()["usr"]
+            "username": username, "password": pw}).json()["usr"]
         print(res)
         if(pw == api_res["password"]):
             # return render_template('base.html', title="Logged In :)", user=api_res)
