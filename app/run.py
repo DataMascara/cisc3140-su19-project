@@ -78,7 +78,7 @@ def sign_up():
         print(f"{email},  {password}, {username},  {first}, {last}, {avatarurl}")
 
         added_user = dbmodule.users_db.add_user(
-            email,  password, username,  first, last, avatarurl, description)
+            email,  password, username,  first, last, description, avatarurl)
         print(added_user)
 
     try:
@@ -158,7 +158,7 @@ def delete_user(user):
     return jsonify({"err": "Bad request"}), 400
 
 # return ports from database
-@app.route('/ports/', methods=['GET'])
+@app.route('/ports/')
 def get_ad():
     ports = dbmodule.ports_db.all_ports()
     return ports
@@ -200,7 +200,6 @@ def get_posts_username():
     res = request.get_json()
     username = res["username"]
     # Clean up result here
-
     return dbmodule.subscriptions_db.all_subscriptions_by('username', username)
 
 
