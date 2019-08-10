@@ -75,14 +75,14 @@ def sign_up():
         last = res['last']
         avatarurl = res['avatarurl']
         description = res["description"] = res["description"]
-        print(f"{email},  {password}, {username},  {first}, {last}, {avatarurl}")
+        # print(f"{email},  {password}, {username},  {first}, {last}, {avatarurl}")
 
         added_user = dbmodule.users_db.add_user(
             email,  password, username,  first, last, description, avatarurl)
         print(added_user)
 
     try:
-        return jsonify({"response": added_user['users'][0]}), 201
+        return added_user, 201
     except:
         return jsonify({"err": added_user}), 401
 
