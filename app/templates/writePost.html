@@ -26,7 +26,7 @@ base template, all we modify here is the 'content' block: #} {%- block content
   <form
     class="writePostForm"
     action=""
-    method="post"
+    method="POST"
     enctype="multipart/form-data"
   >
     <div class="header">
@@ -50,7 +50,13 @@ base template, all we modify here is the 'content' block: #} {%- block content
     </div>
     <span class="red">*- required</span>
     <br />
-    <input type="text" name="title" placeholder="Post Title" id="title" required/><span class="red"> *</span>
+    <input
+      type="text"
+      name="title"
+      placeholder="Post Title"
+      id="title"
+      required
+    /><span class="red"> *</span>
     <br />
     <input type="text" name="username" placeholder="Username" required />
     <input type="text" name="addlink" placeholder="Add Link (optional)" />

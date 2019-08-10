@@ -3,7 +3,7 @@ import json
 import os
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_cors import CORS
-from app.database import dbmodule
+from database import dbmodule
 
 
 # This is the file that is invoked to start up a development server. It gets a copy of the app from your package and runs it. This won’t be used in production, but it will see a lot of mileage in development.
@@ -67,20 +67,19 @@ def sign_up():
     if(request.method == 'POST'):
         # Grab the form
 
-            res = request.get_json()
-            email = res['email']
-            username = res['username']
-            password = res['password']
-            first = res['first']
-            last = res['last']
-            avatarurl = res['avatarurl']
-            description = res["description"] = res["description"]
-            print(f"{email},  {password}, {username},  {first}, {last}, {avatarurl}")
+        res = request.get_json()
+        email = res['email']
+        username = res['username']
+        password = res['password']
+        first = res['first']
+        last = res['last']
+        avatarurl = res['avatarurl']
+        description = res["description"] = res["description"]
+        print(f"{email},  {password}, {username},  {first}, {last}, {avatarurl}")
 
-            added_user = dbmodule.users_db.add_user(
-                email,  password, username,  first, last, avatarurl,description)
-            print(added_user)
-
+        added_user = dbmodule.users_db.add_user(
+            email,  password, username,  first, last, avatarurl, description)
+        print(added_user)
 
     try:
         return jsonify({"response": added_user['users'][0]}), 201
@@ -172,11 +171,47 @@ def new_post():
     title = res['title']
     text = res['text']
     portname = res['portname']
-    username = res['user']
-
+    user_id = res['userId']
     response = json.loads(
-        dbmodule.posts_db.add_post(title, text, 1, 1))
+        dbmodule.posts_db.add_post(title, text, portname, user_id))
+    print(f"Newpost res{response}")
     return response
+
+
+# function dbmodule.posts_db.all_posts_by(column_name, data_value)
+#dbmodule.posts_db.all_posts_by('portId', 1)
+#dbmodule.posts_db.all_posts_by('portName', 'main')
+@app.route('/posts-by-portname/')
+def get_posts():
+    port_name = "Main"
+    return dbmodule.posts_db.all_posts_by('portName', 'Main')
+
+
+@app.route('/posts-by-author/')
+def get_posts_author():
+
+    return dbmodule.posts_db.all_posts_by('author', 'Markkduke')
+
+
+# Display Posts Relevant to User Given a User id
+# Obtain the ids of all the Ports to which the User is subscribed
+@app.route('/posts-for-username/')
+def get_posts_username():
+    res = request.get_json()
+    username = res["username"]
+    # Clean up result here
+
+    return dbmodule.subscriptions_db.all_subscriptions_by('username', username)
+
+
+@app.route('/subscribe-to-port/')
+def subscribe_to_port():
+    res = request.get_json()
+    username = res["username"]
+    portname = res["portname"]
+    # Clean up result here
+    return dbmodule.subscriptions_db.add_subscription(username, portname)
+
 
 if(__name__ == "__main__"):
     app.run(debug=True)
