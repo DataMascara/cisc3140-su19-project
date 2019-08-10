@@ -1,9 +1,12 @@
-# cisc3140-su19-project
-
+# CISC 3140 - Summer 2019 Project
 This is the repository for the group project in CISC 3140 class at Brooklyn College.
 
-## Team-Specific ReadMe
+## UnderDogs
 
+UnderDogs is an information hub for Brooklyn College Computer Science students and faculty. Users can share original content, ask for assistance from other students, find collaborators, and have discussions across an array of curated communities.
+
+## Team-Specific ReadMe
+- [Product Team README](https://github.com/DataMascara/cisc3140-su19-project/blob/master/product/README.md)
 - Backend
 - ect.
 

@@ -1,6 +1,9 @@
-﻿{#- Version 1.0 - 08.07.2019, 16:00 #}
+{#- Version 1.1 - 08.09.2019, 05:40 #}
+{#- Description: 'if' condition added to lines 22-26 to close menu if user is logged in. #}
+
+{#- Version 1.0 - 08.07.2019, 16:00 #}
 {#- Description: Refactoring based on Professor Chuang's advice. #}
-{#-                      'baseLoggedIn.html' and 'basedLoggedOut.html' were merged into this 'base.html' template! #}
+{#-              'baseLoggedIn.html' and 'basedLoggedOut.html' were merged into this 'base.html' template! #}
 
 <!DOCTYPE html>
 <html lang = "en">
@@ -16,7 +19,11 @@
         <div class = "siteLogo" ><a href = "" title = "Go to Homepage" ><span class="a">logic</span><span class="b">Port</span></a></div>
 
         <!-- Sidebar Holder -->
-        <nav class="sidebar active" >
+        {%- if user %}
+            <nav class="sidebar active" >
+        {%- else %}
+            <nav class="sidebar" >
+        {% endif -%}
 
                     <button type="button" class="sidebarCollapse" onclick = "openCloseSidebar()">
                       <img class = "hamMenu" src = "{{ url_for('static',filename='img/ham-menu.gif') }}" alt = "Menu" title = "Menu">
@@ -29,7 +36,7 @@
                              <img src="{{ url_for('static',filename='img/profile_logo.png') }}" class="logo" alt = "the user {{ user['username'] }}" title = "{{ user['username'] }}" >
                        {% endif -%}
                         <a href = "" class = "username" title = "Go to your User Profile" >{{ user['username'] }}</a>
-
+ 
                         <form method = "post" action = "">
                                  <input type = "submit" name = "loggedIn" class="profile" value = "User Profile" title = "Go to your User Profile">
                         </form>
@@ -39,7 +46,7 @@
                         <form method = "post" action = "">
                                  <input type = "submit" name = "loggedIn" class="settings" value = "Account Settings" title = "Go to your Account Settings">
                         </form>
-                        <a href = "" class = "signOut" title = "sign out" >sign out</a>
+                        <a href = "/" class = "signOut" title = "sign out" >sign out</a>
 
                     {% else -%}{# If it wasn't: treat as though as the user is logged out. #}
                         <img src="{{ url_for('static',filename='img/profile_logo.png') }}" class="logo" alt = "User Logo" title = "User Logo">
@@ -48,29 +55,32 @@
                             <p class = "errLogIn">! Invalid username or password !</p>
                        {% endif -%}
 
-                        <form action = "" method="POST"> 
+                        <form action = "/api/login/" method="POST"> 
                             <input type = "text" 
                                         name = "username" 
                                         class = "text" 
                                         autocomplete = "off"
                                         title = "Enter your username here"
-                                        placeholder = "Username/Email"/>
+                                        placeholder = "Username/Email"
+                                        required
+                                        />
 
-                            <input type = "text" 
+                            <input type = "password" 
                                        name = "password"
                                        class = "text" 
                                        autocomplete = "off"
                                        title = "Enter your password here"
-                                       placeholder = "Password"/>
+                                       placeholder = "Password"
+                                       required
+                                       />
 
                              <input type = "submit" class = "button1" value = "Sign in" name = "submit" title = "Sign in">
                          </form> 
                        
                          <div class = "passAndRegistr">
                              <a href = "" class = "forgotPass" title = "Click here if you forgot your password" >Forgot Password?</a>
-                           
                              <p class = "notAMem">Not a member?</p>
-                             <form method = "post" action = "">
+                             <form method = "get" action = "/signup">
                                         <input type = "submit" name = "register" class="button2" value = "Register" title = "Register">
                              </form>
                          </div>

@@ -232,7 +232,7 @@ class users_db:
 	#email and username must be unique (use find_user)
 	#password should be hashed
 	#all fields are required!!
-	def add_user(email, password, username, first, last, avatarurl):
+	def add_user(email, password, username, first, last, avatarurl, description):
 
 		mydb = dbconnection()
 		cursor = mydb.cursor(buffered=True)
@@ -253,7 +253,7 @@ class users_db:
 			if isinstance(o, datetime.datetime):
 				return o.__str__()
 
-		return find_users('username', username)
+		return users_db.find_users('username', username)
 
 #input: username (string)
 	def update_user(username, column_name, value_name):
@@ -277,7 +277,7 @@ class users_db:
 			if isinstance(o, datetime.datetime):
 				return o.__str__()
 
-		return find_users('username', username)
+		return users_db.find_users('username', username)
 
 	#input: username (string)
 	def delete_user(username):
