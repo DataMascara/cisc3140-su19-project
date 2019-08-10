@@ -16,11 +16,6 @@ for a user-based loggin website.
 '''
 
 
-@app.route('/')
-def test():
-    return jsonify({"msg": "hello"})
-
-
 '''
 -------------Endpoint to login-------------
 1)Get the user details from front end (either from form or json)
@@ -31,19 +26,16 @@ def test():
 @app.route('/login/', methods=['POST'])
 def login():
     res = request.get_json()
-    print(res)
-
     # Grab the user and pw
     user = res['username']
     password = res['password']
 
     # Get the db query into a python dict
     db_result = json.loads(dbmodule.users_db.find_users('username', user))
-    print("dbRes")
+
     # Grab the first result of users that match
-    print(db_result)
     db_usr = list(db_result['user'])
-    print(db_usr)
+
     # User Validation to DB goes here
     if(len(db_usr) > 0):
         #     #Now that we know the user exists, validate the password
@@ -75,7 +67,6 @@ def sign_up():
         description = res["description"] = res["description"]
         added_user = dbmodule.users_db.add_user(
             email,  password, username,  first, last, description, avatarurl)
-        print(added_user)
     try:
         # Returning the added user
         return added_user, 201
@@ -104,11 +95,6 @@ def user():
         return jsonify(response), 200
     else:
         return jsonify({"error": "User Not Found!"}), 404
-
-
-@app.route('/allusers/')
-def all_users():
-    return dbmodule.allUsers()
 
 
 '''
@@ -167,26 +153,25 @@ def new_post():
     title = res['title']
     text = res['text']
     portname = res['portname']
-    user_id = res['userId']
+    username = res['username']
+    user_id = json.loads(dbmodule.users_db.find_users(
+        "username", username))['user'][0]['userId']
+
+    # Returns the added post from this user
     response = json.loads(
-        dbmodule.posts_db.add_post(title, text, portname, user_id))
-    print(f"Newpost res{response}")
+        dbmodule.posts_db.add_post(title, text, portname, user_id, username))
+
+    # Filter out the new one by title, and return that.
     return response
 
 
-# function dbmodule.posts_db.all_posts_by(column_name, data_value)
-#dbmodule.posts_db.all_posts_by('portId', 1)
-#dbmodule.posts_db.all_posts_by('portName', 'main')
+# Function dbmodule.posts_db.all_posts_by(column_name, data_value)
+# dbmodule.posts_db.all_posts_by('portId', 1)
+# dbmodule.posts_db.all_posts_by('portName', 'main')
 @app.route('/posts-by-portname/')
 def get_posts():
     port_name = "Main"
     return dbmodule.posts_db.all_posts_by('portName', 'Main')
-
-
-@app.route('/posts-by-author/')
-def get_posts_author():
-
-    return dbmodule.posts_db.all_posts_by('author', 'Markkduke')
 
 
 # Display Posts Relevant to User Given a User id
@@ -206,6 +191,14 @@ def subscribe_to_port():
     portname = res["portname"]
     # Clean up result here
     return dbmodule.subscriptions_db.add_subscription(username, portname)
+
+
+'''
+---- Getting All Users ----
+'''
+@app.route('/allusers/')
+def all_users():
+    return json.loads(dbmodule.users_db.all_users())
 
 
 if(__name__ == "__main__"):

@@ -338,7 +338,37 @@ class posts_db:
                 return o.__str__()
         return json.dumps({'posts': json_data}, default=myconverter)
 
-    def add_post(title, text, port_name, author_id):
+   #column_name = port_id or author
+    # data_value depends on the column (always a string)
+    # e.g. http://localhost:5000/all_posts_by?column=author&value=chalshaff12
+    # or http://localhost:5000/all_posts_by?column=port_id&value=1
+    def find_posts_by_text(postText, text):
+
+        mydb = dbconnection()
+        cursor = mydb.cursor(buffered=True)
+        sql = f"SELECT * FROM posts_vw where {postText} = '{text}'"
+
+        try:
+            cursor.execute(sql)
+        except mysql.connector.Error as err:
+            return json.dumps({'error': str(err)})
+
+        result_set = cursor.fetchall()  # save sql result set
+        # convert columns and rows into json data
+        json_data = [dict(zip([key[0] for key in cursor.description], row))
+                     for row in result_set]
+        # close database connection
+
+        cursor.close()
+        mydb.close()
+
+        # catch datetime datatype error for json
+        def myconverter(o):
+            if isinstance(o, datetime.datetime):
+                return o.__str__()
+        return json.dumps({'posts': json_data}, default=myconverter)
+
+    def add_post(title, text, port_name, author_id, username):
 
         mydb = dbconnection()
         cursor = mydb.cursor(buffered=True)
@@ -357,8 +387,8 @@ class posts_db:
         def myconverter(o):
             if isinstance(o, datetime.datetime):
                 return o.__str__()
-
-        return posts_db.all_posts_by('author', author_id)
+                # PLEASE ADD WAY TO GET POST BY TITLE
+        return posts_db.find_posts_by_text("postText", text)
 
     def delete_post(post_id):
 
