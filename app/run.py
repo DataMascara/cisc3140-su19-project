@@ -86,7 +86,7 @@ def sign_up():
 def user():
     res = request.get_json()  # Grab the response as a python dict from json sent
     # User Validation to DB goes here
-    user_wanted = res['user']
+    user_wanted = res['username']
     response = json.loads(
         dbmodule.users_db.find_users("username", user_wanted))
     print(response)
@@ -107,17 +107,23 @@ def user():
 2)Send json with success response or error if error (implement try blocks?)
 '''
 @app.route('/update/', methods=['PUT'])
-def update_user(user, field):
+def update_user():
         # Grab the form data(could also be a json, if we front end sends that instead)
-    res = request.form
-    thing_to_update = res[field]
-    if get_user(user) != '()':  # Currently, the get_user returns '()' if no user is found
+    res = request.get_json()
+    username = res['username']
+    field_to_update = res['field']
+    value = res['value']
+
+    db_res = json.loads(dbmodule.users_db.update_user(
+        username, field_to_update, value))
+    # If the user exists
+    if(len(db_res["user"]) > 0):
         # Call db to do the update on that user's data
         return jsonify({"msg": "Update Success"}), 202
     else:
         # Signal DB Error
         return jsonify({"err": "User Invalid"}), 409
-    return jsonify({"err": "Bad request"}), 400
+    # return jsonify({"err": "Bad request"}), 400
 
 
 '''
@@ -125,18 +131,21 @@ def update_user(user, field):
 1)Get the user ID
     -Update the database with removing the delete
 2)Send json with success response or error if error (implement try blocks?)
+TODO:
+-> Add check to see if user exists first.
 '''
-@app.route('/deleteuser/', methods=['DELETE'])
-def delete_user(user):
+@app.route('/delete-user/', methods=['DELETE'])
+def delete_user():
     # Grab the form data(could also be a json, if we front end sends that instead)
-    res = request.form  # Grab the request's form
-    user_to_del = user
-    if get_user(user) != '()':  # Currently, the get_user returns '()' if no user is found
-        # Call db to delete that user's data
-        return jsonify({"msg": "Delete Success"}), 202
-    else:
-        # Signal DB Error
-        return jsonify({"err": "User Invalid"}), 409
+    res = request.get_json()  # Grab the request's form
+    user = res["username"]
+    # Currently, we assume the user exists and delactivate the user
+    dbmodule.users_db.delete_user(user)
+    # Call db to delete that user's data
+    return jsonify({"msg": f"Deactivated {user} successfully"}), 202
+    # else:
+    #     # Signal DB Error
+    #     return jsonify({"err": "User Invalid"}), 409
     return jsonify({"err": "Bad request"}), 400
 
 # return ports from database
@@ -160,8 +169,6 @@ def new_post():
     # Returns the added post from this user
     response = json.loads(
         dbmodule.posts_db.add_post(title, text, portname, user_id, username))
-
-    # Filter out the new one by title, and return that.
     return response
 
 
