@@ -22,6 +22,11 @@ def load_user(username):
     print(user)
     return user
 
+@app.route('/', methods=['GET'])
+def redirect_home():
+    if ('loggedin' in session):
+        return redirect("/home/")
+    return redirect("/login/")
 
 @app.route('/login/', methods=['POST', 'GET'])
 def login_api():
