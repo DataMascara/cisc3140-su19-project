@@ -64,7 +64,7 @@ def logout():
 def home():
     if ('loggedin' in session):
         print(session)
-        return render_template('base.html', user = session.username)
+        return render_template('base.html', user = session['username'])
     else:
         return render_template('base.html')
 

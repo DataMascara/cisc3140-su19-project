@@ -13,6 +13,8 @@
 
 <body {%- block onload %} onload = "displayYear()" {% endblock -%}>
 
+
+
 {%- block leftContainer %}
     <div class = "leftContainer"> <!-- Beginning of the Left (Logo and Menu) Container -->
 
@@ -23,6 +25,7 @@
             <nav class="sidebar active" >
         {%- else %}
             <nav class="sidebar" >
+
         {% endif -%}
 
                     <button type="button" class="sidebarCollapse" onclick = "openCloseSidebar()">
@@ -46,7 +49,7 @@
                         <form method = "post" action = "">
                                  <input type = "submit" name = "loggedIn" class="settings" value = "Account Settings" title = "Go to your Account Settings">
                         </form>
-                        <a href = "/" class = "signOut" title = "sign out" >sign out</a>
+                        <a href = "/logout" class = "signOut" title = "sign out" >sign out</a>
 
                     {% else -%}{# If it wasn't: treat as though as the user is logged out. #}
                         <img src="{{ url_for('static',filename='img/profile_logo.png') }}" class="logo" alt = "User Logo" title = "User Logo">
@@ -55,7 +58,7 @@
                             <p class = "errLogIn">! Invalid username or password !</p>
                        {% endif -%}
 
-                        <form action = "/api/login/" method="POST"> 
+                        <form action = "/login/" method="POST"> 
                             <input type = "text" 
                                         name = "username" 
                                         class = "text" 
@@ -101,6 +104,15 @@
      <div class = "midContainer"> <!-- Beginning of the Middle Container -->
          {%- block content %}
               {#- All the content will come here! #}
+
+        {%- if user %}
+            <h1>Current User{{user}}</h1>
+            {%- else %}
+        
+                <h1>YOURE NOT LOGGED IN!</h1>
+                {% endif -%}
+
+
          {% endblock content -%}
          {%- block generalLinks %}
               <div class = "bottomLinks">
