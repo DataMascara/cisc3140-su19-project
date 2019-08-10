@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import requests
 import json
 import urllib.request
@@ -7,15 +7,67 @@ import webbrowser
 # Example calling the API from another python file
 
 # Relative path to reach the templates folder
-app = Flask(__name__, template_folder=r'./templates')
+app = Flask(__name__, template_folder='templates')
+app.secret_key = "test"
 
 # Assuming the API is running at the local ip below
 api = "http://127.0.0.1:5000"
 
+ 
 
-@app.route('/')
+
+def load_user(username):
+    user = (requests.get(f"{api}/user", json={
+        "user": username}).json())['user'][0]
+    print(user)
+    return user
+
+
+@app.route('/login/', methods=['POST', 'GET'])
+def login_api():
+    if(request.method == 'POST'):
+        res = request.form
+        print(res)
+        # Grab the user and pw
+        username = res['username']
+        password = res['password']
+        api_res = requests.post(f"{api}/login/", json={
+                "username": username, "password": password}).json()
+        print(api_res['user']['username'])
+        
+        if api_res['user']['username']:
+            # Create session data, we can access this data in other routes
+            session['loggedin'] = True
+            # session['id'] = account['id']
+            session['username'] = username
+            return render_template('base.html', title='Logged In', user = username)
+        else:
+            return render_template('base.html', title="", errLogIn=True)
+    else:
+        print("HELLO")
+        return render_template('base.html', title='NONE')
+
+
+
+@app.route('/logout')
+def logout():
+    res = request.form
+    # Grab the user and pw
+    session.pop('loggedin', None)
+    session.pop('id', None)
+    session.pop('username', None)
+   #Redirect to login page
+    return render_template('base.html', title="Logged Out :) ")
+
+
+@app.route('/home/')
 def home():
-    return render_template('base.html')
+    if ('loggedin' in session):
+        print(session)
+        return render_template('base.html', user = session.username)
+    else:
+        return render_template('base.html')
+
 
 # possible to make an endpoint private unless redirected to it?
 @app.route('/user/<username>/', methods=['GET'])
@@ -80,26 +132,6 @@ def post(username):
 #         return render_template('postSubmitted.html', user=user)
 #     except:
 #         return redirect('/')
-
-
-@app.route('/api/login/', methods=['POST'])
-def login_api():
-    res = request.form
-    # Grab the user and pw
-    username = res['username']
-    pw = res['password']
-    try:
-        api_res = requests.post(f"{api}/login/", json={
-            "username": username, "password": pw}).json()["user"]
-        print(res)
-        if(pw == api_res["password"]):
-            # return render_template('base.html', title="Logged In :)", user=api_res)
-            # redirects to /user/<username> endpoint
-            return redirect(url_for('user_logged_in', username=username))
-        name = res['first']
-        print(name)
-    except:
-        return render_template('base.html', title="", errLogIn=True)
 
 
 # renders the template to signup
@@ -179,14 +211,6 @@ def subm():
     trendPorts = [{'name': 'port1', 'mem': 18}, {'name': 'port2', 'mem': 17}, {
         'name': 'port3', 'mem': 16}, {'name': 'port4', 'mem': 15}, {'name': 'port5', 'mem': 14}]
     return render_template('postSubmitted.html', name="Bla", user=user, trendPorts=trendPorts)
-
-
-@app.route('/api/logout/', methods=['POST', 'GET'])
-def logout():
-    if(request.method == 'POST'):
-        return redirect('/api/login/', code=307)
-
-    return render_template('base.html', title="Logged Out :) ")
 
 
 if __name__ == "__main__":

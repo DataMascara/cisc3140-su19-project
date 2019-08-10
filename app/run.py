@@ -26,13 +26,14 @@ for a user-based loggin website.
 @app.route('/login/', methods=['POST'])
 def login():
     res = request.get_json()
+    print(res)
     # Grab the user and pw
     user = res['username']
     password = res['password']
 
     # Get the db query into a python dict
     db_result = json.loads(dbmodule.users_db.find_users('username', user))
-
+    print(db_result)
     # Grab the first result of users that match
     db_usr = list(db_result['user'])
 
@@ -151,10 +152,12 @@ def delete_user():
         return jsonify({"err": "User Invalid"}), 409
 
 
-@app.route('/ports/')
-def get_ad():
+@app.route('/allports/')
+def get_all_ports():
     ports = dbmodule.ports_db.all_ports()
-    return ports
+
+    # Simply return the json of ports.
+    return json.loads(ports)
 
 # return ports from database
 @app.route('/newpost/', methods=['POST'])
