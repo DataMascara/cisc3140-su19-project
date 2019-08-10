@@ -113,7 +113,7 @@ def update_user():
     username = res['username']
     field_to_update = res['field']
     value = res['value']
-
+    # Grab the DB result
     db_res = json.loads(dbmodule.users_db.update_user(
         username, field_to_update, value))
     # If the user exists
@@ -139,16 +139,18 @@ def delete_user():
     # Grab the form data(could also be a json, if we front end sends that instead)
     res = request.get_json()  # Grab the request's form
     user = res["username"]
-    # Currently, we assume the user exists and delactivate the user
-    dbmodule.users_db.delete_user(user)
-    # Call db to delete that user's data
-    return jsonify({"msg": f"Deactivated {user} successfully"}), 202
-    # else:
-    #     # Signal DB Error
-    #     return jsonify({"err": "User Invalid"}), 409
-    return jsonify({"err": "Bad request"}), 400
+    # Check if user exists
+    user_exist = (
+        len(json.loads(dbmodule.users_db.find_users("username", user))['user']) > 0)
+    if(user_exist):
+        # Call db to delete that user's data
+        dbmodule.users_db.find_users("username", user)
+        return jsonify({"msg": f"Deactivated {user} successfully"}), 202
+    else:
+        # Signal that the user is invalid
+        return jsonify({"err": "User Invalid"}), 409
 
-# return ports from database
+
 @app.route('/ports/')
 def get_ad():
     ports = dbmodule.ports_db.all_ports()
