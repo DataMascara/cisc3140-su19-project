@@ -53,7 +53,7 @@ def login_api():
             return render_template("base.html", title="NONE")
 
 
-@app.route("/logout")
+@app.route("/logout/")
 def logout():
     session.pop("loggedin", None)
     session.pop("id", None)
@@ -183,6 +183,20 @@ def post():
 
     else:
         return render_template("base.html")
+
+
+@app.route("/subscribed-posts/", methods=["GET"])
+def subscribedposts():
+    if 'loggedin' in session:
+        post = requests.get(
+            f"{api}/posts-from-subscribed-ports/",
+            json={
+                "username": session["username"]
+            }).json()
+
+        return post
+    else:
+        return redirect('/login/')
 
 
 @app.route("/ourteam/")
