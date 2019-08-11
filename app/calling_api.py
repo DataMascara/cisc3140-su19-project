@@ -81,9 +81,9 @@ def home():
         {"name": "port5", "mem": 14},
     ]
     if "loggedin" in session:
-        return render_template('posts.html', name="Bla", user= session['user'], trendPorts=trendPorts, port=port, search="My First Search!")
+        return render_template('posts.html', name="Home", user= session['user'], trendPorts=trendPorts, port=port, search="My First Search!")
     else:
-        return render_template('posts.html', name="Bla", trendPorts=trendPorts, port=port, search="My First Search!")
+        return render_template('posts.html', name="Home", trendPorts=trendPorts, port=port, search="My First Search!")
 
 
 @app.route("/p/<portname>", methods=["GET"])
@@ -102,9 +102,9 @@ def portpost(portname):
         {"name": "port5", "mem": 14},
     ]
     if "loggedin" in session:
-        return render_template('posts.html', name="Bla", user= session['user'], trendPorts=trendPorts, port=port, search="My First Search!")
+        return render_template('posts.html', name="p/"+portname, user= session['user'], trendPorts=trendPorts, port=port, search="My First Search!")
     else:
-        return render_template('posts.html', name="Bla", trendPorts=trendPorts, port=port, search="My First Search!")
+        return render_template('posts.html', name="p/"+portname, trendPorts=trendPorts, port=port, search="My First Search!")
 
 
 # gets user's post history
@@ -119,10 +119,10 @@ def my_posts(username):
     ]
     port = requests.get(f"{api}/my-posts/", json={"username": username}).json()
     if "loggedin" in session:
-        return render_template('posts.html', name='Bla', user=session['user'], trendPorts=trendPorts, port=port, search="My First Search!")
+        return render_template('posts.html', name=username+"\'s Post", user=session['user'], trendPorts=trendPorts, port=port, search="My First Search!")
         # return port
     else:
-        return render_template('posts.html', name='Bla', trendPorts=trendPorts, port=port, search="My First Search!")
+        return render_template('posts.html', name=username+"\'s Post", trendPorts=trendPorts, port=port, search="My First Search!")
 
 
 # calls the api to sign the user up
