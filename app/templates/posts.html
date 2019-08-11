@@ -66,7 +66,7 @@
                         {% endif %}
                  </div>
                  <div class = "description">
-                        <a href = "" class = "portOfPostName" title = "See all posts in {{ port['name'] }}">p/{{ port['name'] }}</a>
+                        <a href = "" class = "portOfPostName" title = "See all posts in {{ post['portName'] }}">p/{{ post['portName'] }}</a>
                         <a href = "" class = "nameOfPost" title = "{{ post['title'] | e }}">{{ post['title']  | e }}</a>
                         {%- if post['postText'] != None %}
                               <p class = "postDescription">{{ post['postText']  | e }}</p>

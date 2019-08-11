@@ -83,9 +83,9 @@ def home():
         {"name": "port5", "mem": 14},
     ]
     if "loggedin" in session:
-        return render_template('posts.html', name="Bla", user= session['user'], trendPorts=trendPorts, port=port, search="My First Search!")
+        return render_template('posts.html', name="Home", user= session['user'], trendPorts=trendPorts, port=port, search="My First Search!")
     else:
-        return render_template('posts.html', name="Bla", trendPorts=trendPorts, port=port, search="My First Search!")
+        return render_template('posts.html', name="Home", trendPorts=trendPorts, port=port, search="My First Search!")
 
 
 @app.route("/p/<portname>", methods=["GET"])
@@ -95,6 +95,7 @@ def portpost(portname):
         json={
             "portname": portname
         }).json()
+    print(type(port))
     trendPorts = [
         {"name": "port1", "mem": 18},
         {"name": "port2", "mem": 17},
@@ -103,21 +104,27 @@ def portpost(portname):
         {"name": "port5", "mem": 14},
     ]
     if "loggedin" in session:
-        return render_template('posts.html', name="Bla", user= session['user'], trendPorts=trendPorts, port=port, search="My First Search!")
+        return render_template('posts.html', name="p/"+portname, user= session['user'], trendPorts=trendPorts, port=port, search="My First Search!")
     else:
-        return render_template('posts.html', name="Bla", trendPorts=trendPorts, port=port, search="My First Search!")
+        return render_template('posts.html', name="p/"+portname, trendPorts=trendPorts, port=port, search="My First Search!")
 
-# # renders the template to signup
-# @app.route('/signup/', methods=['POST', 'GET'])
-# def signup():
-#     return render_template('register.html')
 
-# Get's your posts (As json right now)
-@app.route("/my-posts/", methods=["GET"])
-def my_posts():
-    res = requests.get(f"{api}/myposts/", json={"username": session["username"]}).json()
-    return res
-    # return render_template('register.html')
+# gets user's post history
+@app.route("/u/<username>/posts/", methods=["GET"])
+def my_posts(username):
+    trendPorts = [
+        {"name": "port1", "mem": 18},
+        {"name": "port2", "mem": 17},
+        {"name": "port3", "mem": 16},
+        {"name": "port4", "mem": 15},
+        {"name": "port5", "mem": 14},
+    ]
+    port = requests.get(f"{api}/my-posts/", json={"username": username}).json()
+    if "loggedin" in session:
+        return render_template('posts.html', name=username+"\'s Post", user=session['user'], trendPorts=trendPorts, port=port, search="My First Search!")
+        # return port
+    else:
+        return render_template('posts.html', name=username+"\'s Post", trendPorts=trendPorts, port=port, search="My First Search!")
 
 
 # calls the api to sign the user up
