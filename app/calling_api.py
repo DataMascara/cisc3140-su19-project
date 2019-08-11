@@ -86,54 +86,11 @@ def my_posts():
 
 
 # calls the api to sign the user up
-@app.route("/signup", methods=["POST", "GET"])
+@app.route("/signup/", methods=["POST", "GET"])
 def sign_up():
     # if loggedin why you signing up
     if "loggedin" in session:
         return redirect("/home/")
-
-    if request.method == "POST":
-        # Grab the form
-        res = request.form
-        email = res["email"]
-        username = res["username"]
-        password = res["password"]
-        first = res["First Name"]
-        last = res["Last Name"]
-        # avatarurl = res['imageUpload']
-        avatarurl = ""
-        # currently signup page has no description box
-        # description = res["description"]
-        description = ""
-        res = requests.post(
-            f"{api}/signup/",
-            json={
-                "email": email,
-                "password": password,
-                "username": username,
-                "first": first,
-                "last": last,
-                "avatarurl": avatarurl,
-                "description": description,
-            },
-        ).json()
-        # prints -1 if the user doesn't already exist
-        if res["err"]:  # Signal the error
-            return render_template("register.html", error=res["err"])
-        else:
-            # if this line is successful then the user is created
-            session["user"] = res["user"]
-            session["loggedin"] = True
-            # session['id'] = account['id']
-            session["username"] = username
-            return redirect("/home/")
-            # rendering register
-    else:
-        return render_template("register.html")
-
-
-@app.route("/new-post/", methods=["GET", "POST"])
-def post():
     # TODO: Remove psudo tending ports for real ones
     trendPorts = [
         {"name": "port1", "mem": 18},
@@ -142,6 +99,55 @@ def post():
         {"name": "port4", "mem": 15},
         {"name": "port5", "mem": 14},
     ]
+    if request.method == "POST":
+        # Grab the form
+        res = request.form
+        print(res)
+        email = res["email"]
+        username = res["username"]
+        password = res["password"]
+        first = res["first"]
+        last = res["last"]
+        # avatarurl = res['imageUpload']
+        avatarurl = ""
+        # currently signup page has no description box
+        # description = res["description"]
+        description = ""
+        try:
+            res = requests.post(
+                f"{api}/signup/",
+                json={
+                    "email": email,
+                    "password": password,
+                    "username": username,
+                    "first": first,
+                    "last": last,
+                    "avatarurl": avatarurl,
+                    "description": description,
+                },
+            ).json()
+            print(res)
+            # prints -1 if the user doesn't already exist
+        except:  # Signal the error
+            return render_template("register.html", error=res["err"])
+        # if this line is successful then the user is created
+        print(load_user(username))
+        print(f"TYPE HERE {type(load_user(username))}")
+        session["user"] = load_user(username)
+        session["loggedin"] = True
+        # session['id'] = account['id']
+        session["username"] = username
+        redirect("/home/")
+        return render_template(
+            "base.html", name="Bla", trendPorts=trendPorts, user=session["user"]
+        )
+    else:
+        return render_template("register.html")
+
+
+@app.route("/new-post/", methods=["GET", "POST"])
+def post():
+
     # Make sure the user is logged in
     if "loggedin" in session:
         # If we are making a post
@@ -228,7 +234,7 @@ def pending():
 
 
 def load_user(username):
-    user = (requests.get(f"{api}/user", json={"user": username}).json())["user"][0]
+    user = (requests.get(f"{api}/user", json={"username": username}).json())["user"][0]
     print(user)
     return user
 
