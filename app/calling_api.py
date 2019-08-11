@@ -80,9 +80,11 @@ def post():
                 title = res['title']
                 portname = res['portname']
                 text = res['text']
-                response = (requests.get(f"{api}/newpost/",
+                userId = session['user']['userId']
+                username = session['username']
+                response = (requests.post(f"{api}/newpost/",
                                          json={"title": title, "text": text, "portname": portname,
-                                               "userId": session['id'], "username": session['username']}).json())
+                                               "userId": userId, "username": username}).json())
                 print(response)
                 return render_template('postSubmitted.html', user=session['user'])
             
