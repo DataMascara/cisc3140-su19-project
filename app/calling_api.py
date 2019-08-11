@@ -24,168 +24,123 @@ def load_user(username):
 
 @app.route('/', methods=['GET'])
 def redirect_home():
-    if ('loggedin' in session):
+    if 'loggedin' in session:
         return redirect("/home/")
     return redirect("/login/")
 
 @app.route('/login/', methods=['POST', 'GET'])
 def login_api():
-    if(request.method == 'POST'):
-        res = request.form
-        print(res)
-        # Grab the user and pw
-        username = res['username']
-        password = res['password']
-        api_res = requests.post(f"{api}/login/", json={
-                "username": username, "password": password}).json()
-        print(api_res['user']['username'])
-        
-        if api_res['user']['username']:
-            # Create session data, we can access this data in other routes
-            session['loggedin'] = True
-            # session['id'] = account['id']
-            session['username'] = username
-            return render_template('base.html', title='Logged In', user = username)
-        else:
-            return render_template('base.html', title="", errLogIn=True)
+    # already logged in
+    if 'loggedin' in session:
+        return  redirect("/home/")
     else:
-        print("HELLO")
-        return render_template('base.html', title='NONE')
+        if request.method == 'POST':
+            res = request.form
+            print(res)
+            # Grab the user and pw
+            username = res['username']
+            password = res['password']
+            api_res = requests.post(f"{api}/login/", json={
+                    "username": username, "password": password}).json()
+            print(api_res['user']['username'])
+
+            if api_res['user']['username']:
+                # Create session data, we can access this data in other routes
+                session['loggedin'] = True
+                # session['id'] = account['id']
+                session['username'] = username
+                session['user'] = api_res['user']
+                return render_template('base.html', title='Logged In', user = session['user'])
+            else:
+                return render_template('base.html', title="", errLogIn=True)
+        else:
+            print("HELLO")
+            return render_template('base.html', title='NONE')
 
 
 
-@app.route('/logout')
+@app.route('/logout/')
 def logout():
-    res = request.form
-    # Grab the user and pw
     session.pop('loggedin', None)
     session.pop('id', None)
     session.pop('username', None)
    #Redirect to login page
-    return render_template('base.html', title="Logged Out :) ")
+    return redirect('/home/')
 
 
 @app.route('/home/')
 def home():
-    if ('loggedin' in session):
+    if 'loggedin' in session:
         print(session)
-        return render_template('base.html', user = session['username'])
+        return render_template('base.html', user = session['user'])
+    else:
+        return render_template('base.html')
+
+@app.route('/post/', methods=['GET', 'POST'])
+def post():
+    if 'loggedin' in session:
+        print(session)
+        if request.method == 'POST':
+            try:
+                res = request.form
+                title = res['title']
+                portname = res['portname']
+                text = res['text']
+
+                response = (requests.get(f"{api}/newpost/",
+                                         json={"title": title, "text": text, "portname": portname,
+                                               "userId": session['id'], "username": session['username']}).json())
+                print(response)
+                return render_template('postSubmitted.html', user=session['user'])
+            except:
+                return render_template('writePost.html', user= session['user'])
+        else:
+            return render_template('writePost.html', user=session['user'])
+
     else:
         return render_template('base.html')
 
 
-# possible to make an endpoint private unless redirected to it?
-@app.route('/user/<username>/', methods=['GET'])
-def user_logged_in(username):
-    try:
-        user = (requests.get(f"{api}/user", json={
-            "user": username}).json())['user'][0]
-        print(user)
-        return render_template('base.html', user=user)
-    except:
-        return redirect('/')
-
-
-@app.route('/user/<username>/post/', methods=['GET', 'POST'])
-def post(username):
-    # makes sure user posting exists
-    try:
-        user = (requests.get(f"{api}/user", json={
-            "user": username}).json())['user'][0]
-        # submitting the post
-        if request.method == 'POST':
-            try:
-                # Grab the form data
-                user_id = user['userId']
-                res = request.form
-                title = res['title']
-                portname = res['portname']
-                # username name value no longer needed we can get the user from the url
-                user = res['username']
-                text = res['text']
-                # Uncomment once the endpoint is running
-                response = (requests.get(f"{api}/newpost/",
-                                         json={
-                                             "title": title, "text": text, "portname": portname, "userId": user_id}).json())
-                print(f" THE RESPONSE {response}")
-                return render_template('postSubmitted.html', user=user)
-
-            # if post is unsuccessful returns back to writePost
-            except Exception as err:
-                print(err)
-                return render_template('writePost.html', user=user)
-
-        # rendering writePost
-        else:
-            return render_template('writePost.html', user=user)
-
-    # returns to homepage
-    except:
-        return redirect('/')
-
-# @app.route('/api/submitpost/', methods=['POST'])
-# def submit_post():
-#     try:
-#         res = request.form
-#         title = res['title']
-#         port = res['portname']
-#         user = res['username']
-#         text = res['text']
-#         # print(title + port + user + text)
-#         user = (requests.get(f"{api}/user", json={
-#             "user": user}).json())['user'][0]
-#         return render_template('postSubmitted.html', user=user)
-#     except:
-#         return redirect('/')
-
-
 # renders the template to signup
-@app.route('/signup', methods=['GET'])
+@app.route('/signup/', methods=['POST', 'GET'])
 def signup():
-    return render_template('register.html')
-
-# calls the api to sign the user up
-@app.route('/api/signup', methods=['POST', 'GET'])
-def signingup():
-    # Grab the form
-    res = request.form
-    email = res['Email']
-    username = res['Username']
-    password = res['password']
-    first = res['First Name']
-    last = res['Last Name']
-    # avatarurl = res['imageUpload']
-    avatarurl = ''
-    # currently signup page has no description box
-    # description = res["description"]
-    description = ''
-    res = requests.post(f"{api}/signup/", json={
-        "email": email, "password": password, 'username': username, "first": first, "last": last, "avatarurl": avatarurl, "description": description
-    }).json()
-    # prints -1 if the user doesn't already exist
-    print(res['err'].find('Duplicate'))
-    if res['err'].find('Duplicate') == -1:
-        # logs the new user in
-        # redirects to /user/<username> endpoint
-        return redirect(url_for('user_logged_in', username=username))
+    # if loggedin why you signing up
+    if 'loggedin' in session:
+        return redirect('/home/')
     else:
-        # will redirect you back to signup page if user already exists
-        return redirect('/signup')
+        # submitting registration
+        if request.method == 'POST':
+            res = request.form
+            email = res['Email']
+            username = res['Username']
+            password = res['password']
+            first = res['First Name']
+            last = res['Last Name']
+            # avatarurl = res['imageUpload']
+            avatarurl = ''
+            # currently signup page has no description box
+            # description = res["description"]
+            description = ''
+            res = requests.post(f"{api}/signup/", json={
+                "email": email, "password": password, 'username': username, "first": first, "last": last,
+                "avatarurl": avatarurl, "description": description
+            }).json()
+            print(res)
 
-# @app.route('/api/submitpost/', methods=['POST'])
-# def submit_post():
-#     trendPorts = [{'name': 'port1', 'mem': 18},{'name': 'port2', 'mem': 17},{'name': 'port3', 'mem': 16},{'name': 'port4', 'mem': 15},{'name': 'port5', 'mem': 14}]
-#     res = request.form
-#     title = res['title']
-#     text = res['text']
-#     portname = res['portname']
-#     user = res["username"]
-#     (title, text, portname, 1)
-#     api_res = requests.post(f"{api}/newpost/", json={
-#            "title": title, "text":text, 'portname':portname, "user":user
-#            }).json()
-#     print(api_res)
-#     return render_template('postSubmitted.html', name = "Bla", trendPorts = trendPorts, user = "Logged in")
+            try:
+                # if this line is successful then the user is created
+                session['user'] = res['user']
+                session['loggedin'] = True
+                # session['id'] = account['id']
+                session['username'] = username
+                return redirect('/home/')
+
+            except:
+                # will redirect you back to signup page if user already exists
+                return render_template('register.html')
+        # rendering register
+        else:
+            return render_template('register.html')
 
 
 @app.route('/newpost/')
