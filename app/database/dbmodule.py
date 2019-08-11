@@ -303,7 +303,7 @@ class users_db:
             if isinstance(o, datetime.datetime):
                 return o.__str__()
 
-        return f"user {username} deleted"
+        return f"user {username} deactivated"
 
 
 class posts_db:

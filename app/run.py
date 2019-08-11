@@ -185,11 +185,18 @@ def get_posts():
     port_name = "Main"
     return dbmodule.posts_db.all_posts_by('portName', 'Main')
 
+@app.route('/myposts/')
+def get_posts_username():
+    res = request.get_json()
+    username = res['username']
+    print(type(dbmodule.posts_db.all_posts_by('author', username)))
+    return dbmodule.posts_db.all_posts_by('author', username)
+
 
 # Display Posts Relevant to User Given a User id
 # Obtain the ids of all the Ports to which the User is subscribed
-@app.route('/posts-for-username/')
-def get_posts_username():
+@app.route('/ports-for-username/')
+def get_ports_username():
     res = request.get_json()
     username = res["username"]
     # Clean up result here

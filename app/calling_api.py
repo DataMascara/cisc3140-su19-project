@@ -74,7 +74,7 @@ def home():
         return render_template('base.html')
 
 
-# possible to make an endpoint private unless redirected to it?
+# Just getting a user
 @app.route('/user/<username>/', methods=['GET'])
 def user_logged_in(username):
     try:
@@ -86,42 +86,30 @@ def user_logged_in(username):
         return redirect('/')
 
 
-@app.route('/user/<username>/post/', methods=['GET', 'POST'])
-def post(username):
-    # makes sure user posting exists
-    try:
-        user = (requests.get(f"{api}/user", json={
-            "user": username}).json())['user'][0]
+@app.route('/new-post/', methods=['GET', 'POST'])
+def post():
+    # makes sure user exists
+    if( 'loggedin' in session):
+        username = session['username']
         # submitting the post
-        if request.method == 'POST':
-            try:
                 # Grab the form data
-                user_id = user['userId']
-                res = request.form
-                title = res['title']
-                portname = res['portname']
-                # username name value no longer needed we can get the user from the url
-                user = res['username']
-                text = res['text']
+        if(request.method == "POST"):        
+            res = request.form
+            title = res['title']
+            portname = res['portname']
+            # username name value no longer needed we can get the user from the url
+            text = res['text']
                 # Uncomment once the endpoint is running
-                response = (requests.get(f"{api}/newpost/",
-                                         json={
-                                             "title": title, "text": text, "portname": portname, "userId": user_id}).json())
-                print(f" THE RESPONSE {response}")
-                return render_template('postSubmitted.html', user=user)
+            response = (requests.post(f"{api}/newpost/",
+            json={"title": title, "text": text, "portname": portname, "username": username}).json())
+            print(f" THE RESPONSE {response}")
+            return render_template('postSubmitted.html', user=username)
 
             # if post is unsuccessful returns back to writePost
-            except Exception as err:
-                print(err)
-                return render_template('writePost.html', user=user)
+    
+        return render_template('writePost.html', user=username)
 
-        # rendering writePost
-        else:
-            return render_template('writePost.html', user=user)
 
-    # returns to homepage
-    except:
-        return redirect('/')
 
 # @app.route('/api/submitpost/', methods=['POST'])
 # def submit_post():
@@ -143,6 +131,14 @@ def post(username):
 @app.route('/signup', methods=['GET'])
 def signup():
     return render_template('register.html')
+
+# renders the template to signup
+@app.route('/my-posts/', methods=['GET'])
+def my_posts():
+    res = requests.get(f"{api}/myposts/",
+            json={"username": session['username']}).json()
+    return res
+    # return render_template('register.html')
 
 # calls the api to sign the user up
 @app.route('/api/signup', methods=['POST', 'GET'])
