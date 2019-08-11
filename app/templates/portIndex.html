@@ -1,0 +1,71 @@
+﻿{#- Version 1.0 - 08.11.2019 - Description: File Created #}
+<head>
+     <script src="{{ url_for('static',filename='js/scriptsPortIndex.js') }}"></script>
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/stylesPortIndex.css') }}">
+     <! -- Website's Icon -->
+     <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
+</head>
+{%- extends "base.html" %}
+
+{%- block content %}
+
+     <div class = "flexTitle">
+        <div class = "page">
+                  <p class = "pageTitle" >PORT INDEX</p>
+        </div>
+     </div>
+
+     {#- Each time a user subscribes to a port or unsubscribes, a form will be submitted, but the page #}
+     {#- won't reload, since the 'target' will be redirected into the frame 'frameForVotes' below: #}
+     <iframe name="frameForSubscriptions" style="display:none;" type=  'hidden'></iframe>
+
+     {%- for port in ports %}
+         {#- Display alternating colors for odd and even-numbered posts: #}
+         {%- if loop.index % 2 != 0 %}
+            <div class="port-section" style = "background-color: #ded3d7;">
+         {%- else %}
+            <div class="port-section" style = "background-color: #eae8e8;">
+         {% endif -%}
+
+                 <div class = "portFirstPart">
+                    <a href = "" class = "portName">p/{{ port['name'] }}</a>
+                    <p class = "portMembersNumber">{{ port['mem'] }} members</p>
+                 </div>
+                 <div class = "portSecondPart">
+                        {#- Since 'port['description']' is optional, we must have the following 'if' statement. #}
+                        {%- if port['description'] != None %}
+                            <p class= "portDescription">{{ port['description'] }}</p>
+                        {% endif %}
+                 </div>
+                 <div class = "portThirdPart">
+                       {%- if user %} {#- if the user is logged in, put the buttons in forms, and submit subscription info to server: #}
+                             <form class = "indexForm" action = "" method = "post" target="frameForSubscriptions" name = "subscriptionForm{{ port['id'] }}">
+                                   {%- if port['isSubscribed'] == True %}
+                                       <input type="button" 
+                                                   style = "background-color: #7B2240" 
+                                                   class = "subscribeIndex subscribe{{ port['id'] }}" 
+                                                   name  = "subscribe{{ port['id'] }}" 
+                                                   title="Joined" 
+                                                   value = "Joined" 
+                                                   onclick="subscribePortIndex(this)" >
+                                   {%- else %} {#- if it is False: #}
+                                        <input type="button" 
+                                                     style = "background-color: rgb(117, 117, 117)" 
+                                                     class = "subscribeIndex subscribe{{ port['id'] }}" 
+                                                     name  = "subscribe{{ port['id'] }}" 
+                                                     title="Subscribe"
+                                                     value = "Subscribe"
+                                                     onclick="subscribePortIndex(this)" >
+                                    {% endif -%} {#- the one of 'port['isSubscribed']' #}
+                             </form>
+                         {%- else %} {#- if the user is logged out, make the menu open and the input fields in it glow to hopefully 'call' for user's registration. #}
+                                        <button type="button" 
+                                                     style = "background-color: rgb(117, 117, 117)" 
+                                                     class = "subscribeIndex" 
+                                                     title="Subscribe"
+                                                     onclick="ifLoggedOutGlowSignIn ()" >Subscribe</button>
+                          {% endif -%} {#- the one that checks if the user is logged in! #}
+                 </div>
+         </div>
+    {% endfor -%}
+{%- endblock content %}

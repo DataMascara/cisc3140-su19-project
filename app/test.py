@@ -68,6 +68,28 @@ def hello9():
     return render_template('posts.html', name = "Bla", trendPorts = trendPorts, port = port, search = "My First Search!")
 
 
+#-----------------------------------------------
+
+# 2 Examples of the Display of the Port Index Template
+
+# Create a list of 5 ports dictionaries. The ports are based on the Product Team's 'Port_Index.xlsx' file that is located now in their folder.
+ports = [{'id': 1, 'name': 'bcNews', 'mem': 523, 'description': 'A place to post Brooklyn College-wide news and related information.', 'isSubscribed': True},
+         {'id': 2, 'name': 'CISC3115', 'mem': 841, 'description': 'Introduction to Programming Using Java: Algorithms, computers and programs.', 'isSubscribed': True},
+         {'id': 3, 'name': 'CISC2210', 'mem': 752, 'description': 'Introduction to Discrete Structures: Elementary set theory, functions, relations, and Boolean algebra.', 'isSubscribed': False},
+         {'id': 4, 'name': 'csNews', 'mem': 16854, 'description': 'A place to post Brooklyn College Computer Science Department news and related information.', 'isSubscribed': True},
+         {'id': 5, 'name': 'sellBooks', 'mem': 11577, 'description': 'A place to advertise books for sale.', 'isSubscribed': False} ]
+
+# Example 1: The user is signed in
+@app.route('/port-index/example1')
+def hello10():
+    return render_template('portIndex.html', name = "Bla", trendPorts = trendPorts, ports = ports, user = user)
+
+# Example 1: The user is signed out
+@app.route('/port-index/example2')
+def hello11():
+    return render_template('portIndex.html', name = "Bla", trendPorts = trendPorts, ports = ports)
+
+
 if __name__ == "__main__":
     # webbrowser.open_new("http://localhost:8080/")
     # webbrowser.open_new("http://localhost:8080/homepage")
@@ -79,4 +101,6 @@ if __name__ == "__main__":
     # webbrowser.open_new("http://localhost:8080/registration-pending/")
     # # webbrowser.open_new("http://localhost:8080/register/")
     # webbrowser.open_new("http://localhost:8080/newsfeed/")
+    # webbrowser.open_new("http://localhost:8080/port-index/example1")
+    # webbrowser.open_new("http://localhost:8080/port-index/example2")
     app.run('localhost', 8080, True, use_reloader=False)
