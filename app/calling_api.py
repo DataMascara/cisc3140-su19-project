@@ -131,8 +131,7 @@ def sign_up():
         except:  # Signal the error
             return render_template("register.html", error=res["err"])
         # if this line is successful then the user is created
-        print(load_user(username))
-        print(f"TYPE HERE {type(load_user(username))}")
+        # Load uses helper method returns the dict of the user representation for local storage
         session["user"] = load_user(username)
         session["loggedin"] = True
         # session['id'] = account['id']
