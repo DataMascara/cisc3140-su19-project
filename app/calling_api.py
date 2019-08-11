@@ -180,21 +180,29 @@ def sign_up():
 def post():
 
     # Make sure the user is logged in
+    trendPorts = [
+        {"name": "port1", "mem": 18},
+        {"name": "port2", "mem": 17},
+        {"name": "port3", "mem": 16},
+        {"name": "port4", "mem": 15},
+        {"name": "port5", "mem": 14},
+    ]
     if "loggedin" in session:
         # If we are making a post
+
         if request.method == "POST":
             try:
                 res = request.form
                 title = res["title"]
                 portname = res["portname"]
                 text = res["text"]
-                response = requests.get(
+                response = requests.post(
                     f"{api}/newpost/",
                     json={
                         "title": title,
                         "text": text,
                         "portname": portname,
-                        "userId": session["id"],
+                        "userId": session["user"]['userId'],
                         "username": session["username"],
                     },
                 ).json()
