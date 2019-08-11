@@ -1,6 +1,17 @@
+--Template Not Found--
+Logging into: http://localhost/login/
+Error received:
+jinja2.exceptions.TemplateNotFound
+jinja2.exceptions.TemplateNotFound: baseLoggedIn.html
+
+Fixes:
 http://localhost:8080/ is used instead of http://localhost:8080/login
 Changed "basedLogin.html" in calling_api.py --> "base.html"
-http://localhost:8080/user/chalshaff12 doesn't work anymore instead it displays an error :
+
+--New Connection Error--
+http://localhost:8080/user/chalshaff12 doesn't work anymore instead it displays the following.
+
+Error recieved:
 requests.exceptions.ConnectionError
 requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000):
 Max retries exceeded with url: /user (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x04AECA50>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
