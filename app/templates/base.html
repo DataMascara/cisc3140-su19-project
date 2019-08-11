@@ -83,15 +83,15 @@
                          <div class = "passAndRegistr">
                              <a href = "" class = "forgotPass" title = "Click here if you forgot your password" >Forgot Password?</a>
                              <p class = "notAMem">Not a member?</p>
-                             <form method = "get" action = "/signup">
+                             <form method = "get" action = "/signup/">
                                         <input type = "submit" name = "register" class="button2" value = "Register" title = "Register">
                              </form>
                          </div>
                     {% endif -%}
 
                        <div class = "moreInfo">
-                           <a href="" class="w1" title = "About Our Team" >Our Team</a>
-                           <a href="" class="w2" title = "Contact Us" >Contact Us</a>
+                           <a href="/ourteam/" class="w1" title = "About Our Team" >Our Team</a>
+                           <a href="/contact/" class="w2" title = "Contact Us" >Contact Us</a>
                        </div>
             </nav>
 
@@ -116,9 +116,9 @@
          {% endblock content -%}
          {%- block generalLinks %}
               <div class = "bottomLinks">
-                    <a href = "" class = "termsConds">Terms and Conditions</a>
-                    <a href = "" class = "ourTeam">Our Team</a>
-                    <a href = "" class = "contactUs">Contact Us</a>
+                    <a href = "/terms/" class = "termsConds">Terms and Conditions</a>
+                    <a href = "/ourteam/" class = "ourTeam">Our Team</a>
+                    <a href = "/contact/" class = "contactUs">Contact Us</a>
               </div>
          {% endblock generalLinks -%}
          {%- block copyright %}
