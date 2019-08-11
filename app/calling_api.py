@@ -36,23 +36,26 @@ def login_api():
             api_res = requests.post(
                 f"{api}/login/", json={"username": username, "password": password}
             ).json()
-
-        try:
-            if api_res["user"]["username"]:
-                # Create session data, we can access this data in other routes
-                session["loggedin"] = True
-                # session['id'] = account['id']
-                session["username"] = username
-                session["user"] = api_res["user"]
-                return render_template(
-                    "base.html", title="Logged In", user=session["user"]
-                )
-            else:
+            try:
+                if api_res["user"]["username"]:
+                    session["user"] = api_res["user"]
+                    # Create session data, we can access this data in other routes
+                    session["loggedin"] = True
+                    # session['id'] = account['id']
+                    session["username"] = username
+                    session["user"] = api_res["user"]
+                    return redirect('/home/')
+                    return render_template(
+                        "base.html", title="Logged In", user=session["user"]
+                    )
+                else:
+                    return render_template("base.html", title="", errLogIn=True)
+            except:
                 return render_template("base.html", title="", errLogIn=True)
-        except:
-            return render_template("base.html", title="", errLogIn=True)
         else:
-            return render_template("base.html", title="NONE")
+            return render_template("base.html", title = "Please Log in")
+
+
 
 
 @app.route("/logout/")
@@ -244,7 +247,6 @@ def terms():
 @app.route("/newsfeed/")
 def hello9():
     trending = trending_ports()['all_ports']
-
     return render_template(
         "posts.html", name="Bla", trendPorts=trending, port="Main", search="My First Search!"
     )
@@ -252,17 +254,17 @@ def hello9():
 
 @app.route("/Regist_Pending/")
 def pending():
-    user = {"username": "bla-bla-bla"}
+    user = session['user']
     trending = trending_ports()['all_ports']
-
     return render_template(
-        "genLinks.html", name="Bla", user=user, trendPorts=trending
+        "genLinks.html", name=user['first'], user=user, trendPorts=trending
     )
 
 # helper function to get "trending posts"
 # WIll do this by just getting three three random ports
 def trending_ports():
     ports = (requests.get(f"{api}/allports/"))
+    #Add way of deciding what ports are "trending"
     # Return a dictonary of the port representation
     return ports.json()
 
@@ -270,9 +272,7 @@ def trending_ports():
 def load_user(username):
     user = (requests.get(f"{api}/user", json={"username": username}).json())["user"][0]
     print(user)
-    return user
-
+    return user 
 
 if __name__ == "__main__":
     app.run("localhost", 8080, debug=True)
-
