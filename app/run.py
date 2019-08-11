@@ -163,7 +163,7 @@ def delete_user():
         return jsonify({"err": "User Invalid"}), 409
 
 
-@app.route("/allports/")
+@app.route("/allports/", methods=['GET'])
 def get_all_ports():
     ports = dbmodule.ports_db.all_ports()
     print(ports)

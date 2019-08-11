@@ -220,6 +220,16 @@ def subscribedposts():
         return redirect("/login/")
 
 
+@app.route("/portindex/", methods=['GET'])
+def portindex():
+    trending = trending_ports()['all_ports']
+    ports = requests.get(f"{api}/allports/").json()['all_ports']
+    if 'loggedin' in session:
+        return render_template("portIndex.html", name="Port Index", user=session['user'], ports=ports, trendPorts=trending)
+    else:
+        return render_template("portIndex.html", name="Port Index", ports=ports, trendPorts=trending)
+
+
 @app.route("/ourteam/")
 def ourteam():
     if "loggedin" in session:
