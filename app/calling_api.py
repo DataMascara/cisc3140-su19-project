@@ -115,27 +115,6 @@ def my_posts():
 # calls the api to sign the user up
 @app.route('/api/signup', methods=['POST', 'GET'])
 def signingup():
-    # Grab the form
-    res = request.form
-    email = res['Email']
-    username = res['Username']
-    password = res['password']
-    first = res['First Name']
-    last = res['Last Name']
-    # avatarurl = res['imageUpload']
-    avatarurl = ''
-    # currently signup page has no description box
-    # description = res["description"]
-    description = ''
-    res = requests.post(f"{api}/signup/", json={
-        "email": email, "password": password, 'username': username, "first": first, "last": last, "avatarurl": avatarurl, "description": description
-    }).json()
-    # prints -1 if the user doesn't already exist
-    print(res['err'].find('Duplicate'))
-    if res['err'].find('Duplicate') == -1:
-        # logs the new user in
-        # redirects to /user/<username> endpoint
-        return redirect(url_for('user_logged_in', username=username))
     # if loggedin why you signing up
     if 'loggedin' in session:
         return redirect('/home/')
