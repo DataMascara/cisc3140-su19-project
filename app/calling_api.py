@@ -51,10 +51,7 @@ def login_api():
             else:
                 return render_template('base.html', title="", errLogIn=True)
         else:
-            print("HELLO")
             return render_template('base.html', title='NONE')
-
-
 
 @app.route('/logout/')
 def logout():
@@ -64,7 +61,6 @@ def logout():
    #Redirect to login page
     return redirect('/home/')
 
-
 @app.route('/home/')
 def home():
     if 'loggedin' in session:
@@ -73,20 +69,7 @@ def home():
     else:
         return render_template('base.html')
 
-
-# Just getting a user
-@app.route('/user/<username>/', methods=['GET'])
-def user_logged_in(username):
-    try:
-        user = (requests.get(f"{api}/user", json={
-            "user": username}).json())['user'][0]
-        print(user)
-        return render_template('base.html', user=user)
-    except:
-        return redirect('/')
-
-
-@app.route('/post/', methods=['GET', 'POST'])
+@app.route('/new-post/', methods=['GET', 'POST'])
 def post():
     # Make sure the user is logged in
     if 'loggedin' in session:
@@ -102,8 +85,10 @@ def post():
                                                "userId": session['id'], "username": session['username']}).json())
                 print(response)
                 return render_template('postSubmitted.html', user=session['user'])
+            
             except:
-                return render_template('writePost.html', user= session['user'])
+                return render_template('writePost.html', user= session['user'], error = "Invalid Post")
+        # If the post fails, try again
         else:
             return render_template('writePost.html', user=session['user'])
 
