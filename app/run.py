@@ -194,10 +194,14 @@ def new_post():
 # Function dbmodule.posts_db.all_posts_by(column_name, data_value)
 # dbmodule.posts_db.all_posts_by('portId', 1)
 # dbmodule.posts_db.all_posts_by('portName', 'main')
-@app.route("/posts-by-portname/")
+@app.route("/posts-by-portname/", methods=["GET"])
 def get_posts():
-    port_name = "Main"
-    return dbmodule.posts_db.all_posts_by("portName", "Main")
+    res = request.get_json()
+
+    port_name = res['portname']
+    posts = json.loads(dbmodule.posts_db.all_posts_by("portname", port_name))['posts']
+    port = {'name': port_name, 'posts': posts}
+    return port
 
 
 @app.route("/myposts/")
