@@ -224,7 +224,14 @@ def subscribedposts():
 def portindex():
     trending = trending_ports()['all_ports']
     ports = requests.get(f"{api}/allports/").json()['all_ports']
+
     if 'loggedin' in session:
+        subscribed_ports = requests.get(f"{api}/ports-for-username/",
+                                        json={"username": session["username"]}).json()["all_subscriptions for {data_value}"]
+        for p in ports:
+            for sp in subscribed_ports:
+                if p['id'] == sp['portId']:
+                    p.update({'isSubscribed': True})
         return render_template("portIndex.html", name="Port Index", user=session['user'], ports=ports, trendPorts=trending)
     else:
         return render_template("portIndex.html", name="Port Index", ports=ports, trendPorts=trending)

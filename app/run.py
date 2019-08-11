@@ -216,7 +216,7 @@ def get_posts_username():
 
 # Display Posts Relevant to User Given a User id
 # Obtain the ids of all the Ports to which the User is subscribed
-@app.route("/ports-for-username/")
+@app.route("/ports-for-username/", methods=["GET"])
 def get_ports_username():
     res = request.get_json()
     username = res["username"]
