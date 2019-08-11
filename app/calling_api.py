@@ -13,9 +13,6 @@ app.secret_key = "test"
 # Assuming the API is running at the local ip below
 api = "http://127.0.0.1:5000"
 
- 
-
-
 def load_user(username):
     user = (requests.get(f"{api}/user", json={
         "user": username}).json())['user'][0]
@@ -113,21 +110,6 @@ def post():
         return render_template('writePost.html', user=username)
 
 
-
-# @app.route('/api/submitpost/', methods=['POST'])
-# def submit_post():
-#     try:
-#         res = request.form
-#         title = res['title']
-#         port = res['portname']
-#         user = res['username']
-#         text = res['text']
-#         # print(title + port + user + text)
-#         user = (requests.get(f"{api}/user", json={
-#             "user": user}).json())['user'][0]
-#         return render_template('postSubmitted.html', user=user)
-#     except:
-#         return redirect('/')
 @app.route('/post/', methods=['GET', 'POST'])
 def post():
     if 'loggedin' in session:
@@ -158,7 +140,7 @@ def post():
 def signup():
     return render_template('register.html')
 
-# renders the template to signup
+# Get's your posts (As json right now)
 @app.route('/my-posts/', methods=['GET'])
 def my_posts():
     res = requests.get(f"{api}/myposts/",
@@ -288,14 +270,3 @@ if __name__ == "__main__":
     app.run('localhost', 8080, debug=True,)
 
 
-# Now run this file and navigate to the route below
-# Try with chalshaff12 ie /user/
-# @app.route('/user/<username>')
-# def test(username):
-#     # Get the response from the API from the /user endpoint
-#     res = (requests.get(f"{api}/user", json={
-#            "user": username}).json())['user'][0]
-#     print(res)
-#     name = res['first']
-#     print(name)
-#     return render_template('base.html', title="Logged In :)")
