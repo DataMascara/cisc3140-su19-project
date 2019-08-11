@@ -129,7 +129,7 @@ def sign_up():
             print(res)
             # prints -1 if the user doesn't already exist
         except:  # Signal the error
-            return render_template("register.html", error=res["err"])
+            return render_template("register.html", errUsernameInUse=res)
         # if this line is successful then the user is created
         # Load uses helper method returns the dict of the user representation for local storage
         session["user"] = load_user(username)
