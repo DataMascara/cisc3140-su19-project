@@ -106,10 +106,6 @@ def portpost(portname):
     else:
         return render_template('posts.html', name="Bla", trendPorts=trendPorts, port=port, search="My First Search!")
 
-# # renders the template to signup
-# @app.route('/signup/', methods=['POST', 'GET'])
-# def signup():
-#     return render_template('register.html')
 
 # gets user's post history
 @app.route("/u/<username>/posts/", methods=["GET"])
