@@ -227,6 +227,24 @@ def subscribe_to_port():
     return dbmodule.subscriptions_db.add_subscription(username, portname)
 
 
+@app.route('/posts-from-subscribed-ports/')
+def get_subscribed_posts():
+    res = request.get_json()
+    username = res['username']
+    ports = json.loads(dbmodule.subscriptions_db.all_subscriptions_by('username', username))
+    ports = ports['all_subscriptions for {data_value}']
+    print(ports)
+    # creates a empty list where the post will be stored
+    posts = []
+    # iterates through the ports
+    for i in ports:
+        print(i)
+        # iterates through the posts of the ports
+        for j in json.loads(dbmodule.posts_db.all_posts_by('portName', i['portName']))['posts']:
+            print(j)
+            posts.append(j)
+    return json.dumps({'posts': posts})
+
 """
 ---- Getting All Users ----
 """
