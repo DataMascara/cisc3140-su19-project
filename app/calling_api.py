@@ -86,41 +86,17 @@ def user_logged_in(username):
         return redirect('/')
 
 
-@app.route('/new-post/', methods=['GET', 'POST'])
-def post():
-    # makes sure user exists
-    if( 'loggedin' in session):
-        username = session['username']
-        # submitting the post
-                # Grab the form data
-        if(request.method == "POST"):        
-            res = request.form
-            title = res['title']
-            portname = res['portname']
-            # username name value no longer needed we can get the user from the url
-            text = res['text']
-                # Uncomment once the endpoint is running
-            response = (requests.post(f"{api}/newpost/",
-            json={"title": title, "text": text, "portname": portname, "username": username}).json())
-            print(f" THE RESPONSE {response}")
-            return render_template('postSubmitted.html', user=username)
-
-            # if post is unsuccessful returns back to writePost
-    
-        return render_template('writePost.html', user=username)
-
-
 @app.route('/post/', methods=['GET', 'POST'])
 def post():
+    # Make sure the user is logged in
     if 'loggedin' in session:
-        print(session)
+        # If we are making a post
         if request.method == 'POST':
             try:
                 res = request.form
                 title = res['title']
                 portname = res['portname']
                 text = res['text']
-
                 response = (requests.get(f"{api}/newpost/",
                                          json={"title": title, "text": text, "portname": portname,
                                                "userId": session['id'], "username": session['username']}).json())
