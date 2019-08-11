@@ -63,14 +63,47 @@ def logout():
     return redirect("/home/")
 
 
-@app.route("/home/")
+@app.route("/home/", methods=['GET'])
 def home():
-    if "loggedin" in session:
-        print(session)
-        return render_template("base.html", user=session["username"])
-    else:
-        return render_template("base.html")
 
+    print(session)
+    port = (requests.get(
+        f"{api}/posts-by-portname/",
+        json={
+            "portname": "Main"
+        }).json())
+    print(port)
+    trendPorts = [
+        {"name": "port1", "mem": 18},
+        {"name": "port2", "mem": 17},
+        {"name": "port3", "mem": 16},
+        {"name": "port4", "mem": 15},
+        {"name": "port5", "mem": 14},
+    ]
+    if "loggedin" in session:
+        return render_template('posts.html', name="Bla", user= session['user'], trendPorts=trendPorts, port=port, search="My First Search!")
+    else:
+        return render_template('posts.html', name="Bla", trendPorts=trendPorts, port=port, search="My First Search!")
+
+
+@app.route("/p/<portname>", methods=["GET"])
+def portpost(portname):
+    port = requests.get(
+        f"{api}/posts-by-portname/",
+        json={
+            "portname": portname
+        }).json()
+    trendPorts = [
+        {"name": "port1", "mem": 18},
+        {"name": "port2", "mem": 17},
+        {"name": "port3", "mem": 16},
+        {"name": "port4", "mem": 15},
+        {"name": "port5", "mem": 14},
+    ]
+    if "loggedin" in session:
+        return render_template('posts.html', name="Bla", user= session['user'], trendPorts=trendPorts, port=port, search="My First Search!")
+    else:
+        return render_template('posts.html', name="Bla", trendPorts=trendPorts, port=port, search="My First Search!")
 
 # # renders the template to signup
 # @app.route('/signup/', methods=['POST', 'GET'])
@@ -142,21 +175,29 @@ def sign_up():
 def post():
 
     # Make sure the user is logged in
+    trendPorts = [
+        {"name": "port1", "mem": 18},
+        {"name": "port2", "mem": 17},
+        {"name": "port3", "mem": 16},
+        {"name": "port4", "mem": 15},
+        {"name": "port5", "mem": 14},
+    ]
     if "loggedin" in session:
         # If we are making a post
+
         if request.method == "POST":
             try:
                 res = request.form
                 title = res["title"]
                 portname = res["portname"]
                 text = res["text"]
-                response = requests.get(
+                response = requests.post(
                     f"{api}/newpost/",
                     json={
                         "title": title,
                         "text": text,
                         "portname": portname,
-                        "userId": session["id"],
+                        "userId": session["user"]['userId'],
                         "username": session["username"],
                     },
                 ).json()

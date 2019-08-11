@@ -17,7 +17,7 @@
                   <p class = "pageTitle" >CURRENT PORT: p/{{ port['name'] }}</p>
         </div>
         {#- If user presses the button, he or she will be redirected to create a new post! #}
-        <form method = "post" action = "" class = "createPostForm">
+        <form method = "post" action = "/new-post/" class = "createPostForm">
               <input type = "submit" class = "createPostBtn" name = "createPostBtn" value = "CREATE POST" title = "Create New Post">
         </form>
         {#- The 'sort by' form. If the user selects something from the list, the Python code could reload this based on the user's #}
@@ -54,7 +54,7 @@
                     <form class = "upvote" action = "" method = "post" target = "frameForVotes">
                            <input type = "submit" class = "upvoteBtn post{{ post['id'] }}" value = "++" name = "upvote{{ post['id'] }}" onclick="forUpvote (this)" title = "Upvote it!">
                     </form>
-                    <p class = "numOfVotes post{{ post['id'] }}">{{ post['totalVotes'] }}</p>
+                    <p class = "numOfVotes post{{ post['id'] }}">{{ post['votes'] }}</p>
                     <form class = "downvote" action = "" method = "post" target = "frameForVotes">
                            <input type = "submit" class = "downvoteBtn post{{ post['id'] }}" value = "--" name = "downvote{{ post['id'] }}" onclick="forDownvote (this)" title = "Downvote it!">
                     </form>
@@ -68,10 +68,10 @@
                  <div class = "description">
                         <a href = "" class = "portOfPostName" title = "See all posts in {{ port['name'] }}">p/{{ port['name'] }}</a>
                         <a href = "" class = "nameOfPost" title = "{{ post['title'] | e }}">{{ post['title']  | e }}</a>
-                        {%- if post['text'] != None %}
-                              <p class = "postDescription">{{ post['text']  | e }}</p>
+                        {%- if post['postText'] != None %}
+                              <p class = "postDescription">{{ post['postText']  | e }}</p>
                         {% endif -%}
-                        <p class = "numberOfComments">{{ post['commentNum'] }} comments</p>
+                        <p class = "numberOfComments">{{ post['numComments'] }} comments</p>
                  </div>
                  <div class = "timeAndAuthor">
                         <p class = "dateOfWriting">{{ post['dateCreated'] }}</p>
@@ -81,9 +81,9 @@
                              {%- if post['avatarUrl'] != None %}
                                   <a href = "" title = "{{ post['username'] }}'s profile"><img src = "{{ post['avatarUrl'] | e }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
                              {%- else %}
-                                  <a href = "" title = "{{ post['username'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
+                                  <a href = "" title = "{{ post['username'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ post['author'] }}"></a>
                              {% endif -%}
-                             <a href = "" class = "usernameOfAuthor" title = "{{ post['username'] }}'s profile">{{ post['username'] }}</a>
+                             <a href = "" class = "usernameOfAuthor" title = "{{ post['author'] }}'s profile">{{ post['author'] }}</a>
                         </div>
                  </div>
          </div>
