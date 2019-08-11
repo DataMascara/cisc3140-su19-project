@@ -91,14 +91,7 @@ def sign_up():
     # if loggedin why you signing up
     if "loggedin" in session:
         return redirect("/home/")
-    # TODO: Remove psudo tending ports for real ones
-    trendPorts = [
-        {"name": "port1", "mem": 18},
-        {"name": "port2", "mem": 17},
-        {"name": "port3", "mem": 16},
-        {"name": "port4", "mem": 15},
-        {"name": "port5", "mem": 14},
-    ]
+
     if request.method == "POST":
         # Grab the form
         res = request.form
@@ -113,22 +106,26 @@ def sign_up():
         # currently signup page has no description box
         # description = res["description"]
         description = ""
+
+        api_res = requests.post(
+            f"{api}/signup/",
+            json={
+                "email": email,
+                "password": password,
+                "username": username,
+                "first": first,
+                "last": last,
+                "avatarurl": avatarurl,
+                "description": description,
+            },
+        ).json()
         try:
-            res = requests.post(
-                f"{api}/signup/",
-                json={
-                    "email": email,
-                    "password": password,
-                    "username": username,
-                    "first": first,
-                    "last": last,
-                    "avatarurl": avatarurl,
-                    "description": description,
-                },
-            ).json()
-            print(f"API Res {res}")
-        except:  # Signal the error
-            return render_template("register.html", errUsernameInUse=res)
+            # Try and get the new user, meaning they registered
+            username = api_res["user"][0]["username"]
+        except:
+            # Otherwise, render an error
+            return render_template("register.html", errUsernameInUse=api_res["error"])
+
         # if this line is successful then the user is created
         # Load uses helper method returns the dict of the user representation for local storage
         session["user"] = load_user(username)
@@ -136,9 +133,7 @@ def sign_up():
         # session['id'] = account['id']
         session["username"] = username
         redirect("/home/")
-        return render_template(
-            "base.html", name="Bla", trendPorts=trendPorts, user=session["user"]
-        )
+        return render_template("base.html", name="Bla", user=session["user"])
     else:
         return render_template("register.html")
 
@@ -187,16 +182,15 @@ def post():
 
 @app.route("/subscribed-posts/", methods=["GET"])
 def subscribedposts():
-    if 'loggedin' in session:
+    if "loggedin" in session:
         post = requests.get(
             f"{api}/posts-from-subscribed-ports/",
-            json={
-                "username": session["username"]
-            }).json()
+            json={"username": session["username"]},
+        ).json()
 
         return post
     else:
-        return redirect('/login/')
+        return redirect("/login/")
 
 
 @app.route("/ourteam/")
