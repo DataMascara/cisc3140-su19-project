@@ -1,0 +1,95 @@
+﻿{#- Version 1.0 - 08.09.2019 - Description: File Created #}
+<head>
+     <!-- Johnny -->
+        <script src="{{ url_for('static',filename='js/scriptsPosts.js') }}"></script>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/stylesPosts.css') }}">
+     <!-- Johnny -->
+     <! -- Website's Icon -->
+     <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
+</head>
+<body {%- block onload %} onload = "displayYear(); cutIt ();" {% endblock -%}>
+{%- extends "base.html" %}
+
+{%- block content %}
+
+     <div class = "flexTitle">
+        <div class = "page">
+                  <p class = "pageTitle" >CURRENT PORT: p/{{ port['name'] }}</p>
+        </div>
+        {#- If user presses the button, he or she will be redirected to create a new post! #}
+        <form method = "post" action = "" class = "createPostForm">
+              <input type = "submit" class = "createPostBtn" name = "createPostBtn" value = "CREATE POST" title = "Create New Post">
+        </form>
+        {#- The 'sort by' form. If the user selects something from the list, the Python code could reload this based on the user's #}
+        {#- choice of sorting. Notice the hidden input with name 'postsAndPortToSort' that could give you the info about #}
+        {#- the posts in which port to sort! #}
+        <form method = "post" action = "" class = "sortByForm">
+            <select name = "sortByBtn" title = "Sort Posts" onchange="this.form.submit()">
+                  <option value="new" selected="selected">Sort By: New</option>
+                  <option value="hot">Sort By: Hot</option>
+            </select>
+            <input type = "hidden" name = "postsAndPortToSort" value = "{{ port['name'] }}">
+        </form>
+     </div>
+
+     {#- Each time a user upvotes or downvotes some post, a form will be submitted, but page #}
+     {#- won't reload, since the 'target' will be redirected into the frame 'frameForVotes' below: #}
+     <iframe name="frameForVotes" style="display:none;" type=  'hidden'></iframe>
+
+     {#- Optional 'search' argument. Should contain the string representing the user's search. #}
+     {#- Will display the message to the user: 'Showing Search Results for: bla-bla'. #}
+     {%- if search %}
+         <p class = "searchResultsMessage"><u>Showing Search Results for: {{ search }}</u></p>
+     {% endif -%}
+
+     {%- for post in port['posts'] %}
+         {#- Display alternating colors for odd and even-numbered posts: #}
+         {%- if loop.index % 2 != 0 %}
+            <div class="post-section" style = "background-color: #ded3d7;">
+         {%- else %}
+            <div class="post-section" style = "background-color: #eae8e8;">
+         {% endif -%}
+
+                <div class = "votes">
+                    <form class = "upvote" action = "" method = "post" target = "frameForVotes">
+                           <input type = "submit" class = "upvoteBtn post{{ post['id'] }}" value = "++" name = "upvote{{ post['id'] }}" onclick="forUpvote (this)" title = "Upvote it!">
+                    </form>
+                    <p class = "numOfVotes post{{ post['id'] }}">{{ post['totalVotes'] }}</p>
+                    <form class = "downvote" action = "" method = "post" target = "frameForVotes">
+                           <input type = "submit" class = "downvoteBtn post{{ post['id'] }}" value = "--" name = "downvote{{ post['id'] }}" onclick="forDownvote (this)" title = "Downvote it!">
+                    </form>
+                 </div>
+                 <div class = "postImage">
+                        {#- Since 'post['image']' is optional, we must have the following 'if' statement. #}
+                        {%- if post['image'] != None %}
+                            <a href = ""><img src = "{{ post['image'] | e }}" class = "squareImage" title = "See post details" alt = "the post {{ post['title'] | e }}"></a>
+                        {% endif %}
+                 </div>
+                 <div class = "description">
+                        <a href = "" class = "portOfPostName" title = "See all posts in {{ port['name'] }}">p/{{ port['name'] }}</a>
+                        <a href = "" class = "nameOfPost" title = "{{ post['title'] | e }}">{{ post['title']  | e }}</a>
+                        {%- if post['text'] != None %}
+                              <p class = "postDescription">{{ post['text']  | e }}</p>
+                        {% endif -%}
+                        <p class = "numberOfComments">{{ post['commentNum'] }} comments</p>
+                 </div>
+                 <div class = "timeAndAuthor">
+                        <p class = "dateOfWriting">{{ post['dateCreated'] }}</p>
+                        <p class = "postedBy">Posted by:</p>
+                        <div class = "authorDetails">
+                             {#- Since 'post['avatarUrl']' is optional, we must have the following 'if' statement. #}
+                             {%- if post['avatarUrl'] != None %}
+                                  <a href = "" title = "{{ post['username'] }}'s profile"><img src = "{{ post['avatarUrl'] | e }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
+                             {%- else %}
+                                  <a href = "" title = "{{ post['username'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
+                             {% endif -%}
+                             <a href = "" class = "usernameOfAuthor" title = "{{ post['username'] }}'s profile">{{ post['username'] }}</a>
+                        </div>
+                 </div>
+         </div>
+    {% endfor -%}
+
+ <!-- End of middle part -->
+
+{%- endblock content %}
+</body>
