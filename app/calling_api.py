@@ -142,6 +142,31 @@ def signup():
         else:
             return render_template('register.html')
 
+@app.route('/ourteam/')
+def ourteam():
+    if 'loggedin' in session:
+        return render_template('genLinks.html', user=session['user'], about=True)
+    else:
+        return render_template('genLinks.html', about=True)
+
+@app.route('/contact/')
+def contact():
+    if 'loggedin' in session:
+        return render_template('genLinks.html', user=session['user'], contact=True)
+    else:
+        return render_template('genLinks.html', contact=True)
+
+@app.route('/terms/')
+def terms():
+    if 'loggedin' in session:
+        return render_template('genLinks.html', user=session['user'], terms=True)
+    else:
+        return render_template('genLinks.html', terms=True)
+
+
+@app.route('/newsfeed/')
+def hello9():
+    return render_template('posts.html', name = "Bla", trendPorts = '', port = "Main", search = "My First Search!")
 
 @app.route('/newpost/')
 def create():
