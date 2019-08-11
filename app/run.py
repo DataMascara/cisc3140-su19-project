@@ -70,7 +70,7 @@ def sign_up():
         first = res["first"]
         last = res["last"]
         avatarurl = res["avatarurl"]
-        description = res["description"] = res["description"]
+        description = res["description"]
         added_user = dbmodule.users_db.add_user(
             email, password, username, first, last, description, avatarurl
         )
