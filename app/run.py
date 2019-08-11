@@ -166,7 +166,7 @@ def delete_user():
 @app.route("/allports/")
 def get_all_ports():
     ports = dbmodule.ports_db.all_ports()
-
+    print(ports)
     # Simply return the json of ports.
     return json.loads(ports)
 
