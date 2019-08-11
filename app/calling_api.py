@@ -36,8 +36,8 @@ def login_api():
             api_res = requests.post(
                 f"{api}/login/", json={"username": username, "password": password}
             ).json()
-            print(api_res["user"]["username"])
 
+        try:
             if api_res["user"]["username"]:
                 # Create session data, we can access this data in other routes
                 session["loggedin"] = True
@@ -49,6 +49,8 @@ def login_api():
                 )
             else:
                 return render_template("base.html", title="", errLogIn=True)
+        except:
+            return render_template("base.html", title="", errLogIn=True)
         else:
             return render_template("base.html", title="NONE")
 
