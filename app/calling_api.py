@@ -126,8 +126,7 @@ def sign_up():
                     "description": description,
                 },
             ).json()
-            print(res)
-            # prints -1 if the user doesn't already exist
+            print(f"API Res {res}")
         except:  # Signal the error
             return render_template("register.html", errUsernameInUse=res)
         # if this line is successful then the user is created
