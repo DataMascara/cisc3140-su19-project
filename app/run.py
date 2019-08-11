@@ -204,12 +204,14 @@ def get_posts():
     return port
 
 
-@app.route("/myposts/")
+@app.route("/my-posts/", methods=["GET"])
 def get_posts_username():
     res = request.get_json()
     username = res["username"]
-    print(type(dbmodule.posts_db.all_posts_by("author", username)))
-    return dbmodule.posts_db.all_posts_by("author", username)
+    posts = json.loads(dbmodule.posts_db.all_posts_by("author", username))['posts']
+    print(posts)
+    port = {"name": 'user history', 'posts': posts}
+    return port
 
 
 # Display Posts Relevant to User Given a User id
