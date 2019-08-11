@@ -17,7 +17,7 @@
                   <p class = "pageTitle" >CURRENT PORT: p/{{ port['name'] }}</p>
         </div>
         {#- If user presses the button, he or she will be redirected to create a new post! #}
-        <form method = "post" action = "" class = "createPostForm">
+        <form method = "post" action = "/new-post/" class = "createPostForm">
               <input type = "submit" class = "createPostBtn" name = "createPostBtn" value = "CREATE POST" title = "Create New Post">
         </form>
         {#- The 'sort by' form. If the user selects something from the list, the Python code could reload this based on the user's #}
