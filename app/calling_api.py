@@ -58,6 +58,7 @@ def logout():
     session.pop("loggedin", None)
     session.pop("id", None)
     session.pop("username", None)
+    session.pop("user", None)
     # Redirect to login page
     return redirect("/home/")
 
