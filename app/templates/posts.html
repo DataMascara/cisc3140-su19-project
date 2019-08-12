@@ -94,12 +94,12 @@
                  <div class = "postImage">
                         {#- Since 'post['image']' is optional, we must have the following 'if' statement. #}
                         {%- if post['image'] != None %}
-                            <a href = ""><img src = "{{ post['image'] | e }}" class = "squareImage" title = "See post details" alt = "the post {{ post['title'] | e }}"></a>
+                            <a href = ""><img src = "{{ post['image'] | e }}" class = "squareImage" title = "See post details" alt = "the post {{ post['postTitle'] | e }}"></a>
                         {% endif %}
                  </div>
                  <div class = "description">
                         <a href = "" class = "portOfPostName" title = "See all posts in {{ post['portName'] }}">p/{{ post['portName'] }}</a>
-                        <a href = "" class = "nameOfPost" title = "{{ post['title'] | e }}">{{ post['title']  | e }}</a>
+                        <a href = "" class = "nameOfPost" title = "{{ post['postTitle'] | e }}">{{ post['postTitle']  | e }}</a>
                         {%- if post['postText'] != None %}
                               <p class = "postDescription">{{ post['postText']  | e }}</p>
                         {% endif -%}
