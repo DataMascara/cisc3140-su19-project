@@ -81,7 +81,7 @@ def logout():
     session.pop("username", None)
     session.pop("user", None)
     # Redirect to login page
-    return redirect("/home/")
+    return redirect("/login/")
 
 
 """
@@ -107,8 +107,8 @@ def home():
         return render_template(
             "posts.html",
             name="Log In",
-            trendPorts=trending,
-            port=port,
+            trendPorts=None,
+            port=None,
             search="My First Search!",
         )
 
@@ -116,7 +116,7 @@ def home():
 """
 -------------/PORT(aka subreddit)-------------
 - Uses the url to decide what port the user wants to go to.
-        - So, this should 
+        - So, this should
 """
 
 
