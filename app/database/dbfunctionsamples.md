@@ -73,6 +73,6 @@ and accurate, redirect
 
 
 Add post:
->`#function dbmodule.post_db.add_post(title, text, port_id, author_id)`
+>`#function dbmodule.post_db.add_post(title, text, port_name, author, image)`
 >
->`dbmodule.post_db.add_post('This is a new post','Here is the text of the post, it might be longer',3,2)`
+>`dbmodule.post_db.add_post('This is a new post','Here is the text of the post, it might be longer','main','chalshaff12', 'www.image/url.jpg')`
