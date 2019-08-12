@@ -17,9 +17,11 @@
                   <p class = "pageTitle" >CURRENT PORT: p/{{ port['name'] }}</p>
         </div>
         {#- If user presses the button, he or she will be redirected to create a new post! #}
-        <form method = "post" action = "/new-post/" class = "createPostForm">
-              <input type = "submit" class = "createPostBtn" name = "createPostBtn" value = "CREATE POST" title = "Create New Post">
-        </form>
+        {%- if user %}
+            <form method = "post" action = "/new-post/" class = "createPostForm">
+                  <input type = "submit" class = "createPostBtn" name = "createPostBtn" value = "CREATE POST" title = "Create New Post">
+            </form>
+        {% endif -%}
         {#- The 'sort by' form. If the user selects something from the list, the Python code could reload this based on the user's #}
         {#- choice of sorting. Notice the hidden input with name 'postsAndPortToSort' that could give you the info about #}
         {#- the posts in which port to sort! #}
@@ -51,13 +53,44 @@
          {% endif -%}
 
                 <div class = "votes">
-                    <form class = "upvote" action = "" method = "post" target = "frameForVotes">
-                           <input type = "submit" class = "upvoteBtn post{{ post['id'] }}" value = "++" name = "upvote{{ post['id'] }}" onclick="forUpvote (this)" title = "Upvote it!">
-                    </form>
-                    <p class = "numOfVotes post{{ post['id'] }}">{{ post['votes'] }}</p>
-                    <form class = "downvote" action = "" method = "post" target = "frameForVotes">
-                           <input type = "submit" class = "downvoteBtn post{{ post['id'] }}" value = "--" name = "downvote{{ post['id'] }}" onclick="forDownvote (this)" title = "Downvote it!">
-                    </form>
+                   {%- if user %} {#- Appears only if the user is logged in #}
+                     <form class = "upvote" action = "" method = "post" target = "frameForVotes">
+                            <input type = "submit" 
+                                       class = "upvoteBtn post{{ post['id'] }}" 
+                                       value = "++" 
+                                       name = "upvote{{ post['id'] }}" 
+                                       onclick="forUpvote (this)" 
+                                       title = "Upvote it!"
+                                       {%- if post['upOrDownvoted'] == 1 %}
+                                       style = "color: rgb(77, 208, 191);"
+                                       {%- else %}
+                                       {#- do nothing #}
+                                       {% endif -%}>
+                      </form>
+                   {% endif -%}
+                    <p class = "numOfVotes post{{ post['id'] }}"
+                       {%- if (post['upOrDownvoted'] == 1) and (user) %}
+                       style = "color: rgb(77, 208, 191);"
+                       {%- elif (post['upOrDownvoted'] == -1) and (user) %}
+                       style = "color: red;"
+                       {%- else %}
+                       {#- do nothing #}
+                       {% endif -%}>{{ post['totalVotes'] }}</p>
+                    {%- if user %} {#- Appears only if the user is logged in #}
+                       <form class = "downvote" action = "" method = "post" target = "frameForVotes">
+                          <input type = "submit" 
+                                     class = "downvoteBtn post{{ post['id'] }}" 
+                                     value = "--" 
+                                     name = "downvote{{ post['id'] }}"  
+                                     onclick="forDownvote (this)" 
+                                     title = "Downvote it!"
+                                     {%- if post['upOrDownvoted'] == -1 %}
+                                     style = "color: red;"
+                                     {%- else %}
+                                     {#- do nothing #}
+                                     {% endif -%}>
+                       </form>
+                     {% endif -%}
                  </div>
                  <div class = "postImage">
                         {#- Since 'post['image']' is optional, we must have the following 'if' statement. #}
