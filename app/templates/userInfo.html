@@ -61,9 +61,8 @@
                                                                title = "Describe yourself, {{ viewedUser['username']}}!" 
                                                                placeholder = "Your description here"
                                                                spellcheck = "true">{{ viewedUser['description'] }}</textarea>
+                                                <input type="text" name="avatarURL" class = "avatarURL" placeholder="Add URL to Your Avatar">
                                                 <div class = "descriptionFormSubmitDiv">
-                                                      <label for="imageUpload" class = "descriptionFormSubmitBtn imageLabel" >Upload Avatar</label>
-                                                      <input type="file" id="imageUpload" name="pic" accept="image/*" class = "imageUpload" style="display: none" onchange = "changeVal()">
                                                       <input type = "button" class = "descriptionFormSubmitBtn" name = "descriptionFormSubmitBtn" title = "Save your bio!" value = "Save Bio" onclick = "submitBio()">
                                                 </div>
                                 </form> 
