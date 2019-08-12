@@ -38,7 +38,7 @@
                        {%- else %}
                              <img src="{{ url_for('static',filename='img/profile_logo.png') }}" class="logo" alt = "the user {{ user['username'] }}" title = "{{ user['username'] }}" >
                        {% endif -%}
-                        <a href = "" class = "username" title = "Go to your User Profile" >{{ user['username'] }}</a>
+                        <a href = "/profile/" class = "username" title = "Go to your User Profile" >{{ user['username'] }}</a>
  
                         <form method = "post" action = "">
                                  <input type = "submit" name = "loggedIn" class="profile" value = "User Profile" title = "Go to your User Profile">
