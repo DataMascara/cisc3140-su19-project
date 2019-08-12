@@ -209,6 +209,29 @@ def hello11():
         "portIndex.html", name="Bla", trendPorts=trendPorts, ports=ports
     )
 
+#---------------------------- 08.12.2019 -------------------------
+
+# Examples of Post Details Template
+
+# Create a post dictionary. It will look like this:
+postDict = {'id': 257, 'title': 'Want to Order Some Pizza on the Last Day of Classes?', 'portname': "CISCRocks", 'totalVotes': 1000, 'image': 'https://cdn.apartmenttherapy.info/image/fetch/f_auto,q_auto:eco/https%3A%2F%2Fstorage.googleapis.com%2Fgen-atmedia%2F3%2F2018%2F03%2F55cd28cae8ee78fe1e52ab1adc9eafff24c9af92.jpeg', 'text': "Why shouldn't we?", 'commentNum': 5, 'dateCreated': '2019-08-11 02:23:04', 'username': 'mary060196', 'avatarUrl': 'https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Up_Hand_Sign_Emoji_large.png?v=1480481047', 'upOrDownvoted': 1,
+            'comments': [{'id': 1, 'totalVotes': 64, 'dateCreated': '2019-08-11 10:10:10', 'username': 'jtroia', 'avatarUrl': 'https://cdn.sandals.com/beaches/v12/images/general/destinations/home/beach.jpg', 'text': "How hadn't I thought of it myself? Great idea!", 'upOrDownvoted': 1,
+                          'comments' : [{'id': 4, 'totalVotes': 24, 'dateCreated': '2019-08-11 15:15:15', 'username': 'mary060196', 'avatarUrl': 'https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Up_Hand_Sign_Emoji_large.png?v=1480481047', 'text': "Yea! We'll just have to find a good pizzeria and notify the class.", 'upOrDownvoted': 0}, 
+                                        {'id': 5, 'totalVotes': 15, 'dateCreated': '2019-08-11 15:20:15', 'username': 'jtroia', 'avatarUrl': 'https://cdn.sandals.com/beaches/v12/images/general/destinations/home/beach.jpg', 'text': "I will send everyone a message on Slack (if anybody even opens it.)", 'upOrDownvoted': 0}]}, 
+                         {'id': 2, 'totalVotes': 59, 'dateCreated': '2019-08-11 10:20:36', 'username': 'bla-bla', 'avatarUrl': 'https://www.designrepublic.com/27631-large_default/blabla-big-plexi.jpg', 'text': "Bla bla bla bla bla. Bla bla bla bla!", 'upOrDownvoted': -1, 'comments': {}}, 
+                         {'id': 3, 'totalVotes': 12, 'dateCreated': '2019-08-11 10:20:36', 'username': 'wowwow1', 'avatarUrl': None, 'text': "Wow wow wow wow wow. Wow wow wow wow!", 'upOrDownvoted': 0, 'comments': {}}]}
+
+# 'user' is logged in, and optional argument 'commentSubmittedMessage' is passed:
+@app.route('/post-details1')
+def hello12():
+    return render_template('postDetails.html', name = "Bla", trendPorts = trendPorts, post = postDict, user = user, commentSubmittedMessage = True)
+
+# 'user' is logged out:
+@app.route('/post-details2')
+def hello13():
+    return render_template('postDetails.html', name = "Bla", trendPorts = trendPorts, post = postDict)
+
+
 
 if __name__ == "__main__":
     webbrowser.open_new("http://localhost:8181/")
@@ -223,5 +246,7 @@ if __name__ == "__main__":
     webbrowser.open_new("http://localhost:8181/newsfeed/")
     webbrowser.open_new("http://localhost:8181/port-index/example1")
     webbrowser.open_new("http://localhost:8181/port-index/example2")
+    webbrowser.open_new("http://localhost:8080/post-details1")
+    webbrowser.open_new("http://localhost:8080/post-details2")
     app.run("localhost", 8181, True, use_reloader=False)
 
