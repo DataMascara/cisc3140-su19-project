@@ -557,8 +557,8 @@ class votes_db:
     #type = 'post' or 'comment'
     #column_name = 'saved' or 'vote'
     # data_value = '1' for saved, '1' for upvotes, '-1' for downvotes
-    def all_votes_by(username, column_name, data_value, type):
-        operation = '='
+    def all_votes_by(username, column_name, data_value, type, operation):
+
         mydb = dbconnection()
         cursor = mydb.cursor(buffered=True)
         sql = f"SELECT * FROM votes_vw where voteUsername = '{username}' and {column_name} {operation} '{data_value}' and type = '{type}'"

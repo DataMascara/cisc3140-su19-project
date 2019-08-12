@@ -223,19 +223,20 @@ where s.isActive = 1;
 
 create view votes_vw as
   #votes are being cast as char(10) because the integer sums were not showing up through the python functions for some reason
-select distinct p.id as postId, p.text as Text, u.username as author, uv.username as voteUsername, vote, isSaved, 'Post' as type
+select distinct p.id as postId, p.title as Title, p.imageUrl as Image, p.text as Text, u.username as author, uv.username as voteUsername, vote, isSaved, 'Post' as type
 from posts p
 left join users u on p.userid = u.id
 left join votes v on v.postid = p.id
 join users uv on uv.id = v.userid
 where isDeleted = 0
 union
-select distinct c.id as commentId, c.text as Text, u.username as author, uv.username as voteUsername, vote, isSaved, 'Comment' as type
+select distinct c.id as commentId, '' as Title, '' as Image, c.text as Text, u.username as author, uv.username as voteUsername, vote, isSaved, 'Comment' as type
 from comments c
 left join users u on u.id = c.userid
 left join votes v on v.commentid = c.id
 join users uv on uv.id = v.userid
 where c.isDeleted = 0;
+
 
 create view users_vw as
 select u.id as userId, password, username, first, last, email, description, avatarUrl, cast(sum(vote) as char(10)) as votes

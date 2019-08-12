@@ -91,7 +91,8 @@ def add_post():
 	text = request.args.get('text')
 	author = request.args.get('author')
 	port_name = request.args.get('port_name')
-	image = requests.args.get('image')
+	image = request.args.get('image')
+
 	#calling the insert statement function
 	result_set = dbmodule.posts_db.add_post(title, text, port_name, author, image)
 	return str(result_set)
@@ -182,4 +183,14 @@ def update_subscription():
 	value = request.args.get('value')
 	#calling the insert statement function
 	result_set = dbmodule.subscriptions_db.update_subscription(username, portId, value)
+	return str(result_set)
+
+@app.route('/allVotesBy')
+def all_votes_by():
+	username = request.args.get('username')
+	column = request.args.get('column')
+	value = request.args.get('value')
+	type = request.args.get('type')
+	operation = request.args.get('operation')
+	result_set = dbmodule.votes_db.all_votes_by(username, column, value, type, operation)
 	return str(result_set)
