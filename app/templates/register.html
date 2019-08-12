@@ -98,16 +98,14 @@ base template, all we modify here is the 'content' block: #} {%- block content
             required
           /><label class="required">*</label>
         </div>
-        <label for="imageUpload" class="imageLabel">Your Image</label>
-        <input
-          type="file"
-          id="imageUpload"
-          name="pic"
-          accept="image/*"
-          class="btn imageUpload"
-          style="display: none"
-          onchange="changeVal()"
-        />
+        <div class = "row5">
+          <input 
+            type="text" 
+            name="addimage" 
+            class = "addimage" 
+            placeholder="Add URL to Your Image"
+          />
+        </div>
         <input
           type="submit"
           value="Register"
