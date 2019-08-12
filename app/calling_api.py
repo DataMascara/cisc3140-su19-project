@@ -378,12 +378,31 @@ def profile():
 @app.route("/update/", methods=["GET", "POST"])
 def update():
     if "loggedin" in session:
-        res = request.form
-        key = res["key"]
-        value = res["value"]
-        dbmodule.users_db.update_user(session["user"]["username"], key, value)
-        return render_template("userInfo.html", userProfile = True, user = session["user"],
-            viewedUser=session["user"], trendPorts=trending)
+
+        form = request.form
+        form = dict(form)
+
+        if request.method == "POST":
+
+            if 'emailSetting' in form.keys():
+
+                payload = { "username":session["user"]["username"], "field":"email", "value":form["emailSetting"] }
+
+                response = requests.post(api + "/update/", data=payload)
+                print(response.content)
+
+                return render_template("userInfo.html", user = session["user"]["username"], accountSettings = True, emailAndPassword = True)
+                
+            else:
+
+                payload = { "username":session["user"]["username"], "field":"password", "value":form["passwordSetting"] }
+
+                response = requests.post(api + "/update/", data=payload)
+                print(response.content)
+
+                return render_template("userInfo.html", user = session["user"]["username"], accountSettings = True, emailAndPassword = True)
+
+            return render_template("userInfo.html", user = session["user"]["username"], accountSettings = True, emailAndPassword = True)
     else:
         return redirect('/login/')
 
