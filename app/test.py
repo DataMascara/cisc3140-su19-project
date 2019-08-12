@@ -231,6 +231,40 @@ def hello12():
 def hello13():
     return render_template('postDetails.html', name = "Bla", trendPorts = trendPorts, post = postDict)
 
+#---------------------------------- User Info Template --------------------------
+
+# What the 'viewedUser' object must have (this is other than the 'user' dict)
+viewedUser1 = {'username': 'mary060196', 'email': 'mary060196@gmail.com', 'avatarUrl': 'https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Up_Hand_Sign_Emoji_large.png?v=1480481047', 'description': "I love CISC since I was a child.", 'isEmailPrivate': False}
+viewedUser2 = {'username': 'jtroia', 'email': 'jtroia@joetroia.com', 'avatarUrl': 'https://cdn.sandals.com/beaches/v12/images/general/destinations/home/beach.jpg', 'description': "Lorem Ipsum ... and other stuff.", 'isEmailPrivate': False}
+
+# We also want to update the 'user' to contain the following:
+user = {'username': 'mary060196', 'isEmailPrivate': False, 'isPostCommentNotificationsEnabled': True, 'isCommentReplyEnabled': True}
+
+# Following are 4 example routes for the "Account Settings" and "User Profile" views.
+# The third and last "Dashboard" view has not yet been added to the 'userInfo.html' template, but
+# it will be added until the 08.13 (maybe including the 08.13).
+
+# 'user' is logged in, and the user is looking at his or her own profile:
+@app.route('/user-profile1')
+def hello14():
+    return render_template('userInfo.html', name = "Bla", trendPorts = trendPorts, viewedUser = viewedUser1, user = user, userProfile = True)
+
+# 'user' is logged in, and the user is looking at somebody else's profile:
+@app.route('/user-profile2')
+def hello15():
+    return render_template('userInfo.html', name = "Bla", trendPorts = trendPorts, viewedUser = viewedUser2, user = user, userProfile = True)
+
+# 'user' is logged in and is looking at the "Account Settings", inside the "Email and Password" tab
+# Notice the optional 'errIncorrectPassword' argument that can be passed to show the user message about incorrect current password.
+@app.route('/account-settings1')
+def hello16():
+    return render_template('userInfo.html', name = "Bla", trendPorts = trendPorts, user = user, accountSettings = True, emailAndPassword = True, errIncorrectPassword = True)
+
+# 'user' is logged in and is looking at the "Account Settings", inside the "Notification" tab
+@app.route('/account-settings2')
+def hello17():
+    return render_template('userInfo.html', name = "Bla", trendPorts = trendPorts, user = user, accountSettings = True, notifications = True)
+
 
 
 if __name__ == "__main__":
@@ -249,5 +283,9 @@ if __name__ == "__main__":
     webbrowser.open_new("http://localhost:8080/post-details1")
     webbrowser.open_new("http://localhost:8080/post-details2")
     webbrowser.open_new("http://localhost:8181/newsfeed2/")
+    webbrowser.open_new("http://localhost:8080/user-profile1")
+    webbrowser.open_new("http://localhost:8080/user-profile2")
+    webbrowser.open_new("http://localhost:8080/account-settings1")
+    webbrowser.open_new("http://localhost:8080/account-settings2")
     app.run("localhost", 8181, True, use_reloader=False)
 
