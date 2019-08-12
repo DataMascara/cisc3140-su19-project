@@ -368,11 +368,11 @@ class posts_db:
                 return o.__str__()
         return json.dumps({'posts': json_data}, default=myconverter)
 
-    def add_post(title, text, port_name, author_id, username):
+    def add_post(title, text, port_name, author):
 
         mydb = dbconnection()
         cursor = mydb.cursor(buffered=True)
-        sql = f"INSERT INTO posts (title, text, portid, userid) VALUES ('{title}','{text}',(select id from ports where name = '{port_name}'), {author_id})"
+        sql = f"INSERT INTO posts (title, text, portId, userid) VALUES ('{title}','{text}', (select id from ports where name = '{port_name}'), (select id from users where username = '{author}'))"
 
         try:
             cursor.execute(sql)

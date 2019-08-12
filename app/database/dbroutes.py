@@ -90,10 +90,10 @@ def add_post():
 	title = request.args.get('title')
 	text = request.args.get('text')
 	author = request.args.get('author')
-	port_id = request.args.get('port_id')
-	
+	port_name = request.args.get('port_name')
+
 	#calling the insert statement function
-	result_set = dbmodule.posts_db.add_post(title, text, port_id, author)
+	result_set = dbmodule.posts_db.add_post(title, text, port_name, author)
 	return str(result_set)
 
 @app.route('/deletePost')
