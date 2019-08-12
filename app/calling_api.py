@@ -351,7 +351,7 @@ def subscribe():
             )
         return res
     else:
-        redirect("/login/")
+        return redirect("/login/")
 '''
  ------PROFILE-----
 '''      
@@ -364,7 +364,7 @@ def profile():
             "userInfo.html", userProfile = True, user=session["user"],
             viewedUser= session["user"], trendPorts=trending)
     else:
-        return render_template("genLinks.html", about=True, trendPorts=trending)
+        return redirect('/login/')
 
 @app.route("/ourteam/")
 def ourteam():
