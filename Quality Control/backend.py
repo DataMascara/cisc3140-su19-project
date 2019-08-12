@@ -22,16 +22,16 @@ def test(username):
     print(res)
     name = res['first']
     print(name)
-    return render_template('baseLoggedIn.html', title="Logged In :)")
+    return render_template('base.html', title="Logged In :)")
 
 
 @app.route('/login/')
 def login():
-    return render_template('baseLoggedOut.html', title="Logged Out :) ")
+    return render_template('base.html', title="Logged Out :) ")
 
 @app.route('/home/')
 def home():
-    return render_template('baseLoggedIn.html', title="Logged In :)")
+    return render_template('base.html', title="Logged In :)")
 
 #login function
 #do not use email loggin
@@ -49,11 +49,11 @@ def logout():
             print("login not successful.")
         if(msg == 'Credentials Valid!'):
             #return the site with username title
-            return render_template('baseLoggedIn.html', title="Logged In :)", name=res['username'])
+            return render_template('base.html', title="Logged In :)", name=res['username'])
         else:
-            return render_template('baseLoggedOut.html', title="Logged Out :) ")
+            return render_template('base.html', title="Logged Out :) ")
 
-    return render_template('baseLoggedOut.html', title="Logged Out :) ")
+    return render_template('base.html', title="Logged Out :) ")
 
 
 if __name__ == "__main__":
