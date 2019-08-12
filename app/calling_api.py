@@ -44,7 +44,7 @@ def login_api():
                     # session['id'] = account['id']
                     session["username"] = username
                     session["user"] = api_res["user"]
-                    return redirect('/home/')
+                    return redirect("/home/")
                     return render_template(
                         "base.html", title="Logged In", user=session["user"]
                     )
@@ -53,9 +53,7 @@ def login_api():
             except:
                 return render_template("base.html", title="", errLogIn=True)
         else:
-            return render_template("base.html", title = "Please Log in")
-
-
+            return render_template("base.html", title="Please Log in")
 
 
 @app.route("/logout/")
@@ -68,46 +66,77 @@ def logout():
     return redirect("/home/")
 
 
-@app.route("/home/", methods=['GET'])
+@app.route("/home/", methods=["GET"])
 def home():
-    #Use the helper method to grab "tredning ports"
-    trending = trending_ports()['all_ports']
-    port = (requests.get(
-        f"{api}/posts-by-portname/",
-        json={
-            "portname": "Main"
-        }).json())    
+    # Use the helper method to grab "tredning ports"
+    trending = trending_ports()["all_ports"]
+    port = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
     if "loggedin" in session:
-        return render_template('posts.html', name="Home", user= session['user'], trendPorts=trending, port=port, search="My First Search!")
+        return render_template(
+            "posts.html",
+            name="Home",
+            user=session["user"],
+            trendPorts=trending,
+            port=port,
+            search="My First Search!",
+        )
     else:
-        return render_template('posts.html', name="Home", trendPorts=trending, port=port, search="My First Search!")
+        return render_template(
+            "posts.html",
+            name="Log In",
+            trendPorts=trending,
+            port=port,
+            search="My First Search!",
+        )
 
 
 @app.route("/p/<portname>", methods=["GET"])
 def portpost(portname):
-    port = requests.get(
-        f"{api}/posts-by-portname/",
-        json={
-            "portname": portname
-        }).json()
+    port = requests.get(f"{api}/posts-by-portname/", json={"portname": portname}).json()
     print(type(port))
-    trending = trending_ports()['all_ports']
+    trending = trending_ports()["all_ports"]
     if "loggedin" in session:
-        return render_template('posts.html', name="p/"+portname, user= session['user'], trendPorts=trending, port=port, search="My First Search!")
+        return render_template(
+            "posts.html",
+            name="p/" + portname,
+            user=session["user"],
+            trendPorts=trending,
+            port=port,
+            search="My First Search!",
+        )
     else:
-        return render_template('posts.html', name="p/"+portname, trendPorts=trending, port=port, search="My First Search!")
+        return render_template(
+            "posts.html",
+            name="p/" + portname,
+            trendPorts=trending,
+            port=port,
+            search="My First Search!",
+        )
 
 
 # gets user's post history
 @app.route("/u/<username>/posts/", methods=["GET"])
 def my_posts(username):
-    trending = trending_ports()['all_ports']
+    trending = trending_ports()["all_ports"]
     port = requests.get(f"{api}/my-posts/", json={"username": username}).json()
     if "loggedin" in session:
-        return render_template('posts.html', name=username+"\'s Post", user=session['user'], trendPorts=trending, port=port, search="My First Search!")
+        return render_template(
+            "posts.html",
+            name=username + "'s Post",
+            user=session["user"],
+            trendPorts=trending,
+            port=port,
+            search="My First Search!",
+        )
         # return port
     else:
-        return render_template('posts.html', name=username+"\'s Post", trendPorts=trending, port=port, search="My First Search!")
+        return render_template(
+            "posts.html",
+            name=username + "'s Post",
+            trendPorts=trending,
+            port=port,
+            search="My First Search!",
+        )
 
 
 # calls the api to sign the user up
@@ -167,7 +196,7 @@ def sign_up():
 def post():
 
     # Make sure the user is logged in
-   
+
     if "loggedin" in session:
         # If we are making a post
 
@@ -183,11 +212,11 @@ def post():
                         "title": title,
                         "text": text,
                         "portname": portname,
-                        "userId": session["user"]['userId'],
+                        "userId": session["user"]["userId"],
                         "username": session["username"],
                     },
                 ).json()
-                trending = trending_ports()['all_ports']
+                trending = trending_ports()["all_ports"]
                 return render_template(
                     "postSubmitted.html",
                     user=session["user"],
@@ -246,25 +275,30 @@ def terms():
 
 @app.route("/newsfeed/")
 def hello9():
-    trending = trending_ports()['all_ports']
+    trending = trending_ports()["all_ports"]
     return render_template(
-        "posts.html", name="Bla", trendPorts=trending, port="Main", search="My First Search!"
+        "posts.html",
+        name="Bla",
+        trendPorts=trending,
+        port="Main",
+        search="My First Search!",
     )
 
 
 @app.route("/Regist_Pending/")
 def pending():
-    user = session['user']
-    trending = trending_ports()['all_ports']
+    user = session["user"]
+    trending = trending_ports()["all_ports"]
     return render_template(
-        "genLinks.html", name=user['first'], user=user, trendPorts=trending
+        "genLinks.html", name=user["first"], user=user, trendPorts=trending
     )
+
 
 # helper function to get "trending posts"
 # WIll do this by just getting three three random ports
 def trending_ports():
-    ports = (requests.get(f"{api}/allports/"))
-    #Add way of deciding what ports are "trending"
+    ports = requests.get(f"{api}/allports/")
+    # Add way of deciding what ports are "trending"
     # Return a dictonary of the port representation
     return ports.json()
 
@@ -272,7 +306,8 @@ def trending_ports():
 def load_user(username):
     user = (requests.get(f"{api}/user", json={"username": username}).json())["user"][0]
     print(user)
-    return user 
+    return user
+
 
 if __name__ == "__main__":
     app.run("localhost", 8080, debug=True)
