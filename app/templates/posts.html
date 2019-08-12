@@ -56,9 +56,9 @@
                    {%- if user %} {#- Appears only if the user is logged in #}
                      <form class = "upvote" action = "" method = "post" target = "frameForVotes">
                             <input type = "submit" 
-                                       class = "upvoteBtn post{{ post['id'] }}" 
+                                       class = "upvoteBtn post{{ post['postId'] }}"
                                        value = "++" 
-                                       name = "upvote{{ post['id'] }}" 
+                                       name = "value"
                                        onclick="forUpvote (this)" 
                                        title = "Upvote it!"
                                        {%- if post['upOrDownvoted'] == 1 %}
@@ -66,8 +66,8 @@
                                        {%- else %}
                                        {#- do nothing #}
                                        {% endif -%}>
-                      </form>
                    {% endif -%}
+                    <input type="hidden" name="portId" value="{{ post['postId'] }}">
                     <p class = "numOfVotes post{{ post['id'] }}"
                        {%- if (post['upOrDownvoted'] == 1) and (user) %}
                        style = "color: rgb(77, 208, 191);"
@@ -75,13 +75,12 @@
                        style = "color: red;"
                        {%- else %}
                        {#- do nothing #}
-                       {% endif -%}>{{ post['totalVotes'] }}</p>
+                       {% endif -%}>{{ post['votes'] }}</p>
                     {%- if user %} {#- Appears only if the user is logged in #}
-                       <form class = "downvote" action = "" method = "post" target = "frameForVotes">
                           <input type = "submit" 
-                                     class = "downvoteBtn post{{ post['id'] }}" 
+                                     class = "downvoteBtn post{{ post['postId'] }}"
                                      value = "--" 
-                                     name = "downvote{{ post['id'] }}"  
+                                     name = "value"
                                      onclick="forDownvote (this)" 
                                      title = "Downvote it!"
                                      {%- if post['upOrDownvoted'] == -1 %}
