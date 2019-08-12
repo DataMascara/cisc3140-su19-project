@@ -24,8 +24,6 @@ def redirect_home():
 """
 -------------LOGIN-------------
 """
-
-
 @app.route("/login/", methods=["POST", "GET"])
 def login_api():
     # already logged in
@@ -40,7 +38,8 @@ def login_api():
             username = res["username"]
             password = res["password"]
             api_res = requests.post(
-                f"{api}/login/", json={"username": username, "password": password}
+                f"{api}/login/", 
+                json={"username": username, "password": password}
             ).json()
             try:
                 # Make sure there is a user before we do anything with sessions
@@ -68,12 +67,9 @@ def login_api():
                 "base.html", title="Please Log in", trendPorts=trending
             )
 
-
 """
 -------------LOG-OUT-------------
 """
-
-
 @app.route("/logout/")
 def logout():
     session.pop("loggedin", None)
@@ -83,12 +79,9 @@ def logout():
     # Redirect to login page
     return redirect("/login/")
 
-
 """
 -------------HOMEPAGE-------------
 """
-
-
 @app.route("/home/", methods=["GET"])
 def home():
     # Use the helper method to grab "tredning ports"
@@ -118,11 +111,10 @@ def home():
 - Uses the url to decide what port the user wants to go to.
         - So, this should
 """
-
-
 @app.route("/p/<portname>/", methods=["GET"])
 def portpost(portname):
-    port = requests.get(f"{api}/posts-by-portname/", json={"portname": portname}).json()
+    port = requests.get(f"{api}/posts-by-portname/", 
+    json={"portname": portname}).json()
     print(type(port))
     trending = trending_ports()["all_ports"]
     if "loggedin" in session:
@@ -148,7 +140,8 @@ def portpost(portname):
 @app.route("/u/<username>/posts/", methods=["GET"])
 def my_posts(username):
     trending = trending_ports()["all_ports"]
-    port = requests.get(f"{api}/my-posts/", json={"username": username}).json()
+    port = requests.get(f"{api}/my-posts/", 
+    json={"username": username}).json()
     if "loggedin" in session:
         return render_template(
             "posts.html",
@@ -168,8 +161,9 @@ def my_posts(username):
             search="My First Search!",
         )
 
-
-# calls the api to sign the user up
+        """
+-------------SIGN-UP-------------
+"""
 @app.route("/signup/", methods=["POST", "GET"])
 def sign_up():
     trending = trending_ports()["all_ports"]
@@ -214,7 +208,8 @@ def sign_up():
             )
 
         # if this line is successful then the user is created
-        # Load uses helper method returns the dict of the user representation for local storage
+        # Load uses helper method returns the dict of the user 
+        # representation for local storage
         session["user"] = load_user(username)
         session["loggedin"] = True
         # session['id'] = account['id']
@@ -228,10 +223,8 @@ def sign_up():
 
 
 """
-
+-------------NEW POST-------------
 """
-
-
 @app.route("/new-post/", methods=["GET", "POST"])
 def post():
     trending = trending_ports()["all_ports"]
@@ -280,7 +273,10 @@ def post():
     else:
         return redirect("/login/")
 
-
+"""
+-------------USER SUBSCRIBED POSTS-------------
+ - Given a user, return all the posts from the ports they are subscribed to
+"""
 @app.route("/subscribed-posts/", methods=["GET"])
 def subscribedposts():
     if "loggedin" in session:
@@ -293,7 +289,10 @@ def subscribedposts():
     else:
         return redirect("/login/")
 
-
+"""
+-------------PORT INDEX-------------
+- Allows logged in users to brows ports
+"""
 @app.route("/portindex/", methods=["GET"])
 def portindex():
     trending = trending_ports()["all_ports"]
@@ -308,9 +307,11 @@ def portindex():
         for p in ports:
             # this will iterate through all the ports that the user is subscribed
             for sp in subscribed_ports:
-                # if the ids match then the user is subscribed to the port so 'isSubscribed' will be set to True
+                # if the ids match then the user is subscribed to the port so 'isSubscribed'
+                #  will be set to True
                 if p["id"] == sp["portId"]:
-                    # "isSubscribed" notifies the html page what state the button should be in
+                    # "isSubscribed" notifies the html page what 
+                    # state the button should be in
                     p.update({"isSubscribed": True})
         return render_template(
             "portIndex.html",
@@ -324,14 +325,17 @@ def portindex():
             "portIndex.html", name="Port Index", ports=ports, trendPorts=trending
         )
 
-
+"""
+-------------SUBSCRIBE TO PORT-------------
+"""
 @app.route("/subscribe/", methods=["POST"])
 def subscribe():
     if "loggedin" in session:
         res = request.form
         portname = res["portname"]
         username = session["username"]
-        # Either going be joined(you're subscribing) or Subscribed, meaning you want to unsubscribe
+        # Either going be joined(you're subscribing) or Subscribed, 
+        # meaning you want to unsubscribe
         state = res["value"]
 
         # If you click on subscribe(you just joined the port),
@@ -345,11 +349,22 @@ def subscribe():
                 f"{api}/unsubscribe-to-port/",
                 json={"portname": portname, "username": username},
             )
-
         return res
     else:
         redirect("/login/")
-
+'''
+ ------PROFILE-----
+'''      
+@app.route("/profile/")
+def profile():
+    trending = trending_ports()["all_ports"]
+    if "loggedin" in session:
+        print("hello")
+        return render_template(
+            "userInfo.html", userProfile = True, user=session["user"],
+            viewedUser= session["user"], trendPorts=trending)
+    else:
+        return render_template("genLinks.html", about=True, trendPorts=trending)
 
 @app.route("/ourteam/")
 def ourteam():
