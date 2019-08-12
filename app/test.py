@@ -248,5 +248,6 @@ if __name__ == "__main__":
     webbrowser.open_new("http://localhost:8181/port-index/example2")
     webbrowser.open_new("http://localhost:8080/post-details1")
     webbrowser.open_new("http://localhost:8080/post-details2")
+    webbrowser.open_new("http://localhost:8181/newsfeed2/")
     app.run("localhost", 8181, True, use_reloader=False)
 
