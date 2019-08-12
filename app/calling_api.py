@@ -83,7 +83,7 @@ def home():
         return render_template('posts.html', name="Home", trendPorts=trending, port=port, search="My First Search!")
 
 
-@app.route("/p/<portname>", methods=["GET"])
+@app.route("/p/<portname>/", methods=["GET"])
 def portpost(portname):
     port = requests.get(
         f"{api}/posts-by-portname/",
@@ -239,19 +239,22 @@ def portindex():
 
 @app.route("/subscribe/", methods=['POST'])
 def subscribe():
-    res = request.form
-    portname = res['portname']
-    username = session['username']
-    state = res['value']
+    if 'loggedin' in session:
+        res = request.form
+        portname = res['portname']
+        username = session['username']
+        state = res['value']
 
-    if state == "Joined":
-        requests.post(f"{api}/subscribe-to-port/",
-                      json={"portname": portname, "username": username})
+        if state == "Joined":
+            requests.post(f"{api}/subscribe-to-port/",
+                          json={"portname": portname, "username": username})
+        else:
+            requests.post(f"{api}/unsubscribe-to-port/",
+                          json={"portname": portname, "username": username})
+
+        return res
     else:
-        requests.post(f"{api}/unsubscribe-to-port/",
-                      json={"portname": portname, "username": username})
-
-    return res
+        redirect('/login/')
 
 
 @app.route("/ourteam/")
