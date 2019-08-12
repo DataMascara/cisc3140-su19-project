@@ -68,7 +68,7 @@
                                        {% endif -%}>
                    {% endif -%}
                     <input type="hidden" name="portId" value="{{ post['postId'] }}">
-                    <p class = "numOfVotes post{{ post['id'] }}"
+                    <p class = "numOfVotes post{{ post['postId'] }}"
                        {%- if (post['upOrDownvoted'] == 1) and (user) %}
                        style = "color: rgb(77, 208, 191);"
                        {%- elif (post['upOrDownvoted'] == -1) and (user) %}
