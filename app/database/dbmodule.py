@@ -561,7 +561,7 @@ class votes_db:
         operation = '='
         mydb = dbconnection()
         cursor = mydb.cursor(buffered=True)
-        sql = f"SELECT * FROM votes_vw where voteUsername = (select id from users where username = '{username}') and {column_name} {operation} '{data_value}' and type = '{type}'"
+        sql = f"SELECT * FROM votes_vw where voteUsername = '{username}' and {column_name} {operation} '{data_value}' and type = '{type}'"
 
         try:
             cursor.execute(sql)
