@@ -21,6 +21,11 @@ def redirect_home():
     return redirect("/login/")
 
 
+"""
+-------------LOGIN-------------
+"""
+
+
 @app.route("/login/", methods=["POST", "GET"])
 def login_api():
     # already logged in
@@ -38,6 +43,7 @@ def login_api():
                 f"{api}/login/", json={"username": username, "password": password}
             ).json()
             try:
+                # Make sure there is a user before we do anything with sessions
                 if api_res["user"]["username"]:
                     session["user"] = api_res["user"]
                     # Create session data, we can access this data in other routes
@@ -63,6 +69,11 @@ def login_api():
             )
 
 
+"""
+-------------LOG-OUT-------------
+"""
+
+
 @app.route("/logout/")
 def logout():
     session.pop("loggedin", None)
@@ -71,6 +82,11 @@ def logout():
     session.pop("user", None)
     # Redirect to login page
     return redirect("/home/")
+
+
+"""
+-------------HOMEPAGE-------------
+"""
 
 
 @app.route("/home/", methods=["GET"])
@@ -95,6 +111,13 @@ def home():
             port=port,
             search="My First Search!",
         )
+
+
+"""
+-------------/PORT(aka subreddit)-------------
+- Uses the url to decide what port the user wants to go to.
+        - So, this should 
+"""
 
 
 @app.route("/p/<portname>/", methods=["GET"])
@@ -204,6 +227,11 @@ def sign_up():
         return render_template("register.html", trendPorts=trending)
 
 
+"""
+
+"""
+
+
 @app.route("/new-post/", methods=["GET", "POST"])
 def post():
     trending = trending_ports()["all_ports"]
@@ -298,8 +326,10 @@ def subscribe():
         res = request.form
         portname = res["portname"]
         username = session["username"]
+        # Either going be joined(you're subscribing) or Subscribed, meaning you want to unsubscribe
         state = res["value"]
 
+        # If you click on subscribe(you just joined the port),
         if state == "Joined":
             requests.post(
                 f"{api}/subscribe-to-port/",
