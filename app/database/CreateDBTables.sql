@@ -191,12 +191,6 @@ END; //
 DELIMITER ;
 
 
-begin
-
-end
-SELECT LAST_INSERT_ID();
-
-
 create view posts_vw as
     #votes are being cast as char(10) because the integer sums were not showing up through the python functions for some reason
 select pr.name as portName, p.id as postId, p.title as postTitle, p.text as postText, p.imageUrl as image, u.username as author, 
