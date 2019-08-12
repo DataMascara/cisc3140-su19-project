@@ -59,18 +59,8 @@ base template, all we modify here is the 'content' block: #} {%- block content
     <br />
     <textarea name="text" rows="15" placeholder="Text"></textarea>
     <br />
+    <input type="text" name="addimage" placeholder="Add Image URL">
     <div class="btncontainer">
-      <label for="imageUpload" class="imageLabel">Add Image</label>
-      <input
-        type="file"
-        id="imageUpload"
-        name="pic"
-        accept="image/*"
-        class="btn imageUpload"
-        style="display: none"
-        onchange="changeVal()"
-      />
-      <br />
       <input type="submit" class="btn" name="submit" value="Submit Post" />
     </div>
   </form>
