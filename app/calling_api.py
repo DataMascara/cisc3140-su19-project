@@ -237,6 +237,23 @@ def portindex():
         return render_template("portIndex.html", name="Port Index", ports=ports, trendPorts=trending)
 
 
+@app.route("/subscribe/", methods=['POST'])
+def subscribe():
+    res = request.form
+    portname = res['portname']
+    username = session['username']
+    state = res['value']
+
+    if state == "Joined":
+        requests.post(f"{api}/subscribe-to-port/",
+                      json={"portname": portname, "username": username})
+    else:
+        requests.post(f"{api}/unsubscribe-to-port/",
+                      json={"portname": portname, "username": username})
+
+    return res
+
+
 @app.route("/ourteam/")
 def ourteam():
     if "loggedin" in session:

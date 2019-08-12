@@ -39,20 +39,21 @@
                  </div>
                  <div class = "portThirdPart">
                        {%- if user %} {#- if the user is logged in, put the buttons in forms, and submit subscription info to server: #}
-                             <form class = "indexForm" action = "" method = "post" target="frameForSubscriptions" name = "subscriptionForm{{ port['id'] }}">
+                             <form class = "indexForm" action = "/subscribe/" method = "post" target="frameForSubscriptions" name = "subscriptionForm{{ port['id'] }}">
+                             <input type="hidden" name="portname" value="{{ port['name'] }}">
                                    {%- if port['isSubscribed'] == True %}
-                                       <input type="button" 
+                                       <input type="submit"
                                                    style = "background-color: #7B2240" 
                                                    class = "subscribeIndex subscribe{{ port['id'] }}" 
-                                                   name  = "subscribe{{ port['id'] }}" 
+                                                   name  = "value"
                                                    title="Joined" 
-                                                   value = "Joined" 
+                                                   value = "Joined"
                                                    onclick="subscribePortIndex(this)" >
                                    {%- else %} {#- if it is False: #}
-                                        <input type="button" 
+                                        <input type="submit"
                                                      style = "background-color: rgb(117, 117, 117)" 
                                                      class = "subscribeIndex subscribe{{ port['id'] }}" 
-                                                     name  = "subscribe{{ port['id'] }}" 
+                                                     name  = "value"
                                                      title="Subscribe"
                                                      value = "Subscribe"
                                                      onclick="subscribePortIndex(this)" >

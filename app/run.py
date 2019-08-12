@@ -224,13 +224,28 @@ def get_ports_username():
     return dbmodule.subscriptions_db.all_subscriptions_by("username", username)
 
 
-@app.route("/subscribe-to-port/")
+@app.route("/subscribe-to-port/", methods=['POST'])
 def subscribe_to_port():
     res = request.get_json()
     username = res["username"]
     portname = res["portname"]
     # Clean up result here
-    return dbmodule.subscriptions_db.add_subscription(username, portname)
+    # We first try to add subscription to db
+    response = json.loads(dbmodule.subscriptions_db.add_subscription(username, portname))
+    try:
+        # If there is an error then that means there is already an subscription so we will have to set it to active
+        print(response['error'])
+        return dbmodule.subscriptions_db.update_subscription(username, portname, True)
+    except:
+        return response
+
+
+@app.route("/unsubscribe-to-port/", methods=['POST'])
+def unsubscribe_to_port():
+    res = request.get_json()
+    username = res["username"]
+    portname = res["portname"]
+    return dbmodule.subscriptions_db.update_subscription(username, portname, False)
 
 
 @app.route('/posts-from-subscribed-ports/')
