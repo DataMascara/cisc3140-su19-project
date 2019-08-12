@@ -11,7 +11,7 @@ app = Flask(__name__, template_folder="templates")
 app.secret_key = "test"
 
 # Assuming the API is running at the local ip below
-api = "https://bc-app-api.herokuapp.com"
+api = "https://bc-api-class.herokuapp.com/"
 
 
 @app.route("/", methods=["GET"])
