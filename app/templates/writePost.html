@@ -31,20 +31,16 @@ base template, all we modify here is the 'content' block: #} {%- block content
   >
     <div class="header">
       <h1>Create a post on p/</h1>
-      <input
-        type="text"
-        name="portname"
-        placeholder="Search Communities"
-        required
-      />
-      <datalist class="communities">
-        {#- Please pass here an array of dicts called 'ports' of all existing
-        ports, each of which dict has one attribute: 'portname' #} {%- for port
-        in ports %}
-        <option value="{{ port['portname'] }}">
-          {% endfor -%}
-        </option>
-      </datalist>
+      
+      <select class = "communities"
+              required
+              name = "communitysearch">
+           <option selected="selected" value = "" title = "Search Communities" >Search Communities</option>
+           {#- Please pass here an array of dicts called 'ports' of all existing ports, each of which dict has the attribute: 'name' #}
+           {%- for port in ports %} 
+                <option value="{{  port['name']  }}" title = "{{  port['name']  }}" >{{  port['name']  }}</option>
+           {% endfor -%}
+      </select>
 
       <p class="red">*</p>
     </div>
