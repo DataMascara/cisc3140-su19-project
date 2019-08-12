@@ -280,10 +280,19 @@ def post():
 @app.route("/subscribed-posts/", methods=["GET"])
 def subscribedposts():
     if "loggedin" in session:
+        trending = trending_ports()["all_ports"]
         post = requests.get(
             f"{api}/posts-from-subscribed-ports/",
             json={"username": session["username"]},
         ).json()
+        return render_template(
+            "posts.html",
+            name="Your feed",
+            user=session["user"],
+            trendPorts=trending,
+            port=post,
+            search="My First Search!",
+        )
 
         return post
     else:
