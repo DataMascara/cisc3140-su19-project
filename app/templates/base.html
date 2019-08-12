@@ -169,7 +169,7 @@
 
                {%- if trendPorts %}{# If argument trendPorts was passed: #}
                   {%- for port in trendPorts %}
-                      <a href = "" class = "trendingName" title = "Go to p/{{ port['name'] }}" >p/{{ port['name'] }}</a>
+                      <a href = "/p/{{ port['name'] }}/" class = "trendingName" title = "Go to p/{{ port['name'] }}" >p/{{ port['name'] }}</a>
                       <p class = "trendingName trendingMem" >{{ port['mem'] }} members</p>
                       {%- if user %}
                           <input type="button" class = "subscribe subscribe{{ loop.index }}" name  = "subscribe{{ loop.index }}" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
