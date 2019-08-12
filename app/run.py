@@ -163,7 +163,7 @@ def delete_user():
         return jsonify({"err": "User Invalid"}), 409
 
 
-@app.route("/allports/", methods=['GET'])
+@app.route("/allports/", methods=["GET"])
 def get_all_ports():
     ports = dbmodule.ports_db.all_ports()
     print(ports)
@@ -198,9 +198,9 @@ def new_post():
 def get_posts():
     res = request.get_json()
 
-    port_name = res['portname']
-    posts = json.loads(dbmodule.posts_db.all_posts_by("portname", port_name))['posts']
-    port = {'name': port_name, 'posts': posts}
+    port_name = res["portname"]
+    posts = json.loads(dbmodule.posts_db.all_posts_by("portname", port_name))["posts"]
+    port = {"name": port_name, "posts": posts}
     return port
 
 
@@ -208,9 +208,9 @@ def get_posts():
 def get_posts_username():
     res = request.get_json()
     username = res["username"]
-    posts = json.loads(dbmodule.posts_db.all_posts_by("author", username))['posts']
+    posts = json.loads(dbmodule.posts_db.all_posts_by("author", username))["posts"]
     print(posts)
-    port = {"name": 'user history', 'posts': posts}
+    port = {"name": "user history", "posts": posts}
     return port
 
 
@@ -224,23 +224,25 @@ def get_ports_username():
     return dbmodule.subscriptions_db.all_subscriptions_by("username", username)
 
 
-@app.route("/subscribe-to-port/", methods=['POST'])
+@app.route("/subscribe-to-port/", methods=["POST"])
 def subscribe_to_port():
     res = request.get_json()
     username = res["username"]
     portname = res["portname"]
     # Clean up result here
     # We first try to add subscription to db
-    response = json.loads(dbmodule.subscriptions_db.add_subscription(username, portname))
+    response = json.loads(
+        dbmodule.subscriptions_db.add_subscription(username, portname)
+    )
     try:
         # If there is an error then that means there is already an subscription so we will have to set it to active
-        print(response['error'])
+        print(response["error"])
         return dbmodule.subscriptions_db.update_subscription(username, portname, True)
     except:
         return response
 
 
-@app.route("/unsubscribe-to-port/", methods=['POST'])
+@app.route("/unsubscribe-to-port/", methods=["POST"])
 def unsubscribe_to_port():
     res = request.get_json()
     username = res["username"]
@@ -248,12 +250,14 @@ def unsubscribe_to_port():
     return dbmodule.subscriptions_db.update_subscription(username, portname, False)
 
 
-@app.route('/posts-from-subscribed-ports/')
+@app.route("/posts-from-subscribed-ports/")
 def get_subscribed_posts():
     res = request.get_json()
-    username = res['username']
-    ports = json.loads(dbmodule.subscriptions_db.all_subscriptions_by('username', username))
-    ports = ports['all_subscriptions for {data_value}']
+    username = res["username"]
+    ports = json.loads(
+        dbmodule.subscriptions_db.all_subscriptions_by("username", username)
+    )
+    ports = ports["all_subscriptions for {data_value}"]
     print(ports)
     # creates a empty list where the post will be stored
     posts = []
@@ -261,10 +265,13 @@ def get_subscribed_posts():
     for i in ports:
         print(i)
         # iterates through the posts of the ports
-        for j in json.loads(dbmodule.posts_db.all_posts_by('portName', i['portName']))['posts']:
+        for j in json.loads(dbmodule.posts_db.all_posts_by("portName", i["portName"]))[
+            "posts"
+        ]:
             print(j)
             posts.append(j)
-    return json.dumps({'posts': posts})
+    return json.dumps({"posts": posts})
+
 
 """
 ---- Getting All Users ----
