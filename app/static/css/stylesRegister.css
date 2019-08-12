@@ -45,7 +45,7 @@ h1{
   margin-top: 15px;
 }
 
-.first_name, .last_name, .usernameForm, .email, .password, .confirm_password{
+.first_name, .last_name, .usernameForm, .email, .password, .confirm_password, .addimage{
   width: 200px;
   padding: 12px 11px 11px 11px;
   margin-top: 7.5px;
@@ -54,10 +54,6 @@ h1{
   border: 0.5px solid #8c918d;
   border-radius: 3px;
   font-size: 11px;
-}
-
-.confirm_password{
-  margin-bottom: 25px;
 }
 
 .registFormButton{
