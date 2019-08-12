@@ -375,6 +375,17 @@ def profile():
     else:
         return redirect('/login/')
 
+@app.route("/update/", methods=["GET", "POST"])
+def update():
+
+    res = request.form
+    key = res["key"]
+    value = res["value"]
+
+    dbmodule.users_db.update_user(session["user"]["username"], key, value)
+
+    return "Updated"
+
 @app.route("/ourteam/")
 def ourteam():
     trending = trending_ports()["all_ports"]
@@ -442,7 +453,6 @@ def load_user(username):
     user = (requests.get(f"{api}/user", json={"username": username}).json())["user"][0]
     print(user)
     return user
-
 
 if __name__ == "__main__":
     app.run("localhost", 8080, debug=True)
