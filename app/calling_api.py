@@ -303,9 +303,14 @@ def portindex():
         subscribed_ports = requests.get(
             f"{api}/ports-for-username/", json={"username": session["username"]}
         ).json()["all_subscriptions for {data_value}"]
+
+        # this will iterate through all the ports that existing
         for p in ports:
+            # this will iterate through all the ports that the user is subscribed
             for sp in subscribed_ports:
+                # if the ids match then the user is subscribed to the port so 'isSubscribed' will be set to True
                 if p["id"] == sp["portId"]:
+                    # "isSubscribed" notifies the html page what state the button should be in
                     p.update({"isSubscribed": True})
         return render_template(
             "portIndex.html",
