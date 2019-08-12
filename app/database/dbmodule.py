@@ -372,7 +372,8 @@ class posts_db:
 
         mydb = dbconnection()
         cursor = mydb.cursor(buffered=True)
-        sql = f"INSERT INTO posts (title, text, portId, userid, imageUrl) VALUES ('{title}','{text}', (select id from ports where name = '{port_name}'), (select id from users where username = '{author}'), '{image}')"
+        sql = f"SELECT add_post('{title}','{text}','{port_name}','{author}', '{image}')"
+        #sql = f"INSERT INTO posts (title, text, portid, userid, imageUrl) VALUES ('{title}','{text}',(select id from ports where name = '{port_name}'), (select id from users where username = '{author}'), '{image}')"
 
         try:
             cursor.execute(sql)
@@ -380,15 +381,36 @@ class posts_db:
         except mysql.connector.Error as err:
             return json.dumps({'error': str(err)})
 
-        # close database connection
+        result_set = cursor.fetchall()  # save sql result set
+        # convert columns and rows into json data
+        
         cursor.close()
         mydb.close()
 
-        def myconverter(o):
-            if isinstance(o, datetime.datetime):
-                return o.__str__()
-                # PLEASE ADD WAY TO GET POST BY TITLE
-        return posts_db.find_posts_by_text("postText", text)
+    
+        return posts_db.all_posts_by('postId',result_set[0][0])
+
+    # def add_post(title, text, port_name, author, image):
+
+    #     mydb = dbconnection()
+    #     cursor = mydb.cursor(buffered=True)
+    #     sql = f"INSERT INTO posts (title, text, portId, userid, imageUrl) VALUES ('{title}','{text}', (select id from ports where name = '{port_name}'), (select id from users where username = '{author}'), '{image}')"
+
+    #     try:
+    #         cursor.execute(sql)
+    #         mydb.commit()
+    #     except mysql.connector.Error as err:
+    #         return json.dumps({'error': str(err)})
+
+    #     # close database connection
+    #     cursor.close()
+    #     mydb.close()
+
+    #     def myconverter(o):
+    #         if isinstance(o, datetime.datetime):
+    #             return o.__str__()
+    #             # PLEASE ADD WAY TO GET POST BY TITLE
+    #     return posts_db.find_posts_by_text("postText", text)
 
     def delete_post(post_id):
 

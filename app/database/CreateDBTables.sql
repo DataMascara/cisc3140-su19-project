@@ -191,6 +191,11 @@ END; //
 DELIMITER ;
 
 
+begin
+
+end
+SELECT LAST_INSERT_ID();
+
 
 create view posts_vw as
     #votes are being cast as char(10) because the integer sums were not showing up through the python functions for some reason
@@ -246,8 +251,20 @@ where u.isActive = 1
 group by u.id;
 
 
+DELIMITER $$
+ 
+CREATE FUNCTION add_post(title varchar(360), text varchar(1000), port_name varchar(30), author varchar(30), image text) RETURNS INTEGER
+    DETERMINISTIC
+BEGIN
+    DECLARE newId INTEGER;
 
+    INSERT INTO posts (title, text, portId, userid, imageUrl) VALUES 
+    (title, text, (select id from ports where name = port_name), (select id from users where username = author), image);
 
+ 	SET newId =  LAST_INSERT_ID();
+
+ RETURN (newId);
+END
 
 
 
