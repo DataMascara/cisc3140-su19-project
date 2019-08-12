@@ -377,14 +377,15 @@ def profile():
 
 @app.route("/update/", methods=["GET", "POST"])
 def update():
-
-    res = request.form
-    key = res["key"]
-    value = res["value"]
-
-    dbmodule.users_db.update_user(session["user"]["username"], key, value)
-
-    return "Updated"
+    if "loggedin" in session:
+        res = request.form
+        key = res["key"]
+        value = res["value"]
+        dbmodule.users_db.update_user(session["user"]["username"], key, value)
+        return render_template("userInfo.html", userProfile = True, user = session["user"],
+            viewedUser=session["user"], trendPorts=trending)
+    else:
+        return redirect('/login/')
 
 @app.route("/ourteam/")
 def ourteam():
