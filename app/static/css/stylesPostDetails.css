@@ -1,0 +1,338 @@
+/* CSS file for: 'postDetails.html'
+    version 1.0
+    08.12.2019
+    Description: Creation of File
+- Front End Team
+*/
+
+.commentSubmittedMessage{
+    margin: 0;
+    font-size: 14px;
+    color: green;
+    margin-left: 7vmin;
+    padding-left: 70px;
+    margin-bottom: 15px;
+}
+
+.flexTitle{
+    display: flex;
+    position: relative;
+    margin-bottom: 15px;
+    margin-left: 7vmin;
+    margin-top: calc(4.5vh + 4.5vw);
+}
+
+.savePost{
+    background-repeat: no-repeat;
+    background-position: 7px 6px;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 8.5px;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    padding: 7px;
+    padding-left: 20px;
+    padding-right: 5px;
+    width: 85;
+    position: absolute;
+    bottom: 0;
+    left: 455px;
+    font-family: 'Roboto', Sans-Serif;
+    text-align: center;
+}
+
+.mainScreen{
+    display: flex;
+    flex-direction: column;
+    width: 550px;
+    margin-bottom: 15px;
+    margin-left: 7vmin;
+}
+
+.votes{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 0;
+    width: 80px;
+}
+
+.numOfVotes{
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+}
+
+.upvote, .downvote{
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    display: inline-block;
+}
+
+.upvoteBtn, .downvoteBtn{
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.postData{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.description{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 5px;
+}
+
+.portOfPostName{
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-weight: normal;
+    color: black;
+}
+
+.nameOfPost{
+    margin: 0;
+    font-size: 18px;
+    color: black;
+    padding: 0;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+
+.timeAndAuthor{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    margin-left: auto;
+    margin-right: 10px;
+    order: 2;
+}
+
+.dateOfWriting{
+    font-size: 9px;
+    color: black;
+    margin: 0;
+    padding: 0;
+    margin-left: auto;
+    width: 86px;
+}
+
+.postedBy{
+    margin: 0;
+    padding: 0;
+    margin-top: 30px;
+    font-size: 7px;
+    color: black;
+}
+
+.authorDetails{
+    display: flex;
+}
+
+.roundImage{
+    margin: 0;
+    padding: 0;
+    margin-top: 3px;
+    margin-bottom: 15px;
+    font-size: 0;
+    border: 0;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+}
+
+.usernameOfAuthor{
+    color: #7b2240;
+    font-size: 9px;
+    margin: 0;
+    padding: 0;
+    margin-left: 5px;
+    overflow-y: auto;
+    margin-top: 9px;
+}
+
+.postDescription{
+    margin: 0;
+    color: black;
+    text-align: left;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    border-left: solid 1px black;
+    padding-left: 10px;
+    margin-bottom: 15px;
+    margin-left: 80px;
+}
+
+.postImageDiv{
+    width: auto;
+    background-color: #e3e3e3;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px gray;
+    margin-left: 80px;
+    margin-bottom: 10px;
+}
+
+.squareImage{
+    width: 300px;
+    height: 300px;
+    border: 0;
+    padding: 0;
+    display: block;
+    margin: auto;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.writeCommentToPost{
+    margin-left: 80px;
+}
+
+.commentToPostText{
+   margin: 0;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   border: 0.5px solid LightGray;
+   padding-left: 10px;
+   padding-top: 5px;
+   padding-right: 10px;
+   padding-bottom: 5px;
+   width: 100%;
+   border-radius: 3px;
+   font-family: 'Roboto', Sans-Serif;
+   font-size: 12px;
+}
+
+.commentToPostText::placeholder{
+    color: black; important!
+}
+
+.commentToPostDiv{
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.CommentToPostBtn{
+    text-align: center;
+    background-color: #757575;
+    border-radius: 3px;
+    border: 0;
+    color: white;
+    font-size: 8.5px;
+    width: auto;
+    height: auto;
+    padding: 6px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+.comments{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 80px;
+}
+
+.numberOfComments{
+    padding: 0;
+    margin: 0;
+    margin-bottom: 15px;
+    color: black;
+    font-size: 14px;
+}
+
+.commentTree{
+    width: auto;
+    background-color: #e3e3e3;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px gray;
+    padding: 10px;
+}
+
+.firstLevelComment, .secondLevelComment{
+    display: flex;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.votesComments{
+    text-align: center;
+}
+
+.commentsImage{
+    margin-left: 10px;
+}
+
+.commentUsernameOfAuthor{
+    margin: 0;
+    margin-top: 5px;
+}
+
+.upvoteBtnComments, .upvoteBtnComments{
+    font-size: 10px;
+}
+
+.numOfVotesComments{
+    font-size: 12px;
+}
+
+.commentUserNameTextAndReply{
+    margin-left: 10px;
+}
+
+.commentText{
+    margin: 0;
+    font-size: 11px;
+    color: black;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.commentReply{
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 0;
+    font-size: 9px;
+    border: 0;
+    background-color: transparent;
+    color: #7b2240;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.commentDate{
+    margin: 0;
+    order: 2;
+    margin-left: auto;
+    margin-right: 0;
+    width: 83px;
+}
+
+.commentDateOfWriting{
+    margin: 0;
+    font-size:9px;
+    width: 83px;
+}
+
+.blackline{
+  margin-left: 6px;
+  width: 0px;
+  border-left: 1px solid black;
+  height: auto;
+  margin-right: 25px;
+}

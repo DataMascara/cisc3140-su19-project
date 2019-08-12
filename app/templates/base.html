@@ -1,0 +1,214 @@
+{#- Version 1.1 - 08.09.2019, 05:40 #}
+{#- Description: 'if' condition added to lines 22-26 to close menu if user is logged in. #}
+
+{#- Version 1.0 - 08.07.2019, 16:00 #}
+{#- Description: Refactoring based on Professor Chuang's advice. #}
+{#-              'baseLoggedIn.html' and 'basedLoggedOut.html' were merged into this 'base.html' template! #}
+
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    {% include '_head.html' %}
+</head>
+
+<body {%- block onload %} onload = "displayYear()" {% endblock -%}>
+
+
+
+{%- block leftContainer %}
+    <div class = "leftContainer"> <!-- Beginning of the Left (Logo and Menu) Container -->
+
+        <div class = "siteLogo" ><a href = "/" title = "Go to Homepage" ><span class="a">logic</span><span class="b">Port</span></a></div>
+
+        <!-- Sidebar Holder -->
+        {%- if user %}
+            <nav class="sidebar active" >
+        {%- else %}
+            <nav class="sidebar" >
+
+        {% endif -%}
+
+                    <button type="button" class="sidebarCollapse" onclick = "openCloseSidebar()">
+                      <img class = "hamMenu" src = "{{ url_for('static',filename='img/ham-menu.gif') }}" alt = "Menu" title = "Menu">
+                    </button>
+
+                    {%- if user %}{# If argument user was passed: treat as though as the user is logged in. #}
+                       {%- if user['avatarUrl'] %}
+                             <img src="{{ user['avatarUrl'] }}" class="logo" alt = "the user {{ user['username'] }}" title = "{{ user['username'] }}" >
+                       {%- else %}
+                             <img src="{{ url_for('static',filename='img/profile_logo.png') }}" class="logo" alt = "the user {{ user['username'] }}" title = "{{ user['username'] }}" >
+                       {% endif -%}
+                        <a href = "" class = "username" title = "Go to your User Profile" >{{ user['username'] }}</a>
+ 
+                        <form method = "post" action = "">
+                                 <input type = "submit" name = "loggedIn" class="profile" value = "User Profile" title = "Go to your User Profile">
+                        </form>
+                        <form method = "post" action = "">
+                                 <input type = "submit" name = "loggedIn" class="dash" value = "Dashboard" title = "Go to your Dashboard">
+                        </form>                      
+                        <form method = "post" action = "">
+                                 <input type = "submit" name = "loggedIn" class="settings" value = "Account Settings" title = "Go to your Account Settings">
+                        </form>
+                        <a href = "/logout" class = "signOut" title = "sign out" >sign out</a>
+
+                    {% else -%}{# If it wasn't: treat as though as the user is logged out. #}
+                        <img src="{{ url_for('static',filename='img/profile_logo.png') }}" class="logo" alt = "User Logo" title = "User Logo">
+ 
+                       {%- if errLogIn %}  {# Fires if 'errLogIn' is True; otherwise, does not fire. #}
+                            <p class = "errLogIn">! Invalid username or password !</p>
+                       {% endif -%}
+
+                        <form action = "/login/" method="POST"> 
+                            <input type = "text" 
+                                        name = "username" 
+                                        class = "text" 
+                                        autocomplete = "off"
+                                        title = "Enter your username here"
+                                        placeholder = "Username/Email"
+                                        required
+                                        />
+
+                            <input type = "password" 
+                                       name = "password"
+                                       class = "text" 
+                                       autocomplete = "off"
+                                       title = "Enter your password here"
+                                       placeholder = "Password"
+                                       required
+                                       />
+
+                             <input type = "submit" class = "button1" value = "Sign in" name = "submit" title = "Sign in">
+                         </form> 
+                       
+                         <div class = "passAndRegistr">
+                             <a href = "" class = "forgotPass" title = "Click here if you forgot your password" >Forgot Password?</a>
+                             <p class = "notAMem">Not a member?</p>
+                             <form method = "get" action = "/signup/">
+                                        <input type = "submit" name = "register" class="button2" value = "Register" title = "Register">
+                             </form>
+                         </div>
+                    {% endif -%}
+
+                       <div class = "moreInfo">
+                           <a href="/ourteam/" class="w1" title = "About Our Team" >Our Team</a>
+                           <a href="/contact/" class="w2" title = "Contact Us" >Contact Us</a>
+                       </div>
+            </nav>
+
+    </div> <!-- End of the Left (Logo and Menu) Container -->
+
+ {% endblock leftContainer -%}
+
+ {#- All the content from the templates that will inherit this 'base.html' will go into the 'content' block: #}
+ {%- block midContainer %}
+     <div class = "midContainer"> <!-- Beginning of the Middle Container -->
+         {%- block content %}
+              {#- All the content will come here! #}
+
+    <!-- Mind the Ugly H1, just using for debugging.
+    -The backend :] -->
+        {%- if user %}
+            <h1>Current User{{user}}</h1>
+            {%- else %}
+        
+            <h1>YOURE NOT LOGGED IN!</h1>
+        {% endif -%}
+
+
+         {% endblock content -%}
+         {%- block generalLinks %}
+              <div class = "bottomLinks">
+                    <a href = "/terms/" class = "termsConds">Terms and Conditions</a>
+                    <a href = "/ourteam/" class = "ourTeam">Our Team</a>
+                    <a href = "/contact/" class = "contactUs">Contact Us</a>
+              </div>
+         {% endblock generalLinks -%}
+         {%- block copyright %}
+            <div class = "copyright">
+                <p class = 'copyrightParag'>Copyright © <span class = "year"></span></p>
+            </div>
+         {% endblock copyright -%}
+      </div> <!-- End of the Middle Container -->
+ {% endblock midContainer -%}
+
+ {%- block rightContainer %}
+
+    <div class = "rightContainer"> <!-- Beginning of the Right Container -->
+
+        <form class = "searchform" 
+                   name = "searchform" 
+                   action = ""
+                   method = "post" > <!-- Submit Search w/ ENTER Key: -->
+                                                   <!-- Instead of pressing a button, just press ENTER or RETURN for the search to be processed. -->
+
+            <input type = "search" 
+                        class = "search" 
+                        name = "search" 
+                        title = "Type Your Search and Press ENTER to Submit"
+                        placeholder = "Search & ENTER"
+                        onkeydown = "submitSearch();">
+         </form>
+
+         <form action = "/portindex/" method = "get">
+            <input type="submit" class = "viewPortIndex" title="View Port Index" value="VIEW PORT INDEX"  ></button>
+         </form>
+
+        <div class = "trending"> <!-- Trending Ports Window: shows you all the trending ports and lets you subscribe to some. -->
+        <!-- This part will have exactly 5 trending ports, that will repeat among all users (that's what the Product Team said they want). Hence, we do not use a Jinja loop -->
+        <!-- here; we just use the names of the variables passed to this template in the JSON array. -->
+
+            <p class = "trendingTitle" >TRENDING PORTS</p>
+           {#- The following iframe is used for an alternative to Ajax code for prevention of page reloading after form submission, but form is still submitted! :) #}
+            <iframe name="justframe" style="display:none;" type=  'hidden'></iframe>
+
+            {%- if user %}
+                <form class = "trendingForm" action = "" method = "post" target="justframe"> {# Here, the user is logged in, so the form works. #}
+            {%- else %}
+                <form class = "trendingForm" action = "" > {# The form is inactive since the user is logged out! #}
+            {% endif -%}
+
+               {%- if trendPorts %}{# If argument trendPorts was passed: #}
+                  {%- for port in trendPorts %}
+                      <a href = "/p/{{ port['name'] }}/" class = "trendingName" title = "Go to p/{{ port['name'] }}" >p/{{ port['name'] }}</a>
+                      <p class = "trendingName trendingMem" >{{ port['mem'] }} members</p>
+                      {%- if user %}
+                          <input type="button" class = "subscribe subscribe{{ loop.index }}" name  = "subscribe{{ loop.index }}" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+                      {%- else %}
+                          <input type="button" class = "subscribe subscribe{{ loop.index }}" name  = "subscribe{{ loop.index }}" title="Subscribe" value = "Subscribe" onclick="ifLoggedOutGlowSignIn ()" >
+                       {%- endif %}
+                  {%- endfor %}
+
+               {%- else %}{# If argument trendPorts was not passed, display demo stuff: #}
+                   {%- for port in range(5) %}
+                       <p class = "trendingName" >p/DEMO</p>
+                       <p class = "trendingName trendingMem" >0 members</p>
+                       {%- if user %}
+                            <input type="button" class = "subscribe subscribe{{ loop.index }}" name  = "subscribe{{ loop.index }}" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+                       {%- else %}
+                            <input type="button" class = "subscribe subscribe{{ loop.index }}" name  = "subscribe{{ loop.index }}" title="Subscribe" value = "Subscribe" onclick="ifLoggedOutGlowSignIn ()" >
+                       {%- endif %}
+                   {%- endfor %}
+
+                {% endif -%}{# of the 'trendPorts' 'if' statement. #}
+
+                 </form> {#- Closing the 'trendingForm' from above #}
+        </div>
+
+        <div class = "theAdYouCantRemoveThis"> <!-- Advertisement Area: an annoying and clickable ad will appear here (it is even more annoying to 
+                                                                                     realize we are not paid a penny for putting this here!) -->
+            <p>Advertisement</p>
+            {%- if ad %}{# If argument ad was passed: #} {# |e mean 'do escaping' for security! #}
+                  <a href = "{{ ad['adurl']|e }}" title = "{{ ad['adtext'] }}">
+                  <div class = "ad" style = "content: url({{ad['imageurl']|e}})"></div></a>
+            {%- else %}{# If argument ad was not passed, a demo ad of Brooklyn College is shown: #}
+                  <a href = "http://www.brooklyn.cuny.edu/web/home.php" title = "Go to the Brooklyn College's Website">
+                  <div class = "ad" style = "content: url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/2016_Brooklyn_College_Library.jpg/300px-2016_Brooklyn_College_Library.jpg);"></div></a>
+            {% endif -%}
+        </div>
+
+    </div> <!-- End of the Right Container -->
+
+ {% endblock rightContainer -%}
+
+</body>
+</html>

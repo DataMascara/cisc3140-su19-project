@@ -1,0 +1,265 @@
+﻿{#- Version 1.0 - 08.12.2019 #}
+{#- Description: file created #}
+{#- Note: file does not include the "Dashboard" views yet #}
+<head>
+              <! -- Website's Icon -->
+              <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
+              <!-- CSS files: -->
+              <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/stylesUserInfo.css') }}">
+              <!-- Scripts -->
+              <script src="{{ url_for('static',filename='js/scriptsUserInfo.js') }}"></script>
+</head>
+{%- extends "base.html" %}
+
+{#- Since this template inherits everything from a base template, all we modify here is the 'content' block: #}
+{%- block content %}
+
+     {#- Each time a user edits his or her profile or make account settings changes, a form will be submitted, #}
+     {#- but the page won't reload, since the 'target' will be redirected into the frame 'frameForUserInfo' below: #}
+     <iframe name="frameForUserInfo" style="display:none;" type=  'hidden'></iframe>
+
+       {%- if userProfile %}
+              <div class = "middleScreen">
+                    <div class = "page">
+                           <p class = "pageTitle" >USER PROFILE</p>
+                    </div>
+                    <div class = "divText">
+                        {%- if (user) and (user['username'] == viewedUser['username']) -%}
+                        <div class = "maroonButtons">
+                            <div class = "userProfileTitle">
+                                 <p class = "userProfileTitleText" >Personal</p>
+                            </div>
+                            <div class = "editProfile">
+                                  <button type = "button" class = "editProfileBtn" title = "Edit your profile" onclick = "openEdit()" >EDIT PROFILE</button>
+                            </div>
+                         </div>
+                         {% endif -%}
+                          <div class = "profileContent">
+                             {#- Since 'viewedUser['avatarUrl']' is optional, we must have the following 'if' statement. #}
+                             {%- if viewedUser['avatarUrl'] != None %}
+                                  <img src = "{{ viewedUser['avatarUrl'] | e }}" class = "roundImage" alt = "the user {{ viewedUser['username'] }}" title = "{{ viewedUser['username'] }}'s profile">
+                             {%- else %}
+                                  <img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ viewedUser['username'] }}" title = "{{ viewedUser['username'] }}'s profile">
+                             {% endif -%}
+                              <div class = "usernameAndEmailFlex">
+                                  <p class = "viewedUserUsername" title = "{{ viewedUser['username'] }}'s profile">{{ viewedUser['username'] }}</p>
+                                 {%- if viewedUser['isEmailPrivate'] == False %}
+                                     <p class = "viewedUserEmail" title = "{{ viewedUser['username'] }}'s email">{{ viewedUser['email'] }}</p>
+                                 {% endif -%}
+                               </div>
+                          </div>
+                          <div class = "viewedUserDescription">
+                              {%- if viewedUser['description'].length != 0 %}
+                                     <p class = "descriptionText">{{ viewedUser['description'] }}</p>
+                              {%- else %}
+                                     <p class = "descriptionText">(No description added)</p>
+                              {% endif -%}
+                               <form class = "descriptionForm" method = "post" action = "" enctype="multipart/form-data">
+                                               <textarea rows = "10" 
+                                                               class = "descriptionTextArea" 
+                                                               name = "descriptionTextArea" 
+                                                               title = "Describe yourself, {{ viewedUser['username']}}!" 
+                                                               placeholder = "Your description here"
+                                                               spellcheck = "true">{{ viewedUser['description'] }}</textarea>
+                                                <div class = "descriptionFormSubmitDiv">
+                                                      <label for="imageUpload" class = "descriptionFormSubmitBtn imageLabel" >Upload Avatar</label>
+                                                      <input type="file" id="imageUpload" name="pic" accept="image/*" class = "imageUpload" style="display: none" onchange = "changeVal()">
+                                                      <input type = "button" class = "descriptionFormSubmitBtn" name = "descriptionFormSubmitBtn" title = "Save your bio!" value = "Save Bio" onclick = "submitBio()">
+                                                </div>
+                                </form> 
+                          </div>
+                  </div> <!-- End of 'divText' -->
+              </div> <!-- End of 'middleScreen' -->
+       {%- elif accountSettings %}
+             <div class = "middleScreen">
+                    <div class = "page">
+                           <p class = "pageTitle" >ACCOUNT SETTINGS</p>
+                    </div>
+                    <div class = "divText">
+                        <form action = "" method = "post" class = "accountSettingsButtons">
+                            <div class = "maroonButtons">
+                                <div class = "emailAndPasswordDiv">
+                                     <input type = "submit" 
+                                                 class = "emailAndPasswordText"  
+                                                 name = "emailAndPassword" 
+                                                 value = "Email and Password" 
+                                                 title = "Email and password settings" >
+                                </div>
+                                <div class = "notificationsDiv">
+                                      <input type = "submit" 
+                                                  class = "notificationsText" 
+                                                  name = "notifications" 
+                                                  value = "Notifications" 
+                                                  title = "Notifications settings"></p>
+                                </div>
+                             </div>
+                         </form>
+                         {%- if emailAndPassword %}
+                          <div class = "settingsContent">
+                             <div class = "privateEmail">
+                                <form action = "" method = "post" class = "privateEmailForm" target = "frameForUserInfo">
+                                    <div class = "privateEmailFlex">
+                                      <div class = "privateEmailCheckbox">
+                                           <label class="container">
+                                           {%- if user['isEmailPrivate'] == False %}
+                                                  <input type="checkbox" class = "keepEmailPrivate" name="keepEmailPrivate" value="keepEmailPrivate" onclick= "submitCheckboxForm ('privateEmailForm')">
+                                                  <span class="checkmark"></span>
+                                           {%- else %}
+                                                  <input type="checkbox" class = "keepEmailPrivate" name="keepEmailPrivate" value="keepEmailPrivate" checked onclick= "submitCheckboxForm ('privateEmailForm')">
+                                                  <span class="checkmark"></span>
+                                           {% endif -%}
+                                           </label>
+                                      </div>
+                                      <div class = "privateEmailLabel">
+                                           <div class = "upperLabel">
+                                                 <p class = "privateEmailLabelTextUpperLabel">Keep email private</p>
+                                           </div>
+                                           <div class = "lowerLabel">
+                                                 <p class = "privateEmailLabelTextLowerLabel">Your email is hidden from other users.</p>
+                                           </div>
+                                       </div>
+                                    </div>
+                                </form>
+                             </div>
+                             <div class = "requiredFieldsMessage">
+                                     <p class = "requiredFieldsMessageText">* - required</p>
+                             </div>
+                             <div class = "emailChange">
+                                  <p class = "emailChangeTitle">CHANGE EMAIL</p>
+                                  <form action = "" method = "post" class = "changeEmailForm">
+                                      <div class = "changeEmailInnerDiv">
+                                         <div class = "emailsDiv">
+                                            <div class = "emailDiv">
+                                                 <input type = "email" 
+                                                             class = "emailSetting" 
+                                                             name = "emailSetting" 
+                                                             title = "Type the new email"
+                                                             placeholder = "New Email"
+                                                             onkeyup = "validateEmail(this)"
+                                                             required><span class = "red">*</span>
+                                            </div>
+                                            <div class = "emailDiv">
+                                                 <input type = "email" 
+                                                             class = "emailSetting" 
+                                                             name = "emailConfirmSetting" 
+                                                             title = "Re-type the new email"
+                                                             placeholder = "Re-enter New Email"
+                                                             onkeyup = "validateEmail(this)"
+                                                             required><span class = "red">*</span>
+                                            </div>
+                                         </div>
+                                         <div class = "buttonDiv">
+                                               <input type = "submit" 
+                                                          class = "changeEmailBtn" 
+                                                          name = "changeEmailBtn" 
+                                                          title = "Confirm Change Email" 
+                                                          value = "Confirm Change Email">
+                                         </div>
+                                      </div>
+                                  </form>
+                             </div>                             
+                             <div class = "passwordChange">
+                                  <p class = "passwordChangeTitle">CHANGE PASSWORD</p>
+                                  <form action = "" method = "post" class = "changePasswordForm">
+                                      <div class = "changePasswordInnerDiv">
+                                         <div class = "currentPasswordDiv">
+                                            <input type = "password" 
+                                                        class = "currentPassword" 
+                                                        name = "currentPassword" 
+                                                        title = "Type your current password"
+                                                        placeholder = "Current Password"
+                                                        onkeyup = "validatePassword()"
+                                                        required><span class = "red">*</span>
+                                             {%- if errIncorrectPassword %}
+                                                 <span class = "errIncorrectPassword">Password is Incorrect!</span>
+                                             {% endif -%}
+                                         </div>
+                                         <div class = "passwordsDiv">
+                                            <div class = "passwordDiv">
+                                                 <input type = "password" 
+                                                             class = "passwordSetting" 
+                                                             name = "passwordSetting" 
+                                                             title = "Type the new password"
+                                                             placeholder = "New Password"
+                                                             onkeyup = "validatePassword()"
+                                                             required><span class = "red">*</span>
+                                            </div>
+                                            <div class = "emailDiv">
+                                                 <input type = "password" 
+                                                             class = "passwordSetting" 
+                                                             name = "passwordConfirmSetting" 
+                                                             title = "Re-type the new password"
+                                                             placeholder = "Re-enter New Password"
+                                                             onkeyup = "validatePassword()"
+                                                             required><span class = "red">*</span>
+                                            </div>
+                                         </div>
+                                         <div class = "buttonDiv">
+                                               <input type = "submit" 
+                                                          class = "changePasswordBtn" 
+                                                          name = "changePasswordBtn" 
+                                                          title = "Confirm Change Password" 
+                                                          value = "Confirm Change Password">
+                                         </div>
+                                      </div>
+                                  </form>
+                             </div>
+                          </div>
+                         {%- elif notifications %}
+                          <div class = "settingsContent">
+                             <div class = "privateEmail notify">
+                                <form action = "" method = "post" class = "privateEmailForm" target = "frameForUserInfo">
+                                    <div class = "privateEmailFlex">
+                                      <div class = "privateEmailCheckbox">
+                                           <label class="container">
+                                           {%- if user['isPostCommentNotificationsEnabled'] == False %}
+                                                  <input type="checkbox" class = "keepEmailPrivate" name="postCommentNotifications" value="postCommentNotifications" onclick= "submitCheckboxForm ('privateEmailForm')">
+                                                  <span class="checkmark"></span>
+                                           {%- else %}
+                                                  <input type="checkbox" class = "keepEmailPrivate" name="postCommentNotifications" value="postCommentNotifications" checked onclick= "submitCheckboxForm ('privateEmailForm')">
+                                                  <span class="checkmark"></span>
+                                           {% endif -%}
+                                           </label>
+                                      </div>
+                                      <div class = "privateEmailLabel">
+                                           <div class = "upperLabel">
+                                                 <p class = "privateEmailLabelTextUpperLabel">Enable post comment notifications</p>
+                                           </div>
+                                           <div class = "lowerLabel">
+                                                 <p class = "privateEmailLabelTextLowerLabel">Selecting this option results in being notified when a user has commented on one of your posts.</p>
+                                           </div>
+                                       </div>
+                                    </div>
+                                </form>
+                             </div>
+                             <div class = "privateEmail notify">
+                                <form action = "" method = "post" class = "privateEmailForm" target = "frameForUserInfo">
+                                    <div class = "privateEmailFlex">
+                                      <div class = "privateEmailCheckbox">
+                                           <label class="container">
+                                           {%- if user['isCommentReplyEnabled'] == False %}
+                                                  <input type="checkbox" class = "keepEmailPrivate" name="commentReply" value="commentReply" onclick= "submitCheckboxForm ('privateEmailForm')">
+                                                  <span class="checkmark"></span>
+                                           {%- else %}
+                                                  <input type="checkbox" class = "keepEmailPrivate" name="commentReply" value="commentReply" checked onclick= "submitCheckboxForm ('privateEmailForm')">
+                                                  <span class="checkmark"></span>
+                                           {% endif -%}
+                                           </label>
+                                      </div>
+                                      <div class = "privateEmailLabel">
+                                           <div class = "upperLabel">
+                                                 <p class = "privateEmailLabelTextUpperLabel">Enable comment reply notifications</p>
+                                           </div>
+                                           <div class = "lowerLabel">
+                                                 <p class = "privateEmailLabelTextLowerLabel">Selecting this option results in being notified when a user has replied to one of your comments.</p>
+                                           </div>
+                                       </div>
+                                    </div>
+                                </form>
+                             </div>
+                          </div>
+                         {% endif -%}
+                  </div> <!-- End of 'divText' -->
+              </div> <!-- End of 'middleScreen' -->
+       {% endif -%}
+{% endblock content -%}

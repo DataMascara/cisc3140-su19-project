@@ -1,0 +1,122 @@
+﻿{#- Version 1.0 - 08.09.2019, 05:20 #} {#- This is the 'register.html' template.
+A non-user can register for the website on this page. #} {#- Optional arguments
+to pass here: the 'errUsernameInUse': if server finds that username is in use,
+the form is reloaded with #} {#- an alert message in red color for the user:
+"Username already in use!" #} {#- The links below must have been included in the
+'head' tag before 'extends'; otherwise, they won't be noticed by the
+application. #}
+<head>
+  <! -- Website's Icon -->
+  <link
+    rel="shortcut icon"
+    href="{{ url_for('static',filename='img/favicon.ico') }}"
+  />
+  <!-- CSS files: -->
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static',filename='css/stylesRegister.css') }}"
+  />
+  <!-- Script files: -->
+  <script src="{{ url_for('static',filename='js/scriptsRegister.js') }}"></script>
+</head>
+{%- extends "base.html" %} {#- Since this template inherits everything from a
+base template, all we modify here is the 'content' block: #} {%- block content
+%}
+<!-- <div class = "container"> -->
+<div class="signup-wrap">
+  <div class="panel-frame">
+    <div class="panel-content">
+      <header class="header-wrapper">
+        <h1>Sign Up!</h1>
+        <p class="required">* - required</p>
+      </header>
+      <span></span>
+      <form
+        class="registerForm"
+        action="/signup/"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="row1">
+          <input
+            type="text"
+            class="first_name"
+            name="first"
+            placeholder="First Name"
+          />
+          <input
+            type="text"
+            class="last_name"
+            name="last"
+            placeholder="Last Name"
+          />
+        </div>
+        <div class="row2">
+          <input
+            type="text"
+            class="usernameForm"
+            name="username"
+            placeholder="Username"
+            required
+            onkeyup="validateUserNameLength()"
+          /><label class="required">*</label>
+          {%- if errUsernameInUse %}
+          <span class="errUsernameInUse">Username already in use!</span>
+          {%- endif %}
+        </div>
+        <div class="row3">
+          <input
+            type="email"
+            class="email"
+            name="email"
+            placeholder="Email Address"
+            required
+            onkeyup="validateEmail()"
+          /><label class="required">*</label>
+          {%- if errUsernameInUse %}
+          <span class="errUsernameInUse"
+            >Error: Have you signed up already?</span
+          >
+          {%- endif %}
+        </div>
+        <div class="row4">
+          <input
+            type="password"
+            name="password"
+            class="password"
+            placeholder="Password"
+            onkeyup="validatePassword(this)"
+            required
+          /><label class="required">*</label>
+          <input
+            type="password"
+            name="confirm_password"
+            class="confirm_password"
+            placeholder="Re-enter Password"
+            onkeyup="validatePassword(this)"
+            required
+          /><label class="required">*</label>
+        </div>
+        <label for="imageUpload" class="imageLabel">Your Image</label>
+        <input
+          type="file"
+          id="imageUpload"
+          name="pic"
+          accept="image/*"
+          class="btn imageUpload"
+          style="display: none"
+          onchange="changeVal()"
+        />
+        <input
+          type="submit"
+          value="Register"
+          class="registFormButton"
+          name="registFormButton"
+        />
+      </form>
+    </div>
+  </div>
+</div>
+<!-- </div> -->
+{% endblock content -%}
