@@ -24,6 +24,7 @@ def redirect_home():
 @app.route("/login/", methods=["POST", "GET"])
 def login_api():
     # already logged in
+    trending = trending_ports()["all_ports"]
     if "loggedin" in session:
         return redirect("/home/")
     else:
@@ -49,11 +50,17 @@ def login_api():
                         "base.html", title="Logged In", user=session["user"]
                     )
                 else:
-                    return render_template("base.html", title="", errLogIn=True)
+                    return render_template(
+                        "base.html", title="", errLogIn=True, trendPorts=trending
+                    )
             except:
-                return render_template("base.html", title="", errLogIn=True)
+                return render_template(
+                    "base.html", title="", errLogIn=True, trendPorts=trending
+                )
         else:
-            return render_template("base.html", title="Please Log in")
+            return render_template(
+                "base.html", title="Please Log in", trendPorts=trending
+            )
 
 
 @app.route("/logout/")
@@ -90,7 +97,7 @@ def home():
         )
 
 
-@app.route("/p/<portname>", methods=["GET"])
+@app.route("/p/<portname>/", methods=["GET"])
 def portpost(portname):
     port = requests.get(f"{api}/posts-by-portname/", json={"portname": portname}).json()
     print(type(port))
@@ -142,6 +149,7 @@ def my_posts(username):
 # calls the api to sign the user up
 @app.route("/signup/", methods=["POST", "GET"])
 def sign_up():
+    trending = trending_ports()["all_ports"]
     # if loggedin why you signing up
     if "loggedin" in session:
         return redirect("/home/")
@@ -178,7 +186,9 @@ def sign_up():
             username = api_res["user"][0]["username"]
         except:
             # Otherwise, render an error
-            return render_template("register.html", errUsernameInUse=api_res["error"])
+            return render_template(
+                "register.html", errUsernameInUse=api_res["error"], trendPorts=trending
+            )
 
         # if this line is successful then the user is created
         # Load uses helper method returns the dict of the user representation for local storage
@@ -187,14 +197,16 @@ def sign_up():
         # session['id'] = account['id']
         session["username"] = username
         redirect("/home/")
-        return render_template("base.html", name="Bla", user=session["user"])
+        return render_template(
+            "base.html", name="Bla", user=session["user"], trendPorts=trending
+        )
     else:
-        return render_template("register.html")
+        return render_template("register.html", trendPorts=trending)
 
 
 @app.route("/new-post/", methods=["GET", "POST"])
 def post():
-
+    trending = trending_ports()["all_ports"]
     # Make sure the user is logged in
 
     if "loggedin" in session:
@@ -226,14 +238,19 @@ def post():
 
             except:
                 return render_template(
-                    "writePost.html", user=session["user"], error="Invalid Post"
+                    "writePost.html",
+                    user=session["user"],
+                    error="Invalid Post",
+                    trendPorts=trending,
                 )
         # If the post fails, try again
         else:
-            return render_template("writePost.html", user=session["user"])
+            return render_template(
+                "writePost.html", user=session["user"], trendPorts=trending
+            )
 
     else:
-        return render_template("base.html")
+        return redirect("/login/")
 
 
 @app.route("/subscribed-posts/", methods=["GET"])
@@ -249,28 +266,87 @@ def subscribedposts():
         return redirect("/login/")
 
 
+@app.route("/portindex/", methods=["GET"])
+def portindex():
+    trending = trending_ports()["all_ports"]
+    ports = requests.get(f"{api}/allports/").json()["all_ports"]
+
+    if "loggedin" in session:
+        subscribed_ports = requests.get(
+            f"{api}/ports-for-username/", json={"username": session["username"]}
+        ).json()["all_subscriptions for {data_value}"]
+        for p in ports:
+            for sp in subscribed_ports:
+                if p["id"] == sp["portId"]:
+                    p.update({"isSubscribed": True})
+        return render_template(
+            "portIndex.html",
+            name="Port Index",
+            user=session["user"],
+            ports=ports,
+            trendPorts=trending,
+        )
+    else:
+        return render_template(
+            "portIndex.html", name="Port Index", ports=ports, trendPorts=trending
+        )
+
+
+@app.route("/subscribe/", methods=["POST"])
+def subscribe():
+    if "loggedin" in session:
+        res = request.form
+        portname = res["portname"]
+        username = session["username"]
+        state = res["value"]
+
+        if state == "Joined":
+            requests.post(
+                f"{api}/subscribe-to-port/",
+                json={"portname": portname, "username": username},
+            )
+        else:
+            requests.post(
+                f"{api}/unsubscribe-to-port/",
+                json={"portname": portname, "username": username},
+            )
+
+        return res
+    else:
+        redirect("/login/")
+
+
 @app.route("/ourteam/")
 def ourteam():
+    trending = trending_ports()["all_ports"]
     if "loggedin" in session:
-        return render_template("genLinks.html", user=session["user"], about=True)
+        return render_template(
+            "genLinks.html", user=session["user"], about=True, trendPorts=trending
+        )
     else:
-        return render_template("genLinks.html", about=True)
+        return render_template("genLinks.html", about=True, trendPorts=trending)
 
 
 @app.route("/contact/")
 def contact():
+    trending = trending_ports()["all_ports"]
     if "loggedin" in session:
-        return render_template("genLinks.html", user=session["user"], contact=True)
+        return render_template(
+            "genLinks.html", user=session["user"], contact=True, trendPorts=trending
+        )
     else:
-        return render_template("genLinks.html", contact=True)
+        return render_template("genLinks.html", contact=True, trendPorts=trending)
 
 
 @app.route("/terms/")
 def terms():
+    trending = trending_ports()["all_ports"]
     if "loggedin" in session:
-        return render_template("genLinks.html", user=session["user"], terms=True)
+        return render_template(
+            "genLinks.html", user=session["user"], terms=True, trendPorts=trending
+        )
     else:
-        return render_template("genLinks.html", terms=True)
+        return render_template("genLinks.html", terms=True, trendPorts=trending)
 
 
 @app.route("/newsfeed/")
