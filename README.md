@@ -1,8 +1,11 @@
 # CISC 3140 - Summer 2019 Project
-This is the repository for the group project in CISC 3140 class at Brooklyn College.
+This is the repository for the group project in CISC 3140 Summer Session 2 2019 class at Brooklyn College.
 
 ## UnderDogs
 UnderDogs is an information hub for Brooklyn College Computer Science students and faculty. Users can share original content, ask for assistance from other students, find collaborators, and have discussions across an array of curated communities.
+
+### Alpha Server
+- Deployed at [UnderDogs](https://bc-app-class.herokuapp.com/)
 
 ## Setup
 ### Installation
@@ -27,36 +30,19 @@ UnderDogs is an information hub for Brooklyn College Computer Science students a
 - Make sure that the dependencies are up to date.
 - Make sure that UnderDogs website is running in your web browser.
 
-### Signing Up
-*Alternatively, you can fast track to the [**Signing In**](#signing-in) section*
+### Registration
+*Alternatively, you can fast track to the [**Signing In**](#Login) section*
 
 - Open the tab on the left side of the browser
 - Select the `Register` button
-- Enter your registration informationinto the fields.
+- Enter your registration details into the fields.
 
-### [![Signing In]] Signing In
+### Login
 First, make sure you have the API running and you note down the url ie `localhost:8080`
+
 - Open the tab on the left and enter the following information into the fields:
 - Username: `username`
 - Password: `password`
-``` 
-{
-  "users": [
-    {
-      "avatarUrl": null,
-      "dateCreated": "2019-07-25 23:46:14",
-      "dateModified": null,
-      "email": "chalshaff12@gmail.com",
-      "first": "Michal",
-      "isActive": 1,
-      "last": "Shaffer",
-      "password": "hashedpassword",
-      "userid": 246815,
-      "username": "chalshaff12"
-    }
-  ]
-}
-```
 
-#### Test on a user that doesn't exist
-- Follow the above steps but put `{"user":"notrealuser13"}` into the raw body (notrealuser13 does NOT exist, so you should get a response that indicates that) - TADA! You should see `{"error": "User Not found!"}` in the response body below with a status of 404!
+## Contributing
+Please keep check for recent pushes before pushing your work.
