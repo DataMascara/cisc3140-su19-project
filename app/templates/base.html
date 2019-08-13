@@ -1,3 +1,6 @@
+{#- Version 1.1.1 - 08.13.2019, 06:15 #}
+{#- Description: 'isSubscribed' attribute added to the 'trending ports' section and is recognized thereby. Bug fixed! #}
+
 {#- Version 1.1 - 08.09.2019, 05:40 #}
 {#- Description: 'if' condition added to lines 22-26 to close menu if user is logged in. #}
 
@@ -176,7 +179,23 @@
                       <a href = "/p/{{ port['name'] }}/" class = "trendingName" title = "Go to p/{{ port['name'] }}" >p/{{ port['name'] }}</a>
                       <p class = "trendingName trendingMem" >{{ port['mem'] }} members</p>
                       {%- if user %}
-                          <input type="button" class = "subscribe subscribe{{ loop.index }}" name  = "subscribe{{ loop.index }}" title="Subscribe" value = "Subscribe" onclick="subscribe(this)" >
+                            {%- if port['isSubscribed'] == True %}
+                                   <input type="button" 
+                                          style = "background-color: #7B2240" 
+                                          class = "subscribe subscribe{{ loop.index }}" 
+                                          name  = "subscribe{{ loop.index }}" 
+                                          title="Joined" 
+                                          value = "Joined" 
+                                          onclick="subscribe(this)" >
+                            {%- else %} {#- if it is False: #}
+                                    <input type="button" 
+                                           style = "background-color: rgb(117, 117, 117)" 
+                                           class = "subscribe subscribe{{ loop.index }}" 
+                                           name  = "subscribe{{ loop.index }}" 
+                                           title="Subscribe"
+                                           value = "Subscribe"
+                                           onclick="subscribe(this)" >
+                            {% endif -%} {#- the one of 'port['isSubscribed']' #}
                       {%- else %}
                           <input type="button" class = "subscribe subscribe{{ loop.index }}" name  = "subscribe{{ loop.index }}" title="Subscribe" value = "Subscribe" onclick="ifLoggedOutGlowSignIn ()" >
                        {%- endif %}
