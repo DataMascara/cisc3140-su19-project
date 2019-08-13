@@ -246,7 +246,7 @@ def post():
             try:
                 res = request.form
                 title = res["title"]
-                portname = res["portname"]
+                portname = res["communitysearch"]
                 text = res["text"]
                 response = requests.post(
                     f"{api}/newpost/",
@@ -263,7 +263,7 @@ def post():
                     "postSubmitted.html",
                     user=session["user"],
                     name="What Name",
-                    trendPorts=trending
+                    trendPorts=trending, ports=trending
                 )
 
             except:
