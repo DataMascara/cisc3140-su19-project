@@ -362,6 +362,7 @@ def portindex():
                     # "isSubscribed" notifies the html page what
                     # state the button should be in
                     p.update({"isSubscribed": True})
+                    break
         return render_template(
             "portIndex.html",
             name="Port Index",
@@ -624,6 +625,7 @@ def trending_ports():
             for subscribe_ports in session['subscriptions']:
                 if port['id'] == subscribe_ports['portId']:
                     port.update({"isSubscribed": True})
+                    break
     # Add way of deciding what ports are "trending"
     # Return a dictonary of the port representation
     return ports
@@ -636,6 +638,7 @@ def update_vote_for_post(port):
                 if posts["postId"] == votes["postId"]:
                     # print(votes["vote"])
                     posts.update({"upOrDownvoted": votes["vote"]})
+                    break
         return port
     else:
         return None
