@@ -4,8 +4,6 @@ import json
 import urllib.request
 import webbrowser
 
-# Example calling the API from another python file
-
 # Relative path to reach the templates folder
 app = Flask(__name__, template_folder="templates")
 app.secret_key = "test"
@@ -51,8 +49,12 @@ def login_api():
                     # session['id'] = account['id']
                     session["username"] = username
                     session["user"] = api_res["user"]
-                    session["subscriptions"] = requests.get(f"{api}/ports-for-username/", json={"username": username}).json()["all_subscriptions for {data_value}"]
-                    session["votes"] = requests.get(f"{api}/votes-for-username/", json={"username": username}).json()['voted_data']
+                    session["subscriptions"] = requests.get(
+                        f"{api}/ports-for-username/", json={"username": username}
+                    ).json()["all_subscriptions for {data_value}"]
+                    session["votes"] = requests.get(
+                        f"{api}/votes-for-username/", json={"username": username}
+                    ).json()["voted_data"]
                     return redirect("/home/")
                     return render_template(
                         "base.html", title="Logged In", user=session["user"]
@@ -541,14 +543,23 @@ def vote():
         originalValue = res["originalValue"]
         print(originalValue)
         print(value)
-        response = (requests.post(f"{api}/vote/", json={
-            "username": session['username'], "value": value, "postId": postId,
-            "originalValue": originalValue},).json())['voted_data']
+        response = (
+            requests.post(
+                f"{api}/vote/",
+                json={
+                    "username": session["username"],
+                    "value": value,
+                    "postId": postId,
+                    "originalValue": originalValue,
+                },
+            ).json()
+        )["voted_data"]
         print(response)
-        session['votes'] = response
+        session["votes"] = response
         return "UPDATED"
     else:
         return redirect("/login/")
+
 
 # helper function to get "trending posts"
 # WIll do this by just getting three three random ports
@@ -558,12 +569,13 @@ def trending_ports():
     # Return a dictonary of the port representation
     return ports.json()
 
+
 def update_vote_for_post(port):
-    for posts in port['posts']:
-        for votes in session['votes']:
-            if posts['postId'] == votes['postId']:
-                print(votes['vote'])
-                posts.update({"upOrDownvoted": votes['vote']})
+    for posts in port["posts"]:
+        for votes in session["votes"]:
+            if posts["postId"] == votes["postId"]:
+                print(votes["vote"])
+                posts.update({"upOrDownvoted": votes["vote"]})
     return port
 
 
