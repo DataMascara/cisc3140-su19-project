@@ -420,13 +420,13 @@ def post_by_title(title):
             post_dict = requests.get(
                 f"{api}/post-by-title/",
                 json={"title": title}).json() 
-            print("here")
+            
             print(type(post_dict) )
             
             # post_id = post_dict[id]
             comments = requests.get(
                 f"{api}/comments-by-post/",
-                json={"id":"1" }).json()['comments']
+                json={"id": post_dict['postId']}).json()['comments']
             print(comments)
             return render_template('postDetails.html', user = session['user'], name = "Post", post=post_dict, comments= comments)
         except Exception as e:
