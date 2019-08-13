@@ -542,8 +542,7 @@ def vote():
         value = res["value"]
         postId = res["postId"]
         originalValue = res["originalValue"]
-        print(originalValue)
-        print(value)
+        # print(res)
         response = (
             requests.post(
                 f"{api}/vote/",
@@ -555,7 +554,7 @@ def vote():
                 },
             ).json()
         )["voted_data"]
-        print(response)
+        # print(response)
         session["votes"] = response
         return "UPDATED"
     else:
