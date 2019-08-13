@@ -10,7 +10,7 @@ app = Flask(__name__, template_folder="templates")
 app.secret_key = "test"
 
 # Assuming the API is running at the local ip below
-api = "https://bc-api-class.herokuapp.com/"
+api = "https://bc-api-class.herokuapp.com"
 
 @app.route("/", methods=["GET"])
 def redirect_home():
@@ -415,9 +415,17 @@ def post_by_title(title):
             post_dict = requests.get(
                 f"{api}/post-by-title/",
                 json={"title": title}).json() 
-            print(post_dict)    
-            return render_template('postDetails.html', user = session['user'], name = "Post", post=post_dict)
-        except:
+            print("here")
+            print(type(post_dict) )
+            
+            # post_id = post_dict[id]
+            comments = requests.get(
+                f"http://127.0.0.1:5000/comments-by-post/",
+                json={"id":"1" }).json()['comments']
+            print(comments)
+            return render_template('postDetails.html', user = session['user'], name = "Post", post=post_dict, comments= comments)
+        except Exception as e:
+            print(e)
             return redirect('/home/')
     else:
         return redirect("/login/")
