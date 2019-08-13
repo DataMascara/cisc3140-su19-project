@@ -30,19 +30,19 @@ Base-requirements:
 - **NOTE:** MinimalAPI functionality is currently implemented, with no VIEW/connecting link to the front end.
 - Alpha release will be served on a server soon so that features can be continuously implemented
 - Navigate to the `app/` folder and execute `python app.py` or `python3 app.py` (depending on your setup)
-- 
-    - Server hosting for live demo is coming soon.
 
-## Try a GET Request
 
-First, make sure you have the API running and you note down the url ie `127.0.0.0:5000`
+## Signing Up
 
-- Open Postman and go to the header tab and your header Content-Type to "application/json"
-- Go to the "Body" tab and check the "raw" and "JSON(application/json) options under that tab
-- Now put `{"user":"chalshaff12"}` into the raw body (if chalshaff12 exists, so you should get a response that indicates that )
-- Set the request to GET and the URL `http://YOURLOCALHOSTURL:5000/user` 
-  - TADA! You should see a json response with that user's information in the response body below with a status of 200!
-  - Currently looks like this, but will be cleaned up for easy data getting. 
+Firstly, make sure that UnderDogs website is running in your web browser.
+- Open the tab on the left side of the browser
+
+## Signing In
+
+First, make sure you have the API running and you note down the url ie `localhost:8080`
+- Open the tab on the left and enter the following information into the fields:
+- Username: `username`
+- Password: `password`
 ``` 
 {
   "users": [
