@@ -447,12 +447,12 @@ def post_by_title(postId):
                 try:
                     parent_id = res["parentId"]
                 except:
-                    parent_id = None
+                    parent_id = "NULL"
                 print("we got to text")
                 print(author)
                 try:
                     add_comment = requests.post(
-                    f"http://127.0.0.1:5000/add-comment/",
+                    f"{api}/add-comment/",
                     json={"text": text, "postId":post_id, "parent_id":parent_id, "author":author}).json() 
                     print("GOT HERE TOO!")
                     print(add_comment)
