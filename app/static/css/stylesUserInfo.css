@@ -39,7 +39,7 @@ Version 1.0
     margin: 0;
 }
 
-.divText
+.divText, .divText1
 {
      margin: 0;
      margin-top: 10px;
@@ -53,6 +53,11 @@ Version 1.0
      box-shadow: 1px 1px 1px lightgray, -1px -1px 1px lightgray;
      display: flex;
      flex-direction: column;
+}
+
+.divText1{
+    height: 400px;
+    overflow-y: auto;
 }
 
 .maroonButtons{
@@ -70,9 +75,10 @@ Version 1.0
      border-top-right-radius: 5px;
      width: auto;
      margin-bottom: 25px;
+     overflow-y: auto;
 }
 
-.userProfileTitle, .emailAndPasswordDiv, .notificationsDiv{
+.userProfileTitle, .emailAndPasswordDiv, .notificationsDiv, .subscriptionsDiv, .commentsDiv, .savedDiv, .postsDiv{
      margin: 0;
      padding: 0;
      background-color: #863550;
@@ -85,7 +91,7 @@ Version 1.0
      margin-bottom: -3px;
 }
 
-.userProfileTitleText, .emailAndPasswordText, .notificationsText{
+.userProfileTitleText, .emailAndPasswordText, .notificationsText, .subscriptionsText, .commentsText, .savedText, .postsText{
      border: 0;
      background-color: #863550;
      margin: 0;
@@ -99,8 +105,14 @@ Version 1.0
      letter-spacing: 0.5px;
 }
 
-.emailAndPasswordText, .notificationsText{
+.emailAndPasswordText, .notificationsText, .subscriptionsText, .commentsText, .savedText, .postsText{
      cursor: pointer;
+}
+
+.subscriptionsDiv, .commentsDiv, .savedDiv, .postsDiv{
+    width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .editProfile{
@@ -385,4 +397,162 @@ Version 1.0
     margin: 0;
     padding: 0;
     margin-left: 15px;
+}
+
+.portMembersNumber{
+    margin: 0;
+}
+
+.port-section, .comment-section, .post-section{
+    margin: 0;
+    padding: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px gray;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.comment-section, .post-section{
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.portName{
+    margin: 0;
+    padding: 0;
+    margin-top: 2px;
+    padding-bottom: 10px;
+    font-size: 16px;
+    color: rgb(80, 80, 80);
+    overflow-y: auto;
+}
+
+.portMembersNumber{
+    margin: 0;
+    padding: 0;
+    margin-top: 7px;
+    font-size: 8.5px;
+    color: rgb(80, 80, 80);
+    overflow-y: auto;
+}
+
+.indexForm{
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+}
+
+.subscribeIndex{
+    text-align: center;
+    border-radius: 3px;
+    border: 0;
+    color: white;
+    font-size: 8.5px;
+    width: 70px;
+    height: auto;
+    padding: 6px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+.portFirstPart{
+    width: 150px;
+}
+
+.portThirdPart{
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.commentSecondPart, .postSecondPart{
+    display:flex; 
+    flex-direction:column;
+    overflow-y: auto;
+}
+
+.votes{
+   margin: 0;
+   font-size: 12px;
+   color: rgb(77, 208, 191);
+   margin-top: 5px;
+   margin-right: 5px;
+}
+
+.thePortName{
+   color: rgb(80, 80, 80);
+   font-size: 7px;
+   margin-right: 10px;
+   margin-top: 8px;
+}
+
+.thePostName{
+    margin: 0;
+    color: black;
+    font-size: 11px;
+}
+
+.commentText, .postText{
+    margin: 0;
+    color: black;
+    font-size: 8px;
+    margin-left: 10px;
+    overflow-y: auto;
+    padding-top: 5px;
+}
+
+
+.dateAndTime{
+    margin: 0;
+    color: rgb(80, 80, 80);
+    font-size: 8px;
+}
+
+.commentFirstPart, .postFirstPart{
+    text-align: center;
+    width: 30px;
+    margin-left: -8px;
+    overflow-y: auto;
+}
+
+.commentThirdPart, .postThirdPart{
+    margin-left: auto;
+    margin-right: 0;
+    order: 2;
+    overflow-y: auto;
+}
+
+.postThirdPart{
+    display:flex; 
+    flex-direction:column;
+    overflow-y: auto;
+}
+
+.authorDetails{
+    display: flex;
+}
+
+.roundImage{
+    margin: 0;
+    padding: 0;
+    margin-top: 3px;
+    font-size: 0;
+    border: 0;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+}
+
+.usernameOfAuthor{
+    color: #7b2240;
+    font-size: 9px;
+    margin: 0;
+    padding: 0;
+    margin-left: 5px;
+    overflow-y: auto;
+    margin-top: 9px;
 }
