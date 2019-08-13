@@ -612,5 +612,5 @@ def load_user(username):
 
 
 if __name__ == "__main__":
-    webbrowser.open_new("http://bc-app-class.herokuapp.com")
-    app.run("http://bc-app-class.herokuapp.com", debug=True)
+    webbrowser.open_new("localhost:8080")
+    app.run("localhost", 8080, debug=True)
