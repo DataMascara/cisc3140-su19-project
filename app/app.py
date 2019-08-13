@@ -411,29 +411,88 @@ def subscribe():
 '''
 --- POST ---
 '''
-@app.route("/post/<title>")
-def post_by_title(title):
+@app.route("/post/<postId>", methods = ["POST", "GET"])
+def post_by_title(postId):
+    ##Get post by post ID
+    post = requests.get(
+        f"{api}/post-by-id/",
+        json={"id": f"{postId}"}).json()['posts'][0]
+    print(post)
     if "loggedin" in session:
-        post_title = title
-    # If you click on subscribe(you just joined the port),
+        post_title = post['postTitle']
         try:
-            post_dict = requests.get(
-                f"{api}/post-by-title/",
-                json={"title": title}).json() 
-            
-            print(type(post_dict) )
-            
-            # post_id = post_dict[id]
+            # post_dict = requests.get(
+            #     f"{api}/post-by-title/",
+            #     json={"title": title}).json() 
             comments = requests.get(
                 f"{api}/comments-by-post/",
-                json={"id": post_dict['postId']}).json()['comments']
-            print(comments)
-            return render_template('postDetails.html', user = session['user'], name = "Post", post=post_dict, comments= comments)
+                json={"id": postId}).json()['comments']
         except Exception as e:
+            print("EXCEPT")
             print(e)
-            return redirect('/home/')
+            redirect("/home/")
+        if(request.method == "GET"):
+            # If you click on subscribe(you just joined the port),
+            print(comments)
+            return render_template('postDetails.html', user = session['user'], name = "Post", post=post, comments= comments)
+        ## MEANING WE ARE POSTING A COMMENT        
+        elif(request.method == "POST"):
+            res = request.form
+            if "loggedin" in session:
+            # If you click on subscribe(you just joined the port)
+                # text, post_id, parent_id, author
+                text = res["commentToPostText"]
+                post_id = post["postId"]
+                author = session['username']
+                try:
+                    parent_id = res["parentId"]
+                except:
+                    parent_id = None
+                print("we got to text")
+                print(author)
+                try:
+                    add_comment = requests.post(
+                    f"http://127.0.0.1:5000/add-comment/",
+                    json={"text": text, "postId":post_id, "parent_id":parent_id, "author":author}).json() 
+                    print("GOT HERE TOO!")
+                    print(add_comment)
+                    return render_template('postDetails.html', user = session['user'], name = "Post", post=post, comments = comments, commentSubmittedMessage = True)
+                except:
+                    return redirect("/login/")            
     else:
-        return redirect("/login/")
+         return redirect("/login/")
+
+
+
+
+# '''
+# ---- ADD COMMENT -----
+# '''
+# @app.route("/add-comment/", methods = ["POST"])
+# def add_comment_post():
+#     if "loggedin" in session:
+#         post_title = title
+#     # If you click on subscribe(you just joined the port)
+#         # text, post_id, parent_id, author
+#         text = res["text"]
+#         post_id = res["postId"]
+#         parent_id = None
+#         author = session['username']
+#         try:
+#             parent_id = res["parentId"]
+#         except:
+#         try:
+#             add_comment = requests.post(
+#                 f"{api}/add-comment/",
+#                 json={"text": text, "post_id":post_id, "parent_id":parent_id, "author":author}).json() 
+            
+#             print(comments)
+#             return render_template('postDetails.html', user = session['user'], name = "Post", post=post_dict, comments = comments, commentSubmittedMessage = True)
+#         except Exception as e:
+#             print(e)
+#             return redirect('/home/')
+#     else:
+#         return redirect("/login/")
 
 
 

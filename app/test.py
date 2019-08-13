@@ -399,7 +399,7 @@ savedPosts = [
 ]
 
 # and, finally, written posts:
-comments = 
+
 myPosts = [ 
    { 
      'title': "Bla Bla Post",
