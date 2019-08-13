@@ -28,7 +28,7 @@
          {% endif -%}
 
                  <div class = "portFirstPart">
-                    <a href = "/p/{{ port['name']}}/" class = "portName">p/{{ port['name'] }}</a>
+                    <a href = "/p/{{ port['name']}}/" class = "portName portName{{ port['id'] }}">p/{{ port['name'] }}</a>
                     <p class = "portMembersNumber">{{ port['mem'] }} members</p>
                  </div>
                  <div class = "portSecondPart">
@@ -39,7 +39,7 @@
                  </div>
                  <div class = "portThirdPart">
                        {%- if user %} {#- if the user is logged in, put the buttons in forms, and submit subscription info to server: #}
-                             <form class = "indexForm" action = "/subscribe/" method = "post" target="frameForSubscriptions" name = "subscriptionForm{{ port['id'] }}">
+                             <form class = "indexForm subscriptionForm{{ port['id'] }}" action = "/subscribe/" method = "post" target="frameForSubscriptions" name = "subscriptionForm{{ port['id'] }}">
                              <input type="hidden" name="portname" value="{{ port['name'] }}">
                                    {%- if port['isSubscribed'] == True %}
                                        <input type="submit"
