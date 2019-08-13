@@ -238,7 +238,7 @@ def sign_up():
 def post():
     trending = trending_ports()["all_ports"]
     # Make sure the user is logged in
-
+   
     if "loggedin" in session:
         # If we are making a post
 
@@ -263,7 +263,7 @@ def post():
                     "postSubmitted.html",
                     user=session["user"],
                     name="What Name",
-                    trendPorts=trending,
+                    trendPorts=trending
                 )
 
             except:
@@ -273,10 +273,12 @@ def post():
                     error="Invalid Post",
                     trendPorts=trending,
                 )
-        # If the post fails, try again
+        # If it's  a get
         else:
+            ports = trending_ports()["all_ports"]
+            print(ports)
             return render_template(
-                "writePost.html", user=session["user"], trendPorts=trending
+                "writePost.html", user=session["user"], trendPorts=trending, ports=ports
             )
 
     else:
