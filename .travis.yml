@@ -3,13 +3,13 @@ language: python
 sudo: required
 python: "3.7"
 script:
-# - python test.py
+- python test1.py
 install:
   - pip install -r requirements.txt
 deploy:
   provider: heroku
   api_key:
     secure: SRQYTCaJ7yYNsVUIG70tF13JW7PQynp9XGwxb7R6neG8R13dsZ1Aip/oyN/4WtpIRBTh9YgH5QO/bqe5MusejDt7j3uGJ9/zAjZj6iY8NVzlglJjHOGWJY9yPLmlqq/vBPIkX9JOdJMHjBDve/fqDSdDUlqOQYRpZq1aCPnKCnhjk2tfux4aWi8kOPayM8tl4mRolTWvrntcgrkenJIQx07GsTO1LwAoum2tlmGiHvbv610xpyIIUIqKNdqv676YdAxKBhQDPjFfORmMMXZswJs2jinrYpnfmwiI0TxU/YiYySjsr6yc/7PVwM/U7Z0Ehz+vuSQDFbR7lGw0XsoEhIkSbg4vKDropClndT7+1rDugc/IfQThkeRlnUGcNTkNkEaTKIgneWLPDx+Oz3mADx5Qp8zfEOXBgk5tRXkAH9M/RStQmeBhvHABmmz33a9GuNZwud6i5J0lhMpI9afNdNznH0f3AN8YKT5WG0/BQMgyXXdVfRVX+nkBff49emDgqbOaygpV0byfv4Ylla3yRdxFsxetrM/HMfCMw6y6wFtkRH07J+PwHAqOhFf0SLTrZ0VQzNKjL8bBQFeHKYd2ZRZozMsnJp9gY/7q2Z72bDg3hdgwyQ/8savJRB0AYbDiOJk8G9TLIOKWPIWhtZiscbaePpG6BUiI7WbrvGyUuXQ=
-  app: bc-api-class
+  app: bc-app-class
   on:
     repo: DataMascara/cisc3140-su19-project
