@@ -334,19 +334,15 @@ if __name__ == "__main__":
     # webbrowser.open_new("http://localhost:8181/write-post/")
     # webbrowser.open_new("http://localhost:8181/registration-pending/")
     # webbrowser.open_new("http://localhost:8181/register/")
-    webbrowser.open_new("http://localhost:8282/newsfeed/")
+    # webbrowser.open_new("http://localhost:8181/newsfeed/")
     # webbrowser.open_new("http://localhost:8181/port-index/example1")
     # webbrowser.open_new("http://localhost:8181/port-index/example2")
-    # webbrowser.open_new("http://localhost:8181/post-details1")
-    # webbrowser.open_new("http://localhost:8181/post-details2")
+    webbrowser.open_new("http://localhost:8181/post-details1")
+    webbrowser.open_new("http://localhost:8181/post-details2")
     # webbrowser.open_new("http://localhost:8181/newsfeed2/")
     # webbrowser.open_new("http://localhost:8181/user-profile1")
     # webbrowser.open_new("http://localhost:8181/user-profile2")
     # webbrowser.open_new("http://localhost:8181/account-settings1")
     # webbrowser.open_new("http://localhost:8181/account-settings2")
-<<<<<<< HEAD
-    app.run("localhost", 8282, True, use_reloader=False)
-=======
     app.run("localhost", 8181, True, use_reloader=False)
->>>>>>> 2192e577f4ac922648790ddb2b42528b41e0a6cb
 

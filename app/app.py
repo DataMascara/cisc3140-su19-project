@@ -4,14 +4,13 @@ import json
 import urllib.request
 import webbrowser
 
-
 # Relative path to reach the templates folder
 app = Flask(__name__, template_folder="templates")
+##Regen secret before production level
 app.secret_key = "test"
 
 # Assuming the API is running at the local ip below
 api = "https://bc-api-class.herokuapp.com/"
-
 
 @app.route("/", methods=["GET"])
 def redirect_home():
@@ -23,8 +22,6 @@ def redirect_home():
 """
 -------------LOGIN-------------
 """
-
-
 @app.route("/login/", methods=["POST", "GET"])
 def login_api():
     # already logged in
@@ -77,8 +74,6 @@ def login_api():
 """
 -------------LOG-OUT-------------
 """
-
-
 @app.route("/logout/")
 def logout():
     session.pop("loggedin", None)
@@ -90,12 +85,9 @@ def logout():
     # Redirect to login page
     return redirect("/login/")
 
-
 """
 -------------HOMEPAGE-------------
 """
-
-
 @app.route("/home/", methods=["GET"])
 def home():
     # Use the helper method to grab "tredning ports"
@@ -119,15 +111,12 @@ def home():
             port=None,
             search="My First Search!",
         )
-
-
+ 
 """
 -------------/PORT(aka subreddit)-------------
 - Uses the url to decide what port the user wants to go to.
         - So, this should
 """
-
-
 @app.route("/p/<portname>/", methods=["GET"])
 def portpost(portname):
     port = requests.get(f"{api}/posts-by-portname/", json={"portname": portname}).json()
@@ -152,7 +141,9 @@ def portpost(portname):
             search="My First Search!",
         )
 
-
+'''
+--------POST HISTORY------
+'''
 # gets user's post history
 @app.route("/u/<username>/posts/", methods=["GET"])
 def my_posts(username):
@@ -178,11 +169,9 @@ def my_posts(username):
             search="My First Search!",
         )
 
-        """
+"""
 -------------SIGN-UP-------------
 """
-
-
 @app.route("/signup/", methods=["POST", "GET"])
 def sign_up():
     trending = trending_ports()["all_ports"]
@@ -240,12 +229,9 @@ def sign_up():
     else:
         return render_template("register.html", trendPorts=trending)
 
-
 """
 -------------NEW POST-------------
 """
-
-
 @app.route("/new-post/", methods=["GET", "POST"])
 def post():
     trending = trending_ports()["all_ports"]
@@ -294,13 +280,10 @@ def post():
     else:
         return redirect("/login/")
 
-
 """
 -------------USER SUBSCRIBED POSTS-------------
  - Given a user, return all the posts from the ports they are subscribed to
 """
-
-
 @app.route("/subscribed-posts/", methods=["GET"])
 def subscribedposts():
     if "loggedin" in session:
@@ -323,13 +306,38 @@ def subscribedposts():
     else:
         return redirect("/login/")
 
+'''
+----VOTE ON POST----
+'''
+@app.route("/vote/", methods=["POST"])
+def vote():
+    if "loggedin" in session:
+        res = request.form
+        value = res["value"]
+        postId = res["postId"]
+        originalValue = res["originalValue"]
+        # print(res)
+        response = (
+            requests.post(
+                f"{api}/vote/",
+                json={
+                    "username": session["username"],
+                    "value": value,
+                    "postId": postId,
+                    "originalValue": originalValue,
+                },
+            ).json()
+        )["voted_data"]
+        # print(response)
+        session["votes"] = response
+        return "UPDATED"
+    else:
+        return redirect("/login/")
 
 """
 -------------PORT INDEX-------------
 - Allows logged in users to brows ports
 """
-
-
 @app.route("/portindex/", methods=["GET"])
 def portindex():
     trending = trending_ports()["all_ports"]
@@ -366,8 +374,6 @@ def portindex():
 """
 -------------SUBSCRIBE TO PORT-------------
 """
-
-
 @app.route("/subscribe/", methods=["POST"])
 def subscribe():
     if "loggedin" in session:
@@ -397,8 +403,6 @@ def subscribe():
 """
  ------PROFILE-----
 """
-
-
 @app.route("/profile/", methods=["GET", "POST"])
 def profile():
     trending = trending_ports()["all_ports"]
@@ -445,6 +449,10 @@ def profile():
         return redirect("/login/")
 
 
+
+"""
+------UPDATE-----
+"""
 @app.route("/update/", methods=["GET", "POST"])
 def update():
     if "loggedin" in session:
@@ -517,6 +525,9 @@ def update():
         return redirect("/login/")
 
 
+"""
+------OUR TEAM PAGE-----
+"""
 @app.route("/ourteam/")
 def ourteam():
     trending = trending_ports()["all_ports"]
@@ -528,6 +539,9 @@ def ourteam():
         return render_template("genLinks.html", about=True, trendPorts=trending)
 
 
+"""
+------CONTCT PAGE-----
+"""
 @app.route("/contact/")
 def contact():
     trending = trending_ports()["all_ports"]
@@ -538,7 +552,9 @@ def contact():
     else:
         return render_template("genLinks.html", contact=True, trendPorts=trending)
 
-
+"""
+------TERMS PAGE-----
+"""
 @app.route("/terms/")
 def terms():
     trending = trending_ports()["all_ports"]
@@ -549,7 +565,9 @@ def terms():
     else:
         return render_template("genLinks.html", terms=True, trendPorts=trending)
 
-
+"""
+------NEWS FEED-----
+"""
 @app.route("/newsfeed/")
 def hello9():
     trending = trending_ports()["all_ports"]
@@ -569,34 +587,6 @@ def pending():
     return render_template(
         "genLinks.html", name=user["first"], user=user, trendPorts=trending
     )
-
-
-@app.route("/vote/", methods=["POST"])
-def vote():
-    if "loggedin" in session:
-        res = request.form
-        value = res["value"]
-        postId = res["postId"]
-        originalValue = res["originalValue"]
-        # print(res)
-        response = (
-            requests.post(
-                f"{api}/vote/",
-                json={
-                    "username": session["username"],
-                    "value": value,
-                    "postId": postId,
-                    "originalValue": originalValue,
-                },
-            ).json()
-        )["voted_data"]
-        # print(response)
-        session["votes"] = response
-        return "UPDATED"
-    else:
-        return redirect("/login/")
-
-
 # helper function to get "trending posts"
 # WIll do this by just getting three three random ports
 def trending_ports():
