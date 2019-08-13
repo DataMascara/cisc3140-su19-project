@@ -51,6 +51,8 @@ def login_api():
                     # session['id'] = account['id']
                     session["username"] = username
                     session["user"] = api_res["user"]
+                    session["subscriptions"] = requests.get(f"{api}/ports-for-username/", json={"username": username}).json()["all_subscriptions for {data_value}"]
+                    session["votes"] = requests.get(f"{api}/votes-for-username/", json={"username": username}).json()['voted_data']
                     return redirect("/home/")
                     return render_template(
                         "base.html", title="Logged In", user=session["user"]
@@ -80,6 +82,8 @@ def logout():
     session.pop("id", None)
     session.pop("username", None)
     session.pop("user", None)
+    session.pop("subscriptions", None)
+    session.pop("votes", None)
     # Redirect to login page
     return redirect("/login/")
 
@@ -95,6 +99,7 @@ def home():
     trending = trending_ports()["all_ports"]
     port = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
     if "loggedin" in session:
+        update_vote_for_post(port)
         return render_template(
             "posts.html",
             name="Home",
@@ -126,6 +131,7 @@ def portpost(portname):
     print(type(port))
     trending = trending_ports()["all_ports"]
     if "loggedin" in session:
+        update_vote_for_post(port)
         return render_template(
             "posts.html",
             name="p/" + portname,
@@ -150,6 +156,7 @@ def my_posts(username):
     trending = trending_ports()["all_ports"]
     port = requests.get(f"{api}/my-posts/", json={"username": username}).json()
     if "loggedin" in session:
+        update_vote_for_post(port)
         return render_template(
             "posts.html",
             name=username + "'s Post",
@@ -299,6 +306,7 @@ def subscribedposts():
             f"{api}/posts-from-subscribed-ports/",
             json={"username": session["username"]},
         ).json()
+        update_vote_for_post(post)
         return render_template(
             "posts.html",
             name="Your feed",
@@ -524,6 +532,24 @@ def pending():
     )
 
 
+@app.route("/vote/", methods=["POST"])
+def vote():
+    if "loggedin" in session:
+        res = request.form
+        value = res["value"]
+        postId = res["postId"]
+        originalValue = res["originalValue"]
+        print(originalValue)
+        print(value)
+        response = (requests.post(f"{api}/vote/", json={
+            "username": session['username'], "value": value, "postId": postId,
+            "originalValue": originalValue},).json())['voted_data']
+        print(response)
+        session['votes'] = response
+        return "UPDATED"
+    else:
+        return redirect("/login/")
+
 # helper function to get "trending posts"
 # WIll do this by just getting three three random ports
 def trending_ports():
@@ -531,6 +557,14 @@ def trending_ports():
     # Add way of deciding what ports are "trending"
     # Return a dictonary of the port representation
     return ports.json()
+
+def update_vote_for_post(port):
+    for posts in port['posts']:
+        for votes in session['votes']:
+            if posts['postId'] == votes['postId']:
+                print(votes['vote'])
+                posts.update({"upOrDownvoted": votes['vote']})
+    return port
 
 
 def load_user(username):
