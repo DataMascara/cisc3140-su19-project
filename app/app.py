@@ -619,7 +619,7 @@ def trending_ports():
 
 
 def update_vote_for_post(port):
-    if "loggedIn" in session:
+    if "loggedin" in session:
         for posts in port["posts"]:
             for votes in session["votes"]:
                 if posts["postId"] == votes["postId"]:
