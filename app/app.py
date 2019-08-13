@@ -4,6 +4,7 @@ import json
 import urllib.request
 import webbrowser
 
+
 # Relative path to reach the templates folder
 app = Flask(__name__, template_folder="templates")
 app.secret_key = "test"
