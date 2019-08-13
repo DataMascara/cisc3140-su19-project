@@ -104,17 +104,7 @@
      <div class = "midContainer"> <!-- Beginning of the Middle Container -->
          {%- block content %}
               {#- All the content will come here! #}
-
-    <!-- Mind the Ugly H1, just using for debugging.
-    -The backend :] -->
-        {%- if user %}
-            <h1>Current User{{user}}</h1>
-            {%- else %}
-        
-            <h1>YOURE NOT LOGGED IN!</h1>
-        {% endif -%}
-
-
+              
          {% endblock content -%}
          {%- block generalLinks %}
               <div class = "bottomLinks">

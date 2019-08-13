@@ -234,7 +234,7 @@ def hello13():
 #---------------------------------- User Info Template --------------------------
 
 # What the 'viewedUser' object must have (this is other than the 'user' dict)
-viewedUser1 = {'username': 'mary060196', 'email': 'mary060196@gmail.com', 'avatarUrl': 'https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Up_Hand_Sign_Emoji_large.png?v=1480481047', 'description': "I love CISC since I was a child.", 'isEmailPrivate': False}
+viewedUser1 = {'username': 'mary060196', 'email': 'mary060196@gmail.com', 'avatarUrl': '', 'description': "I love CISC since I was a child.", 'isEmailPrivate': False}
 viewedUser2 = {'username': 'jtroia', 'email': 'jtroia@joetroia.com', 'avatarUrl': 'https://cdn.sandals.com/beaches/v12/images/general/destinations/home/beach.jpg', 'description': "Lorem Ipsum ... and other stuff.", 'isEmailPrivate': False}
 
 # We also want to update the 'user' to contain the following:
@@ -277,15 +277,15 @@ if __name__ == "__main__":
     # webbrowser.open_new("http://localhost:8181/write-post/")
     # webbrowser.open_new("http://localhost:8181/registration-pending/")
     # webbrowser.open_new("http://localhost:8181/register/")
-    # webbrowser.open_new("http://localhost:8181/newsfeed/")
+    webbrowser.open_new("http://localhost:8282/newsfeed/")
     # webbrowser.open_new("http://localhost:8181/port-index/example1")
     # webbrowser.open_new("http://localhost:8181/port-index/example2")
     # webbrowser.open_new("http://localhost:8181/post-details1")
     # webbrowser.open_new("http://localhost:8181/post-details2")
     # webbrowser.open_new("http://localhost:8181/newsfeed2/")
-    webbrowser.open_new("http://localhost:8181/user-profile1")
-    webbrowser.open_new("http://localhost:8181/user-profile2")
-    webbrowser.open_new("http://localhost:8181/account-settings1")
-    webbrowser.open_new("http://localhost:8181/account-settings2")
-    app.run("localhost", 8181, True, use_reloader=False)
+    # webbrowser.open_new("http://localhost:8181/user-profile1")
+    # webbrowser.open_new("http://localhost:8181/user-profile2")
+    # webbrowser.open_new("http://localhost:8181/account-settings1")
+    # webbrowser.open_new("http://localhost:8181/account-settings2")
+    app.run("localhost", 8282, True, use_reloader=False)
 
