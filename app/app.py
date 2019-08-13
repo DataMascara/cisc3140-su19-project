@@ -718,8 +718,6 @@ def update_vote_for_post(port):
         return port
     else:
         return None
-
-
         
 
 
