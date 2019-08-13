@@ -75,10 +75,11 @@ def hello7():
     )
 
 
+# Two new optional agruments: `username_error` and `email_error` (08.12.2019)
 @app.route("/register/")
 def hello8():
     return render_template(
-        "register.html", name="Bla", trendPorts=trendPorts, errUsernameInUse=True
+        "register.html", name="Bla", trendPorts=trendPorts, username_error = True, email_error = True
     )
 
 

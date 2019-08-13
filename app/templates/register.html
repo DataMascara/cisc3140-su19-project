@@ -61,8 +61,8 @@ base template, all we modify here is the 'content' block: #} {%- block content
             required
             onkeyup="validateUserNameLength()"
           /><label class="required">*</label>
-          {%- if errUsernameInUse %}
-          <span class="errUsernameInUse">Username already in use!</span>
+          {%- if username_error %}
+             <span class="errorMessages">Error: Username already in use!</span>
           {%- endif %}
         </div>
         <div class="row3">
@@ -74,10 +74,8 @@ base template, all we modify here is the 'content' block: #} {%- block content
             required
             onkeyup="validateEmail()"
           /><label class="required">*</label>
-          {%- if errUsernameInUse %}
-          <span class="errUsernameInUse"
-            >Error: Have you signed up already?</span
-          >
+          {%- if email_error %}
+             <span class="errorMessages">Error: Email address already in use!</span>
           {%- endif %}
         </div>
         <div class="row4">
