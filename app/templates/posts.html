@@ -54,7 +54,7 @@
 
                 <div class = "votes">
                    {%- if user %} {#- Appears only if the user is logged in #}
-                     <form class = "upvote" action = "" method = "post" target = "frameForVotes">
+                     <form class = "upvote" action = "/vote/" method = "post" target = "frameForVotes">
                             <input type = "submit" 
                                        class = "upvoteBtn post{{ post['postId'] }}"
                                        value = "++" 
@@ -67,7 +67,8 @@
                                        {#- do nothing #}
                                        {% endif -%}>
                    {% endif -%}
-                    <input type="hidden" name="portId" value="{{ post['postId'] }}">
+                    <input type="hidden" name="postId" value="{{ post['postId'] }}">
+                    <input type="hidden" name="originalValue" value="{{ post['upOrDownvoted'] }}">
                     <p class = "numOfVotes post{{ post['postId'] }}"
                        {%- if (post['upOrDownvoted'] == 1) and (user) %}
                        style = "color: rgb(77, 208, 191);"

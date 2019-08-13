@@ -54,18 +54,22 @@
                               {%- else %}
                                      <p class = "descriptionText">(No description added)</p>
                               {% endif -%}
-                               <form class = "descriptionForm" method = "post" action = "" enctype="multipart/form-data">
-                                               <textarea rows = "10" 
-                                                               class = "descriptionTextArea" 
-                                                               name = "descriptionTextArea" 
-                                                               title = "Describe yourself, {{ viewedUser['username']}}!" 
+                               <form class = "descriptionForm" method = "post" action = "/profile/" enctype="multipart/form-data">
+                                               <textarea rows = "10"
+                                                               class = "descriptionTextArea"
+                                                               name = "descriptionTextArea"
+                                                               title = "Describe yourself, {{ viewedUser['username']}}!"
                                                                placeholder = "Your description here"
                                                                spellcheck = "true">{{ viewedUser['description'] }}</textarea>
                                                 <input type="text" name="avatarURL" class = "avatarURL" placeholder="Add URL to Your Avatar">
                                                 <div class = "descriptionFormSubmitDiv">
-                                                      <input type = "button" class = "descriptionFormSubmitBtn" name = "descriptionFormSubmitBtn" title = "Save your bio!" value = "Save Bio" onclick = "submitBio()">
+                                                      <input type = "submit"
+                                                      class = "descriptionFormSubmitBtn"
+                                                      name = "descriptionFormSubmitBtn"
+                                                      title = "Save your bio!"
+                                                      value = "Save Bio">
                                                 </div>
-                                </form> 
+                                </form>
                           </div>
                   </div> <!-- End of 'divText' -->
               </div> <!-- End of 'middleScreen' -->
@@ -78,17 +82,17 @@
                         <form action = "" method = "post" class = "accountSettingsButtons">
                             <div class = "maroonButtons">
                                 <div class = "emailAndPasswordDiv">
-                                     <input type = "submit" 
-                                                 class = "emailAndPasswordText"  
-                                                 name = "emailAndPassword" 
-                                                 value = "Email and Password" 
+                                     <input type = "submit"
+                                                 class = "emailAndPasswordText"
+                                                 name = "emailAndPassword"
+                                                 value = "Email and Password"
                                                  title = "Email and password settings" >
                                 </div>
                                 <div class = "notificationsDiv">
-                                      <input type = "submit" 
-                                                  class = "notificationsText" 
-                                                  name = "notifications" 
-                                                  value = "Notifications" 
+                                      <input type = "submit"
+                                                  class = "notificationsText"
+                                                  name = "notifications"
+                                                  value = "Notifications"
                                                   title = "Notifications settings"></p>
                                 </div>
                              </div>
@@ -129,18 +133,18 @@
                                       <div class = "changeEmailInnerDiv">
                                          <div class = "emailsDiv">
                                             <div class = "emailDiv">
-                                                 <input type = "email" 
-                                                             class = "emailSetting" 
-                                                             name = "emailSetting" 
+                                                 <input type = "email"
+                                                             class = "emailSetting"
+                                                             name = "emailSetting"
                                                              title = "Type the new email"
                                                              placeholder = "New Email"
                                                              onkeyup = "validateEmail(this)"
                                                              required><span class = "red">*</span>
                                             </div>
                                             <div class = "emailDiv">
-                                                 <input type = "email" 
-                                                             class = "emailSetting" 
-                                                             name = "emailConfirmSetting" 
+                                                 <input type = "email"
+                                                             class = "emailSetting"
+                                                             name = "emailConfirmSetting"
                                                              title = "Re-type the new email"
                                                              placeholder = "Re-enter New Email"
                                                              onkeyup = "validateEmail(this)"
@@ -148,23 +152,23 @@
                                             </div>
                                          </div>
                                          <div class = "buttonDiv">
-                                               <input type = "submit" 
-                                                          class = "changeEmailBtn" 
-                                                          name = "changeEmailBtn" 
-                                                          title = "Confirm Change Email" 
+                                               <input type = "submit"
+                                                          class = "changeEmailBtn"
+                                                          name = "changeEmailBtn"
+                                                          title = "Confirm Change Email"
                                                           value = "Confirm Change Email">
                                          </div>
                                       </div>
                                   </form>
-                             </div>                             
+                             </div>
                              <div class = "passwordChange">
                                   <p class = "passwordChangeTitle">CHANGE PASSWORD</p>
                                   <form action = "" method = "post" class = "changePasswordForm">
                                       <div class = "changePasswordInnerDiv">
                                          <div class = "currentPasswordDiv">
-                                            <input type = "password" 
-                                                        class = "currentPassword" 
-                                                        name = "currentPassword" 
+                                            <input type = "password"
+                                                        class = "currentPassword"
+                                                        name = "currentPassword"
                                                         title = "Type your current password"
                                                         placeholder = "Current Password"
                                                         onkeyup = "validatePassword()"
@@ -175,18 +179,18 @@
                                          </div>
                                          <div class = "passwordsDiv">
                                             <div class = "passwordDiv">
-                                                 <input type = "password" 
-                                                             class = "passwordSetting" 
-                                                             name = "passwordSetting" 
+                                                 <input type = "password"
+                                                             class = "passwordSetting"
+                                                             name = "passwordSetting"
                                                              title = "Type the new password"
                                                              placeholder = "New Password"
                                                              onkeyup = "validatePassword()"
                                                              required><span class = "red">*</span>
                                             </div>
                                             <div class = "emailDiv">
-                                                 <input type = "password" 
-                                                             class = "passwordSetting" 
-                                                             name = "passwordConfirmSetting" 
+                                                 <input type = "password"
+                                                             class = "passwordSetting"
+                                                             name = "passwordConfirmSetting"
                                                              title = "Re-type the new password"
                                                              placeholder = "Re-enter New Password"
                                                              onkeyup = "validatePassword()"
@@ -194,10 +198,10 @@
                                             </div>
                                          </div>
                                          <div class = "buttonDiv">
-                                               <input type = "submit" 
-                                                          class = "changePasswordBtn" 
-                                                          name = "changePasswordBtn" 
-                                                          title = "Confirm Change Password" 
+                                               <input type = "submit"
+                                                          class = "changePasswordBtn"
+                                                          name = "changePasswordBtn"
+                                                          title = "Confirm Change Password"
                                                           value = "Confirm Change Password">
                                          </div>
                                       </div>

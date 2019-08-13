@@ -75,10 +75,11 @@ def hello7():
     )
 
 
+# Two new optional agruments: `username_error` and `email_error` (08.12.2019)
 @app.route("/register/")
 def hello8():
     return render_template(
-        "register.html", name="Bla", trendPorts=trendPorts, errUsernameInUse=True
+        "register.html", name="Bla", trendPorts=trendPorts, username_error = True, email_error = True
     )
 
 
@@ -214,12 +215,68 @@ def hello11():
 # Examples of Post Details Template
 
 # Create a post dictionary. It will look like this:
-postDict = {'id': 257, 'title': 'Want to Order Some Pizza on the Last Day of Classes?', 'portname': "CISCRocks", 'totalVotes': 1000, 'image': 'https://cdn.apartmenttherapy.info/image/fetch/f_auto,q_auto:eco/https%3A%2F%2Fstorage.googleapis.com%2Fgen-atmedia%2F3%2F2018%2F03%2F55cd28cae8ee78fe1e52ab1adc9eafff24c9af92.jpeg', 'text': "Why shouldn't we?", 'commentNum': 5, 'dateCreated': '2019-08-11 02:23:04', 'username': 'mary060196', 'avatarUrl': 'https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Up_Hand_Sign_Emoji_large.png?v=1480481047', 'upOrDownvoted': 1,
-            'comments': [{'id': 1, 'totalVotes': 64, 'dateCreated': '2019-08-11 10:10:10', 'username': 'jtroia', 'avatarUrl': 'https://cdn.sandals.com/beaches/v12/images/general/destinations/home/beach.jpg', 'text': "How hadn't I thought of it myself? Great idea!", 'upOrDownvoted': 1,
-                          'comments' : [{'id': 4, 'totalVotes': 24, 'dateCreated': '2019-08-11 15:15:15', 'username': 'mary060196', 'avatarUrl': 'https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Up_Hand_Sign_Emoji_large.png?v=1480481047', 'text': "Yea! We'll just have to find a good pizzeria and notify the class.", 'upOrDownvoted': 0}, 
-                                        {'id': 5, 'totalVotes': 15, 'dateCreated': '2019-08-11 15:20:15', 'username': 'jtroia', 'avatarUrl': 'https://cdn.sandals.com/beaches/v12/images/general/destinations/home/beach.jpg', 'text': "I will send everyone a message on Slack (if anybody even opens it.)", 'upOrDownvoted': 0}]}, 
-                         {'id': 2, 'totalVotes': 59, 'dateCreated': '2019-08-11 10:20:36', 'username': 'bla-bla', 'avatarUrl': 'https://www.designrepublic.com/27631-large_default/blabla-big-plexi.jpg', 'text': "Bla bla bla bla bla. Bla bla bla bla!", 'upOrDownvoted': -1, 'comments': {}}, 
-                         {'id': 3, 'totalVotes': 12, 'dateCreated': '2019-08-11 10:20:36', 'username': 'wowwow1', 'avatarUrl': None, 'text': "Wow wow wow wow wow. Wow wow wow wow!", 'upOrDownvoted': 0, 'comments': {}}]}
+postDict = {
+    'id': 257, 
+    'title': 'Want to Order Some Pizza on the Last Day of Classes?', 
+    'portname': "CISCRocks", 
+    'totalVotes': 1000, 
+    'image': 'https://cdn.apartmenttherapy.info/image/fetch/f_auto,q_auto:eco/https%3A%2F%2Fstorage.googleapis.com%2Fgen-atmedia%2F3%2F2018%2F03%2F55cd28cae8ee78fe1e52ab1adc9eafff24c9af92.jpeg', 
+    'text': "Why shouldn't we?", 
+    'commentNum': 5, 
+    'dateCreated': '2019-08-11 02:23:04', 
+    'username': 'mary060196', 
+    'avatarUrl': 'https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Up_Hand_Sign_Emoji_large.png?v=1480481047', 
+    'upOrDownvoted': 1,
+    'comments': [
+    {
+        'id': 1, 
+        'totalVotes': 64, 
+        'dateCreated': '2019-08-11 10:10:10', 
+        'username': 'jtroia', 
+        'avatarUrl': 'https://cdn.sandals.com/beaches/v12/images/general/destinations/home/beach.jpg', 
+        'text': "How hadn't I thought of it myself? Great idea!", 
+        'upOrDownvoted': 1,
+        'comments' : [
+        {
+            'id': 4, 
+            'totalVotes': 24, 
+            'dateCreated': '2019-08-11 15:15:15', 
+            'username': 'mary060196', 
+            'avatarUrl': 'https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Up_Hand_Sign_Emoji_large.png?v=1480481047', 
+            'text': "Yea! We'll just have to find a good pizzeria and notify the class.", 
+            'upOrDownvoted': 0
+        }, 
+        {
+            'id': 5, 
+            'totalVotes': 15, 
+            'dateCreated': '2019-08-11 15:20:15', 
+            'username': 'jtroia', 
+            'avatarUrl': 'https://cdn.sandals.com/beaches/v12/images/general/destinations/home/beach.jpg', 
+            'text': "I will send everyone a message on Slack (if anybody even opens it.)", 
+            'upOrDownvoted': 0
+        }]
+    }, 
+    {
+        'id': 2, 
+        'totalVotes': 59, 
+        'dateCreated': '2019-08-11 10:20:36', 
+        'username': 'bla-bla', 
+        'avatarUrl': 'https://www.designrepublic.com/27631-large_default/blabla-big-plexi.jpg', 
+        'text': "Bla bla bla bla bla. Bla bla bla bla!", 
+        'upOrDownvoted': -1, 
+        'comments': []
+    }, 
+    {
+        'id': 3, 
+        'totalVotes': 12, 
+        'dateCreated': '2019-08-11 10:20:36', 
+        'username': 'wowwow1', 
+        'avatarUrl': None, 
+        'text': "Wow wow wow wow wow. Wow wow wow wow!", 
+        'upOrDownvoted': 0, 
+        'comments': []
+    }]
+}
 
 # 'user' is logged in, and optional argument 'commentSubmittedMessage' is passed:
 @app.route('/post-details1')
@@ -287,5 +344,9 @@ if __name__ == "__main__":
     # webbrowser.open_new("http://localhost:8181/user-profile2")
     # webbrowser.open_new("http://localhost:8181/account-settings1")
     # webbrowser.open_new("http://localhost:8181/account-settings2")
+<<<<<<< HEAD
     app.run("localhost", 8282, True, use_reloader=False)
+=======
+    app.run("localhost", 8181, True, use_reloader=False)
+>>>>>>> 2192e577f4ac922648790ddb2b42528b41e0a6cb
 

@@ -1,4 +1,8 @@
 ﻿/* JavaScript file
+    version 1.1
+    08.13.2019
+    Description: Pressing 'subscribe' on the port index will change the color of the corresponding button in 'Trending Ports'. Bug fixed!
+    
     version 1.0
     08.11.2019
     Description: Creation of File
@@ -25,5 +29,19 @@ function subscribePortIndex(object)
        subscribeButton.value = 'Subscribe'; // Change the text on the button to 'Subscribe'.
        subscribeButton.title = 'Subscribe'; // Change the title text on the button to 'Subscribe'.
    }
+    
+   // Now check if this port is also in the 'trending ports' section, and change the color of the button accordingly:
+   for (i = 0; i < document.getElementsByClassName("trendingName").length; i++)
+   {
+        if (document.getElementsByClassName("trendingName")[i].innerHTML == document.getElementsByClassName("portName" + id)[0].innerHTML)
+        {
+                // Note that the index below is 'i-1'. The reason is that we enumerate the 'trending ports' starting from 1 and not from ,
+                // which is why here we have to subtract 1 to get to the right button!
+                document.getElementsByClassName("subscribe")[i-1].style.backgroundColor = subscribeButton.style.backgroundColor;
+                document.getElementsByClassName("subscribe")[i-1].value = subscribeButton.value;
+                document.getElementsByClassName("subscribe")[i-1].title = subscribeButton.title;
+        }
+   }
+    
    document.getElementsByClassName("subscriptionForm" + id)[0].submit(); // Now submit this information
 }
