@@ -380,6 +380,7 @@ def portindex():
 def subscribe():
     if "loggedin" in session:
         res = request.form
+        print(res)
         portname = res["portname"]
         username = session["username"]
         # Either going be joined(you're subscribing) or Subscribed,
@@ -397,6 +398,9 @@ def subscribe():
                 f"{api}/unsubscribe-to-port/",
                 json={"portname": portname, "username": username},
             )
+        session["subscriptions"] = requests.get(
+            f"{api}/ports-for-username/", json={"username": username}
+        ).json()["all_subscriptions for {data_value}"]
         return res
     else:
         return redirect("/login/")
@@ -612,10 +616,15 @@ def pending():
 # helper function to get "trending posts"
 # WIll do this by just getting three three random ports
 def trending_ports():
-    ports = requests.get(f"{api}/allports/")
+    ports = requests.get(f"{api}/allports/").json()
+    if "loggedin" in session:
+        for port in ports['all_ports']:
+            for subscribe_ports in session['subscriptions']:
+                if port['id'] == subscribe_ports['portId']:
+                    port.update({"isSubscribed": True})
     # Add way of deciding what ports are "trending"
     # Return a dictonary of the port representation
-    return ports.json()
+    return ports
 
 
 def update_vote_for_post(port):
@@ -623,7 +632,7 @@ def update_vote_for_post(port):
         for posts in port["posts"]:
             for votes in session["votes"]:
                 if posts["postId"] == votes["postId"]:
-                    print(votes["vote"])
+                    # print(votes["vote"])
                     posts.update({"upOrDownvoted": votes["vote"]})
         return port
     else:
