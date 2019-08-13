@@ -1,6 +1,9 @@
 # CISC 3140 - Summer 2019 Project
 This is the repository for the group project in CISC 3140 class at Brooklyn College.
+
 # Alpha Deployed @ https://bc-app-class.herokuapp.com/
+- Linked up with Travis CI 
+    - [![Build Status](https://travis-ci.org/DataMascara/cisc3140-su19-project.svg?branch=master)](https://travis-ci.org/DataMascara/cisc3140-su19-project)
 
 ## UnderDogs
 

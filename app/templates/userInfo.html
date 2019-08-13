@@ -264,5 +264,150 @@
                          {% endif -%}
                   </div> <!-- End of 'divText' -->
               </div> <!-- End of 'middleScreen' -->
+       {%- elif dashboard %}
+        <div class = "middleScreen">
+              <div class = "page">
+                     <p class = "pageTitle" >DASHBOARD</p>
+              </div>
+              <div class = "divText1">
+                    <form action = "" method = "post" class = "accountSettingsButtons">
+                            <div class = "maroonButtons">
+                                <div class = "subscriptionsDiv">
+                                     <input type = "submit" 
+                                                 class = "subscriptionsText"  
+                                                 name = "subscriptions" 
+                                                 value = "Subscriptions" 
+                                                 title = "Your port subscriptions" >
+                                </div>
+                                <div class = "commentsDiv">
+                                      <input type = "submit" 
+                                                  class = "commentsText" 
+                                                  name = "comments" 
+                                                  value = "Comments" 
+                                                  title = "Comments you wrote"></p>
+                                </div>
+                                <div class = "savedDiv">
+                                     <input type = "submit" 
+                                                 class = "savedText"  
+                                                 name = "savedPosts" 
+                                                 value = "Saved Posts" 
+                                                 title = "Posts you saved" >
+                                </div>
+                                <div class = "postsDiv">
+                                      <input type = "submit" 
+                                                  class = "postsText" 
+                                                  name = "myPosts" 
+                                                  value = "My Posts" 
+                                                  title = "Posts you wrote"></p>
+                                </div>
+                             </div>
+                   </form>
+                   {%- if (subscrptions) and (user) %}
+                       {%- for port in user['myPorts'] %}
+                               {#- Display alternating colors for odd and even-numbered posts: #}
+                               {%- if loop.index % 2 != 0 %}
+                                   <div class="port-section" style = "background-color: #ded3d7;">
+                               {%- else %}
+                                   <div class="port-section" style = "background-color: #eae8e8;">
+                               {% endif -%}
+                                <div class = "portFirstPart">
+                                    <a href = "" class = "portName portName{{ port['id'] }}" title = "{{ port['name'] }}" >p/{{ port['name'] }}</a>
+                                 </div>
+                                 <div class = "portSecondPart">
+                                     <p class = "portMembersNumber">{{ port['mem'] }} members</p>
+                                 </div>
+                                 <div class = "portThirdPart">
+                                             <form class = "indexForm subscriptionForm{{ port['id'] }}" 
+                                                        action = "" 
+                                                        method = "post" 
+                                                        target="frameForUserInfo" 
+                                                        name = "subscriptionForm{{ port['id'] }}">
+                                                    <input type="button" 
+                                                                style = "background-color: #7B2240" 
+                                                                class = "subscribeIndex subscribe{{ port['id'] }}" 
+                                                                name  = "subscribe{{ port['id'] }}" 
+                                                                title="Joined" 
+                                                                value = "Joined" 
+                                                                onclick="subscribePortIndex(this)" >
+                                             </form>
+                                 </div>
+                         </div>
+                       {% endfor -%}
+                    {%- elif (comments) and (user) %}
+                         {%- for comment in user['myComments'] %}
+                               {#- Display alternating colors for odd and even-numbered posts: #}
+                               {%- if loop.index % 2 != 0 %}
+                                   <div class="comment-section" style = "background-color: #ded3d7;">
+                               {%- else %}
+                                   <div class="comment-section" style = "background-color: #eae8e8;">
+                               {% endif -%}
+                                 <div class = "commentFirstPart">
+                                    <p class = "votes" >{{ comment['totalVotes'] }}</p>
+                                 </div>
+                                 <div class = "commentSecondPart">
+                                     <div style = "display:flex;">
+                                          <div>
+                                              <a href = "" class = "thePortName" title = "Go to {{ comment['portname'] }}">{{ comment['portname'] }}</a>
+                                          </div>
+                                          <div>
+                                              <a href = "" class = "thePostName" title = "See {{ comment['postname'] }}">{{ comment['postname'] }}</a>
+                                          </div>
+                                     </div>
+                                     <div>
+                                        <p class = "commentText">{{ comment['text'] }}</p>
+                                     </div>
+                                 </div>
+                                 <div class = "commentThirdPart">
+                                         <p class = "dateAndTime">{{ comment['dateCreated'] }}</p>
+                                 </div>
+                         </div>
+                      {% endfor -%}
+                    {%- elif (savedPosts) and (user) %}
+                         {%- for post in user['savedPosts'] %}
+                               {#- Display alternating colors for odd and even-numbered posts: #}
+                               {%- if loop.index % 2 != 0 %}
+                                   <div class="post-section" style = "background-color: #ded3d7;">
+                               {%- else %}
+                                   <div class="post-section" style = "background-color: #eae8e8;">
+                               {% endif -%}
+                                 <div class = "postFirstPart">
+                                    <p class = "votes" >{{ post['totalVotes'] }}</p>
+                                 </div>
+                                 <div class = "postSecondPart">
+                                     <div style = "display:flex;">
+                                          <div>
+                                              <a href = "" class = "thePortName" title = "Go to {{ post['portname'] }}" >{{ post['portname'] }}</a>
+                                          </div>
+                                          <div>
+                                              <a href = "" class = "thePostName" title = "See {{ post['title'] }}" >{{ post['title'] }}</a>
+                                          </div>
+                                     </div>
+                                     <div>
+                                        {%- if post['text'] %}
+                                         <p class = "postText">{{ post['text'] }}</p>
+                                        {% else %}
+                                         <p class = "postText">(No text content)</p>
+                                        {% endif -%}
+                                     </div>
+                                 </div>
+                                 <div class = "postThirdPart">
+                                         <div class = "dateAndTimeDiv">
+                                             <p class = "dateAndTime">{{ post['dateCreated'] }}</p>
+                                         </div>
+                                         <div class = "authorDetails">
+                                               {#- Since 'post['avatarUrl']' is optional, we must have the following 'if' statement. #}
+                                               {%- if post['avatarUrl'] != None %}
+                                                       <a href = "" title = "{{ post['username'] }}'s profile"><img src = "{{ post['avatarUrl'] | e }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
+                                               {%- else %}
+                                                       <a href = "" title = "{{ post['username'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
+                                               {% endif -%}
+                                                       <a href = "" class = "usernameOfAuthor" title = "{{ post['username'] }}'s profile">{{ post['username'] }}</a>
+                                         </div>
+                                 </div>
+                         </div>
+                      {% endfor -%}
+                    {% endif -%}
+                </div> <!-- End of 'divText' -->
+            </div> <!-- End of 'middleScreen' -->
        {% endif -%}
 {% endblock content -%}
