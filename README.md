@@ -14,21 +14,23 @@ UnderDogs is an information hub for Brooklyn College Computer Science students a
 
 ## Installation
 
-Base-requirements: Python3, Flask Web Framework
+Base-requirements: 
+- Python3, 
+- Flask Web Framework
 
 ## Installing dependencies from the `requirements.txt` file.
 
-- To install dependencies from the `requirements.txt` file. - `pip3 install -r requirements.txt`
-- When new Python libraries are required, update the `requirements.txt` file using the command. - `pip3 freeze > requirements.txt` and push the file to Github. (or `pip` instead of `pip3`
+- To install dependencies from the `requirements.txt` file: 
+```pip3 install -r requirements.txt```
+- When new Python libraries are required, update the `requirements.txt` file using the command and push the file to Github. (or `pip` instead of `pip3`
+```pip3 freeze > requirements.txt```
 
 ## Running
 
 - **NOTE:** MinimalAPI functionality is currently implemented, with no VIEW/connecting link to the front end.
 - Alpha release will be served on a server soon so that features can be continuously implemented
-- Navigate to the `app/` folder and execute `python main.py` or `python3 main.py` (depending on your setup)
-- Use postman ([https://www.getpostman.com/](https://www.getpostman.com/)) to test the API.
-- Debug user that already exists is :chalshaff12 (it returns their full record) - Currently, the API is just working in some cases and not linked to a view page
-  yet 
+- Navigate to the `app/` folder and execute `python app.py` or `python3 app.py` (depending on your setup)
+- 
     - Server hosting for live demo is coming soon.
 
 ## Try a GET Request
