@@ -1,4 +1,9 @@
 /* CSS Styles for Base Templates: 'baseLoggedIn.html' and 'baseLoggedOut.html'
+Version 1.1.4
+   08.12.2019
+   Description: Flex styling for the 'outerShellForMenuLinks' class added. Inline links
+                screen reader accessibility issue resolved!
+
 Version 1.1.3
    08.06.2019
    Description: Addition of 'outline: inherit' to classes 'a' and 'b'
@@ -225,11 +230,13 @@ span, a{
     font-size: 0;
 }
 
-.moreInfo{
+.outerShellForMenuLinks{
+    display: flex;
     position: absolute;
     bottom: 0;
     bottom: calc(1.7vh + 1.7vw);
     left: calc(4vh + 4vw);
+    justify-content: space-around;
 }
 
 .w2{

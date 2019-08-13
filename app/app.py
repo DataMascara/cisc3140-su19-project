@@ -38,7 +38,7 @@ def login_api():
             username = res["username"]
             password = res["password"]
             api_res = requests.post(
-                f"{api}/login/", 
+                f"{api}/login/",
                 json={"username": username, "password": password}
             ).json()
             try:
@@ -114,7 +114,7 @@ def home():
 """
 @app.route("/p/<portname>/", methods=["GET"])
 def portpost(portname):
-    port = requests.get(f"{api}/posts-by-portname/", 
+    port = requests.get(f"{api}/posts-by-portname/",
     json={"portname": portname}).json()
     print(type(port))
     trending = trending_ports()["all_ports"]
@@ -141,7 +141,7 @@ def portpost(portname):
 @app.route("/u/<username>/posts/", methods=["GET"])
 def my_posts(username):
     trending = trending_ports()["all_ports"]
-    port = requests.get(f"{api}/my-posts/", 
+    port = requests.get(f"{api}/my-posts/",
     json={"username": username}).json()
     if "loggedin" in session:
         return render_template(
@@ -209,7 +209,7 @@ def sign_up():
             )
 
         # if this line is successful then the user is created
-        # Load uses helper method returns the dict of the user 
+        # Load uses helper method returns the dict of the user
         # representation for local storage
         session["user"] = load_user(username)
         session["loggedin"] = True
@@ -320,7 +320,7 @@ def portindex():
                 # if the ids match then the user is subscribed to the port so 'isSubscribed'
                 #  will be set to True
                 if p["id"] == sp["portId"]:
-                    # "isSubscribed" notifies the html page what 
+                    # "isSubscribed" notifies the html page what
                     # state the button should be in
                     p.update({"isSubscribed": True})
         return render_template(
@@ -344,7 +344,7 @@ def subscribe():
         res = request.form
         portname = res["portname"]
         username = session["username"]
-        # Either going be joined(you're subscribing) or Subscribed, 
+        # Either going be joined(you're subscribing) or Subscribed,
         # meaning you want to unsubscribe
         state = res["value"]
 
@@ -364,7 +364,7 @@ def subscribe():
         return redirect("/login/")
 '''
  ------PROFILE-----
-'''      
+'''
 @app.route("/profile/")
 def profile():
     trending = trending_ports()["all_ports"]
@@ -380,29 +380,31 @@ def profile():
 def update():
     if "loggedin" in session:
 
-        form = request.form
-        form = dict(form)
+        form = request.form.to_dict()
+        headers = {"Content-Type": "application/json"}
 
         if request.method == "POST":
 
             if 'emailSetting' in form.keys():
 
-                payload = { "username":session["user"]["username"], "field":"email", "value":form["emailSetting"] }
+                payload = json.dumps({ "username":session["user"]["username"], "field":"email", "value":form["emailSetting"] })
 
-                response = requests.post(api + "/update/", data=payload)
+                response = requests.put(api + "update/", data=payload, headers = headers)
                 print(response.content)
 
                 return render_template("userInfo.html", user = session["user"]["username"], accountSettings = True, emailAndPassword = True)
-                
+
             else:
 
-                payload = { "username":session["user"]["username"], "field":"password", "value":form["passwordSetting"] }
+                payload = json.dumps({ "username":session["user"]["username"], "field":"password", "value":form["passwordSetting"] })
 
-                response = requests.post(api + "/update/", data=payload)
+                response = requests.put(api + "/update/", data=payload, headers = headers)
                 print(response.content)
 
                 return render_template("userInfo.html", user = session["user"]["username"], accountSettings = True, emailAndPassword = True)
 
+            return render_template("userInfo.html", user = session["user"]["username"], accountSettings = True, emailAndPassword = True)
+        else:
             return render_template("userInfo.html", user = session["user"]["username"], accountSettings = True, emailAndPassword = True)
     else:
         return redirect('/login/')
