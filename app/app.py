@@ -410,10 +410,11 @@ def post_by_title(title):
         post_title = title
     # If you click on subscribe(you just joined the port),
         try:
-            post = requests.get(
+            post_dict = requests.get(
                 f"{api}/post-by-title/",
-                json={"title": title})
-            return render_template( 'postDetails.html', user = session['user'], name = "Post", post = post)
+                json={"title": title}).json() 
+            print(post_dict)    
+            return render_template('postDetails.html', user = session['user'], name = "Post", post=post_dict)
         except:
             return redirect('/home/')
     else:

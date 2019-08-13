@@ -89,19 +89,19 @@
              </span>
              <div class = "description">
                         <a href = "" class = "portOfPostName" title = "See all posts in {{ post['portname'] }}">p/{{ post['portname'] }}</a>
-                        <p class = "nameOfPost" title = "{{ post['title'] | e }}">{{ post['title']  | e }}</p>
+                        <p class = "nameOfPost" title = "{{ post['postTitle'] | e }}">{{ post['postTitle']  | e }}</p>
               </div>
               <div class = "timeAndAuthor">
                         <p class = "dateOfWriting">{{ post['dateCreated'] }}</p>
-                        <p class = "postedBy">Posted by:</p>
+                        <p class = "postedBy">Posted by: {{post['author']}}</p>
                         <div class = "authorDetails">
                              {#- Since 'post['avatarUrl']' is optional, we must have the following 'if' statement. #}
                              {%- if post['avatarUrl'] != None %}
-                                  <a href = "" title = "{{ post['username'] }}'s profile"><img src = "{{ post['avatarUrl'] | e }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
+                                  <a href = "" title = "{{ post['author'] }}'s profile"><img src = "{{ post['image'] | e }}" class = "roundImage" alt = "the user {{ post['author'] }}"></a>
                              {%- else %}
-                                  <a href = "" title = "{{ post['username'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
+                                  <a href = "" title = "{{ post['author'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ post['author'] }}"></a>
                              {% endif -%}
-                             <a href = "" class = "usernameOfAuthor" title = "{{ post['username'] }}'s profile">{{ post['username'] }}</a>
+                             <a href = "" class = "usernameOfAuthor" title = "{{ post['author'] }}'s profile">{{ post['username'] }}</a>
                          </div>
                 </div>
           </div> <!-- End of 'postData' division -->

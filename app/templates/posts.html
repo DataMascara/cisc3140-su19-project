@@ -78,6 +78,7 @@
                        {#- do nothing #}
                        {% endif -%}>{{ post['votes'] }}</p>
                     {%- if user %} {#- Appears only if the user is logged in #}
+                        {{user}}
                           <input type = "submit" 
                                      class = "downvoteBtn post{{ post['postId'] }}"
                                      value = "--" 
@@ -108,7 +109,7 @@
                  </div>
                  <div class = "timeAndAuthor">
                         <p class = "dateOfWriting">{{ post['dateCreated'] }}</p>
-                        <p class = "postedBy">Posted by:</p>
+                        <p class = "postedBy">Posted by: {{post['author']}}</p>
                         <div class = "authorDetails">
                              {#- Since 'post['avatarUrl']' is optional, we must have the following 'if' statement. #}
                              {%- if post['avatarUrl'] != None %}
