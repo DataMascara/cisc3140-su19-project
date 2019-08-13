@@ -102,16 +102,14 @@ def home():
             name="Home",
             user=session["user"],
             trendPorts=trending,
-            port=port,
-            search="My First Search!",
+            port=port
         )
     else:
         return render_template(
             "posts.html",
             name="Log In",
             trendPorts=None,
-            port=None,
-            search="My First Search!",
+            port=None
         )
  
 """
@@ -131,16 +129,14 @@ def portpost(portname):
             name="p/" + portname,
             user=session["user"],
             trendPorts=trending,
-            port=port,
-            search="My First Search!",
+            port=port
         )
     else:
         return render_template(
             "posts.html",
             name="p/" + portname,
             trendPorts=trending,
-            port=port,
-            search="My First Search!",
+            port=port
         )
 
 '''
@@ -158,8 +154,7 @@ def my_posts(username):
             name=username + "'s Post",
             user=session["user"],
             trendPorts=trending,
-            port=port,
-            search="My First Search!",
+            port=port
         )
         # return port
     else:
@@ -167,8 +162,7 @@ def my_posts(username):
             "posts.html",
             name=username + "'s Post",
             trendPorts=trending,
-            port=port,
-            search="My First Search!",
+            port=port
         )
 
 """
@@ -252,7 +246,7 @@ def post():
             try:
                 res = request.form
                 title = res["title"]
-                portname = res["portname"]
+                portname = res["communitysearch"]
                 text = res["text"]
                 response = requests.post(
                     f"{api}/newpost/",
@@ -269,7 +263,7 @@ def post():
                     "postSubmitted.html",
                     user=session["user"],
                     name="What Name",
-                    trendPorts=trending
+                    trendPorts=trending, ports=trending
                 )
 
             except:
@@ -308,8 +302,7 @@ def subscribedposts():
             name="Your feed",
             user=session["user"],
             trendPorts=trending,
-            port=post,
-            search="My First Search!",
+            port=post
         )
 
         return post
@@ -326,6 +319,7 @@ def vote():
         value = res["value"]
         postId = res["postId"]
         originalValue = res["originalValue"]
+        type = res['type']
         # print(res)
         response = (
             requests.post(
@@ -677,8 +671,7 @@ def hello9():
         "posts.html",
         name="Bla",
         trendPorts=trending,
-        port="Main",
-        search="My First Search!",
+        port="Main"
     )
 
 

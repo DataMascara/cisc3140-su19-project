@@ -18,7 +18,7 @@
         </div>
         {#- If user presses the button, he or she will be redirected to create a new post! #}
         {%- if user %}
-            <form method = "post" action = "/new-post/" class = "createPostForm">
+            <form method = "get" action = "/new-post/" class = "createPostForm">
                   <input type = "submit" class = "createPostBtn" name = "createPostBtn" value = "CREATE POST" title = "Create New Post">
             </form>
         {% endif -%}
@@ -69,6 +69,7 @@
                    {% endif -%}
                     <input type="hidden" name="postId" value="{{ post['postId'] }}">
                     <input type="hidden" name="originalValue" value="{{ post['upOrDownvoted'] }}">
+                    <input type="hidden" name="type" value="post">
                     <p class = "numOfVotes post{{ post['postId'] }}"
                        {%- if (post['upOrDownvoted'] == 1) and (user) %}
                        style = "color: rgb(77, 208, 191);"
