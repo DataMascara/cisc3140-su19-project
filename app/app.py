@@ -224,6 +224,12 @@ def sign_up():
         session["loggedin"] = True
         # session['id'] = account['id']
         session["username"] = username
+        session["subscriptions"] = requests.get(
+            f"{api}/ports-for-username/", json={"username": username}
+        ).json()["all_subscriptions for {data_value}"]
+        session["votes"] = requests.get(
+            f"{api}/votes-for-username/", json={"username": username}
+        ).json()["voted_data"]
         redirect("/home/")
         return render_template(
             "base.html", name="Bla", user=session["user"], trendPorts=trending
