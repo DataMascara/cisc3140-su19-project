@@ -10,14 +10,14 @@ app = Flask(__name__, template_folder="templates")
 app.secret_key = "test"
 
 # Assuming the API is running at the local ip below
-api = "https://bc-api-class.herokuapp.com/"
+api = "https://bc-api-class.herokuapp.com"
+# api = "http://127.0.0.1:5000"
 
 @app.route("/", methods=["GET"])
 def redirect_home():
     if "loggedin" in session:
         return redirect("/home/")
     return redirect("/login/")
-
 
 """
 -------------LOGIN-------------
@@ -58,6 +58,7 @@ def login_api():
                         "base.html", title="Logged In", user=session["user"]
                     )
                 else:
+                    session["votes"]
                     return render_template(
                         "base.html", title="", errLogIn=True, trendPorts=trending
                     )
@@ -91,8 +92,9 @@ def logout():
 @app.route("/home/", methods=["GET"])
 def home():
     # Use the helper method to grab "tredning ports"
-    trending = trending_ports()["all_ports"]
+    trending = trending_ports()['all_ports']
     port = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
+    print(port)
     if "loggedin" in session:
         update_vote_for_post(port)
         return render_template(
@@ -121,7 +123,7 @@ def home():
 def portpost(portname):
     port = requests.get(f"{api}/posts-by-portname/", json={"portname": portname}).json()
     print(type(port))
-    trending = trending_ports()["all_ports"]
+    trending = trending_ports()['all_ports']
     if "loggedin" in session:
         update_vote_for_post(port)
         return render_template(
@@ -222,6 +224,12 @@ def sign_up():
         session["loggedin"] = True
         # session['id'] = account['id']
         session["username"] = username
+        session["subscriptions"] = requests.get(
+            f"{api}/ports-for-username/", json={"username": username}
+        ).json()["all_subscriptions for {data_value}"]
+        session["votes"] = requests.get(
+            f"{api}/votes-for-username/", json={"username": username}
+        ).json()["voted_data"]
         redirect("/home/")
         return render_template(
             "base.html", name="Bla", user=session["user"], trendPorts=trending
@@ -236,7 +244,7 @@ def sign_up():
 def post():
     trending = trending_ports()["all_ports"]
     # Make sure the user is logged in
-
+   
     if "loggedin" in session:
         # If we are making a post
 
@@ -261,7 +269,7 @@ def post():
                     "postSubmitted.html",
                     user=session["user"],
                     name="What Name",
-                    trendPorts=trending,
+                    trendPorts=trending
                 )
 
             except:
@@ -271,10 +279,12 @@ def post():
                     error="Invalid Post",
                     trendPorts=trending,
                 )
-        # If the post fails, try again
+        # If it's  a get
         else:
+            ports = trending_ports()["all_ports"]
+            print(ports)
             return render_template(
-                "writePost.html", user=session["user"], trendPorts=trending
+                "writePost.html", user=session["user"], trendPorts=trending, ports=ports
             )
 
     else:
@@ -358,6 +368,7 @@ def portindex():
                     # "isSubscribed" notifies the html page what
                     # state the button should be in
                     p.update({"isSubscribed": True})
+                    break
         return render_template(
             "portIndex.html",
             name="Port Index",
@@ -378,6 +389,7 @@ def portindex():
 def subscribe():
     if "loggedin" in session:
         res = request.form
+        print(res)
         portname = res["portname"]
         username = session["username"]
         # Either going be joined(you're subscribing) or Subscribed,
@@ -395,9 +407,99 @@ def subscribe():
                 f"{api}/unsubscribe-to-port/",
                 json={"portname": portname, "username": username},
             )
+        session["subscriptions"] = requests.get(
+            f"{api}/ports-for-username/", json={"username": username}
+        ).json()["all_subscriptions for {data_value}"]
         return res
     else:
         return redirect("/login/")
+
+'''
+--- POST ---
+'''
+@app.route("/post/<postId>", methods = ["POST", "GET"])
+def post_by_title(postId):
+    ##Get post by post ID
+    post = requests.get(
+        f"{api}/post-by-id/",
+        json={"id": f"{postId}"}).json()['posts'][0]
+    print(post)
+    if "loggedin" in session:
+        post_title = post['postTitle']
+        try:
+            # post_dict = requests.get(
+            #     f"{api}/post-by-title/",
+            #     json={"title": title}).json() 
+            comments = requests.get(
+                f"{api}/comments-by-post/",
+                json={"id": postId}).json()['comments']
+        except Exception as e:
+            print("EXCEPT")
+            print(e)
+            redirect("/home/")
+        if(request.method == "GET"):
+            # If you click on subscribe(you just joined the port),
+            print(comments)
+            return render_template('postDetails.html', user = session['user'], name = "Post", post=post, comments= comments)
+        ## MEANING WE ARE POSTING A COMMENT        
+        elif(request.method == "POST"):
+            res = request.form
+            if "loggedin" in session:
+            # If you click on subscribe(you just joined the port)
+                # text, post_id, parent_id, author
+                text = res["commentToPostText"]
+                post_id = post["postId"]
+                author = session['username']
+                try:
+                    parent_id = res["parentId"]
+                except:
+                    parent_id = "NULL"
+                print("we got to text")
+                print(author)
+                try:
+                    add_comment = requests.post(
+                    f"{api}/add-comment/",
+                    json={"text": text, "postId":post_id, "parent_id":parent_id, "author":author}).json() 
+                    print("GOT HERE TOO!")
+                    print(add_comment)
+                    return render_template('postDetails.html', user = session['user'], name = "Post", post=post, comments = comments, commentSubmittedMessage = True)
+                except:
+                    return redirect("/login/")            
+    else:
+         return redirect("/login/")
+
+
+
+
+# '''
+# ---- ADD COMMENT -----
+# '''
+# @app.route("/add-comment/", methods = ["POST"])
+# def add_comment_post():
+#     if "loggedin" in session:
+#         post_title = title
+#     # If you click on subscribe(you just joined the port)
+#         # text, post_id, parent_id, author
+#         text = res["text"]
+#         post_id = res["postId"]
+#         parent_id = None
+#         author = session['username']
+#         try:
+#             parent_id = res["parentId"]
+#         except:
+#         try:
+#             add_comment = requests.post(
+#                 f"{api}/add-comment/",
+#                 json={"text": text, "post_id":post_id, "parent_id":parent_id, "author":author}).json() 
+            
+#             print(comments)
+#             return render_template('postDetails.html', user = session['user'], name = "Post", post=post_dict, comments = comments, commentSubmittedMessage = True)
+#         except Exception as e:
+#             print(e)
+#             return redirect('/home/')
+#     else:
+#         return redirect("/login/")
+
 
 
 """
@@ -590,19 +692,35 @@ def pending():
 # helper function to get "trending posts"
 # WIll do this by just getting three three random ports
 def trending_ports():
-    ports = requests.get(f"{api}/allports/")
-    # Add way of deciding what ports are "trending"
-    # Return a dictonary of the port representation
-    return ports.json()
+    ports = requests.get(f"{api}/allports/").json()
+    # if "loggedin" in session:
+        # for port in ports['all_ports']:
+    #         for subscribe_ports in session['subscriptions']:
+    #             if port['id'] == subscribe_ports['portId']:
+    #                 port.update({"isSubscribed": True})
+    #                 break
+    # # Add way of deciding what ports are "trending"
+    # # Return a dictonary of the port representation
+    # print(list(port))
+    # print(len(list(port)))
+    return ports
+
 
 
 def update_vote_for_post(port):
-    for posts in port["posts"]:
-        for votes in session["votes"]:
-            if posts["postId"] == votes["postId"]:
-                print(votes["vote"])
-                posts.update({"upOrDownvoted": votes["vote"]})
-    return port
+    if "loggedin" in session:
+        for posts in port["posts"]:
+            for votes in session["votes"]:
+                if posts["postId"] == votes["postId"]:
+                    # print(votes["vote"])
+                    posts.update({"upOrDownvoted": votes["vote"]})
+                    break
+        return port
+    else:
+        return None
+
+
+        
 
 
 def load_user(username):
@@ -612,5 +730,4 @@ def load_user(username):
 
 
 if __name__ == "__main__":
-    webbrowser.open_new("http://bc-app-class.herokuapp.com")
-    app.run("http://bc-app-class.herokuapp.com", debug=True)
+    app.run("localhost", 8080, debug=True)

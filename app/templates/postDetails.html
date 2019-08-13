@@ -89,32 +89,32 @@
              </span>
              <div class = "description">
                         <a href = "" class = "portOfPostName" title = "See all posts in {{ post['portname'] }}">p/{{ post['portname'] }}</a>
-                        <p class = "nameOfPost" title = "{{ post['title'] | e }}">{{ post['title']  | e }}</p>
+                        <p class = "nameOfPost" title = "{{ post['postTitle'] | e }}">{{ post['postTitle']  | e }}</p>
               </div>
               <div class = "timeAndAuthor">
                         <p class = "dateOfWriting">{{ post['dateCreated'] }}</p>
-                        <p class = "postedBy">Posted by:</p>
+                        <p class = "postedBy">Posted by: {{post['author']}}</p>
                         <div class = "authorDetails">
-                             {#- Since 'post['avatarUrl']' is optional, we must have the following 'if' statement. #}
-                             {%- if post['avatarUrl'] != None %}
-                                  <a href = "" title = "{{ post['username'] }}'s profile"><img src = "{{ post['avatarUrl'] | e }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
+                             {#- Since 'post['image']' is optional, we must have the following 'if' statement. #}
+                             {%- if post['image'] != None %}
+                                  <a href = "" title = "{{ post['author'] }}'s profile"><img src = "{{ post['image'] | e }}" class = "roundImage" alt = "the user {{ post['author'] }}"></a>
                              {%- else %}
-                                  <a href = "" title = "{{ post['username'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
+                                  <a href = "" title = "{{ post['author'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ post['author'] }}"></a>
                              {% endif -%}
-                             <a href = "" class = "usernameOfAuthor" title = "{{ post['username'] }}'s profile">{{ post['username'] }}</a>
+                             <a href = "" class = "usernameOfAuthor" title = "{{ post['author'] }}'s profile">{{ post['username'] }}</a>
                          </div>
                 </div>
           </div> <!-- End of 'postData' division -->
 
          {#- Since 'post['text']' is optional, we must have the following 'if' statement. #}
          {%- if post['text'] != None %}
-                 <p class = "postDescription">{{ post['text']  | e }}</p>
+                 <p class = "postDescription">{{ post['postText']  | e }}</p>
          {% endif %}
 
          {#- Since 'post['image']' is optional, we must have the following 'if' statement. We put the whole div inside the 'if' statement. #}
          {%- if post['image'] != None %}
            <div class = "postImageDiv">
-                   <img src = "{{ post['image'] | e }}" class = "squareImage" title = "{{ post['title'] | e }}" alt = "the post {{ post['title'] | e }}">
+                   <img src = "{{ post['image'] | e }}" class = "squareImage" title = "{{ post['postTitle'] | e }}" alt = "the post {{ post['postTitle'] | e }}">
            </div>
          {% endif %}
 
@@ -123,7 +123,7 @@
                   <textarea rows = "7" 
                                   class = "commentToPostText" 
                                   name = "commentToPostText" 
-                                  title = "Write a comment to {{ post['username'] }}'s post" 
+                                  title = "Write a comment to {{ post['author'] }}'s post" 
                                   placeholder = "Comment"
                                   spellcheck = "true" 
                                   onkeyup = "enableDisableSubmission(this)"></textarea>
@@ -142,13 +142,14 @@
          <div class = "comments">
              {#- A line that states how many total comments (both 1 and 2 level): #}
              {%- if post['commentNum'] != 0 %}
-                   <p class = "numberOfComments">{{ post['commentNum'] }} comments:</p>
+                   <p class = "numberOfComments">{{ post['numComments'] }} comments:</p>
              {%- else %}
                    <p class = "numberOfComments">No comments yet!</p>
              {% endif -%}
              {#- The tree of comments: #}
               <div class = "commentTree">
-              {%- for comment1 in post['comments'] %}
+        
+              {%- for comment1 in comments %}
                    <div class = "firstLevelComment">
                        <div class = "votesComments">
                             {%- if user %} {#- Appears only if the user is logged in #}
@@ -173,7 +174,7 @@
                                  style = "color: red;"
                                  {%- else %}
                                  {#- do nothing #}
-                                 {% endif -%}>{{ comment1['totalVotes'] }}</p>
+                                 {% endif -%}>{{ comment1['votes'] }}</p>
                            {%- if user %} {#- Appears only if the user is logged in #}
                                 <form class = "downvoteComments" action = "" method = "post" target = "frameForVotesAndPostSaving">
                                     <input type = "submit" 
@@ -192,16 +193,16 @@
                         </div>
                         <div class = "commentUserImage">
                              {%- if comment1['avatarUrl'] != None %}
-                                  <a href = "" title = "{{ comment1['username'] }}'s profile"><img src = "{{ comment1['avatarUrl'] | e }}" class = "roundImage commentsImage" alt = "the user {{ comment1['username'] }}"></a>
+                                  <a href = "" title = "{{ comment1['author'] }}'s profile"><img src = "{{ comment1['avatarUrl'] | e }}" class = "roundImage commentsImage" alt = "the user {{ comment1['author'] }}"></a>
                              {%- else %}
-                                  <a href = "" title = "{{ comment1['username'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage commentsImage" alt = "the user {{ comment1['username'] }}"></a>
+                                  <a href = "" title = "{{ comment1['username'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage commentsImage" alt = "the user {{ comment1['author'] }}"></a>
                              {% endif -%}
                         </div>
                         <div class = "commentUserNameTextAndReply">
-                             <a href = "" class = "commentUsernameOfAuthor usernameOfAuthor" title = "{{ comment1['username'] }}'s profile">{{ comment1['username'] }}</a>
-                             <p class = "commentText">{{ comment1['text']  | e }}</p>
+                             <a href = "" class = "commentUsernameOfAuthor usernameOfAuthor" title = "{{ comment1['author'] }}'s profile">{{ comment1['author'] }}</a>
+                             <p class = "commentText">{{ comment1['commentText']  | e }}</p>
                              {%- if user %}
-                                 <button type = "button" class = "commentReply" title = "Reply to this comment" onclick = "unvealArea ({{ comment1['id'] }})">← Reply</button>
+                                 <button type = "button" class = "commentReply" title = "Reply to this comment" onclick = "unvealArea ({{ comment1['id'] }}) ">← Reply</button>
                              {% endif -%}
                         </div>
                         <div class = "commentDate">
@@ -209,11 +210,11 @@
                         </div>
                    </div> <!-- End of 'firstLevelComment' -->
                    <div class = "hiddenArea    for{{ comment1['id'] }}" style = "display:none;">
-                       <form class = "writeCommentToComment{{ comment1['id'] }}" method = "post" action = "">
+                       <form class = "writeCommentToComment{{ comment1['id'] }}" method = "post" action = "/post/{{post}}">
                            <textarea rows = "4" 
                                            class = "commentToPostText commentToCommentText{{ comment1['id'] }}" 
                                            name = "commentToCommentTextFor{{ comment1['id'] }}" 
-                                           title = "Write a comment to {{ comment1['username'] }}'s comment" 
+                                           title = "Write a comment to {{ comment1['author'] }}'s comment" 
                                            placeholder = "Comment & ENTER"
                                            spellcheck = "true"
                                            onkeydown="submitComment({{ comment1['id'] }});"></textarea>
@@ -286,5 +287,6 @@
                   {% endfor -%} {#- of the first level comments #}
               </div> <!-- End of 'commentTree' -->
          </div> <!-- End of 'comments' -->
+         
     </div> <!-- End of 'mainScreen' -->
 {%- endblock content %}

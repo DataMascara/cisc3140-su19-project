@@ -399,6 +399,7 @@ savedPosts = [
 ]
 
 # and, finally, written posts:
+
 myPosts = [ 
    { 
      'title': "Bla Bla Post",
