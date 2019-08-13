@@ -425,7 +425,7 @@ def post_by_title(title):
             
             # post_id = post_dict[id]
             comments = requests.get(
-                f"http://127.0.0.1:5000/comments-by-post/",
+                f"{api}/comments-by-post/",
                 json={"id":"1" }).json()['comments']
             print(comments)
             return render_template('postDetails.html', user = session['user'], name = "Post", post=post_dict, comments= comments)
