@@ -58,6 +58,7 @@ def login_api():
                         "base.html", title="Logged In", user=session["user"]
                     )
                 else:
+                    session["votes"]
                     return render_template(
                         "base.html", title="", errLogIn=True, trendPorts=trending
                     )
@@ -94,6 +95,7 @@ def home():
     trending = trending_ports()["all_ports"]
     port = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
     if "loggedin" in session:
+
         update_vote_for_post(port)
         return render_template(
             "posts.html",
@@ -399,6 +401,25 @@ def subscribe():
     else:
         return redirect("/login/")
 
+'''
+--- POST ---
+'''
+@app.route("/post/<title>")
+def post_by_title(title):
+    if "loggedin" in session:
+        post_title = title
+    # If you click on subscribe(you just joined the port),
+        try:
+            post = requests.get(
+                f"{api}/post-by-title/",
+                json={"title": title})
+            return render_template( 'postDetails.html', user = session['user'], name = "Post", post = post)
+        except:
+            return redirect('/home/')
+    else:
+        return redirect("/login/")
+
+
 
 """
  ------PROFILE-----
@@ -597,12 +618,18 @@ def trending_ports():
 
 
 def update_vote_for_post(port):
-    for posts in port["posts"]:
-        for votes in session["votes"]:
-            if posts["postId"] == votes["postId"]:
-                print(votes["vote"])
-                posts.update({"upOrDownvoted": votes["vote"]})
-    return port
+    if "loggedIn" in session:
+        for posts in port["posts"]:
+            for votes in session["votes"]:
+                if posts["postId"] == votes["postId"]:
+                    print(votes["vote"])
+                    posts.update({"upOrDownvoted": votes["vote"]})
+        return port
+    else:
+        return None
+
+
+        
 
 
 def load_user(username):

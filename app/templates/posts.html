@@ -100,7 +100,7 @@
                  </div>
                  <div class = "description">
                         <a href = "" class = "portOfPostName" title = "See all posts in {{ post['portName'] }}">p/{{ post['portName'] }}</a>
-                        <a href = "" class = "nameOfPost" title = "{{ post['postTitle'] | e }}">{{ post['postTitle']  | e }}</a>
+                        <a href = "/post/{{post['postTitle']}}" class = "nameOfPost" title = "{{ post['postTitle'] | e }}">{{ post['postTitle']  | e }}</a>
                         {%- if post['postText'] != None %}
                               <p class = "postDescription">{{ post['postText']  | e }}</p>
                         {% endif -%}
