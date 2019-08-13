@@ -364,10 +364,36 @@ def subscribe():
 '''
  ------PROFILE-----
 '''
-@app.route("/profile/")
+@app.route("/profile/", methods=["GET", "POST"])
 def profile():
     trending = trending_ports()["all_ports"]
     if "loggedin" in session:
+
+        #if user update their profile
+        #get the form from website, convert it to JSON
+        #update the description and avaterURL that user entered.
+        if request.method == "POST":
+            form = request.form.to_dict()
+            headers = {"Content-Type": "application/json"}
+
+            data = json.dumps(
+            { "username":session["user"]["username"],
+             "field":"description",
+              "value":form["descriptionTextArea"] })
+            print(data)
+
+            response = requests.put(api + "update/", data=data, headers = headers)
+            print(response.content)
+
+            data = json.dumps(
+            { "username":session["user"]["username"],
+             "field":"avatarUrl",
+              "value":form["avatarURL"] })
+            print(data)
+
+            response = requests.put(api + "update/", data=data, headers = headers)
+            print(response.content)
+
         print("hello")
         return render_template(
             "userInfo.html", userProfile = True, user=session["user"],
