@@ -24,6 +24,8 @@ def redirect_home():
 """
 -------------LOGIN-------------
 """
+
+
 @app.route("/login/", methods=["POST", "GET"])
 def login_api():
     # already logged in
@@ -38,8 +40,7 @@ def login_api():
             username = res["username"]
             password = res["password"]
             api_res = requests.post(
-                f"{api}/login/",
-                json={"username": username, "password": password}
+                f"{api}/login/", json={"username": username, "password": password}
             ).json()
             try:
                 # Make sure there is a user before we do anything with sessions
@@ -67,9 +68,12 @@ def login_api():
                 "base.html", title="Please Log in", trendPorts=trending
             )
 
+
 """
 -------------LOG-OUT-------------
 """
+
+
 @app.route("/logout/")
 def logout():
     session.pop("loggedin", None)
@@ -79,9 +83,12 @@ def logout():
     # Redirect to login page
     return redirect("/login/")
 
+
 """
 -------------HOMEPAGE-------------
 """
+
+
 @app.route("/home/", methods=["GET"])
 def home():
     # Use the helper method to grab "tredning ports"
@@ -111,10 +118,11 @@ def home():
 - Uses the url to decide what port the user wants to go to.
         - So, this should
 """
+
+
 @app.route("/p/<portname>/", methods=["GET"])
 def portpost(portname):
-    port = requests.get(f"{api}/posts-by-portname/",
-    json={"portname": portname}).json()
+    port = requests.get(f"{api}/posts-by-portname/", json={"portname": portname}).json()
     print(type(port))
     trending = trending_ports()["all_ports"]
     if "loggedin" in session:
@@ -140,8 +148,7 @@ def portpost(portname):
 @app.route("/u/<username>/posts/", methods=["GET"])
 def my_posts(username):
     trending = trending_ports()["all_ports"]
-    port = requests.get(f"{api}/my-posts/",
-    json={"username": username}).json()
+    port = requests.get(f"{api}/my-posts/", json={"username": username}).json()
     if "loggedin" in session:
         return render_template(
             "posts.html",
@@ -164,6 +171,8 @@ def my_posts(username):
         """
 -------------SIGN-UP-------------
 """
+
+
 @app.route("/signup/", methods=["POST", "GET"])
 def sign_up():
     trending = trending_ports()["all_ports"]
@@ -225,6 +234,8 @@ def sign_up():
 """
 -------------NEW POST-------------
 """
+
+
 @app.route("/new-post/", methods=["GET", "POST"])
 def post():
     trending = trending_ports()["all_ports"]
@@ -273,10 +284,13 @@ def post():
     else:
         return redirect("/login/")
 
+
 """
 -------------USER SUBSCRIBED POSTS-------------
  - Given a user, return all the posts from the ports they are subscribed to
 """
+
+
 @app.route("/subscribed-posts/", methods=["GET"])
 def subscribedposts():
     if "loggedin" in session:
@@ -298,10 +312,13 @@ def subscribedposts():
     else:
         return redirect("/login/")
 
+
 """
 -------------PORT INDEX-------------
 - Allows logged in users to brows ports
 """
+
+
 @app.route("/portindex/", methods=["GET"])
 def portindex():
     trending = trending_ports()["all_ports"]
@@ -334,9 +351,12 @@ def portindex():
             "portIndex.html", name="Port Index", ports=ports, trendPorts=trending
         )
 
+
 """
 -------------SUBSCRIBE TO PORT-------------
 """
+
+
 @app.route("/subscribe/", methods=["POST"])
 def subscribe():
     if "loggedin" in session:
@@ -361,19 +381,28 @@ def subscribe():
         return res
     else:
         return redirect("/login/")
-'''
+
+
+"""
  ------PROFILE-----
-'''
+"""
+
+
 @app.route("/profile/")
 def profile():
     trending = trending_ports()["all_ports"]
     if "loggedin" in session:
         print("hello")
         return render_template(
-            "userInfo.html", userProfile = True, user=session["user"],
-            viewedUser= session["user"], trendPorts=trending)
+            "userInfo.html",
+            userProfile=True,
+            user=session["user"],
+            viewedUser=session["user"],
+            trendPorts=trending,
+        )
     else:
-        return redirect('/login/')
+        return redirect("/login/")
+
 
 @app.route("/update/", methods=["GET", "POST"])
 def update():
@@ -384,29 +413,62 @@ def update():
 
         if request.method == "POST":
 
-            if 'emailSetting' in form.keys():
+            if "emailSetting" in form.keys():
 
-                payload = json.dumps({ "username":session["user"]["username"], "field":"email", "value":form["emailSetting"] })
+                payload = json.dumps(
+                    {
+                        "username": session["user"]["username"],
+                        "field": "email",
+                        "value": form["emailSetting"],
+                    }
+                )
 
-                response = requests.put(api + "update/", data=payload, headers = headers)
+                response = requests.put(api + "update/", data=payload, headers=headers)
                 print(response.content)
 
-                return render_template("userInfo.html", user = session["user"]["username"], accountSettings = True, emailAndPassword = True)
+                return render_template(
+                    "userInfo.html",
+                    user=session["user"]["username"],
+                    accountSettings=True,
+                    emailAndPassword=True,
+                )
 
             else:
 
-                payload = json.dumps({ "username":session["user"]["username"], "field":"password", "value":form["passwordSetting"] })
+                payload = json.dumps(
+                    {
+                        "username": session["user"]["username"],
+                        "field": "password",
+                        "value": form["passwordSetting"],
+                    }
+                )
 
-                response = requests.put(api + "/update/", data=payload, headers = headers)
+                response = requests.put(api + "/update/", data=payload, headers=headers)
                 print(response.content)
 
-                return render_template("userInfo.html", user = session["user"]["username"], accountSettings = True, emailAndPassword = True)
+                return render_template(
+                    "userInfo.html",
+                    user=session["user"]["username"],
+                    accountSettings=True,
+                    emailAndPassword=True,
+                )
 
-            return render_template("userInfo.html", user = session["user"]["username"], accountSettings = True, emailAndPassword = True)
+            return render_template(
+                "userInfo.html",
+                user=session["user"]["username"],
+                accountSettings=True,
+                emailAndPassword=True,
+            )
         else:
-            return render_template("userInfo.html", user = session["user"]["username"], accountSettings = True, emailAndPassword = True)
+            return render_template(
+                "userInfo.html",
+                user=session["user"]["username"],
+                accountSettings=True,
+                emailAndPassword=True,
+            )
     else:
-        return redirect('/login/')
+        return redirect("/login/")
+
 
 @app.route("/ourteam/")
 def ourteam():
@@ -475,6 +537,7 @@ def load_user(username):
     user = (requests.get(f"{api}/user", json={"username": username}).json())["user"][0]
     print(user)
     return user
+
 
 if __name__ == "__main__":
     app.run("localhost", 8080, debug=True)
