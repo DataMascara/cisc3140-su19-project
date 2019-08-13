@@ -161,34 +161,37 @@
            {#- The following iframe is used for an alternative to Ajax code for prevention of page reloading after form submission, but form is still submitted! :) #}
             <iframe name="justframe" style="display:none;" type=  'hidden'></iframe>
 
-            {%- if user %}
-                <form class = "trendingForm" action = "" method = "post" target="justframe"> {# Here, the user is logged in, so the form works. #}
-            {%- else %}
-                <form class = "trendingForm" action = "" > {# The form is inactive since the user is logged out! #}
-            {% endif -%}
+{#            {%- if user %}#}
+{#                <form class = "trendingForm" action = "/subscribe/" method = "post" target="justframe"> {# Here, the user is logged in, so the form works. #}
+{#            {%- else %}#}
+{#                <form class = "trendingForm" action = "" > {# The form is inactive since the user is logged out! #}
+{#            {% endif -%}#}
 
                {%- if trendPorts %}{# If argument trendPorts was passed: #}
                   {%- for port in trendPorts %}
                       <a href = "/p/{{ port['name'] }}/" class = "trendingName" title = "Go to p/{{ port['name'] }}" >p/{{ port['name'] }}</a>
                       <p class = "trendingName trendingMem" >{{ port['mem'] }} members</p>
                       {%- if user %}
+                            <form class = "trendingForm" action = "/subscribe/" method = "post" target="justframe"> {# Here, the user is logged in, so the form works. #}
+                            <input type="hidden" name="portname" value="{{ port['name'] }}">
                             {%- if port['isSubscribed'] == True %}
-                                   <input type="button" 
+                                   <input type="submit"
                                           style = "background-color: #7B2240" 
                                           class = "subscribe subscribe{{ loop.index }}" 
-                                          name  = "subscribe{{ loop.index }}" 
+                                          name  = "value"
                                           title="Joined" 
                                           value = "Joined" 
                                           onclick="subscribe(this)" >
                             {%- else %} {#- if it is False: #}
-                                    <input type="button" 
+                                    <input type="submit"
                                            style = "background-color: rgb(117, 117, 117)" 
                                            class = "subscribe subscribe{{ loop.index }}" 
-                                           name  = "subscribe{{ loop.index }}" 
+                                           name  = "value"
                                            title="Subscribe"
                                            value = "Subscribe"
                                            onclick="subscribe(this)" >
                             {% endif -%} {#- the one of 'port['isSubscribed']' #}
+                            </form>
                       {%- else %}
                           <input type="button" class = "subscribe subscribe{{ loop.index }}" name  = "subscribe{{ loop.index }}" title="Subscribe" value = "Subscribe" onclick="ifLoggedOutGlowSignIn ()" >
                        {%- endif %}
@@ -207,7 +210,6 @@
 
                 {% endif -%}{# of the 'trendPorts' 'if' statement. #}
 
-                 </form> {#- Closing the 'trendingForm' from above #}
         </div>
 
         <div class = "theAdYouCantRemoveThis"> <!-- Advertisement Area: an annoying and clickable ad will appear here (it is even more annoying to
