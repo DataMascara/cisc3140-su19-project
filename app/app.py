@@ -4,7 +4,6 @@ import json
 import urllib.request
 import webbrowser
 
-# Example calling the API from another python file
 
 # Relative path to reach the templates folder
 app = Flask(__name__, template_folder="templates")
@@ -24,6 +23,8 @@ def redirect_home():
 """
 -------------LOGIN-------------
 """
+
+
 @app.route("/login/", methods=["POST", "GET"])
 def login_api():
     # already logged in
@@ -38,8 +39,7 @@ def login_api():
             username = res["username"]
             password = res["password"]
             api_res = requests.post(
-                f"{api}/login/",
-                json={"username": username, "password": password}
+                f"{api}/login/", json={"username": username, "password": password}
             ).json()
             try:
                 # Make sure there is a user before we do anything with sessions
@@ -50,6 +50,12 @@ def login_api():
                     # session['id'] = account['id']
                     session["username"] = username
                     session["user"] = api_res["user"]
+                    session["subscriptions"] = requests.get(
+                        f"{api}/ports-for-username/", json={"username": username}
+                    ).json()["all_subscriptions for {data_value}"]
+                    session["votes"] = requests.get(
+                        f"{api}/votes-for-username/", json={"username": username}
+                    ).json()["voted_data"]
                     return redirect("/home/")
                     return render_template(
                         "base.html", title="Logged In", user=session["user"]
@@ -67,27 +73,36 @@ def login_api():
                 "base.html", title="Please Log in", trendPorts=trending
             )
 
+
 """
 -------------LOG-OUT-------------
 """
+
+
 @app.route("/logout/")
 def logout():
     session.pop("loggedin", None)
     session.pop("id", None)
     session.pop("username", None)
     session.pop("user", None)
+    session.pop("subscriptions", None)
+    session.pop("votes", None)
     # Redirect to login page
     return redirect("/login/")
+
 
 """
 -------------HOMEPAGE-------------
 """
+
+
 @app.route("/home/", methods=["GET"])
 def home():
     # Use the helper method to grab "tredning ports"
     trending = trending_ports()["all_ports"]
     port = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
     if "loggedin" in session:
+        update_vote_for_post(port)
         return render_template(
             "posts.html",
             name="Home",
@@ -111,13 +126,15 @@ def home():
 - Uses the url to decide what port the user wants to go to.
         - So, this should
 """
+
+
 @app.route("/p/<portname>/", methods=["GET"])
 def portpost(portname):
-    port = requests.get(f"{api}/posts-by-portname/",
-    json={"portname": portname}).json()
+    port = requests.get(f"{api}/posts-by-portname/", json={"portname": portname}).json()
     print(type(port))
     trending = trending_ports()["all_ports"]
     if "loggedin" in session:
+        update_vote_for_post(port)
         return render_template(
             "posts.html",
             name="p/" + portname,
@@ -140,9 +157,9 @@ def portpost(portname):
 @app.route("/u/<username>/posts/", methods=["GET"])
 def my_posts(username):
     trending = trending_ports()["all_ports"]
-    port = requests.get(f"{api}/my-posts/",
-    json={"username": username}).json()
+    port = requests.get(f"{api}/my-posts/", json={"username": username}).json()
     if "loggedin" in session:
+        update_vote_for_post(port)
         return render_template(
             "posts.html",
             name=username + "'s Post",
@@ -164,6 +181,8 @@ def my_posts(username):
         """
 -------------SIGN-UP-------------
 """
+
+
 @app.route("/signup/", methods=["POST", "GET"])
 def sign_up():
     trending = trending_ports()["all_ports"]
@@ -225,6 +244,8 @@ def sign_up():
 """
 -------------NEW POST-------------
 """
+
+
 @app.route("/new-post/", methods=["GET", "POST"])
 def post():
     trending = trending_ports()["all_ports"]
@@ -273,10 +294,13 @@ def post():
     else:
         return redirect("/login/")
 
+
 """
 -------------USER SUBSCRIBED POSTS-------------
  - Given a user, return all the posts from the ports they are subscribed to
 """
+
+
 @app.route("/subscribed-posts/", methods=["GET"])
 def subscribedposts():
     if "loggedin" in session:
@@ -285,6 +309,7 @@ def subscribedposts():
             f"{api}/posts-from-subscribed-ports/",
             json={"username": session["username"]},
         ).json()
+        update_vote_for_post(post)
         return render_template(
             "posts.html",
             name="Your feed",
@@ -298,10 +323,13 @@ def subscribedposts():
     else:
         return redirect("/login/")
 
+
 """
 -------------PORT INDEX-------------
 - Allows logged in users to brows ports
 """
+
+
 @app.route("/portindex/", methods=["GET"])
 def portindex():
     trending = trending_ports()["all_ports"]
@@ -334,9 +362,12 @@ def portindex():
             "portIndex.html", name="Port Index", ports=ports, trendPorts=trending
         )
 
+
 """
 -------------SUBSCRIBE TO PORT-------------
 """
+
+
 @app.route("/subscribe/", methods=["POST"])
 def subscribe():
     if "loggedin" in session:
@@ -361,9 +392,13 @@ def subscribe():
         return res
     else:
         return redirect("/login/")
-'''
+
+
+"""
  ------PROFILE-----
-'''
+"""
+
+
 @app.route("/profile/", methods=["GET", "POST"])
 def profile():
     trending = trending_ports()["all_ports"]
@@ -394,12 +429,21 @@ def profile():
             response = requests.put(api + "update/", data=data, headers = headers)
             print(response.content)
 
+            #change the session's user info
+            session["user"]["avatarUrl"] = form["avatarURL"]
+            session["user"]["description"] = form["descriptionTextArea"]
+
         print("hello")
         return render_template(
-            "userInfo.html", userProfile = True, user=session["user"],
-            viewedUser= session["user"], trendPorts=trending)
+            "userInfo.html",
+            userProfile=True,
+            user=session["user"],
+            viewedUser=session["user"],
+            trendPorts=trending,
+        )
     else:
-        return redirect('/login/')
+        return redirect("/login/")
+
 
 @app.route("/update/", methods=["GET", "POST"])
 def update():
@@ -410,29 +454,68 @@ def update():
 
         if request.method == "POST":
 
-            if 'emailSetting' in form.keys():
+            if "emailSetting" in form.keys():
 
-                payload = json.dumps({ "username":session["user"]["username"], "field":"email", "value":form["emailSetting"] })
+                payload = json.dumps(
+                    {
+                        "username": session["user"]["username"],
+                        "field": "email",
+                        "value": form["emailSetting"],
+                    }
+                )
 
-                response = requests.put(api + "update/", data=payload, headers = headers)
+                response = requests.put(api + "update/", data=payload, headers=headers)
                 print(response.content)
 
-                return render_template("userInfo.html", user = session["user"]["username"], accountSettings = True, emailAndPassword = True)
+                #update session's user userInfo
+                session["user"]["email"] = form["emailSetting"]
+
+                return render_template(
+                    "userInfo.html",
+                    user=session["user"]["username"],
+                    accountSettings=True,
+                    emailAndPassword=True,
+                )
 
             else:
 
-                payload = json.dumps({ "username":session["user"]["username"], "field":"password", "value":form["passwordSetting"] })
+                payload = json.dumps(
+                    {
+                        "username": session["user"]["username"],
+                        "field": "password",
+                        "value": form["passwordSetting"],
+                    }
+                )
 
-                response = requests.put(api + "/update/", data=payload, headers = headers)
+                response = requests.put(api + "/update/", data=payload, headers=headers)
                 print(response.content)
 
-                return render_template("userInfo.html", user = session["user"]["username"], accountSettings = True, emailAndPassword = True)
+                #update session's user userInfo
+                session["user"]["password"] = form["passwordSetting"]
 
-            return render_template("userInfo.html", user = session["user"]["username"], accountSettings = True, emailAndPassword = True)
+                return render_template(
+                    "userInfo.html",
+                    user=session["user"]["username"],
+                    accountSettings=True,
+                    emailAndPassword=True,
+                )
+
+            return render_template(
+                "userInfo.html",
+                user=session["user"]["username"],
+                accountSettings=True,
+                emailAndPassword=True,
+            )
         else:
-            return render_template("userInfo.html", user = session["user"]["username"], accountSettings = True, emailAndPassword = True)
+            return render_template(
+                "userInfo.html",
+                user=session["user"]["username"],
+                accountSettings=True,
+                emailAndPassword=True,
+            )
     else:
-        return redirect('/login/')
+        return redirect("/login/")
+
 
 @app.route("/ourteam/")
 def ourteam():
@@ -488,6 +571,33 @@ def pending():
     )
 
 
+@app.route("/vote/", methods=["POST"])
+def vote():
+    if "loggedin" in session:
+        res = request.form
+        value = res["value"]
+        postId = res["postId"]
+        originalValue = res["originalValue"]
+        print(originalValue)
+        print(value)
+        response = (
+            requests.post(
+                f"{api}/vote/",
+                json={
+                    "username": session["username"],
+                    "value": value,
+                    "postId": postId,
+                    "originalValue": originalValue,
+                },
+            ).json()
+        )["voted_data"]
+        print(response)
+        session["votes"] = response
+        return "UPDATED"
+    else:
+        return redirect("/login/")
+
+
 # helper function to get "trending posts"
 # WIll do this by just getting three three random ports
 def trending_ports():
@@ -497,10 +607,20 @@ def trending_ports():
     return ports.json()
 
 
+def update_vote_for_post(port):
+    for posts in port["posts"]:
+        for votes in session["votes"]:
+            if posts["postId"] == votes["postId"]:
+                print(votes["vote"])
+                posts.update({"upOrDownvoted": votes["vote"]})
+    return port
+
+
 def load_user(username):
     user = (requests.get(f"{api}/user", json={"username": username}).json())["user"][0]
     print(user)
     return user
+
 
 if __name__ == "__main__":
     app.run("localhost", 8080, debug=True)
