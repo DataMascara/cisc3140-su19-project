@@ -39,38 +39,38 @@
                              <img src="{{ url_for('static',filename='img/profile_logo.png') }}" class="logo" alt = "the user {{ user['username'] }}" title = "{{ user['username'] }}" >
                        {% endif -%}
                         <a href = "/profile/" class = "username" title = "Go to your User Profile" >{{ user['username'] }}</a>
- 
-                        <form method = "post" action = "">
+
+                        <form method = "GET" action = "/profile/">
                                  <input type = "submit" name = "loggedIn" class="profile" value = "User Profile" title = "Go to your User Profile">
                         </form>
-                        <form method = "post" action = "">
+                        <form method = "GET" action = "">
                                  <input type = "submit" name = "loggedIn" class="dash" value = "Dashboard" title = "Go to your Dashboard">
-                        </form>                      
-                        <form method = "post" action = "">
+                        </form>
+                        <form method = "Get" action = "/update/">
                                  <input type = "submit" name = "loggedIn" class="settings" value = "Account Settings" title = "Go to your Account Settings">
                         </form>
                         <a href = "/logout" class = "signOut" title = "sign out" >sign out</a>
 
                     {% else -%}{# If it wasn't: treat as though as the user is logged out. #}
                         <img src="{{ url_for('static',filename='img/profile_logo.png') }}" class="logo" alt = "User Logo" title = "User Logo">
- 
+
                        {%- if errLogIn %}  {# Fires if 'errLogIn' is True; otherwise, does not fire. #}
                             <p class = "errLogIn">! Invalid username or password !</p>
                        {% endif -%}
 
-                        <form action = "/login/" method="POST"> 
-                            <input type = "text" 
-                                        name = "username" 
-                                        class = "text" 
+                        <form action = "/login/" method="POST">
+                            <input type = "text"
+                                        name = "username"
+                                        class = "text"
                                         autocomplete = "off"
                                         title = "Enter your username here"
                                         placeholder = "Username/Email"
                                         required
                                         />
 
-                            <input type = "password" 
+                            <input type = "password"
                                        name = "password"
-                                       class = "text" 
+                                       class = "text"
                                        autocomplete = "off"
                                        title = "Enter your password here"
                                        placeholder = "Password"
@@ -78,8 +78,8 @@
                                        />
 
                              <input type = "submit" class = "button1" value = "Sign in" name = "submit" title = "Sign in">
-                         </form> 
-                       
+                         </form>
+
                          <div class = "passAndRegistr">
                              <a href = "" class = "forgotPass" title = "Click here if you forgot your password" >Forgot Password?</a>
                              <p class = "notAMem">Not a member?</p>
@@ -112,7 +112,7 @@
         {%- if user %}
             <h1>Current User{{user}}</h1>
             {%- else %}
-        
+
             <h1>YOURE NOT LOGGED IN!</h1>
         {% endif -%}
 
@@ -137,15 +137,15 @@
 
     <div class = "rightContainer"> <!-- Beginning of the Right Container -->
 
-        <form class = "searchform" 
-                   name = "searchform" 
+        <form class = "searchform"
+                   name = "searchform"
                    action = ""
                    method = "post" > <!-- Submit Search w/ ENTER Key: -->
                                                    <!-- Instead of pressing a button, just press ENTER or RETURN for the search to be processed. -->
 
-            <input type = "search" 
-                        class = "search" 
-                        name = "search" 
+            <input type = "search"
+                        class = "search"
+                        name = "search"
                         title = "Type Your Search and Press ENTER to Submit"
                         placeholder = "Search & ENTER"
                         onkeydown = "submitSearch();">
@@ -196,7 +196,7 @@
                  </form> {#- Closing the 'trendingForm' from above #}
         </div>
 
-        <div class = "theAdYouCantRemoveThis"> <!-- Advertisement Area: an annoying and clickable ad will appear here (it is even more annoying to 
+        <div class = "theAdYouCantRemoveThis"> <!-- Advertisement Area: an annoying and clickable ad will appear here (it is even more annoying to
                                                                                      realize we are not paid a penny for putting this here!) -->
             <p>Advertisement</p>
             {%- if ad %}{# If argument ad was passed: #} {# |e mean 'do escaping' for security! #}
