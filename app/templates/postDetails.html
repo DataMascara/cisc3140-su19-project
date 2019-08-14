@@ -141,11 +141,12 @@
          
          <div class = "comments">
              {#- A line that states how many total comments (both 1 and 2 level): #}
-             {%- if post['commentNum'] != 0 %}
+             {%- if post['commentNum'] > 0.0 %}
                    <p class = "numberOfComments">{{ post['numComments'] }} comments:</p>
              {%- else %}
                    <p class = "numberOfComments">No comments yet!</p>
              {% endif -%}
+             {%- if post['commentNum'] > 0.0 %}
              {#- The tree of comments: #}
               <div class = "commentTree">
         
@@ -286,6 +287,7 @@
                        {% endfor -%} {#- of the second level comments #}
                   {% endfor -%} {#- of the first level comments #}
               </div> <!-- End of 'commentTree' -->
+             {% endif -%}
          </div> <!-- End of 'comments' -->
          
     </div> <!-- End of 'mainScreen' -->
