@@ -236,7 +236,10 @@
                                            title = "Write a comment to {{ comment1['author'] }}'s comment" 
                                            placeholder = "Comment & ENTER"
                                            spellcheck = "true"
-                                           onkeydown="submitComment({{ comment1['commentId'] }});"></textarea>
+                                           onkeyup="enableDisableSubmission(this)"></textarea>
+                           <div class = "commentToCommentDiv">
+                                 <input type = "submit" class = "commentToCommentBtn buttonComment{{ comment1['id'] }}" name = "commentToCommentBtn" title = "Submit your comment!" value = "✖   Submit Comment" disabled>
+                           </div>
                         </form>
                    </div>
                   {#- Below is the loop section for the second level comments: #}
