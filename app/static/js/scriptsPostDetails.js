@@ -128,28 +128,39 @@ function unvealArea (comment)
     if (theTextAreaDiv.style.display == "none")
     	theTextAreaDiv.style.display = "inherit";
     else
-                 theTextAreaDiv.style.display = "none";
-}
-
-// Submit a comment to comment if ENTER was pressed and if the comment is nonempty:
-function submitComment (comment)
-{
-    if ((event.which == 13 || event.keyCode == 13) 
-                 && document.getElementsByClassName("commentToCommentText" + comment)[0].value.trim().length != 0)
-        document.getElementsByClassName("writeCommentToComment" + comment)[0].submit();
+        theTextAreaDiv.style.display = "none";
 }
 
 // Enable the "submit comment" button if the comment to the post is nonempty, and disable it otherwise:
 function enableDisableSubmission(theTextArea)
 {
-    if (theTextArea.value.trim().length != 0)
+    if (theTextArea.className.length == 17)
     {
-         document.getElementsByClassName("CommentToPostBtn")[0].disabled = false;
-         document.getElementsByClassName("CommentToPostBtn")[0].value = "✔   Submit Comment";
+        if (theTextArea.value.trim().length != 0)
+        {
+             document.getElementsByClassName("CommentToPostBtn")[0].disabled = false;
+             document.getElementsByClassName("CommentToPostBtn")[0].value = "✔   Submit Comment";
+        }
+        else
+        {
+             document.getElementsByClassName("CommentToPostBtn")[0].disabled = true;
+             document.getElementsByClassName("CommentToPostBtn")[0].value = "✖   Submit Comment";
+        }
     }
     else
     {
-         document.getElementsByClassName("CommentToPostBtn")[0].true = false;
-         document.getElementsByClassName("CommentToPostBtn")[0].value = "✖   Submit Comment";
+         // Extract the 'id' of the comment;
+         var id = theTextArea.className.substr(38);
+         // Check if area is non empty:
+         if (theTextArea.value.trim().length != 0)
+        {
+             document.getElementsByClassName("buttonComment" + id)[0].disabled = false;
+             document.getElementsByClassName("buttonComment" + id)[0].value = "✔   Submit Comment";
+        }
+        else
+        {
+             document.getElementsByClassName("buttonComment" + id)[0].disabled = true;
+             document.getElementsByClassName("buttonComment" + id)[0].value = "✖   Submit Comment";
+        }
     }
 }
