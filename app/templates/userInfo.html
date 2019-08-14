@@ -60,14 +60,17 @@
                                                                name = "descriptionTextArea"
                                                                title = "Describe yourself, {{ viewedUser['username']}}!"
                                                                placeholder = "Your description here"
-                                                               spellcheck = "true">{{ viewedUser['description'] }}</textarea>
-                                                <input type="text" name="avatarURL" class = "avatarURL" placeholder="Add URL to Your Avatar">
+                                                               spellcheck = "true">{{ viewedUser['description']
+                                                            }} 
+                                                            </textarea>
+                                                <input type="text" name="avatarURL" class = "avatarURL" required placeholder="Add URL to Your Avatar">
                                                 <div class = "descriptionFormSubmitDiv">
                                                       <input type = "submit"
                                                       class = "descriptionFormSubmitBtn"
                                                       name = "descriptionFormSubmitBtn"
                                                       title = "Save your bio!"
-                                                      value = "Save Bio">
+                                                      value = "Save Bio"
+                                                      >
                                                 </div>
                                 </form>
                           </div>

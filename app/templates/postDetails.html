@@ -1,4 +1,4 @@
-﻿{#- Version 1.0 - 08.12.2019 - Description: File Created #}
+﻿﻿{#- Version 1.0 - 08.12.2019 - Description: File Created #}
 <head>
      <script src="{{ url_for('static',filename='js/scriptsPostDetails.js') }}"></script>
      <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/stylesPostDetails.css') }}">
@@ -166,7 +166,7 @@
              {#- The tree of comments: #}
               <div class = "commentTree">
         
-              {%- for comment1 in comments %}
+              {%- for comment1 in comments['comments'] %}
                    <div class = "firstLevelComment">
                        <div class = "votesComments">
                             {%- if user %} {#- Appears only if the user is logged in #}
@@ -240,7 +240,8 @@
                   {#- Below is the loop section for the second level comments: #}
                   {#- I could have used the recursive nature of Jinja intead of writing the code below, but there #}
                   {#- are a few significant changes between the 1st level and second level comments. #}
-                      {%- for comment2 in comment1['comments'] %}
+                      {%- for comment2 in comments['replies'] %}
+                      {% if comment2["parentId"] == comment1['commentId']%}
                           <div class = "secondLevelComment">
                               <div class = "blackline"> {#- For decoration purposes #}
                               </div>
@@ -248,7 +249,7 @@
                                    {%- if user %} {#- Appears only if the user is logged in #}
                                        <form class = "upvoteComments" action = "" method = "post" target = "frameForVotesAndPostSaving">
                                            <input type = "submit" 
-                                                       class = "upvoteBtn upvoteBtnComment{{ comment2['id'] }}" 
+                                                       class = "upvoteBtn upvoteBtnComment{{ comment2['commentId'] }}" 
                                                        value = "++" 
                                                        name = "upvote{{ comment2['commentId'] }}" 
                                                        onclick="forUpvote (this)" 
@@ -300,6 +301,8 @@
                                     <p class = "commentDateOfWriting">{{ comment2['dateCreated'] }}</p>
                                </div>
                            </div> <!-- End of 'firstLevelComment' -->
+                         {% endif -%}
+                         <!--ENDS IF COMMENT ID == PARENT-->
                        {% endfor -%} {#- of the second level comments #}
                   {% endfor -%} {#- of the first level comments #}
               </div> <!-- End of 'commentTree' -->

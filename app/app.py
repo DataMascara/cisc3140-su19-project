@@ -10,8 +10,8 @@ app = Flask(__name__, template_folder="templates")
 app.secret_key = "test"
 
 # Assuming the API is running at the local ip below
-api = "https://bc-api-class.herokuapp.com"
-# api = "http://127.0.0.1:5000"
+# api = "https://bc-api-class.herokuapp.com"
+api = "http://127.0.0.1:5000"
 
 @app.route("/", methods=["GET"])
 def redirect_home():
@@ -433,17 +433,17 @@ def post_by_title(postId):
             # post_dict = requests.get(
             #     f"{api}/post-by-title/",
             #     json={"title": title}).json()
-            comments = requests.get(
+            comments_and_reps = requests.get(
                 f"{api}/comments-by-post/",
-                json={"id": postId}).json()['comments']
+                json={"id": postId}).json()
         except Exception as e:
             print("EXCEPT")
             print(e)
             redirect("/home/")
         if(request.method == "GET"):
             # If you click on subscribe(you just joined the port),
-            print(comments)
-            return render_template('postDetails.html', user = session['user'], name = "Post", post=post, comments= comments, trendPorts=trending)
+            print(comments_and_reps)
+            return render_template('postDetails.html', user = session['user'], name = "Post", post=post, comments= comments_and_reps, trendPorts=trending)
         ## MEANING WE ARE POSTING A COMMENT
         elif(request.method == "POST"):
             res = request.form
@@ -465,7 +465,7 @@ def post_by_title(postId):
                     json={"text": text, "postId":post_id, "parent_id":parent_id, "author":author}).json()
                     print("GOT HERE TOO!")
                     print(add_comment)
-                    return render_template('postDetails.html', user = session['user'], name = "Post", post=post, comments = comments, commentSubmittedMessage = True, trendPorts=trending)
+                    return render_template('postDetails.html', user = session['user'], name = "Post", post=post, comments = comments_and_reps, commentSubmittedMessage = True, trendPorts=trending)
                 except:
                     return redirect("/login/")
     else:
@@ -533,7 +533,7 @@ def profile():
                 session["user"]["description"] = form["descriptionTextArea"]
                 print("Update description successful!")
             except:
-                Print("Error: Can't update your description.")
+                print("Error: Can't update your description.")
             print(response.content)
 
             data = json.dumps(
