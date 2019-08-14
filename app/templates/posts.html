@@ -112,18 +112,18 @@
                         <p class = "dateOfWriting">{{ post['dateCreated'] }}</p>
                         <p class = "postedBy">Posted by: {{post['author']}}</p>
                         <div class = "authorDetails">
-                             {#- Since 'post['image']' is optional, we must have the following 'if' statement. #}
-                                 {%- if post['image'] != None %}
+                             {#- Since 'post['avatarUrl']' is optional, we must have the following 'if' statement. #}
+                              {#-   {%- if post['image'] != None %}
                                  <a href="" title="{{ post['postTitle'] }}"><img src="{{post['image'] }}"
                                        class="roundImage" alt="the user {{ post['username'] }}"></a>
                                  {% else %}
                                  <a href="" title="{{ post['postTitle'] }}"><img src="{{ url_for('static',filename='img/maroonFolder.png') }}"
                                        class="roundImage" alt="the user {{ post['author'] }}"></a>
-                                 {% endif -%}
+                                 {% endif -%} #}
                                  {%- if post['avatarUrl']|length > 1 %}
-                                 <a href=""   title="{{ post['author'] }}'s profile"> <img src="{{ post['avatarUrl']  }}" class="roundImage"> </a>
+                                 <a href=""   title="{{ post['username'] }}'s profile"> <img src="{{ post['avatarUrl'] }}" class="roundImage"> </a>
                                  {% else %}
-                                 <a href="" title="{{ post['postTitle'] }} post "> <img src="{{ url_for('static',filename='img/profile_logo.png') }}"
+                                 <a href="" title="{{ post['username'] }}'s profile"> <img src="{{ url_for('static',filename='img/profile_logo.png') }}"
                                        class="roundImage"> </a>
                                  {% endif -%}
 
