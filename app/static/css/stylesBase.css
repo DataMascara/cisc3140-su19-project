@@ -1,4 +1,8 @@
 /* CSS Styles for Base Templates: 'baseLoggedIn.html' and 'baseLoggedOut.html'
+Version 1.1.5
+   08.13.2019
+   Description: Style Change for the New Underdogs Logo.
+
 Version 1.1.4
    08.12.2019
    Description: Flex styling for the 'outerShellForMenuLinks' class added. Inline links
@@ -78,19 +82,10 @@ html{
 }
 
 .a{
-    font-family: 'Source Code Pro';
-    font-style: italic;
-    font-size: calc(1.8vh + 1.8vw);
-    color: #7B2240;
-    outline: inherit;
-}
-
-.b{
-    font-family: 'Source Code Pro';
-    font-style: normal;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
     font-size: calc(2vh + 2vw);
     color: #7B2240;
-    font-weight: bold;
     outline: inherit;
 }
 
