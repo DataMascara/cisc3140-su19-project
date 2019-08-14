@@ -79,7 +79,6 @@
                        {#- do nothing #}
                        {% endif -%}>{{ post['votes'] }}</p>
                     {%- if user %} {#- Appears only if the user is logged in #}
-                        {{user}}
                           <input type = "submit" 
                                      class = "downvoteBtn post{{ post['postId'] }}"
                                      value = "--" 
