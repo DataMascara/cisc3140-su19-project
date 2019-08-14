@@ -170,11 +170,14 @@
                    <div class = "firstLevelComment">
                        <div class = "votesComments">
                             {%- if user %} {#- Appears only if the user is logged in #}
-                                <form class = "upvoteComments" action = "" method = "post" target = "frameForVotesAndPostSaving">
+                                <form class = "upvoteComments" action = "/vote/" method = "post" target = "frameForVotesAndPostSaving">
+                                    <input type="hidden" name="id" value="{{ comment1['commentId'] }}">
+                                    <input type="hidden" name="originalValue" value="{{ comment1['upOrDownvoted'] }}">
+                                    <input type="hidden" name="type" value="comment">
                                     <input type = "submit" 
                                                 class = "upvoteBtn upvoteBtnComment{{ comment1['commentId'] }}" 
                                                 value = "++" 
-                                                name = "upvote{{ comment1['commentId'] }}" 
+                                                name = "value"
                                                 onclick="forUpvote (this)" 
                                                 title = "Upvote it!"
                                                {%- if comment1['upOrDownvoted'] == 1 %}
@@ -182,7 +185,6 @@
                                                {%- else %}
                                                {#- do nothing #}
                                                {% endif -%}>
-                                </form>
                             {% endif -%}
                             <p class = "numOfVotes numOfVotesComment{{ comment1['commentId'] }}"
                                  {%- if (comment1['upOrDownvoted'] == 1) and (user) %}
@@ -193,11 +195,10 @@
                                  {#- do nothing #}
                                  {% endif -%}>{{ comment1['votes'] }}</p>
                            {%- if user %} {#- Appears only if the user is logged in #}
-                                <form class = "downvoteComments" action = "" method = "post" target = "frameForVotesAndPostSaving">
                                     <input type = "submit" 
                                                 class = "downvoteBtn downvoteBtnComment{{ comment1['commentId'] }}" 
                                                 value = "--" 
-                                                name = "downvote{{ comment1['commentId'] }}" 
+                                                name = "value"
                                                 onclick="forDownvote (this)" 
                                                 title = "Downvote it!"
                                                 {%- if comment1['upOrDownvoted'] == -1 %}
@@ -248,11 +249,14 @@
                               </div>
                               <div class = "votesComments">
                                    {%- if user %} {#- Appears only if the user is logged in #}
-                                       <form class = "upvoteComments" action = "" method = "post" target = "frameForVotesAndPostSaving">
-                                           <input type = "submit" 
+                                       <form class = "upvoteComments" action = "/vote/" method = "post" target = "frameForVotesAndPostSaving">
+                                           <input type="hidden" name="id" value="{{ comment2['commentId'] }}">
+                                           <input type="hidden" name="originalValue" value="{{ comment2['upOrDownvoted'] }}">
+                                           <input type="hidden" name="type" value="comment">
+                                           <input type = "submit"
                                                        class = "upvoteBtn upvoteBtnComment{{ comment2['commentId'] }}" 
                                                        value = "++" 
-                                                       name = "upvote{{ comment2['commentId'] }}" 
+                                                       name = "value"
                                                        onclick="forUpvote (this)" 
                                                        title = "Upvote it!"
                                                        {%- if comment2['upOrDownvoted'] == 1 %}
@@ -260,7 +264,6 @@
                                                        {%- else %}
                                                        {#- do nothing #}
                                                        {% endif -%}>
-                                       </form>
                                    {% endif -%}
                                    <p class = "numOfVotes numOfVotesComment{{ comment2['commentId'] }}"
                                         {%- if (comment2['upOrDownvoted'] == 1) and (user) %}
@@ -269,13 +272,12 @@
                                         style = "color: red;"
                                         {%- else %}
                                         {#- do nothing #}
-                                        {% endif -%}>{{ comment2['totalVotes'] }}</p>
+                                        {% endif -%}>{{ comment2['votes'] }}</p>
                                    {%- if user %} {#- Appears only if the user is logged in #}
-                                       <form class = "downvoteComments" action = "" method = "post" target = "frameForVotesAndPostSaving">
-                                           <input type = "submit" 
+                                           <input type = "submit"
                                                        class = "downvoteBtn downvoteBtnComment{{ comment2['commentId'] }}" 
                                                        value = "--" 
-                                                       name = "downvote{{ comment2['commentId'] }}" 
+                                                       name = "value"
                                                        onclick="forDownvote (this)" 
                                                        title = "Downvote it!"
                                                       {%- if comment2['upOrDownvoted'] == -1 %}

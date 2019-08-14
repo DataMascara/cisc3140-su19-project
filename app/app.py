@@ -53,6 +53,9 @@ def login_api():
                     session["votes"] = requests.get(
                         f"{api}/votes-for-username/", json={"username": username}
                     ).json()["voted_data"]
+                    session["comment_votes"] = requests.get(
+                        f"{api}/comment-votes-for-username/", json={"username": username}
+                    ).json()["voted_data"]
                     trending = trending_ports()
                     session.pop("trending", None)
                     trending = trending_ports()
@@ -83,6 +86,7 @@ def logout():
     session.pop("subscriptions", None)
     session.pop("votes", None)
     session.pop("trending", None)
+    session.pop("comment_votes", None)
     # Redirect to login page
     return redirect("/login/")
 
@@ -326,23 +330,37 @@ def vote():
     if "loggedin" in session:
         res = request.form
         value = res["value"]
-        postId = res["postId"]
+        id = res["id"]
         originalValue = res["originalValue"]
         type = res['type']
         # print(res)
-        response = (
-            requests.post(
-                f"{api}/vote/",
-                json={
-                    "username": session["username"],
-                    "value": value,
-                    "postId": postId,
-                    "originalValue": originalValue,
-                },
-            ).json()
-        )["voted_data"]
+        if type == 'post':
+            response = (
+                requests.post(
+                    f"{api}/vote/",
+                    json={
+                        "username": session["username"],
+                        "value": value,
+                        "postId": id,
+                        "originalValue": originalValue,
+                    },
+                ).json()
+            )["voted_data"]
+            session["votes"] = response
+        elif type == 'comment':
+            response = (
+                requests.post(
+                    f"{api}/vote-comment/",
+                    json={
+                        "username": session["username"],
+                        "value": value,
+                        "commentId": id,
+                        "originalValue": originalValue,
+                    },
+                ).json()
+            )["voted_data"]
+            session["comment_votes"] = response
         # print(response)
-        session["votes"] = response
         return "UPDATED"
     else:
         return redirect("/login/")
@@ -442,6 +460,13 @@ def post_by_title(postId):
             comments_and_reps = requests.get(
                 f"{api}/comments-by-post/",
                 json={"id": postId}).json()
+            for votes in session['comment_votes']:
+                for comments in comments_and_reps["comments"]:
+                    if comments['commentId'] == votes['postId']:
+                        comments.update({"upOrDownvoted": votes['vote']})
+                for replies in comments_and_reps["replies"]:
+                    if replies['commentId'] == votes['postId']:
+                        replies.update({"upOrDownvoted": votes['vote']})
         except Exception as e:
             print("EXCEPT")
             print(e)
@@ -472,6 +497,12 @@ def post_by_title(postId):
                     json={"text": text, "postId":post_id, "parentId":parent_id, "author":author}).json()
                     print("GOT HERE TOO!")
                     print(add_comment)
+                    session['comment_votes'] = requests.get(
+                        f"{api}/comment-votes-for-username/", json={"username": session['username']}
+                    ).json()["voted_data"]
+                    comments_and_reps = requests.get(
+                        f"{api}/comments-by-post/",
+                        json={"id": postId}).json()
                     return render_template('postDetails.html', user = session['user'], name = "Post", post=post, comments = comments_and_reps, commentSubmittedMessage = True, trendPorts=trending)
                 except:
                     return redirect("/login/")
@@ -556,7 +587,7 @@ def profile():
                 session["user"]["avatarUrl"] = form["avatarURL"]
                 print("Update avatarUrl successful!")
             except:
-                Print("Error: Can't update your avatarUrl.")
+                print("Error: Can't update your avatarUrl.")
             print(response.content)
 
         return render_template(
