@@ -739,6 +739,32 @@ def dashBoard():
                     trendPorts=trending,
                 )
             elif "comments" in form.keys():
+                postInfo = {}
+                try:
+                    res = requests.get(
+                        f"{api}/comments-by-user/", json={"username": session["user"]["username"]}
+                    ).json()
+                except:
+                    print("Error: can't get user's comments.")
+
+                print("In Dashboard Comments.")
+                user = session["user"]
+                user["myComments"] = []
+                #get the user's comments
+                for key in res['comments']:
+                    #get where comment post and port's info
+                    try:
+                        postInfo = requests.get(
+                            f"{api}/post-by-id/", json={"id": key['postId']}
+                        ).json()['posts'][0]
+                    except:
+                        print("Error: can't get post and port info.")
+                    temp = {}
+                    temp["totalVotes"] = key["votes"]
+                    temp["text"] = key["commentText"]
+                    temp["portname"] = postInfo["portName"]
+                    temp["postname"] = postInfo["postTitle"]
+                    user["myComments"].append(temp)
 
                 print("In Dashboard comments.")
                 return render_template(
@@ -746,7 +772,7 @@ def dashBoard():
                     dashboard=True,
                     comments=True,
                     name=session["user"]["username"],
-                    user=session["user"],
+                    user=user,
                     viewedUser=session["user"],
                     trendPorts=trending,
                 )
