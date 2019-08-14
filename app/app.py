@@ -10,8 +10,8 @@ app = Flask(__name__, template_folder="templates")
 app.secret_key = "test"
 
 # Assuming the API is running at the local ip below
-# api = "https://bc-api-class.herokuapp.com"
-api = "http://127.0.0.1:5000"
+api = "https://bc-api-class.herokuapp.com"
+# api = "http://127.0.0.1:5000"
 
 @app.route("/", methods=["GET"])
 def redirect_home():
@@ -583,7 +583,7 @@ def update():
 
                 return render_template(
                     "userInfo.html",
-                    user=session["user"]["username"],
+                    user=session["user"],
                     accountSettings=True,
                     emailAndPassword=True,
                 )
@@ -606,21 +606,21 @@ def update():
 
                 return render_template(
                     "userInfo.html",
-                    user=session["user"]["username"],
+                    user=session["user"],
                     accountSettings=True,
                     emailAndPassword=True,
                 )
 
             return render_template(
                 "userInfo.html",
-                user=session["user"]["username"],
+                user=session["user"],
                 accountSettings=True,
                 emailAndPassword=True,
             )
         else:
             return render_template(
                 "userInfo.html",
-                user=session["user"]["username"],
+                user=session["user"],
                 accountSettings=True,
                 emailAndPassword=True,
             )
@@ -770,8 +770,8 @@ def pending():
 def trending_ports():
     ports = requests.get(f"{api}/allports/").json()
     # if "loggedin" in session:
-        # for port in ports['all_ports']:
-    #         for subscribe_ports in session['subscriptions']:
+    #     for subscribe_ports in session['subscriptions']:
+    #         for port in ports['all_ports']:
     #             if port['id'] == subscribe_ports['portId']:
     #                 port.update({"isSubscribed": True})
     #                 break
@@ -797,10 +797,6 @@ def update_vote_for_post(port):
             return redirect('/home/')
         else:
             return None
-
-
-
-
 
 def load_user(username):
     user = (requests.get(f"{api}/user", json={"username": username}).json())["user"][0]
