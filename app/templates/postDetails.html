@@ -96,7 +96,7 @@
                         <p class = "postedBy">Posted by:</p>
                         <div class = "authorDetails">
                              {#- Since 'post['avatarUrl']' is optional, we must have the following 'if' statement. #}
-                             {%- if post['avatarUrl'] != None %}
+                             {%- if (post['avatarUrl']) and (post['avatarUrl'] != None) %}
                                   <a href = "" title = "{{ post['author'] }}'s profile"><img src = "{{ post['avatarUrl'] | e }}" class = "roundImage" alt = "the user {{ post['author'] }}"></a>
                              {%- else %}
                                   <a href = "" title = "{{ post['author'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ post['author'] }}"></a>
@@ -192,7 +192,7 @@
                             {% endif -%}
                         </div>
                         <div class = "commentUserImage">
-                             {%- if comment1['avatarUrl'] != None %}
+                             {%- if (comment1['avatarUrl']) and (comment1['avatarUrl'] != None) %}
                                   <a href = "" title = "{{ comment1['author'] }}'s profile"><img src = "{{ comment1['avatarUrl'] | e }}" class = "roundImage commentsImage" alt = "the user {{ comment1['author'] }}"></a>
                              {%- else %}
                                   <a href = "" title = "{{ comment1['author'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage commentsImage" alt = "the user {{ comment1['author'] }}"></a>
@@ -268,7 +268,7 @@
                                    {% endif -%}
                                </div>
                                <div class = "commentUserImage">
-                                    {%- if comment2['avatarUrl'] != None %}
+                                    {%- if (comment2['avatarUrl']) and (comment2['avatarUrl'] != None) %}
                                          <a href = "" title = "{{ comment2['author'] }}'s profile"><img src = "{{ comment2['avatarUrl'] | e }}" class = "roundImage commentsImage" alt = "the user {{ comment2['author'] }}"></a>
                                     {%- else %}
                                          <a href = "" title = "{{ comment2['author'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage commentsImage" alt = "the user {{ comment2['author'] }}"></a>
