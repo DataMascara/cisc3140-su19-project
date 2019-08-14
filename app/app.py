@@ -10,8 +10,8 @@ app = Flask(__name__, template_folder="templates")
 app.secret_key = "test"
 
 # Assuming the API is running at the local ip below
-api = "https://bc-api-class.herokuapp.com"
-# api = "http://127.0.0.1:5000"
+# api = "https://bc-api-class.herokuapp.com"
+api = "http://127.0.0.1:5000"
 
 @app.route("/", methods=["GET"])
 def redirect_home():
@@ -93,16 +93,17 @@ def logout():
 def home():
     # Use the helper method to grab "tredning ports"
     trending = trending_ports()['all_ports']
-    port = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
-    print(port)
+    posts = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
+    # print(post)
+   
     if "loggedin" in session:
-        update_vote_for_post(port)
+        update_vote_for_post(posts)
         return render_template(
             "posts.html",
             name="Home",
             user=session["user"],
             trendPorts=trending,
-            port=port)
+            port=posts)
     else:
         return render_template(
             "posts.html",
@@ -187,7 +188,7 @@ def sign_up():
         try:
             avatarurl = res["addimage"]
         except:
-            avatarurl = ''
+            avatarurl = ' '
         # currently signup page has no description box
         # description = res["description"]
         description = ""
@@ -521,7 +522,7 @@ def profile():
               "value":form["descriptionTextArea"] })
             print(data)
 
-            response = requests.put(api + "update/", data=data, headers = headers)
+            response = requests.put(api + "/update/", data=data, headers = headers)
             print(response.content)
 
             data = json.dumps(
@@ -530,7 +531,7 @@ def profile():
               "value":form["avatarURL"] })
             print(data)
 
-            response = requests.put(api + "update/", data=data, headers = headers)
+            response = requests.put(api + "/update/", data=data, headers = headers)
             print(response.content)
 
             #change the session's user info
@@ -572,7 +573,7 @@ def update():
                     }
                 )
 
-                response = requests.put(api + "update/", data=payload, headers=headers)
+                response = requests.put(api + "/update/", data=payload, headers=headers)
                 print(response.content)
 
                 #update session's user userInfo
