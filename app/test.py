@@ -453,6 +453,11 @@ def hello19():
 def hello20():
     return render_template('userInfo.html', name = "Bla", trendPorts = trendPorts, user = user, dashboard = True, savedPosts = True)
 
+# 'user' is logged in and is looking at the "Dashboard" in the section "My Posts":
+@app.route('/dashboard4')
+def hello21():
+    return render_template('userInfo.html', name = "Bla", trendPorts = trendPorts, user = user, dashboard = True, myPosts = True)
+
 
 if __name__ == "__main__":
     # webbrowser.open_new("http://localhost:8181/")
@@ -477,5 +482,6 @@ if __name__ == "__main__":
     # webbrowser.open_new("http://localhost:8080/dashboard1")
     # webbrowser.open_new("http://localhost:8080/dashboard2")
     # webbrowser.open_new("http://localhost:8080/dashboard3")
+    # webbrowser.open_new("http://localhost:8080/dashboard4")
     app.run("localhost", 8181, True, use_reloader=False)
 
