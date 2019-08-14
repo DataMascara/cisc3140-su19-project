@@ -146,7 +146,7 @@
              {%- else %}
                    <p class = "numberOfComments">No comments yet!</p>
              {% endif -%}
-             {%- if post['numComments'] %}
+             {%- if post['numComments'] != '0' %}
              {#- The tree of comments: #}
               <div class = "commentTree">
         
