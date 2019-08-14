@@ -280,7 +280,7 @@ def post():
                 )
         # If it's  a get
         else:
-            ports = trending_ports()["all_ports"]
+            ports = trending_ports()
             print(ports)
             return render_template(
                 "writePost.html", user=session["user"], trendPorts=trending, ports=ports
@@ -457,7 +457,7 @@ def post_by_title(postId):
                 try:
                     parent_id = res["parentId"]
                 except:
-                    parent_id = None
+                    parent_id = "NULL"
                 print("we got to text")
                 print(author)
                 try:
