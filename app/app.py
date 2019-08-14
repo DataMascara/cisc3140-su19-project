@@ -739,6 +739,7 @@ def update():
                     user=session["user"],
                     notifications=True,
                     accountSettings=True,
+                    trendPorts=trending
                 )
 
             return render_template(
