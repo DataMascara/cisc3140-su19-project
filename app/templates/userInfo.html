@@ -273,31 +273,31 @@
                     <form action = "" method = "post" class = "accountSettingsButtons">
                             <div class = "maroonButtons">
                                 <div class = "subscriptionsDiv">
-                                     <input type = "submit" 
-                                                 class = "subscriptionsText"  
-                                                 name = "subscriptions" 
-                                                 value = "Subscriptions" 
+                                     <input type = "submit"
+                                                 class = "subscriptionsText"
+                                                 name = "subscriptions"
+                                                 value = "Subscriptions"
                                                  title = "Your port subscriptions" >
                                 </div>
                                 <div class = "commentsDiv">
-                                      <input type = "submit" 
-                                                  class = "commentsText" 
-                                                  name = "comments" 
-                                                  value = "Comments" 
+                                      <input type = "submit"
+                                                  class = "commentsText"
+                                                  name = "comments"
+                                                  value = "Comments"
                                                   title = "Comments you wrote"></p>
                                 </div>
                                 <div class = "savedDiv">
-                                     <input type = "submit" 
-                                                 class = "savedText"  
-                                                 name = "savedPosts" 
-                                                 value = "Saved Posts" 
+                                     <input type = "submit"
+                                                 class = "savedText"
+                                                 name = "savedPosts"
+                                                 value = "Saved Posts"
                                                  title = "Posts you saved" >
                                 </div>
                                 <div class = "postsDiv">
-                                      <input type = "submit" 
-                                                  class = "postsText" 
-                                                  name = "myPosts" 
-                                                  value = "My Posts" 
+                                      <input type = "submit"
+                                                  class = "postsText"
+                                                  name = "myPosts"
+                                                  value = "My Posts"
                                                   title = "Posts you wrote"></p>
                                 </div>
                              </div>
@@ -311,23 +311,23 @@
                                    <div class="port-section" style = "background-color: #eae8e8;">
                                {% endif -%}
                                 <div class = "portFirstPart">
-                                    <a href = "" class = "portName portName{{ port['id'] }}" title = "{{ port['name'] }}" >p/{{ port['name'] }}</a>
+                                    <a href = "" class = "portName portName{{ port['id'] }}" title = "{{ port['name'] }}" >p/{{ port['portName'] }}</a>
                                  </div>
                                  <div class = "portSecondPart">
                                      <p class = "portMembersNumber">{{ port['mem'] }} members</p>
                                  </div>
                                  <div class = "portThirdPart">
-                                             <form class = "indexForm subscriptionForm{{ port['id'] }}" 
-                                                        action = "" 
-                                                        method = "post" 
-                                                        target="frameForUserInfo" 
+                                             <form class = "indexForm subscriptionForm{{ port['id'] }}"
+                                                        action = ""
+                                                        method = "post"
+                                                        target="frameForUserInfo"
                                                         name = "subscriptionForm{{ port['id'] }}">
-                                                    <input type="button" 
-                                                                style = "background-color: #7B2240" 
-                                                                class = "subscribeIndex subscribe{{ port['id'] }}" 
-                                                                name  = "subscribe{{ port['id'] }}" 
-                                                                title="Joined" 
-                                                                value = "Joined" 
+                                                    <input type="button"
+                                                                style = "background-color: #7B2240"
+                                                                class = "subscribeIndex subscribe{{ port['id'] }}"
+                                                                name  = "subscribe{{ port['id'] }}"
+                                                                title="Joined"
+                                                                value = "Joined"
                                                                 onclick="subscribePortIndex(this)" >
                                              </form>
                                  </div>
