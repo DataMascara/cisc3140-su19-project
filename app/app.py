@@ -302,11 +302,14 @@ def post():
                     },
                 ).json()
                 trending = trending_ports()
+                session["votes"] = requests.get(
+                    f"{api}/votes-for-username/", json={"username": session['username']}
+                ).json()["voted_data"]
                 return render_template(
                     "postSubmitted.html",
                     user=session["user"],
                     name="What Name",
-                    trendPorts=trending, ports=trending
+                    trendPorts=trending, ports=trending, postId=response["posts"][0]["postId"]
                 )
 
             except:

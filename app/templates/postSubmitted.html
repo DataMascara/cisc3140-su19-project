@@ -18,7 +18,7 @@
 {%- block content %}
               <div class = "page">
                   <p class = "welcome">Post submitted.</p>
-                  <form action  =""> {#- Note: no info besides 'action' redirection is submitted by this form. Don't add 'method = post' here! #}
+                  <form action= "/post/{{ postId }}"> {#- Note: no info besides 'action' redirection is submitted by this form. Don't add 'method = post' here! #}
                       <input type="submit" name ="viewPost" class = "viewPost" value = "View Post" title = "View your post">
                   </form>
                   <form action  =""> {#- Note: no info besides 'action' redirection is submitted by this form. Don't add 'method = post' here! #}
