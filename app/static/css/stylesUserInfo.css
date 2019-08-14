@@ -420,6 +420,7 @@ Version 1.0
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
+    height: auto;
 }
 
 .portName{
