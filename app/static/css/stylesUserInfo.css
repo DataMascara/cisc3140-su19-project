@@ -556,3 +556,46 @@ Version 1.0
     overflow-y: auto;
     margin-top: 9px;
 }
+
+.numOfComments{
+    margin: 0;
+    color: rgb(80, 80, 80);
+    font-size: 7px;
+    margin-right: 10px;
+    margin-top: 8px;
+}
+
+.squareImage{
+    width: 30px;
+    height: 30px;
+    border: 0;
+    border-radius: 3px;
+    margin-right: 10px;
+    margin-left: 0;
+    padding: 0;
+}
+
+.postFourthPart{
+    display:flex; 
+    flex-direction:column;
+    overflow-y: auto;
+}
+
+.postFifthPart{
+    margin-left: auto;
+    margin-right: 0;
+    order: 2;
+    overflow-y: auto;
+}
+
+.thePortNameDiv{
+    margin-top: 3px;
+}
+
+.postDescription{
+    margin: 0;
+    font-size: 8px;
+    color: black;
+    margin-left: 5px;
+    margin-top: 6px;
+}
