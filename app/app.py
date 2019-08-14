@@ -10,8 +10,8 @@ app = Flask(__name__, template_folder="templates")
 app.secret_key = "test"
 
 # Assuming the API is running at the local ip below
-api = "https://bc-api-class.herokuapp.com"
-# api = "http://127.0.0.1:5000"
+# api = "https://bc-api-class.herokuapp.com"
+api = "http://127.0.0.1:5000"
 
 @app.route("/", methods=["GET"])
 def redirect_home():
@@ -253,6 +253,11 @@ def post():
                 title = res["title"]
                 portname = res["communitysearch"]
                 text = res["text"]
+                print(res)
+                try:
+                    img = res["addimage"]
+                except:
+                    img =  'https://media.wired.com/photos/5cdefc28b2569892c06b2ae4/master/w_1500,c_limit/Culture-Grumpy-Cat-487386121-2.jpg' 
                 response = requests.post(
                     f"{api}/newpost/",
                     json={
@@ -261,6 +266,7 @@ def post():
                         "portname": portname,
                         "userId": session["user"]["userId"],
                         "username": session["username"],
+                        "image":img
                     },
                 ).json()
                 trending = trending_ports()
