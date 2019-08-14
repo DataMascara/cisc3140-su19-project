@@ -508,6 +508,7 @@ def post_by_title(postId):
 def profile():
     trending = trending_ports()["all_ports"]
     if "loggedin" in session:
+        print("In User Profile.")
 
         #if user update their profile
         #get the form from website, convert it to JSON
@@ -520,9 +521,15 @@ def profile():
             { "username":session["user"]["username"],
              "field":"description",
               "value":form["descriptionTextArea"] })
-            print(data)
 
-            response = requests.put(api + "/update/", data=data, headers = headers)
+            try:
+                response = requests.put(api + "/update/",
+                data=data,
+                headers = headers)
+                session["user"]["description"] = form["descriptionTextArea"]
+                print("Update description successful!")
+            except:
+                Print("Error: Can't update your description.")
             print(response.content)
 
             data = json.dumps(
@@ -531,22 +538,26 @@ def profile():
               "value":form["avatarURL"] })
             print(data)
 
-            response = requests.put(api + "/update/", data=data, headers = headers)
+            try:
+                response = requests.put(api + "/update/",
+                data=data,
+                headers = headers)
+                session["user"]["avatarUrl"] = form["avatarURL"]
+                print("Update avatarUrl successful!")
+            except:
+                Print("Error: Can't update your avatarUrl.")
             print(response.content)
 
-            #change the session's user info
-            session["user"]["avatarUrl"] = form["avatarURL"]
-            session["user"]["description"] = form["descriptionTextArea"]
-
-        print("hello")
         return render_template(
             "userInfo.html",
             userProfile=True,
+            name=session["user"]["username"],
             user=session["user"],
             viewedUser=session["user"],
             trendPorts=trending,
         )
     else:
+        print("Not loggin yet.")
         return redirect("/login/")
 
 
@@ -565,6 +576,7 @@ def update():
 
             if "emailSetting" in form.keys():
 
+                print("In Account Settings: Email and Password.")
                 payload = json.dumps(
                     {
                         "username": session["user"]["username"],
@@ -573,23 +585,29 @@ def update():
                     }
                 )
 
-                response = requests.put(api + "/update/", data=payload, headers=headers)
-                print(response.content)
+                try:
+                    response = requests.put(api + "/update/",
+                    data=payload,
+                    headers=headers)
+                    #update session's user userInfo
+                    session["user"]["email"] = form["emailSetting"]
+                    print("Update email successful!")
+                except:
+                    Print("Error: Can't change your email.")
 
-                #update session's user userInfo
-                session["user"]["email"] = form["emailSetting"]
-                print(form["emailSetting"])
-                print(session["user"]["email"])
+                print(response.content)
 
                 return render_template(
                     "userInfo.html",
+                    name=session["user"]["username"],
                     user=session["user"],
                     accountSettings=True,
                     emailAndPassword=True,
                 )
 
-            else:
+            elif "passwordSetting" in form.keys():
 
+                print("In Account Settings: Email and Password.")
                 payload = json.dumps(
                     {
                         "username": session["user"]["username"],
@@ -598,38 +616,66 @@ def update():
                     }
                 )
 
-                response = requests.put(api + "/update/", data=payload, headers=headers)
-                print(response.content)
+                try:
+                    response = requests.put(api + "/update/",
+                    data=payload,
+                    headers=headers)
+                    #update session's user userInfo
+                    session["user"]["password"] = form["passwordSetting"]
+                    print("Update password successful!")
+                except:
+                    Print("Error: Can't change your password.")
 
-                #update session's user userInfo
-                session["user"]["password"] = form["passwordSetting"]
+                print(response.content)
 
                 return render_template(
                     "userInfo.html",
+                    name=session["user"]["username"],
                     user=session["user"],
                     accountSettings=True,
                     emailAndPassword=True,
                 )
+            elif "notifications" in form.keys():
+
+                print("In Account Settings: Notifications.")
+
+                #make it intentional, can't find any api to access these parameters.
+                session["user"]["isPostCommentNotificationsEnabled"]=True
+                session["user"]["isCommentReplyEnabled"]=True
+                session["user"]["isEmailPrivate"]=False
+
+                return render_template(
+                    "userInfo.html",
+                    name=session["user"]["username"],
+                    user=session["user"],
+                    notifications=True,
+                    accountSettings=True,
+                )
 
             return render_template(
                 "userInfo.html",
+                name=session["user"]["username"],
                 user=session["user"],
                 accountSettings=True,
                 emailAndPassword=True,
             )
+
         else:
+            print("In Account Settings: main page.")
             return render_template(
                 "userInfo.html",
+                name=session["user"]["username"],
                 user=session["user"],
                 accountSettings=True,
                 emailAndPassword=True,
             )
     else:
+        print("Not loggin yet.")
         return redirect("/login/")
 
 
 """
-------UPDATE-----
+------DASHBOARD-----
 """
 @app.route("/dashboard/", methods=["GET", "POST"])
 def dashBoard():
@@ -640,11 +686,14 @@ def dashBoard():
             form = request.form.to_dict()
 
             if "subscriptions" in form.keys():
-                res = requests.get(
+                try:
+                    res = requests.get(
                         f"{api}/ports-for-username/", json={"username": session["user"]["username"]}
                     ).json()["all_subscriptions for {data_value}"]
+                except:
+                    Print("Error: can't get ports user subscribed.")
 
-                print(res)
+                print("In Dashboard subscription.")
                 user = session["user"]
                 user["myPorts"] = []
                 for key in res:
@@ -657,48 +706,55 @@ def dashBoard():
                     "userInfo.html",
                     dashboard=True,
                     subscrptions=True,
+                    name=session["user"]["username"],
                     user=user,
                     viewedUser=session["user"],
                     trendPorts=trending,
                 )
             elif "comments" in form.keys():
 
+                print("In Dashboard comments.")
                 return render_template(
                     "userInfo.html",
                     dashboard=True,
                     comments=True,
+                    name=session["user"]["username"],
                     user=session["user"],
                     viewedUser=session["user"],
                     trendPorts=trending,
                 )
             elif "savedPosts" in form.keys():
-                port = requests.get(f"{api}/my-posts/", json={"username": session["user"]["username"]}).json()
-                for post in port["posts"]:
-                    print(post)
-                user = session["user"]
-                print(user)
-                user["savedPosts"] = []
-                for post in port["posts"]:
-                    temp = {}
-                    temp["totalVotes"] = post["votes"]
-                    temp["portname"] = post["portName"]
-                    temp["title"] = post["postTitle"]
-                    temp["text"] = post["postText"]
-                    temp["dateCreated"] = post["dateCreated"]
-                    temp["avatarUrl"] = post["image"]
-                    user["savedPosts"].append(temp)
-                print(user["savedPosts"])
+                # port = requests.get(f"{api}/my-posts/", json={"username": session["user"]["username"]}).json()
+                # user = session["user"]
+                # user["savedPosts"] = []
+                # for post in port["posts"]:
+                #     temp = {}
+                #     temp["totalVotes"] = post["votes"]
+                #     temp["portname"] = post["portName"]
+                #     temp["title"] = post["postTitle"]
+                #     temp["text"] = post["postText"]
+                #     temp["dateCreated"] = post["dateCreated"]
+                #     temp["avatarUrl"] = post["image"]
+                #     user["savedPosts"].append(temp)
 
+                print("In Dashboard savedPosts.")
                 return render_template(
                     "userInfo.html",
                     dashboard=True,
                     savedPosts=True,
-                    user=user,
+                    name=session["user"]["username"],
+                    user=session["user"],
                     viewedUser=session["user"],
                     trendPorts=trending,
                 )
             elif "myPosts" in form.keys():
-                posts = requests.get(f"{api}/my-posts/", json={"username": session["user"]["username"]}).json()
+                print("In Dashboard myPosts.")
+                try:
+                    posts = requests.get(f"{api}/my-posts/",
+                    json={"username": session["user"]["username"]}
+                    ).json()
+                except:
+                    Print("Error: Can't get user's posts.")
                 user = session["user"]
                 user["myPosts"] = []
                 for post in posts["posts"]:
@@ -708,27 +764,31 @@ def dashBoard():
                     temp["title"] = post["postTitle"]
                     temp["text"] = post["postText"]
                     temp["dateCreated"] = post["dateCreated"]
+                    temp["commentNum"] = 3
                     temp["imageUrl"] = post["image"]
                     user["myPosts"].append(temp)
                 print(user["myPosts"])
 
                 return render_template(
                     "userInfo.html",
-                    dashboard=True,
-                    myPosts=True,
-                    user=user,
-                    viewedUser=session["user"],
+                    name=session["user"]["username"],
                     trendPorts=trending,
+                    user=user,
+                    dashboard=True,
+                    myPosts=True
                 )
 
+        print("In Dashboard main page.")
         return render_template(
             "userInfo.html",
             dashboard=True,
             user=session["user"],
+            name=session["user"]["username"],
             viewedUser=session["user"],
             trendPorts=trending,
         )
     else:
+        print("Not loggin yet.")
         return redirect("/login/")
 
 """
