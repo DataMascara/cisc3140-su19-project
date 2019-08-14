@@ -70,6 +70,7 @@
                        {% endif -%}
 
                         <form action = "/login/" method="POST">
+                            <div>
                             <input type = "text"
                                         name = "username"
                                         class = "text"
@@ -78,7 +79,8 @@
                                         placeholder = "Username/Email"
                                         required
                                         />
-
+                            </div>
+                            <div>
                             <input type = "password"
                                        name = "password"
                                        class = "text"
@@ -87,7 +89,8 @@
                                        placeholder = "Password"
                                        required
                                        />
-
+                             </div>
+                                
                              <input type = "submit" class = "button1" value = "Sign in" name = "submit" title = "Sign in">
                          </form>
 
