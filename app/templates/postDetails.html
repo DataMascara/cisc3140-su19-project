@@ -142,7 +142,7 @@
          <div class = "comments">
              {#- A line that states how many total comments (both 1 and 2 level): #}
              {%- if post['numComments'] %}
-                   <p class = "numberOfComments">{{ post['numComments'] }} comments: {{ post['numComments'] | length }} bla</p>
+                   <p class = "numberOfComments">{{ post['numComments'] }} comments: {{ post['numComments']}} bla</p>
              {%- else %}
                    <p class = "numberOfComments">No comments yet!</p>
              {% endif -%}
