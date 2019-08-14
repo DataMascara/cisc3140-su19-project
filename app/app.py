@@ -254,10 +254,10 @@ def sign_up():
         ).json()["voted_data"]
         session["user"]["avatarUrl"] = avatarurl
         print(session)
-        redirect("/home/")
-        return render_template(
-            "base.html", name="Bla", user=session["user"], trendPorts=trending
-        )
+        return redirect("/home/")
+        # return render_template(
+        #     "base.html", name="Bla", user=session["user"], trendPorts=trending
+        # )
     else:
         return render_template("register.html", trendPorts=trending)
 
