@@ -102,8 +102,7 @@ def home():
             name="Home",
             user=session["user"],
             trendPorts=trending,
-            port=port
-        )
+            port=port)
     else:
         return render_template(
             "posts.html",
