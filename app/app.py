@@ -851,6 +851,16 @@ def hello9():
     )
 
 
+"""
+------FORGOTPW-----
+"""
+@app.route("/forgot/")
+def forgot():
+    trending = trending_ports()
+    return render_template('noPasswordReminders.html', name = "Bla", trendPorts = trending)
+
+
+
 @app.route("/Regist_Pending/")
 def pending():
     user = session["user"]
@@ -858,6 +868,9 @@ def pending():
     return render_template(
         "genLinks.html", name=user["first"], user=user, trendPorts=trending
     )
+
+
+
 # helper function to get "trending posts"
 # WIll do this by just getting three three random ports
 def trending_ports():
@@ -877,6 +890,7 @@ def trending_ports():
                         break
         session['trending'] = ports['all_ports']
         return session['trending']
+
 
 
 
