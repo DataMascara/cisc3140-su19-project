@@ -406,6 +406,46 @@
                                  </div>
                          </div>
                       {% endfor -%}
+                        {%- elif (myPosts) and (user) %}
+                         {%- for post in user['myPosts'] %}
+                               {#- Display alternating colors for odd and even-numbered posts: #}
+                               {%- if loop.index % 2 != 0 %}
+                                   <div class="post-section" style = "background-color: #ded3d7;">
+                               {%- else %}
+                                   <div class="post-section" style = "background-color: #eae8e8;">
+                               {% endif -%}
+                                       <div class = "postFirstPart">
+                                          <p class = "votes" >{{ post['totalVotes'] }}</p>
+                                       </div>
+                                       <div class = "postSecondPart">
+                                           <div class = "thePortNameDiv">
+                                               <a href = "" class = "thePortName" title = "Go to {{ post['portname'] }}" >{{ post['portname'] }}</a>
+                                           </div>
+                                           <div>
+                                               <p class = "numOfComments">{{ post['commentNum'] }} comments</p>
+                                           </div>
+                                        </div>
+                                        <div class = "post3rdPart">
+                                              {#- Since 'post['imageUrl']' is optional, we must have the following 'if' statement. #}
+                                              {%- if post['imageUrl'] != None %}
+                                                    <a href = ""><img src = "{{ post['imageUrl'] | e }}" class = "squareImage" title = "See post details" alt = "the post {{ post['title'] | e }}"></a>
+                                              {% endif %}
+                                        </div>
+                                        <div class = "postFourthPart">
+                                            <div>
+                                                <a href = "" class = "thePostName" title = "See {{ post['title'] }}" >{{ post['title'] }}</a>
+                                            </div>
+                                            <div>
+                                            {%- if post['text'] != None %}
+                                                 <p class = "postDescription">{{ post['text']  | e }}</p>
+                                            {% endif -%}
+                                             </div>
+                                        </div>
+                                        <div class = "postFifthPart">
+                                             <p class = "dateAndTime">{{ post['dateCreated'] }}</p>
+                                        </div>
+                                     </div> <!-- Closing `post-section` -->
+                      {% endfor -%}
                     {% endif -%}
                 </div> <!-- End of 'divText' -->
             </div> <!-- End of 'middleScreen' -->
