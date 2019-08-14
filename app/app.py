@@ -796,6 +796,7 @@ def dashBoard():
                     temp["text"] = key["commentText"]
                     temp["portname"] = postInfo["portName"]
                     temp["postname"] = postInfo["postTitle"]
+                    temp["postId"] = key['postId']
                     user["myComments"].append(temp)
 
                 print("In Dashboard comments.")
