@@ -111,7 +111,7 @@ def home():
             trendPorts=None,
             port=None
         )
- 
+
 """
 -------------/PORT(aka subreddit)-------------
 - Uses the url to decide what port the user wants to go to.
@@ -243,7 +243,7 @@ def sign_up():
 def post():
     trending = trending_ports()["all_ports"]
     # Make sure the user is logged in
-   
+
     if "loggedin" in session:
         # If we are making a post
 
@@ -428,7 +428,7 @@ def post_by_title(postId):
         try:
             # post_dict = requests.get(
             #     f"{api}/post-by-title/",
-            #     json={"title": title}).json() 
+            #     json={"title": title}).json()
             comments = requests.get(
                 f"{api}/comments-by-post/",
                 json={"id": postId}).json()['comments']
@@ -440,7 +440,7 @@ def post_by_title(postId):
             # If you click on subscribe(you just joined the port),
             print(comments)
             return render_template('postDetails.html', user = session['user'], name = "Post", post=post, comments= comments)
-        ## MEANING WE ARE POSTING A COMMENT        
+        ## MEANING WE ARE POSTING A COMMENT
         elif(request.method == "POST"):
             res = request.form
             if "loggedin" in session:
@@ -458,12 +458,12 @@ def post_by_title(postId):
                 try:
                     add_comment = requests.post(
                     f"{api}/add-comment/",
-                    json={"text": text, "postId":post_id, "parent_id":parent_id, "author":author}).json() 
+                    json={"text": text, "postId":post_id, "parent_id":parent_id, "author":author}).json()
                     print("GOT HERE TOO!")
                     print(add_comment)
                     return render_template('postDetails.html', user = session['user'], name = "Post", post=post, comments = comments, commentSubmittedMessage = True)
                 except:
-                    return redirect("/login/")            
+                    return redirect("/login/")
     else:
          return redirect("/login/")
 
@@ -489,8 +489,8 @@ def post_by_title(postId):
 #         try:
 #             add_comment = requests.post(
 #                 f"{api}/add-comment/",
-#                 json={"text": text, "post_id":post_id, "parent_id":parent_id, "author":author}).json() 
-            
+#                 json={"text": text, "post_id":post_id, "parent_id":parent_id, "author":author}).json()
+
 #             print(comments)
 #             return render_template('postDetails.html', user = session['user'], name = "Post", post=post_dict, comments = comments, commentSubmittedMessage = True)
 #         except Exception as e:
@@ -578,6 +578,8 @@ def update():
 
                 #update session's user userInfo
                 session["user"]["email"] = form["emailSetting"]
+                print(form["emailSetting"])
+                print(session["user"]["email"])
 
                 return render_template(
                     "userInfo.html",
@@ -625,6 +627,82 @@ def update():
     else:
         return redirect("/login/")
 
+
+"""
+------UPDATE-----
+"""
+@app.route("/dashboard/", methods=["GET", "POST"])
+def dashBoard():
+    if "loggedin" in session:
+        trending = trending_ports()["all_ports"]
+
+        if request.method == "POST":
+            form = request.form.to_dict()
+
+            if "subscriptions" in form.keys():
+                res = requests.get(
+                        f"{api}/ports-for-username/", json={"username": session["user"]["username"]}
+                    ).json()["all_subscriptions for {data_value}"]
+
+                user = session["user"]
+                user["myPorts"] = []
+                for key in res:
+                    user["myPorts"].append(key)
+
+                return render_template(
+                    "userInfo.html",
+                    dashboard=True,
+                    subscrptions=True,
+                    user=user,
+                    viewedUser=session["user"],
+                    trendPorts=trending,
+                )
+            elif "comments" in form.keys():
+
+                return render_template(
+                    "userInfo.html",
+                    dashboard=True,
+                    comments=True,
+                    user=session["user"],
+                    viewedUser=session["user"],
+                    trendPorts=trending,
+                )
+            elif "savedPosts" in form.keys():
+                port = requests.get(f"{api}/my-posts/", json={"username": session["user"]["username"]}).json()
+                for post in port["posts"]:
+                    print(post)
+                user = session["user"]
+                print(user)
+                user["savedPosts"] = []
+                for post in port["posts"]:
+                    temp = {}
+                    temp["totalVotes"] = post["votes"]
+                    temp["portname"] = post["portName"]
+                    temp["title"] = post["postTitle"]
+                    temp["text"] = post["postText"]
+                    temp["dateCreated"] = post["dateCreated"]
+                    temp["avatarUrl"] = post["image"]
+                    user["savedPosts"].append(temp)
+                print(user["savedPosts"])
+
+                return render_template(
+                    "userInfo.html",
+                    dashboard=True,
+                    savedPosts=True,
+                    user=user,
+                    viewedUser=session["user"],
+                    trendPorts=trending,
+                )
+
+        return render_template(
+            "userInfo.html",
+            dashboard=True,
+            user=session["user"],
+            viewedUser=session["user"],
+            trendPorts=trending,
+        )
+    else:
+        return redirect("/login/")
 
 """
 ------OUR TEAM PAGE-----
@@ -721,7 +799,7 @@ def update_vote_for_post(port):
             return None
 
 
-        
+
 
 
 def load_user(username):

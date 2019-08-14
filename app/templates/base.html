@@ -52,7 +52,7 @@
                         <form method = "GET" action = "/profile/">
                                  <input type = "submit" name = "loggedIn" class="profile" value = "User Profile" title = "Go to your User Profile">
                         </form>
-                        <form method = "GET" action = "">
+                        <form method = "GET" action = "/dashboard/">
                                  <input type = "submit" name = "loggedIn" class="dash" value = "Dashboard" title = "Go to your Dashboard">
                         </form>
                         <form method = "Get" action = "/update/">
@@ -117,7 +117,7 @@
      <div class = "midContainer"> <!-- Beginning of the Middle Container -->
          {%- block content %}
               {#- All the content will come here! #}
-              
+
          {% endblock content -%}
          {%- block generalLinks %}
               <div class = "bottomLinks">
@@ -179,16 +179,16 @@
                             <input type="hidden" name="portname" value="{{ port['name'] }}">
                             {%- if port['isSubscribed'] == True %}
                                    <input type="submit"
-                                          style = "background-color: #7B2240" 
-                                          class = "subscribe subscribe{{ loop.index }}" 
+                                          style = "background-color: #7B2240"
+                                          class = "subscribe subscribe{{ loop.index }}"
                                           name  = "value"
-                                          title="Joined" 
-                                          value = "Joined" 
+                                          title="Joined"
+                                          value = "Joined"
                                           onclick="subscribe(this)" >
                             {%- else %} {#- if it is False: #}
                                     <input type="submit"
-                                           style = "background-color: rgb(117, 117, 117)" 
-                                           class = "subscribe subscribe{{ loop.index }}" 
+                                           style = "background-color: rgb(117, 117, 117)"
+                                           class = "subscribe subscribe{{ loop.index }}"
                                            name  = "value"
                                            title="Subscribe"
                                            value = "Subscribe"
