@@ -794,6 +794,7 @@ def update_vote_for_post(port):
                         break
             return port
         except:
+
             return redirect('/home/')
         else:
             return None
