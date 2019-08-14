@@ -184,7 +184,10 @@ def sign_up():
         first = res["first"]
         last = res["last"]
         # avatarurl = res['imageUpload']
-        avatarurl = ""
+        try:
+            avatarurl = res["addimage"]
+        except:
+            avatarurl = ''
         # currently signup page has no description box
         # description = res["description"]
         description = ""
@@ -223,6 +226,8 @@ def sign_up():
         session["votes"] = requests.get(
             f"{api}/votes-for-username/", json={"username": username}
         ).json()["voted_data"]
+        session["user"]["avatarUrl"] = avatarurl
+        print(session)
         redirect("/home/")
         return render_template(
             "base.html", name="Bla", user=session["user"], trendPorts=trending
