@@ -425,6 +425,9 @@ def post_by_title(postId):
         json={"id": f"{postId}"}).json()['posts'][0]
     print(post)
     if "loggedin" in session:
+        for voted in session["votes"]:
+            if voted['postId'] == post['postId']:
+                post.update({"upOrDownvoted": voted['vote']})
         post_title = post['postTitle']
         try:
             # post_dict = requests.get(

@@ -64,11 +64,11 @@
          <div class = "postData">
             <span class = "votes">
                  {%- if user %} {#- Appears only if the user is logged in #}
-                     <form class = "upvote" action = "" method = "post" target = "frameForVotesAndPostSaving">
+                     <form class = "upvote" action = "/vote/" method = "post" target = "frameForVotesAndPostSaving">
                             <input type = "submit" 
                                        class = "upvoteBtn post{{ post['id'] }}" 
                                        value = "++" 
-                                       name = "upvote{{ post['id'] }}" 
+                                       name = "value"
                                        onclick="forUpvote (this)" 
                                        title = "Upvote it!"
                                        {%- if post['upOrDownvoted'] == 1 %}
@@ -76,8 +76,10 @@
                                        {%- else %}
                                        {#- do nothing #}
                                        {% endif -%}>
-                      </form>
                  {% endif -%}
+                        <input type="hidden" name="postId" value="{{ post['postId'] }}">
+                        <input type="hidden" name="originalValue" value="{{ post['upOrDownvoted'] }}">
+                        <input type="hidden" name="type" value="post">
                  <p class = "numOfVotes post{{ post['id'] }}"
                       {%- if (post['upOrDownvoted'] == 1) and (user) %}
                        style = "color: rgb(77, 208, 191);"
@@ -85,13 +87,12 @@
                        style = "color: red;"
                       {%- else %}
                       {#- do nothing #}
-                      {% endif -%}>{{ post['totalVotes'] }}</p>
+                      {% endif -%}>{{ post['votes'] }}</p>
                  {%- if user %} {#- Appears only if the user is logged in #}
-                     <form class = "downvote" action = "" method = "post" target = "frameForVotesAndPostSaving">
                           <input type = "submit" 
                                      class = "downvoteBtn post{{ post['id'] }}" 
                                      value = "--" 
-                                     name = "downvote{{ post['id'] }}"  
+                                     name = "value"
                                      onclick="forDownvote (this)" 
                                      title = "Downvote it!"
                                      {%- if post['upOrDownvoted'] == -1 %}
@@ -110,7 +111,7 @@
                         <p class = "dateOfWriting">{{ post['dateCreated'] }}</p>
                         <p class = "postedBy">Posted by:</p>
                         <div class = "authorDetails">
-                             {#- Since 'post['avatarUrl']' is optional, we must have the following 'if' statement. #}
+                             {#- Since 'post['authorImg']' is optional, we must have the following 'if' statement. #}
                              {%- if (post['authorImg']) and (post['authorImg']|length > 5) %}
                                   <a href = "" title = "{{ post['author'] }}'s profile"><img src = "{{ post['authorImg'] | e }}" class = "roundImage" alt = "the user {{ post['author'] }}"></a>
                              {%- else %}
