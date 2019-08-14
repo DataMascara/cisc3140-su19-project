@@ -53,6 +53,9 @@ def login_api():
                     session["votes"] = requests.get(
                         f"{api}/votes-for-username/", json={"username": username}
                     ).json()["voted_data"]
+                    session["comment_votes"] = requests.get(
+                        f"{api}/comment-votes-for-username/", json={"username": username}
+                    ).json()["voted_data"]
                     trending = trending_ports()
                     session.pop("trending", None)
                     trending = trending_ports()
@@ -66,9 +69,13 @@ def login_api():
                     "base.html", title="", errLogIn=True, trendPorts=trending
                 )
         else:
+            main = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
             return render_template(
-                "base.html", title="Please Log in", trendPorts=trending
-            )
+            "posts.html",
+            name="Log In",
+            trendPorts=trending,
+            port=main )
+            
 
 
 """
@@ -83,19 +90,25 @@ def logout():
     session.pop("subscriptions", None)
     session.pop("votes", None)
     session.pop("trending", None)
+    session.pop("comment_votes", None)
     # Redirect to login page
     return redirect("/login/")
 
 """
 -------------HOMEPAGE-------------
 """
-@app.route("/home/", methods=["GET"])
+@app.route("/home/", methods=["GET", "POST"])
 def home():
     # Use the helper method to grab "tredning ports"
     trending = trending_ports()
     posts = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
+    if request.method == "POST":
+        res = request.form
+        if res['sortByBtn'] == "hot":
+            posts['posts'].sort(key= lambda x:x["votes"], reverse=True)
+        if res['sortByBtn'] == "new":
+            posts['posts'].sort(key=lambda x: x["dateCreated"], reverse=True)
     # print(post)
-
     if "loggedin" in session:
         update_vote_for_post(posts)
         return render_template(
@@ -108,8 +121,8 @@ def home():
         return render_template(
             "posts.html",
             name="Log In",
-            trendPorts=None,
-            port=None
+            trendPorts=trending,
+            port=posts
         )
 
 """
@@ -117,9 +130,15 @@ def home():
 - Uses the url to decide what port the user wants to go to.
         - So, this should
 """
-@app.route("/p/<portname>/", methods=["GET"])
+@app.route("/p/<portname>/", methods=["GET", "POST"])
 def portpost(portname):
     port = requests.get(f"{api}/posts-by-portname/", json={"portname": portname}).json()
+    if request.method == "POST":
+        res = request.form
+        if res['sortByBtn'] == "hot":
+            port['posts'].sort(key= lambda x:x["votes"], reverse=True)
+        if res['sortByBtn'] == "new":
+            port['posts'].sort(key=lambda x: x["dateCreated"], reverse=True)
     print(type(port))
     trending = trending_ports()
     if "loggedin" in session:
@@ -143,10 +162,16 @@ def portpost(portname):
 --------POST HISTORY------
 '''
 # gets user's post history
-@app.route("/u/<username>/posts/", methods=["GET"])
+@app.route("/u/<username>/posts/", methods=["GET", "POST"])
 def my_posts(username):
     trending = trending_ports()
     port = requests.get(f"{api}/my-posts/", json={"username": username}).json()
+    if request.method == "POST":
+        res = request.form
+        if res['sortByBtn'] == "hot":
+            port['posts'].sort(key= lambda x:x["votes"], reverse=True)
+        if res['sortByBtn'] == "new":
+            port['posts'].sort(key=lambda x: x["dateCreated"], reverse=True)
     if "loggedin" in session:
         update_vote_for_post(port)
         return render_template(
@@ -208,6 +233,7 @@ def sign_up():
         try:
             # Try and get the new user, meaning they registered
             username = api_res["user"][0]["username"]
+            return redirect("/home/")
         except:
             # Otherwise, render an error
             return render_template(
@@ -229,10 +255,10 @@ def sign_up():
         ).json()["voted_data"]
         session["user"]["avatarUrl"] = avatarurl
         print(session)
-        redirect("/home/")
-        return render_template(
-            "base.html", name="Bla", user=session["user"], trendPorts=trending
-        )
+        return redirect("/home/")
+        # return render_template(
+        #     "base.html", name="Bla", user=session["user"], trendPorts=trending
+        # )
     else:
         return render_template("register.html", trendPorts=trending)
 
@@ -255,9 +281,15 @@ def post():
                 text = res["text"]
                 print(res)
                 try:
-                    img = res["addimage"]
+                    print("the tried")
+                    print() 
+                    if(len(res["postImg"] ) > 3 ):
+                        img = res["postImg"]
+                    else:
+                        img = 'https://i.imgur.com/KdKU0UD.png'
                 except:
-                    img =  'https://media.wired.com/photos/5cdefc28b2569892c06b2ae4/master/w_1500,c_limit/Culture-Grumpy-Cat-487386121-2.jpg'
+                    img = 'https://i.imgur.com/KdKU0UD.png'
+                # print(img)
                 response = requests.post(
                     f"{api}/newpost/",
                     json={
@@ -299,21 +331,27 @@ def post():
 -------------USER SUBSCRIBED POSTS-------------
  - Given a user, return all the posts from the ports they are subscribed to
 """
-@app.route("/subscribed-posts/", methods=["GET"])
+@app.route("/subscribed-posts/", methods=["GET", "POST"])
 def subscribedposts():
     if "loggedin" in session:
         trending = trending_ports()
-        post = requests.get(
+        posts = requests.get(
             f"{api}/posts-from-subscribed-ports/",
             json={"username": session["username"]},
         ).json()
+        if request.method == "POST":
+            res = request.form
+            if res['sortByBtn'] == "hot":
+                posts['posts'].sort(key=lambda x: x["votes"], reverse=True)
+            if res['sortByBtn'] == "new":
+                posts['posts'].sort(key=lambda x: x["dateCreated"], reverse=True)
         update_vote_for_post(post)
         return render_template(
             "posts.html",
             name="Your feed",
             user=session["user"],
             trendPorts=trending,
-            port=post
+            port=posts
         )
     else:
         return redirect("/login/")
@@ -326,23 +364,37 @@ def vote():
     if "loggedin" in session:
         res = request.form
         value = res["value"]
-        postId = res["postId"]
+        id = res["id"]
         originalValue = res["originalValue"]
         type = res['type']
         # print(res)
-        response = (
-            requests.post(
-                f"{api}/vote/",
-                json={
-                    "username": session["username"],
-                    "value": value,
-                    "postId": postId,
-                    "originalValue": originalValue,
-                },
-            ).json()
-        )["voted_data"]
+        if type == 'post':
+            response = (
+                requests.post(
+                    f"{api}/vote/",
+                    json={
+                        "username": session["username"],
+                        "value": value,
+                        "postId": id,
+                        "originalValue": originalValue,
+                    },
+                ).json()
+            )["voted_data"]
+            session["votes"] = response
+        elif type == 'comment':
+            response = (
+                requests.post(
+                    f"{api}/vote-comment/",
+                    json={
+                        "username": session["username"],
+                        "value": value,
+                        "commentId": id,
+                        "originalValue": originalValue,
+                    },
+                ).json()
+            )["voted_data"]
+            session["comment_votes"] = response
         # print(response)
-        session["votes"] = response
         return "UPDATED"
     else:
         return redirect("/login/")
@@ -442,6 +494,13 @@ def post_by_title(postId):
             comments_and_reps = requests.get(
                 f"{api}/comments-by-post/",
                 json={"id": postId}).json()
+            for votes in session['comment_votes']:
+                for comments in comments_and_reps["comments"]:
+                    if comments['commentId'] == votes['postId']:
+                        comments.update({"upOrDownvoted": votes['vote']})
+                for replies in comments_and_reps["replies"]:
+                    if replies['commentId'] == votes['postId']:
+                        replies.update({"upOrDownvoted": votes['vote']})
         except Exception as e:
             print("EXCEPT")
             print(e)
@@ -472,45 +531,17 @@ def post_by_title(postId):
                     json={"text": text, "postId":post_id, "parentId":parent_id, "author":author}).json()
                     print("GOT HERE TOO!")
                     print(add_comment)
+                    session['comment_votes'] = requests.get(
+                        f"{api}/comment-votes-for-username/", json={"username": session['username']}
+                    ).json()["voted_data"]
+                    comments_and_reps = requests.get(
+                        f"{api}/comments-by-post/",
+                        json={"id": postId}).json()
                     return render_template('postDetails.html', user = session['user'], name = "Post", post=post, comments = comments_and_reps, commentSubmittedMessage = True, trendPorts=trending)
                 except:
                     return redirect("/login/")
     else:
          return redirect("/login/")
-
-
-
-
-# '''
-# ---- ADD COMMENT -----
-# '''
-# @app.route("/add-comment/", methods = ["POST"])
-# def add_comment_post():
-#     if "loggedin" in session:
-#         post_title = title
-#     # If you click on subscribe(you just joined the port)
-#         # text, post_id, parent_id, author
-#         text = res["text"]
-#         post_id = res["postId"]
-#         parent_id = None
-#         author = session['username']
-#         try:
-#             parent_id = res["parentId"]
-#         except:
-#         try:
-#             add_comment = requests.post(
-#                 f"{api}/add-comment/",
-#                 json={"text": text, "post_id":post_id, "parent_id":parent_id, "author":author}).json()
-
-#             print(comments)
-#             return render_template('postDetails.html', user = session['user'], name = "Post", post=post_dict, comments = comments, commentSubmittedMessage = True)
-#         except Exception as e:
-#             print(e)
-#             return redirect('/home/')
-#     else:
-#         return redirect("/login/")
-
-
 
 """
  ------PROFILE-----
@@ -675,6 +706,7 @@ def update():
                     user=session["user"],
                     notifications=True,
                     accountSettings=True,
+                    trendPorts=trending
                 )
 
             return render_template(

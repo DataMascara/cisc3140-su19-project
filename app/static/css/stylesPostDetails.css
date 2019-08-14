@@ -220,14 +220,14 @@
     color: black; important!
 }
 
-.commentToPostDiv{
+.commentToPostDiv, .commentToCommentDiv{
     display: flex;
     justify-content: flex-end;
     margin: 0;
     margin-bottom: 10px;
 }
 
-.CommentToPostBtn{
+.CommentToPostBtn, .commentToCommentBtn{
     text-align: center;
     background-color: #757575;
     border-radius: 3px;

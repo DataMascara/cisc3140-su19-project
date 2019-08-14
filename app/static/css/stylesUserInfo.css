@@ -414,6 +414,7 @@ Version 1.0
     overflow-y: auto;
     display: flex;
     justify-content: flex-start;
+    min-height: 30px;
 }
 
 .comment-section, .post-section{
