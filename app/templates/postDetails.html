@@ -6,6 +6,7 @@
      <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
 </head>
 {%- extends "base.html" %}
+<body {%- block onload %} onload = "location.reload(); displayYear();" {% endblock -%}>
 
 {%- block content %}
 
@@ -292,3 +293,4 @@
          
     </div> <!-- End of 'mainScreen' -->
 {%- endblock content %}
+</body>
