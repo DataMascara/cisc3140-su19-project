@@ -95,7 +95,7 @@ def home():
     trending = trending_ports()
     posts = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
     # print(post)
-   
+
     if "loggedin" in session:
         update_vote_for_post(posts)
         return render_template(
@@ -650,10 +650,14 @@ def dashBoard():
                         f"{api}/ports-for-username/", json={"username": session["user"]["username"]}
                     ).json()["all_subscriptions for {data_value}"]
 
+                print(res)
                 user = session["user"]
                 user["myPorts"] = []
                 for key in res:
-                    user["myPorts"].append(key)
+                    temp = {}
+                    temp["id"] = key["portId"]
+                    temp["name"] = key["portName"]
+                    user["myPorts"].append(temp)
 
                 return render_template(
                     "userInfo.html",
@@ -695,6 +699,29 @@ def dashBoard():
                     "userInfo.html",
                     dashboard=True,
                     savedPosts=True,
+                    user=user,
+                    viewedUser=session["user"],
+                    trendPorts=trending,
+                )
+            elif "myPosts" in form.keys():
+                posts = requests.get(f"{api}/my-posts/", json={"username": session["user"]["username"]}).json()
+                user = session["user"]
+                user["myPosts"] = []
+                for post in posts["posts"]:
+                    temp = {}
+                    temp["totalVotes"] = post["votes"]
+                    temp["portname"] = post["portName"]
+                    temp["title"] = post["postTitle"]
+                    temp["text"] = post["postText"]
+                    temp["dateCreated"] = post["dateCreated"]
+                    temp["imageUrl"] = post["image"]
+                    user["myPosts"].append(temp)
+                print(user["myPosts"])
+
+                return render_template(
+                    "userInfo.html",
+                    dashboard=True,
+                    myPosts=True,
                     user=user,
                     viewedUser=session["user"],
                     trendPorts=trending,
