@@ -702,15 +702,18 @@ def trending_ports():
 
 def update_vote_for_post(port):
     if "loggedin" in session:
-        for posts in port["posts"]:
-            for votes in session["votes"]:
-                if posts["postId"] == votes["postId"]:
-                    # print(votes["vote"])
-                    posts.update({"upOrDownvoted": votes["vote"]})
-                    break
-        return port
-    else:
-        return None
+        try:
+            for posts in port["posts"]:
+                for votes in session["votes"]:
+                    if posts["postId"] == votes["postId"]:
+                        # print(votes["vote"])
+                        posts.update({"upOrDownvoted": votes["vote"]})
+                        break
+            return port
+        except:
+            return redirect('/home/')
+        else:
+            return None
 
 
         
