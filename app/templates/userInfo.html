@@ -61,7 +61,7 @@
                                                                title = "Describe yourself, {{ viewedUser['username']}}!"
                                                                placeholder = "Your description here"
                                                                spellcheck = "true">{{ viewedUser['description']
-                                                            }} 
+                                                            }}
                                                             </textarea>
                                                 <input type="text" name="avatarURL" class = "avatarURL" required placeholder="Add URL to Your Avatar">
                                                 <div class = "descriptionFormSubmitDiv">
@@ -422,7 +422,7 @@
                                        </div>
                                        <div class = "postSecondPart">
                                            <div class = "thePortNameDiv">
-                                               <a href = "" class = "thePortName" title = "Go to {{ post['portname'] }}" >{{ post['portname'] }}</a>
+                                               <a href = "/p/{{ post['portname'] }}" class = "thePortName" title = "Go to {{ post['portname'] }}" >{{ post['portname'] }}</a>
                                            </div>
                                            <div>
                                                <p class = "numOfComments">{{ post['commentNum'] }} comments</p>
@@ -436,7 +436,7 @@
                                         </div>
                                         <div class = "postFourthPart">
                                             <div>
-                                                <a href = "" class = "thePostName" title = "See {{ post['title'] }}" >{{ post['title'] }}</a>
+                                                <a href = "/post/{{ post['postId'] }}" class = "thePostName" title = "See {{ post['title'] }}" >{{ post['title'] }}</a>
                                             </div>
                                             <div>
                                             {%- if post['text'] != None %}

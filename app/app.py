@@ -75,7 +75,7 @@ def login_api():
             name="Log In",
             trendPorts=trending,
             port=main )
-            
+
 
 
 """
@@ -282,7 +282,7 @@ def post():
                 print(res)
                 try:
                     print("the tried")
-                    print() 
+                    print()
                     if(len(res["postImg"] ) > 3 ):
                         img = res["postImg"]
                     else:
@@ -844,6 +844,7 @@ def dashBoard():
                 user["myPosts"] = []
                 for post in posts["posts"]:
                     temp = {}
+                    temp["postId"] = post["postId"]
                     temp["totalVotes"] = post["votes"]
                     temp["portname"] = post["portName"]
                     temp["title"] = post["postTitle"]
