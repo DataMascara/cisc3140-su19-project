@@ -111,8 +111,8 @@
                         <p class = "postedBy">Posted by:</p>
                         <div class = "authorDetails">
                              {#- Since 'post['avatarUrl']' is optional, we must have the following 'if' statement. #}
-                             {%- if (post['avatarUrl']) and (post['avatarUrl']|length > 1) %}
-                                  <a href = "" title = "{{ post['author'] }}'s profile"><img src = "{{ post['avatarUrl'] | e }}" class = "roundImage" alt = "the user {{ post['author'] }}"></a>
+                             {%- if (post['authorImg']) and (post['authorImg']|length > 5) %}
+                                  <a href = "" title = "{{ post['author'] }}'s profile"><img src = "{{ post['authorImg'] | e }}" class = "roundImage" alt = "the user {{ post['author'] }}"></a>
                              {%- else %}
                                   <a href = "" title = "{{ post['author'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ post['author'] }}"></a>
                              {% endif -%}
