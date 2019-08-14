@@ -10,8 +10,8 @@ app = Flask(__name__, template_folder="templates")
 app.secret_key = "test"
 
 # Assuming the API is running at the local ip below
-api = "https://bc-api-class.herokuapp.com"
-# api = "http://127.0.0.1:5000"
+# api = "https://bc-api-class.herokuapp.com"
+api = "http://127.0.0.1:5000"
 
 @app.route("/", methods=["GET"])
 def redirect_home():
@@ -69,9 +69,13 @@ def login_api():
                     "base.html", title="", errLogIn=True, trendPorts=trending
                 )
         else:
+            main = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
             return render_template(
-                "base.html", title="Please Log in", trendPorts=trending
-            )
+            "posts.html",
+            name="Log In",
+            trendPorts=trending,
+            port=main )
+            
 
 
 """
@@ -99,7 +103,6 @@ def home():
     trending = trending_ports()
     posts = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
     # print(post)
-
     if "loggedin" in session:
         update_vote_for_post(posts)
         return render_template(
@@ -112,8 +115,8 @@ def home():
         return render_template(
             "posts.html",
             name="Log In",
-            trendPorts=None,
-            port=None
+            trendPorts=trending,
+            port=posts
         )
 
 """
@@ -259,9 +262,15 @@ def post():
                 text = res["text"]
                 print(res)
                 try:
-                    img = res["addimage"]
+                    print("the tried")
+                    print() 
+                    if(len(res["postImg"] ) > 3 ):
+                        img = res["postImg"]
+                    else:
+                        img = 'https://i.imgur.com/KdKU0UD.png'
                 except:
-                    img =  'https://media.wired.com/photos/5cdefc28b2569892c06b2ae4/master/w_1500,c_limit/Culture-Grumpy-Cat-487386121-2.jpg'
+                    img = 'https://i.imgur.com/KdKU0UD.png'
+                # print(img)
                 response = requests.post(
                     f"{api}/newpost/",
                     json={

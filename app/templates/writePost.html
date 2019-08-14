@@ -31,15 +31,18 @@ base template, all we modify here is the 'content' block: #} {%- block content
   >
     <div class="header">
       <h1>Create a post on p/</h1>
-      
-      <select class = "communities"
-              required
-              name = "communitysearch">
-           <option selected="selected" value = "" title = "Search Communities" >Search Communities</option>
-           {#- Please pass here an array of dicts called 'ports' of all existing ports, each of which dict has the attribute: 'name' #}
-           {%- for port in ports %} 
-                <option value="{{  port['name']  }}" title = "{{  port['name']  }}" >{{  port['name']  }}</option>
-           {% endfor -%}
+
+      <select class="communities" required name="communitysearch">
+        <option selected="selected" value="" title="Search Communities"
+          >Search Communities</option
+        >
+        {#- Please pass here an array of dicts called 'ports' of all existing
+        ports, each of which dict has the attribute: 'name' #} {%- for port in
+        ports %}
+        <option value="{{ port['name'] }}" title="{{ port['name'] }}">{{
+          port["name"]
+        }}</option>
+        {% endfor -%}
       </select>
 
       <p class="red">*</p>
@@ -58,7 +61,7 @@ base template, all we modify here is the 'content' block: #} {%- block content
     <br />
     <textarea name="text" rows="15" placeholder="Text"></textarea>
     <br />
-    <input type="text" name="addimage" placeholder="Add Image URL">
+    <input type="text" name="postImg" placeholder="Add Image URL" />
     <div class="btncontainer">
       <input type="submit" class="btn" name="submit" value="Submit Post" />
     </div>
