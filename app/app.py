@@ -257,7 +257,7 @@ def post():
                 try:
                     img = res["addimage"]
                 except:
-                    img =  'https://media.wired.com/photos/5cdefc28b2569892c06b2ae4/master/w_1500,c_limit/Culture-Grumpy-Cat-487386121-2.jpg' 
+                    img =  'https://media.wired.com/photos/5cdefc28b2569892c06b2ae4/master/w_1500,c_limit/Culture-Grumpy-Cat-487386121-2.jpg'
                 response = requests.post(
                     f"{api}/newpost/",
                     json={
@@ -537,7 +537,10 @@ def profile():
                 response = requests.put(api + "/update/",
                 data=data,
                 headers = headers)
+                #update session when user update their description.
+                session["user"].pop("description", None)
                 session["user"]["description"] = form["descriptionTextArea"]
+                session.modified = True
                 print("Update description successful!")
             except:
                 print("Error: Can't update your description.")
@@ -553,10 +556,14 @@ def profile():
                 response = requests.put(api + "/update/",
                 data=data,
                 headers = headers)
+
+                #update session when user update their avatarURL.
+                session["user"].pop("avatarUrl", None)
                 session["user"]["avatarUrl"] = form["avatarURL"]
+                session.modified = True
                 print("Update avatarUrl successful!")
             except:
-                Print("Error: Can't update your avatarUrl.")
+                print("Error: Can't update your avatarUrl.")
             print(response.content)
 
         return render_template(
@@ -601,11 +608,13 @@ def update():
                     response = requests.put(api + "/update/",
                     data=payload,
                     headers=headers)
-                    #update session's user userInfo
+                    #update session's user email
+                    session["user"].pop("email", None)
                     session["user"]["email"] = form["emailSetting"]
+                    session.modified = True
                     print("Update email successful!")
                 except:
-                    Print("Error: Can't change your email.")
+                    print("Error: Can't change your email.")
 
                 print(response.content)
 
@@ -633,11 +642,13 @@ def update():
                     response = requests.put(api + "/update/",
                     data=payload,
                     headers=headers)
-                    #update session's user userInfo
+                    #update session's user password
+                    session["user"].pop("password", None)
                     session["user"]["password"] = form["passwordSetting"]
+                    session.modified = True
                     print("Update password successful!")
                 except:
-                    Print("Error: Can't change your password.")
+                    print("Error: Can't change your password.")
 
                 print(response.content)
 
@@ -707,7 +718,7 @@ def dashBoard():
                         f"{api}/ports-for-username/", json={"username": session["user"]["username"]}
                     ).json()["all_subscriptions for {data_value}"]
                 except:
-                    Print("Error: can't get ports user subscribed.")
+                    print("Error: can't get ports user subscribed.")
 
                 print("In Dashboard subscription.")
                 user = session["user"]
@@ -770,7 +781,7 @@ def dashBoard():
                     json={"username": session["user"]["username"]}
                     ).json()
                 except:
-                    Print("Error: Can't get user's posts.")
+                    print("Error: Can't get user's posts.")
                 user = session["user"]
                 user["myPosts"] = []
                 for post in posts["posts"]:
