@@ -521,7 +521,7 @@ def profile():
               "value":form["descriptionTextArea"] })
             print(data)
 
-            response = requests.put(api + "update/", data=data, headers = headers)
+            response = requests.put(api + "/update/", data=data, headers = headers)
             print(response.content)
 
             data = json.dumps(
@@ -530,7 +530,7 @@ def profile():
               "value":form["avatarURL"] })
             print(data)
 
-            response = requests.put(api + "update/", data=data, headers = headers)
+            response = requests.put(api + "/update/", data=data, headers = headers)
             print(response.content)
 
             #change the session's user info
@@ -572,11 +572,13 @@ def update():
                     }
                 )
 
-                response = requests.put(api + "update/", data=payload, headers=headers)
+                response = requests.put(api + "/update/", data=payload, headers=headers)
                 print(response.content)
 
                 #update session's user userInfo
                 session["user"]["email"] = form["emailSetting"]
+                print(form["emailSetting"])
+                print(session["user"]["email"])
 
                 return render_template(
                     "userInfo.html",
