@@ -233,6 +233,7 @@ def sign_up():
         try:
             # Try and get the new user, meaning they registered
             username = api_res["user"][0]["username"]
+            return redirect("/home/")
         except:
             # Otherwise, render an error
             return render_template(
@@ -541,40 +542,6 @@ def post_by_title(postId):
                     return redirect("/login/")
     else:
          return redirect("/login/")
-
-
-
-
-# '''
-# ---- ADD COMMENT -----
-# '''
-# @app.route("/add-comment/", methods = ["POST"])
-# def add_comment_post():
-#     if "loggedin" in session:
-#         post_title = title
-#     # If you click on subscribe(you just joined the port)
-#         # text, post_id, parent_id, author
-#         text = res["text"]
-#         post_id = res["postId"]
-#         parent_id = None
-#         author = session['username']
-#         try:
-#             parent_id = res["parentId"]
-#         except:
-#         try:
-#             add_comment = requests.post(
-#                 f"{api}/add-comment/",
-#                 json={"text": text, "post_id":post_id, "parent_id":parent_id, "author":author}).json()
-
-#             print(comments)
-#             return render_template('postDetails.html', user = session['user'], name = "Post", post=post_dict, comments = comments, commentSubmittedMessage = True)
-#         except Exception as e:
-#             print(e)
-#             return redirect('/home/')
-#     else:
-#         return redirect("/login/")
-
-
 
 """
  ------PROFILE-----
