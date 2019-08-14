@@ -233,6 +233,7 @@ def sign_up():
         try:
             # Try and get the new user, meaning they registered
             username = api_res["user"][0]["username"]
+            return redirect("/home/")
         except:
             # Otherwise, render an error
             return render_template(
@@ -254,10 +255,10 @@ def sign_up():
         ).json()["voted_data"]
         session["user"]["avatarUrl"] = avatarurl
         print(session)
-        redirect("/home/")
-        return render_template(
-            "base.html", name="Bla", user=session["user"], trendPorts=trending
-        )
+        return redirect("/home/")
+        # return render_template(
+        #     "base.html", name="Bla", user=session["user"], trendPorts=trending
+        # )
     else:
         return render_template("register.html", trendPorts=trending)
 
@@ -542,40 +543,6 @@ def post_by_title(postId):
     else:
          return redirect("/login/")
 
-
-
-
-# '''
-# ---- ADD COMMENT -----
-# '''
-# @app.route("/add-comment/", methods = ["POST"])
-# def add_comment_post():
-#     if "loggedin" in session:
-#         post_title = title
-#     # If you click on subscribe(you just joined the port)
-#         # text, post_id, parent_id, author
-#         text = res["text"]
-#         post_id = res["postId"]
-#         parent_id = None
-#         author = session['username']
-#         try:
-#             parent_id = res["parentId"]
-#         except:
-#         try:
-#             add_comment = requests.post(
-#                 f"{api}/add-comment/",
-#                 json={"text": text, "post_id":post_id, "parent_id":parent_id, "author":author}).json()
-
-#             print(comments)
-#             return render_template('postDetails.html', user = session['user'], name = "Post", post=post_dict, comments = comments, commentSubmittedMessage = True)
-#         except Exception as e:
-#             print(e)
-#             return redirect('/home/')
-#     else:
-#         return redirect("/login/")
-
-
-
 """
  ------PROFILE-----
 """
@@ -739,6 +706,7 @@ def update():
                     user=session["user"],
                     notifications=True,
                     accountSettings=True,
+                    trendPorts=trending
                 )
 
             return render_template(
@@ -803,6 +771,32 @@ def dashBoard():
                     trendPorts=trending,
                 )
             elif "comments" in form.keys():
+                postInfo = {}
+                try:
+                    res = requests.get(
+                        f"{api}/comments-by-user/", json={"username": session["user"]["username"]}
+                    ).json()
+                except:
+                    print("Error: can't get user's comments.")
+
+                print("In Dashboard Comments.")
+                user = session["user"]
+                user["myComments"] = []
+                #get the user's comments
+                for key in res['comments']:
+                    #get where comment post and port's info
+                    try:
+                        postInfo = requests.get(
+                            f"{api}/post-by-id/", json={"id": key['postId']}
+                        ).json()['posts'][0]
+                    except:
+                        print("Error: can't get post and port info.")
+                    temp = {}
+                    temp["totalVotes"] = key["votes"]
+                    temp["text"] = key["commentText"]
+                    temp["portname"] = postInfo["portName"]
+                    temp["postname"] = postInfo["postTitle"]
+                    user["myComments"].append(temp)
 
                 print("In Dashboard comments.")
                 return render_template(
@@ -810,7 +804,7 @@ def dashBoard():
                     dashboard=True,
                     comments=True,
                     name=session["user"]["username"],
-                    user=session["user"],
+                    user=user,
                     viewedUser=session["user"],
                     trendPorts=trending,
                 )

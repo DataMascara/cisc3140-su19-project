@@ -61,7 +61,7 @@ base template, all we modify here is the 'content' block: #} {%- block content
     <br />
     <textarea name="text" rows="15" placeholder="Text"></textarea>
     <br />
-    <input type="text" name="postImg" placeholder="Add Image URL" />
+    <input type="text" class = "addimage" name="postImg" placeholder="Add Image URL" onkeyup = "URLLength ()" />
     <div class="btncontainer">
       <input type="submit" class="btn" name="submit" value="Submit Post" />
     </div>
