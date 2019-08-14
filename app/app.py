@@ -447,6 +447,7 @@ def post_by_title(postId):
         ## MEANING WE ARE POSTING A COMMENT
         elif(request.method == "POST"):
             res = request.form
+            print(res)
             if "loggedin" in session:
             # If you click on subscribe(you just joined the port)
                 # text, post_id, parent_id, author
@@ -456,13 +457,13 @@ def post_by_title(postId):
                 try:
                     parent_id = res["parentId"]
                 except:
-                    parent_id = "NULL"
+                    parent_id = None
                 print("we got to text")
                 print(author)
                 try:
                     add_comment = requests.post(
                     f"{api}/add-comment/",
-                    json={"text": text, "postId":post_id, "parent_id":parent_id, "author":author}).json()
+                    json={"text": text, "postId":post_id, "parentId":parent_id, "author":author}).json()
                     print("GOT HERE TOO!")
                     print(add_comment)
                     return render_template('postDetails.html', user = session['user'], name = "Post", post=post, comments = comments_and_reps, commentSubmittedMessage = True, trendPorts=trending)

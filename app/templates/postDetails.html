@@ -227,10 +227,11 @@
                         </div>
                    </div> <!-- End of 'firstLevelComment' -->
                    <div class = "hiddenArea    for{{ comment1['commentId'] }}" style = "display:none;">
-                       <form class = "writeCommentToComment{{ comment1['commentId'] }}" method = "post" action = "/post/{{post}}">
-                           <textarea rows = "4" 
+                       <form class = "writeCommentToComment{{ comment1['commentId'] }}" method = "post" action = "/post/{{ post['postId'] }}">
+                           <input type="hidden" name="parentId" value="{{ comment1['commentId'] }}">
+                           <textarea rows = "4"
                                            class = "commentToPostText commentToCommentText{{ comment1['commentId'] }}" 
-                                           name = "commentToCommentTextFor{{ comment1['commentId'] }}" 
+                                           name = "commentToPostText"
                                            title = "Write a comment to {{ comment1['author'] }}'s comment" 
                                            placeholder = "Comment & ENTER"
                                            spellcheck = "true"
