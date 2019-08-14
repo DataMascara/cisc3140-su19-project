@@ -6,7 +6,25 @@
      <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
 </head>
 {%- extends "base.html" %}
-<body {%- block onload %} onload = "location.reload(); displayYear();" {% endblock -%}>
+
+<script type='text/javascript'>
+
+(function()
+{
+  if( window.localStorage )
+  {
+    if( !localStorage.getItem( 'firstLoad' ) )
+    {
+      localStorage[ 'firstLoad' ] = true;
+      window.location.reload();
+    }  
+
+    else
+      localStorage.removeItem( 'firstLoad' );
+  }
+})();
+
+</script>
 
 {%- block content %}
 
@@ -293,4 +311,3 @@
          
     </div> <!-- End of 'mainScreen' -->
 {%- endblock content %}
-</body>
