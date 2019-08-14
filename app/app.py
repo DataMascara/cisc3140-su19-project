@@ -895,7 +895,6 @@ def ourteam():
     else:
         return render_template("genLinks.html", about=True, trendPorts=trending)
 
-
 """
 ------CONTCT PAGE-----
 """
@@ -953,6 +952,14 @@ def pending():
     return render_template(
         "genLinks.html", name=user["first"], user=user, trendPorts=trending
     )
+
+
+
+@app.route('/search/', methods= ["POST"])
+def search():
+    user = session["user"]
+    trending = trending_ports()
+    return render_template('_404Error.html', name = "404", trendPorts = trending, user = user)
 
 
 
