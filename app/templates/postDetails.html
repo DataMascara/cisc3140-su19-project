@@ -4,28 +4,24 @@
      <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/stylesPostDetails.css') }}">
      <! -- Website's Icon -->
      <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
+     <script type='text/javascript'>
+     (function()
+     {
+             if( window.localStorage )
+             {
+                 if( !localStorage.getItem( 'firstLoad' ) )
+                 {
+                     localStorage[ 'firstLoad' ] = true;
+                     window.location.reload();
+                 }  
+                 else
+                    localStorage.removeItem( 'firstLoad' );
+              }
+      })();
+      </script>
+          
 </head>
 {%- extends "base.html" %}
-
-<script type='text/javascript'>
-
-(function()
-{
-  if( window.localStorage )
-  {
-    if( !localStorage.getItem( 'firstLoad' ) )
-    {
-      localStorage[ 'firstLoad' ] = true;
-      window.location.reload();
-    }  
-
-    else
-      localStorage.removeItem( 'firstLoad' );
-  }
-})();
-
-</script>
-
 {%- block content %}
 
      <div class = "flexTitle">
