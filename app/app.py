@@ -102,8 +102,7 @@ def home():
             name="Home",
             user=session["user"],
             trendPorts=trending,
-            port=port
-        )
+            port=port)
     else:
         return render_template(
             "posts.html",
@@ -185,7 +184,10 @@ def sign_up():
         first = res["first"]
         last = res["last"]
         # avatarurl = res['imageUpload']
-        avatarurl = ""
+        try:
+            avatarurl = res["addimage"]
+        except:
+            avatarurl = ''
         # currently signup page has no description box
         # description = res["description"]
         description = ""
@@ -224,6 +226,8 @@ def sign_up():
         session["votes"] = requests.get(
             f"{api}/votes-for-username/", json={"username": username}
         ).json()["voted_data"]
+        session["user"]["avatarUrl"] = avatarurl
+        print(session)
         redirect("/home/")
         return render_template(
             "base.html", name="Bla", user=session["user"], trendPorts=trending
@@ -778,15 +782,18 @@ def trending_ports():
 
 def update_vote_for_post(port):
     if "loggedin" in session:
-        for posts in port["posts"]:
-            for votes in session["votes"]:
-                if posts["postId"] == votes["postId"]:
-                    # print(votes["vote"])
-                    posts.update({"upOrDownvoted": votes["vote"]})
-                    break
-        return port
-    else:
-        return None
+        try:
+            for posts in port["posts"]:
+                for votes in session["votes"]:
+                    if posts["postId"] == votes["postId"]:
+                        # print(votes["vote"])
+                        posts.update({"upOrDownvoted": votes["vote"]})
+                        break
+            return port
+        except:
+            return redirect('/home/')
+        else:
+            return None
 
 
 

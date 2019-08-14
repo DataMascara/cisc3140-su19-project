@@ -1,4 +1,8 @@
 ﻿/* JavaScript file for: 'portIndex.html'
+    version 1.1
+    08.13.2019
+    Description: correction of folder location of static images
+    
     version 1.0
     08.11.2019
     Description: Creation of File
@@ -14,7 +18,7 @@ function saveOrUnsavePost ()
     if (savePostButton.value == "Save Post")
     {
          savePostButton.style.backgroundColor = "#7B2240";
-         savePostButton.style.backgroundImage = "url('static/img/grayFolder.png')";
+         savePostButton.style.backgroundImage = "url('../static/img/grayFolder.png')";
          savePostButton.value = "Post Saved";
          savePostButton.title = "Post Saved";
     }
@@ -22,7 +26,7 @@ function saveOrUnsavePost ()
     else 
     {
          savePostButton.style.backgroundColor = "#757575";
-         savePostButton.style.backgroundImage = "url('static/img/maroonFolder.png')";
+         savePostButton.style.backgroundImage = "url('../static/img/maroonFolder.png')";
          savePostButton.value = "Save Post";
          savePostButton.title = "Save Post";
     }
