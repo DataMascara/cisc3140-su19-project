@@ -747,7 +747,9 @@ def dashBoard():
         if request.method == "POST":
             form = request.form.to_dict()
 
+            #if user click subscription
             if "subscriptions" in form.keys():
+                #get ports user subscribed
                 try:
                     res = requests.get(
                         f"{api}/ports-for-username/", json={"username": session["user"]["username"]}
@@ -760,6 +762,7 @@ def dashBoard():
                 user["myPorts"] = []
                 users = {}
                 for key in res:
+                    #see how many people subscribed the port
                     try:
                         users = requests.get(
                             f"{api}/users-in-port/", json={"portname": key["portName"]}
@@ -770,6 +773,7 @@ def dashBoard():
                     temp["id"] = key["portId"]
                     temp["name"] = key["portName"]
                     temp['mem'] = len(users)
+                    temp.update({"isSubscribed": True})
                     user["myPorts"].append(temp)
 
                 return render_template(

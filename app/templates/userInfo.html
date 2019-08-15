@@ -322,17 +322,28 @@
                                  </div>
                                  <div class = "portThirdPart">
                                              <form class = "indexForm subscriptionForm{{ port['id'] }}"
-                                                        action = ""
+                                                        action = "/subscribe/"
                                                         method = "post"
                                                         target="frameForUserInfo"
                                                         name = "subscriptionForm{{ port['id'] }}">
-                                                    <input type="button"
-                                                                style = "background-color: #7B2240"
-                                                                class = "subscribeIndex subscribe{{ port['id'] }}"
-                                                                name  = "subscribe{{ port['id'] }}"
-                                                                title="Joined"
-                                                                value = "Joined"
-                                                                onclick="subscribePortIndex(this)" >
+                                              <input type="hidden" name="portname" value="{{port['name']}}">
+                                                    {%- if port['isSubscribed'] == True %}
+                                                        <input type="submit"
+                                                                    style = "background-color: #7B2240"
+                                                                    class = "subscribeIndex subscribe{{ port['id'] }}"
+                                                                    name  = "value"
+                                                                    title="Joined"
+                                                                    value = "Joined"
+                                                                    onclick="subscribePortIndex(this)" >
+                                                    {%- else %} {#- if it is False: #}
+                                                        <input type="submit"
+                                                                     style = "background-color: rgb(117, 117, 117)"
+                                                                     class = "subscribeIndex subscribe{{ port['id'] }}"
+                                                                     name  = "value"
+                                                                     title="Subscribe"
+                                                                     value = "Subscribe"
+                                                                     onclick="subscribePortIndex(this)" >
+                                                    {% endif -%} {#- the one of 'port['isSubscribed']' #}
                                              </form>
                                  </div>
                          </div>
@@ -432,7 +443,7 @@
                                         <div class = "post3rdPart">
                                               {#- Since 'post['imageUrl']' is optional, we must have the following 'if' statement. #}
                                               {%- if post['imageUrl'] != None %}
-                                                    <a href = ""><img src = "{{ post['imageUrl'] | e }}" class = "squareImage" title = "See post details" alt = "the post {{ post['title'] | e }}"></a>
+                                                    <a href = "/post/{{ post['postId'] }}"><img src = "{{ post['imageUrl'] | e }}" class = "squareImage" title = "See post details" alt = "the post {{ post['title'] | e }}"></a>
                                               {% endif %}
                                         </div>
                                         <div class = "postFourthPart">
