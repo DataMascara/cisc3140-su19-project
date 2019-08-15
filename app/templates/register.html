@@ -43,15 +43,17 @@ base template, all we modify here is the 'content' block: #} {%- block content
             type="text"
             class="first_name"
             name="first"
-            placeholder="First Name"
+            placeholder="First Name (length max 30)"
             title = "First Name"
+            onkeyup = "validateNames(this)"
           />
           <input
             type="text"
             class="last_name"
             name="last"
-            placeholder="Last Name"
+            placeholder="Last Name (length max 30)"
             title = "Last Name"
+            onkeyup = "validateNames(this)"
           />
         </div>
         <div class="row2">
