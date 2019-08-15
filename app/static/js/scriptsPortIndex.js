@@ -39,8 +39,8 @@ function subscribePortIndex(object)
    {
         if (document.getElementsByClassName("trendingName")[i].innerHTML == document.getElementsByClassName("portName" + id)[0].innerHTML)
         {
-                // Note that the index below is 'i-1'. The reason is that we enumerate the 'trending ports' starting from 1 and not from ,
-                // which is why here we have to subtract 1 to get to the right button!
+                // Note that the index below is 'i/2'. The reason is that another element has the classname "trendingName", which is
+                // why we need to skip over the odd numbers to get to the corresponding button!
                 document.getElementsByClassName("subscribe")[i/2].style.backgroundColor = subscribeButton.style.backgroundColor;
                 document.getElementsByClassName("subscribe")[i/2].value = subscribeButton.value;
                 document.getElementsByClassName("subscribe")[i/2].title = subscribeButton.title;
