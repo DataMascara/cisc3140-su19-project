@@ -63,13 +63,14 @@
                                                                spellcheck = "true">{{ viewedUser['description']
                                                             }}
                                                             </textarea>
-                                                <input type="text" name="avatarURL" class = "avatarURL" required placeholder="Add URL to Your Avatar">
+                                                <input type="text" name="avatarURL" class = "avatarURL" placeholder="Add URL to Your Avatar" title = "Add URL to Your Avatar" onkeyup = "URLLength ()">
                                                 <div class = "descriptionFormSubmitDiv">
                                                       <input type = "submit"
                                                       class = "descriptionFormSubmitBtn"
                                                       name = "descriptionFormSubmitBtn"
                                                       title = "Save your bio!"
                                                       value = "Save Bio"
+                                                      onclick = "submitBio()"
                                                       >
                                                 </div>
                                 </form>

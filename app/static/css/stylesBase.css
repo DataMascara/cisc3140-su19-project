@@ -86,7 +86,6 @@ html{
     font-weight: bold;
     font-size: calc(2vh + 2vw);
     color: #7B2240;
-    outline: inherit;
 }
 
 .logo{
@@ -143,7 +142,6 @@ a, a:hover, a:focus {
     padding: calc(0.6vh + 0.6vw);
     color: black;
     background: #fcfcfc;
-    outline: none;
     font-size: calc(0.58vh + 0.58vw);
     margin: calc(1vh + 1vw);
     margin-top: calc(0.55vh + 0.55vw);
