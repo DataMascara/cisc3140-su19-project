@@ -758,10 +758,18 @@ def dashBoard():
                 print("In Dashboard subscription.")
                 user = session["user"]
                 user["myPorts"] = []
+                users = {}
                 for key in res:
+                    try:
+                        users = requests.get(
+                            f"{api}/users-in-port/", json={"portname": key["portName"]}
+                        ).json()["all_subscriptions for {data_value}"]
+                    except:
+                        print("Error: can't get ports user subscribed.")
                     temp = {}
                     temp["id"] = key["portId"]
                     temp["name"] = key["portName"]
+                    temp['mem'] = len(users)
                     user["myPorts"].append(temp)
 
                 return render_template(
