@@ -800,6 +800,8 @@ def dashBoard():
                 #get the user's comments
                 for key in res['comments']:
                     #get where comment post and port's info
+                    # Need a better way to do this, to many API calls
+                    # Maybe add a API endpoint to get all post's with info from one response instead...
                     try:
                         postInfo = requests.get(
                             f"{api}/post-by-id/", json={"id": key['postId']}
@@ -825,18 +827,19 @@ def dashBoard():
                     trendPorts=trending,
                 )
             elif "savedPosts" in form.keys():
-                # port = requests.get(f"{api}/my-posts/", json={"username": session["user"]["username"]}).json()
-                # user = session["user"]
-                # user["savedPosts"] = []
-                # for post in port["posts"]:
-                #     temp = {}
-                #     temp["totalVotes"] = post["votes"]
-                #     temp["portname"] = post["portName"]
-                #     temp["title"] = post["postTitle"]
-                #     temp["text"] = post["postText"]
-                #     temp["dateCreated"] = post["dateCreated"]
-                #     temp["avatarUrl"] = post["image"]
-                #     user["savedPosts"].append(temp)
+                posts = requests.get(f"{api}/my-posts/", json={"username": session["user"]["username"]}).json()
+                user = session["user"]
+                user["savedPosts"] = []
+                ##For now sends User's post's as saved posts..
+                for post in posts["posts"]:
+                    temp = {}
+                    temp["totalVotes"] = post["votes"]
+                    temp["portname"] = post["portName"]
+                    temp["title"] = post["postTitle"]
+                    temp["text"] = post["postText"]
+                    temp["dateCreated"] = post["dateCreated"]
+                    temp["avatarUrl"] = post["image"]
+                    user["savedPosts"].append(temp)
 
                 print("In Dashboard savedPosts.")
                 return render_template(

@@ -44,12 +44,14 @@ base template, all we modify here is the 'content' block: #} {%- block content
             class="first_name"
             name="first"
             placeholder="First Name"
+            title = "First Name"
           />
           <input
             type="text"
             class="last_name"
             name="last"
             placeholder="Last Name"
+            title = "Last Name"
           />
         </div>
         <div class="row2">
@@ -57,7 +59,8 @@ base template, all we modify here is the 'content' block: #} {%- block content
             type="text"
             class="usernameForm"
             name="username"
-            placeholder="Username"
+            placeholder="Username (length 7-30)"
+            title = "Username (length 7-30)"
             required
             onkeyup="validateUserNameLength()"
           /><label class="required">*</label>
@@ -71,6 +74,7 @@ base template, all we modify here is the 'content' block: #} {%- block content
             class="email"
             name="email"
             placeholder="Email Address"
+            title = "Email Address"
             required
             onkeyup="validateEmail()"
           /><label class="required">*</label>
@@ -83,7 +87,8 @@ base template, all we modify here is the 'content' block: #} {%- block content
             type="password"
             name="password"
             class="password"
-            placeholder="Password"
+            placeholder="Password (min. length 7)"
+            title = "Password (min. length 7)"
             onkeyup="validatePassword(this)"
             required
           /><label class="required">*</label>
@@ -92,6 +97,7 @@ base template, all we modify here is the 'content' block: #} {%- block content
             name="confirm_password"
             class="confirm_password"
             placeholder="Re-enter Password"
+            title = "Re-enter Password"
             onkeyup="validatePassword(this)"
             required
           /><label class="required">*</label>
@@ -102,14 +108,16 @@ base template, all we modify here is the 'content' block: #} {%- block content
             name="addimage" 
             class = "addimage" 
             placeholder="Add URL to Your Image"
+            title = "Add URL to Your Image"
             onkeyup = "URLLength ()"
           />
         </div>
         <input
-          type="submit"
-          value="Register"
-          class="registFormButton"
-          name="registFormButton"
+          type = "submit"
+          title = "Register"
+          value = "Register"
+          class = "registFormButton"
+          name = "registFormButton"
         />
       </form>
     </div>
