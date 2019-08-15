@@ -4,8 +4,8 @@ This is the repository for the group project in CISC 3140 Summer Session 2 2019 
 ## UnderDogs
 UnderDogs is an information hub for Brooklyn College Computer Science students and faculty. Users can share original content, ask for assistance from other students, find collaborators, and have discussions across an array of curated communities.
 
-## [Alpha Site](https://bc-app-class.herokuapp.com/)
-## Launch Form/Feedback : https://forms.gle/DWKj28iPHTBTwDvK8
+## Alpha Site : [https://bc-app-class.herokuapp.com/](https://bc-app-class.herokuapp.com/)
+## Launch Form/Feedback : [https://forms.gle/DWKj28iPHTBTwDvK8](https://forms.gle/DWKj28iPHTBTwDvK8)
 ## Setup
 ### Installation
 - [Python3](https://www.python.org/downloads/) 
