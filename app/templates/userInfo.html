@@ -391,10 +391,10 @@
                                  <div class = "postSecondPart">
                                      <div style = "display:flex;">
                                           <div>
-                                              <a href = "" class = "thePortName" title = "Go to {{ post['portname'] }}" >{{ post['portname'] }}</a>
+                                              <a href = "/p/{{ post['portname'] }}" class = "thePortName" title = "Go to {{ post['portname'] }}" >{{ post['portname'] }}</a>
                                           </div>
                                           <div>
-                                              <a href = "" class = "thePostName" title = "See {{ post['title'] }}" >{{ post['title'] }}</a>
+                                              <a href = "/post/{{ post['postId'] }}" class = "thePostName" title = "See {{ post['title'] }}" >{{ post['title'] }}</a>
                                           </div>
                                      </div>
                                      <div>
@@ -412,7 +412,7 @@
                                          <div class = "authorDetails">
                                                {#- Since 'post['avatarUrl']' is optional, we must have the following 'if' statement. #}
                                                {%- if post['avatarUrl'] != None %}
-                                                       <a href = "" title = "{{ post['username'] }}'s profile"><img src = "{{ post['avatarUrl'] | e }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
+                                                       <a href = "/post/{{ post['postId'] }}" title = "{{ post['username'] }}'s profile"><img src = "{{ post['avatarUrl'] | e }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
                                                {%- else %}
                                                        <a href = "" title = "{{ post['username'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
                                                {% endif -%}

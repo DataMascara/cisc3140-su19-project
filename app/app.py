@@ -775,11 +775,12 @@ def dashBoard():
                 )
             #show user's comments
             elif "comments" in form.keys():
-                postInfo = {}
+
                 try:
                     res = requests.get(
                         f"{api}/comments-by-user/", json={"username": session["user"]["username"]}
                     ).json()
+                    print(res)
                 except:
                     print("Error: can't get user's comments.")
                 print("In Dashboard Comments.")
@@ -790,17 +791,21 @@ def dashBoard():
                     #get where comment post and port's info
                     # Need a better way to do this, to many API calls
                     # Maybe add a API endpoint to get all post's with info from one response instead...
-                    try:
-                        postInfo = requests.get(
-                            f"{api}/post-by-id/", json={"id": key['postId']}
-                        ).json()['posts'][0]
-                    except:
-                        print("Error: can't get post and port info.")
+                    postInfo = {}
+                    print(key)
+                    # try:
+                    #     postInfo = requests.get(
+                    #         f"{api}/post-by-id/", json={"id": key['postId']}
+                    #     ).json()['posts'][0]
+                    # except:
+                    #     print("Error: can't get post and port info.")
+                    print(postInfo)
                     temp = {}
+                    temp["dateCreated"] = key["dateCreated"]
                     temp["totalVotes"] = key["votes"]
                     temp["text"] = key["commentText"]
-                    temp["portname"] = postInfo["portName"]
-                    temp["postname"] = postInfo["postTitle"]
+                    # temp["portname"] = postInfo["portName"]
+                    # temp["postname"] = postInfo["postTitle"]
                     temp["postId"] = key['postId']
                     user["myComments"].append(temp)
                 print("In Dashboard comments.")
@@ -816,11 +821,13 @@ def dashBoard():
             #show user's saved posts.
             elif "savedPosts" in form.keys():
                 posts = requests.get(f"{api}/my-posts/", json={"username": session["user"]["username"]}).json()
+                print(posts)
                 user = session["user"]
                 user["savedPosts"] = []
                 ##For now sends User's post's as saved posts..
                 for post in posts["posts"]:
                     temp = {}
+                    temp["postId"] = post["postId"]
                     temp["totalVotes"] = post["votes"]
                     temp["portname"] = post["portName"]
                     temp["title"] = post["postTitle"]
