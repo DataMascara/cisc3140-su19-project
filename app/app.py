@@ -555,11 +555,28 @@ def profile():
     if "loggedin" in session:
         print("In User Profile.")
 
+        #check if user visit other's profile
+        #receive a json with viewdUser's Name
+        #show viewdUser's profile if it exist.
+        res = request.get_json()
+        print(res)
+        if 'username' in res:
+            if (res["username"] != session["user"]["username"]):
+                viewdUser = requests.get(
+                    f"{api}/user/", json={"username": res["username"]}
+                ).json()['user']
+                viewdUser = viewdUser[0]
+            else:
+                viewdUser = session["user"]
+        else:
+            viewdUser = session["user"]
+
         #if user update their profile
         #get the form from website, convert it to JSON
         #update the description and avaterURL that user entered.
         if request.method == "POST":
             form = request.form.to_dict()
+
             headers = {"Content-Type": "application/json"}
 
             data = json.dumps(
@@ -605,7 +622,7 @@ def profile():
             userProfile=True,
             name=session["user"]["username"],
             user=session["user"],
-            viewedUser=session["user"],
+            viewedUser=viewdUser,
             trendPorts=trending,
         )
     else:
