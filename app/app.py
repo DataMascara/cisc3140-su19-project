@@ -796,6 +796,8 @@ def dashBoard():
                 #get the user's comments
                 for key in res['comments']:
                     #get where comment post and port's info
+                    # Need a better way to do this, to many API calls
+                    # Maybe add a API endpoint to get all post's with info from one response instead...
                     try:
                         postInfo = requests.get(
                             f"{api}/post-by-id/", json={"id": key['postId']}
@@ -824,6 +826,7 @@ def dashBoard():
                 posts = requests.get(f"{api}/my-posts/", json={"username": session["user"]["username"]}).json()
                 user = session["user"]
                 user["savedPosts"] = []
+                ##For now sends User's post's as saved posts..
                 for post in posts["posts"]:
                     temp = {}
                     temp["totalVotes"] = post["votes"]
