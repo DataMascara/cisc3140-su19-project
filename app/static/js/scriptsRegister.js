@@ -32,8 +32,19 @@ function validateUserNameLength()
 
     if(username.value.length < 7)
         username.setCustomValidity("Username must be of at least 7 characters!");
+    else if (username.value.length > 30)
+        username.setCustomValidity("Username must be of at most 30 characters!");
     else
         username.setCustomValidity("");
+}
+
+// 'validateNames' checks if the first name and the last name are at most 30 chars.
+function validateNames(object)
+{
+    if(object.value.length > 30)
+        object.setCustomValidity("A name must be of at most 30 characters!");
+    else
+        object.setCustomValidity("");
 }
 
 // 'validateEmail' checks if the email is of the form: what@email.com
