@@ -27,8 +27,13 @@
         {#- the posts in which port to sort! #}
         <form method = "post" action = "" class = "sortByForm">
             <select name = "sortByBtn" title = "Sort Posts" onchange="this.form.submit()">
-                  <option value="new" selected="selected">Sort By: New</option>
+               {%- if new %}
+                  <option value="new" selected="selected" >Sort By: New</option>
                   <option value="hot">Sort By: Hot</option>
+               {%- elif hot %}
+                  <option value="new">Sort By: New</option>
+                  <option value="hot" selected="selected" >Sort By: Hot</option>
+               {% endif %}
             </select>
             <input type = "hidden" name = "postsAndPortToSort" value = "{{ port['name'] }}">
         </form>
