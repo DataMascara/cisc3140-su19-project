@@ -47,8 +47,8 @@ First, make sure you have the API running and you note down the url ie `localhos
 ### Before Pushing
 - Please run `git fetch` in order to update your current working branch with any recent commits pushed to the repo. This will help minimize the frequency at which your old code from another file overwrites the code that was recently updated in that file.
 
-### Suggested (Ideal) Flow
-The following method, known as Git Flow, is ideally the way we should be approaching updates to the repo:
+### Suggested Flow
+The following method, known as Git Workflow, is ideally the way we should be approaching updates to the repo:
 - When you are working on a new feature or issue or anything, create a new branch with: ` git checkout -b <branch-name>`. Essentially, the branch name tends to be a short but descriptive name of the task being done in that branch. 
 - When you are finished with your code, commit and push your branch to the repo using: ```git commit -am "<commit-message>"
 git push origin <branch-name>```
