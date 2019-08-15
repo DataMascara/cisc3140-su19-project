@@ -469,6 +469,8 @@ def subscribe():
             f"{api}/ports-for-username/", json={"username": username}
         ).json()["all_subscriptions for {data_value}"]
         session.pop("trending", None)
+        # session.modified = True
+        print(session["subscriptions"])
         trending_ports()
         return res
     else:
@@ -554,36 +556,32 @@ def profile():
     trending = trending_ports()
     if "loggedin" in session:
         print("In User Profile.")
-
         #check if user visit other's profile
         #receive a json with viewdUser's Name
         #show viewdUser's profile if it exist.
+        viewedUser = {}
         res = request.get_json()
-        print(res)
-        if 'username' in res:
-            if (res["username"] != session["user"]["username"]):
-                viewdUser = requests.get(
-                    f"{api}/user/", json={"username": res["username"]}
-                ).json()['user']
-                viewdUser = viewdUser[0]
-            else:
-                viewdUser = session["user"]
-        else:
-            viewdUser = session["user"]
-
+        try:
+            if 'username' in res:
+                if (res["username"] != session["user"]["username"]):
+                    viewedUser = requests.get(
+                        f"{api}/user/", json={"username": res["username"]}
+                    ).json()['user']
+                    viewedUser = viewedUser[0]
+                else:
+                    viewedUser = session["user"]
+        except:
+            viewedUser = session["user"]
         #if user update their profile
         #get the form from website, convert it to JSON
         #update the description and avaterURL that user entered.
         if request.method == "POST":
             form = request.form.to_dict()
-
             headers = {"Content-Type": "application/json"}
-
             data = json.dumps(
             { "username":session["user"]["username"],
              "field":"description",
               "value":form["descriptionTextArea"] })
-
             try:
                 response = requests.put(api + "/update/",
                 data=data,
@@ -596,18 +594,14 @@ def profile():
             except:
                 print("Error: Can't update your description.")
             print(response.content)
-
             data = json.dumps(
             { "username":session["user"]["username"],
              "field":"avatarUrl",
               "value":form["avatarURL"] })
-            print(data)
-
             try:
                 response = requests.put(api + "/update/",
                 data=data,
                 headers = headers)
-
                 #update session when user update their avatarURL.
                 session["user"].pop("avatarUrl", None)
                 session["user"]["avatarUrl"] = form["avatarURL"]
@@ -616,36 +610,30 @@ def profile():
             except:
                 print("Error: Can't update your avatarUrl.")
             print(response.content)
-
         return render_template(
             "userInfo.html",
             userProfile=True,
             name=session["user"]["username"],
             user=session["user"],
-            viewedUser=viewdUser,
+            viewedUser=viewedUser,
             trendPorts=trending,
         )
     else:
         print("Not loggin yet.")
         return redirect("/login/")
 
-
-
 """
 ------UPDATE-----
 """
 @app.route("/update/", methods=["GET", "POST"])
 def update():
-
     if "loggedin" in session:
         trending = trending_ports()
         form = request.form.to_dict()
         headers = {"Content-Type": "application/json"}
-
         if request.method == "POST":
-
+            #get new email from request, put it in DB
             if "emailSetting" in form.keys():
-
                 print("In Account Settings: Email and Password.")
                 payload = json.dumps(
                     {
@@ -654,7 +642,6 @@ def update():
                         "value": form["emailSetting"],
                     }
                 )
-
                 try:
                     response = requests.put(api + "/update/",
                     data=payload,
@@ -666,9 +653,7 @@ def update():
                     print("Update email successful!")
                 except:
                     print("Error: Can't change your email.")
-
                 print(response.content)
-
                 return render_template(
                     "userInfo.html",
                     name=session["user"]["username"],
@@ -677,9 +662,8 @@ def update():
                     emailAndPassword=True,
                     trendPorts=trending
                 )
-
+            #get new password, put it into DB
             elif "passwordSetting" in form.keys():
-
                 print("In Account Settings: Email and Password.")
                 payload = json.dumps(
                     {
@@ -688,7 +672,6 @@ def update():
                         "value": form["passwordSetting"],
                     }
                 )
-
                 try:
                     response = requests.put(api + "/update/",
                     data=payload,
@@ -700,9 +683,7 @@ def update():
                     print("Update password successful!")
                 except:
                     print("Error: Can't change your password.")
-
                 print(response.content)
-
                 return render_template(
                     "userInfo.html",
                     name=session["user"]["username"],
@@ -712,14 +693,11 @@ def update():
                     trendPorts=trending
                 )
             elif "notifications" in form.keys():
-
                 print("In Account Settings: Notifications.")
-
                 #make it intentional, can't find any api to access these parameters.
                 session["user"]["isPostCommentNotificationsEnabled"]=True
                 session["user"]["isCommentReplyEnabled"]=True
                 session["user"]["isEmailPrivate"]=False
-
                 return render_template(
                     "userInfo.html",
                     name=session["user"]["username"],
@@ -728,7 +706,6 @@ def update():
                     accountSettings=True,
                     trendPorts=trending
                 )
-
             return render_template(
                 "userInfo.html",
                 name=session["user"]["username"],
@@ -737,7 +714,6 @@ def update():
                 emailAndPassword=True,
                 trendPorts=trending
             )
-
         else:
             print("In Account Settings: main page.")
             return render_template(
@@ -752,7 +728,6 @@ def update():
         print("Not loggin yet.")
         return redirect("/login/")
 
-
 """
 ------DASHBOARD-----
 """
@@ -760,10 +735,8 @@ def update():
 def dashBoard():
     if "loggedin" in session:
         trending = trending_ports()
-
         if request.method == "POST":
             form = request.form.to_dict()
-
             #if user click subscription
             if "subscriptions" in form.keys():
                 #get ports user subscribed
@@ -773,8 +746,6 @@ def dashBoard():
                     ).json()["all_subscriptions for {data_value}"]
                 except:
                     print("Error: can't get ports user subscribed.")
-
-                print("In Dashboard subscription.")
                 user = session["user"]
                 user["myPorts"] = []
                 users = {}
@@ -792,7 +763,7 @@ def dashBoard():
                     temp['mem'] = len(users)
                     temp.update({"isSubscribed": True})
                     user["myPorts"].append(temp)
-
+                    print(user["myPorts"])
                 return render_template(
                     "userInfo.html",
                     dashboard=True,
@@ -802,6 +773,7 @@ def dashBoard():
                     viewedUser=session["user"],
                     trendPorts=trending,
                 )
+            #show user's comments
             elif "comments" in form.keys():
                 postInfo = {}
                 try:
@@ -810,7 +782,6 @@ def dashBoard():
                     ).json()
                 except:
                     print("Error: can't get user's comments.")
-
                 print("In Dashboard Comments.")
                 user = session["user"]
                 user["myComments"] = []
@@ -832,7 +803,6 @@ def dashBoard():
                     temp["postname"] = postInfo["postTitle"]
                     temp["postId"] = key['postId']
                     user["myComments"].append(temp)
-
                 print("In Dashboard comments.")
                 return render_template(
                     "userInfo.html",
@@ -843,6 +813,7 @@ def dashBoard():
                     viewedUser=session["user"],
                     trendPorts=trending,
                 )
+            #show user's saved posts.
             elif "savedPosts" in form.keys():
                 posts = requests.get(f"{api}/my-posts/", json={"username": session["user"]["username"]}).json()
                 user = session["user"]
@@ -857,17 +828,17 @@ def dashBoard():
                     temp["dateCreated"] = post["dateCreated"]
                     temp["avatarUrl"] = post["image"]
                     user["savedPosts"].append(temp)
-
                 print("In Dashboard savedPosts.")
                 return render_template(
                     "userInfo.html",
                     dashboard=True,
                     savedPosts=True,
                     name=session["user"]["username"],
-                    user=session["user"],
+                    user=user,
                     viewedUser=session["user"],
                     trendPorts=trending,
                 )
+            #show user's posts
             elif "myPosts" in form.keys():
                 print("In Dashboard myPosts.")
                 try:
@@ -889,8 +860,6 @@ def dashBoard():
                     temp["commentNum"] = 3
                     temp["imageUrl"] = post["image"]
                     user["myPosts"].append(temp)
-                print(user["myPosts"])
-
                 return render_template(
                     "userInfo.html",
                     name=session["user"]["username"],
@@ -899,14 +868,38 @@ def dashBoard():
                     dashboard=True,
                     myPosts=True
                 )
-
+        #defaul display Dashboard
+        try:
+            res = requests.get(
+                f"{api}/ports-for-username/", json={"username": session["user"]["username"]}
+            ).json()["all_subscriptions for {data_value}"]
+        except:
+            print("Error: can't get ports user subscribed.")
+        user = session["user"]
+        user["myPorts"] = []
+        users = {}
+        for key in res:
+            #see how many people subscribed the port
+            try:
+                users = requests.get(
+                    f"{api}/users-in-port/", json={"portname": key["portName"]}
+                ).json()["all_subscriptions for {data_value}"]
+            except:
+                print("Error: can't get ports user subscribed.")
+            temp = {}
+            temp["id"] = key["portId"]
+            temp["name"] = key["portName"]
+            temp['mem'] = len(users)
+            temp.update({"isSubscribed": True})
+            user["myPorts"].append(temp)
+            print(user["myPorts"])
         print("In Dashboard main page.")
         return render_template(
             "userInfo.html",
             dashboard=True,
             user=session["user"],
             name=session["user"]["username"],
-            viewedUser=session["user"],
+            subscrptions=True,
             trendPorts=trending,
         )
     else:
