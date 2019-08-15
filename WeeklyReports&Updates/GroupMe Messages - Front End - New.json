@@ -1,5 +1,492 @@
 [
   {
+    "attachments": [
+      {
+        "loci": [
+          [
+            0,
+            12
+          ],
+          [
+            18,
+            14
+          ]
+        ],
+        "type": "mentions",
+        "user_ids": [
+          "73038172",
+          "73038236"
+        ]
+      }
+    ],
+    "avatar_url": "https://i.groupme.com/2464x1632.jpeg.3e7778f39c2c43f698817188ab0d4431",
+    "created_at": 1565858545,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156585854528137097",
+    "name": "Miriam Briskman",
+    "sender_id": "73038271",
+    "sender_type": "user",
+    "source_guid": "a21bffd1c4b1d70cd0625356415d3e56",
+    "system": false,
+    "text": "@Isaiah Khan  and @Chunhao Zheng , please take a look at the presentation and add your slides. Thank you!",
+    "user_id": "73038271",
+    "platform": "gm"
+  },
+  {
+    "attachments": [],
+    "avatar_url": "https://i.groupme.com/2464x1632.jpeg.3e7778f39c2c43f698817188ab0d4431",
+    "created_at": 1565839600,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156583960032197502",
+    "name": "Miriam Briskman",
+    "sender_id": "73038271",
+    "sender_type": "user",
+    "source_guid": "b7b2a7a4ee31872cd50438be4a1db862",
+    "system": false,
+    "text": "Guys, do not forget that the link to the presentation is https://docs.google.com/presentation/d/1fjSRKs4d32VYo8MdCyT6pzdjQPn_ZESeGfMqvJQJ62g/edit?usp=sharing",
+    "user_id": "73038271",
+    "platform": "gm"
+  },
+  {
+    "attachments": [
+      {
+        "charmap": [
+          [
+            18,
+            21
+          ]
+        ],
+        "placeholder": "�",
+        "type": "emoji"
+      }
+    ],
+    "avatar_url": "https://i.groupme.com/2464x1632.jpeg.3e7778f39c2c43f698817188ab0d4431",
+    "created_at": 1565836048,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156583604858086373",
+    "name": "Miriam Briskman",
+    "sender_id": "73038271",
+    "sender_type": "user",
+    "source_guid": "e966ead4f80f5a5188513babd1232a4f",
+    "system": false,
+    "text": "�",
+    "user_id": "73038271",
+    "platform": "gm"
+  },
+  {
+    "attachments": [],
+    "avatar_url": "https://i.groupme.com/728x728.jpeg.d7b02260f9a64ebc8562ad0baab7677c",
+    "created_at": 1565836027,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156583602732357097",
+    "name": "Johnny Lee",
+    "sender_id": "64569956",
+    "sender_type": "user",
+    "source_guid": "5E49EF5E-FE6C-4224-B1DA-DBE29B5F5947",
+    "system": false,
+    "text": "Me too, thanks!",
+    "user_id": "64569956",
+    "platform": "gm"
+  },
+  {
+    "attachments": [
+      {
+        "loci": [
+          [
+            148,
+            11
+          ]
+        ],
+        "type": "mentions",
+        "user_ids": [
+          "64569956"
+        ]
+      }
+    ],
+    "avatar_url": "https://i.groupme.com/2464x1632.jpeg.3e7778f39c2c43f698817188ab0d4431",
+    "created_at": 1565835654,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156583565423149038",
+    "name": "Miriam Briskman",
+    "sender_id": "73038271",
+    "sender_type": "user",
+    "source_guid": "3f2eeb2dbb52584eb12857682bf78c58",
+    "system": false,
+    "text": "It seems like the slides you wrote are sufficient. They look really great and interesting! I am looking forward to hear your presentation's speech, @Johnny Lee !",
+    "user_id": "73038271",
+    "platform": "gm"
+  },
+  {
+    "attachments": [],
+    "avatar_url": "https://i.groupme.com/728x728.jpeg.d7b02260f9a64ebc8562ad0baab7677c",
+    "created_at": 1565834842,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156583484218517097",
+    "name": "Johnny Lee",
+    "sender_id": "64569956",
+    "sender_type": "user",
+    "source_guid": "411B978F-EF5F-4C65-BB5B-C6995051794B",
+    "system": false,
+    "text": "Great！I just finished my slides, you can look at it, if you want me to present more, just let me knows thanks",
+    "user_id": "64569956",
+    "platform": "gm"
+  },
+  {
+    "attachments": [],
+    "avatar_url": "https://i.groupme.com/2464x1632.jpeg.3e7778f39c2c43f698817188ab0d4431",
+    "created_at": 1565833535,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156583353516217988",
+    "name": "Miriam Briskman",
+    "sender_id": "73038271",
+    "sender_type": "user",
+    "source_guid": "44fe3480496a7bd196e3ddcfb3f907be",
+    "system": false,
+    "text": "No problem! Code is always dynamic. You can present the code that you wrote. Just when you present, explain that it is the code that you wrote initially. Thank you very much!",
+    "user_id": "73038271",
+    "platform": "gm"
+  },
+  {
+    "attachments": [
+      {
+        "loci": [
+          [
+            0,
+            16
+          ]
+        ],
+        "type": "mentions",
+        "user_ids": [
+          "73038271"
+        ]
+      }
+    ],
+    "avatar_url": "https://i.groupme.com/728x728.jpeg.d7b02260f9a64ebc8562ad0baab7677c",
+    "created_at": 1565829072,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156582907253981716",
+    "name": "Johnny Lee",
+    "sender_id": "64569956",
+    "sender_type": "user",
+    "source_guid": "EE3B44E6-123B-4D8C-B086-37FFECCBC771",
+    "system": false,
+    "text": "@Miriam Briskman  I just see the final version of the code, I saw you add the jinja in the html, it look different from my version coding. However, I will just present my version of the html and JS, and you can finalize the jinja things in closing. How it sound ? ",
+    "user_id": "64569956",
+    "platform": "gm"
+  },
+  {
+    "attachments": [
+      {
+        "loci": [
+          [
+            0,
+            16
+          ]
+        ],
+        "type": "mentions",
+        "user_ids": [
+          "73038271"
+        ]
+      }
+    ],
+    "avatar_url": null,
+    "created_at": 1565807219,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156580721921405993",
+    "name": "Mg",
+    "sender_id": "73039282",
+    "sender_type": "user",
+    "source_guid": "7570CB34-9F28-43F1-B213-1182C8883E71",
+    "system": false,
+    "text": "@Miriam Briskman ",
+    "user_id": "73039282",
+    "platform": "gm"
+  },
+  {
+    "attachments": [],
+    "avatar_url": null,
+    "created_at": 1565807215,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156580721542551041",
+    "name": "Mg",
+    "sender_id": "73039282",
+    "sender_type": "user",
+    "source_guid": "20A345B8-0DB9-4933-BD89-0C4FDE1B7A1D",
+    "system": false,
+    "text": "Hey, I got it working okay now. Are you seeing the new issues on GitHub?",
+    "user_id": "73039282",
+    "platform": "gm"
+  },
+  {
+    "attachments": [
+      {
+        "loci": [
+          [
+            7,
+            3
+          ]
+        ],
+        "type": "mentions",
+        "user_ids": [
+          "73039282"
+        ]
+      }
+    ],
+    "avatar_url": "https://i.groupme.com/2464x1632.jpeg.3e7778f39c2c43f698817188ab0d4431",
+    "created_at": 1565745870,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156574587045966108",
+    "name": "Miriam Briskman",
+    "sender_id": "73038271",
+    "sender_type": "user",
+    "source_guid": "9be59f6eb24fad429097996bb6d13e35",
+    "system": false,
+    "text": "Hello, @Mg . To include the second-level comments, each comment dict has to have a key called 'comments' whose value is a dictionary, which refers to the second level comments under this 1st-level. Please see the 'test.py' for the exact data structure. I believe all of this is stored inside the dict 'post' on that file. Thanks!",
+    "user_id": "73038271",
+    "platform": "gm"
+  },
+  {
+    "attachments": [],
+    "avatar_url": null,
+    "created_at": 1565716085,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156571608500261424",
+    "name": "Mg",
+    "sender_id": "73039282",
+    "sender_type": "user",
+    "source_guid": "2ED4B622-9644-449D-967E-43483936C9AC",
+    "system": false,
+    "text": " level one comments work, not level two yet ",
+    "user_id": "73039282",
+    "platform": "gm"
+  },
+  {
+    "attachments": [
+      {
+        "loci": [
+          [
+            4,
+            16
+          ]
+        ],
+        "type": "mentions",
+        "user_ids": [
+          "73038271"
+        ]
+      }
+    ],
+    "avatar_url": null,
+    "created_at": 1565716062,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156571606294653974",
+    "name": "Mg",
+    "sender_id": "73039282",
+    "sender_type": "user",
+    "source_guid": "6BA08961-0806-4D14-8BB4-7F30B32E4F11",
+    "system": false,
+    "text": "Hey @Miriam Briskman just pushed the post page to work ",
+    "user_id": "73039282",
+    "platform": "gm"
+  },
+  {
+    "attachments": [
+      {
+        "charmap": [
+          [
+            18,
+            21
+          ],
+          [
+            3,
+            17
+          ]
+        ],
+        "placeholder": "�",
+        "type": "emoji"
+      },
+      {
+        "loci": [
+          [
+            5,
+            3
+          ]
+        ],
+        "type": "mentions",
+        "user_ids": [
+          "73039282"
+        ]
+      }
+    ],
+    "avatar_url": "https://i.groupme.com/2464x1632.jpeg.3e7778f39c2c43f698817188ab0d4431",
+    "created_at": 1565485093,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156548509350539038",
+    "name": "Miriam Briskman",
+    "sender_id": "73038271",
+    "sender_type": "user",
+    "source_guid": "d63b2f2ae0b12ddeb74229aab44f77c2",
+    "system": false,
+    "text": "Ohh, @Mg ! I am so happy to hear that you witness progress. I'll be finishing uploading the remaining four templates today & tomorrow. I'll also create a short PDF with explanation of what template should each 'href' and 'action' redirect the user to. I so much thankful to you and to the entire Back End team for such an amazing work! ��",
+    "user_id": "73038271",
+    "platform": "gm"
+  },
+  {
+    "attachments": [
+      {
+        "loci": [
+          [
+            0,
+            16
+          ]
+        ],
+        "type": "mentions",
+        "user_ids": [
+          "73038271"
+        ]
+      }
+    ],
+    "avatar_url": null,
+    "created_at": 1565474725,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156547472561246810",
+    "name": "Mg",
+    "sender_id": "73039282",
+    "sender_type": "user",
+    "source_guid": "0D2B13B9-7FDB-48FE-87F7-19E022AD7A8B",
+    "system": false,
+    "text": "@Miriam Briskman Thank you for uploading that! We’ve got a bit of progress. I just added basic login/logout sessions and a bunch of new api responses to be used in the calling_api.py. We have implemented a few of them (mainly logging in, out, adding post). We’d love it for you all to look it over, try it out, and contribute a bit/guide the templates. Ie comment on a method and put in the template/expected info you’d want rendered. I have been using your documentation thus far, and it is very helpful! These smaller guides however will speed up the integration process. Please let me know if you have any questions/if I can help ",
+    "user_id": "73039282",
+    "platform": "gm"
+  },
+  {
+    "attachments": [],
+    "avatar_url": "https://i.groupme.com/2464x1632.jpeg.3e7778f39c2c43f698817188ab0d4431",
+    "created_at": 1565382812,
+    "favorited_by": [
+      "73039282"
+    ],
+    "group_id": "51738438",
+    "id": "156538281278811985",
+    "name": "Miriam Briskman",
+    "sender_id": "73038271",
+    "sender_type": "user",
+    "source_guid": "349a8ed8d03f512bb0febb0e85811cd9",
+    "system": false,
+    "text": "And good job for your work on the Back End side so far! I'll copy the changes that you made so far within the templates into the templates in my PC.",
+    "user_id": "73038271",
+    "platform": "gm"
+  },
+  {
+    "attachments": [
+      {
+        "loci": [
+          [
+            7,
+            3
+          ]
+        ],
+        "type": "mentions",
+        "user_ids": [
+          "73039282"
+        ]
+      }
+    ],
+    "avatar_url": "https://i.groupme.com/2464x1632.jpeg.3e7778f39c2c43f698817188ab0d4431",
+    "created_at": 1565382619,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156538261903730250",
+    "name": "Miriam Briskman",
+    "sender_id": "73038271",
+    "sender_type": "user",
+    "source_guid": "5bafa88421a0fe65687c9ebf16f6f633",
+    "system": false,
+    "text": "Hello, @Mg . I'll be happy to do so. Please tells me everything that I need to do! Also, the 'register.html' contains the signup form, and it was uploaded yesterday to 'templates'. Thank you so much!",
+    "user_id": "73038271",
+    "platform": "gm"
+  },
+  {
+    "attachments": [],
+    "avatar_url": null,
+    "created_at": 1565359908,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156535990864025779",
+    "name": "Mg",
+    "sender_id": "73039282",
+    "sender_type": "user",
+    "source_guid": "F88EE531-A838-4249-A564-C53C5514E25A",
+    "system": false,
+    "text": "We really need your guys’ help to try and write the calling_api.py... we are writing the methods and trying to render templates, but I need to edit many things in your html to get the logic to flow. As soon as you make a change to the templates, and update them, we will have to start over. They are small things, but it just is counter productive for me to edit it if once there’s an edit on your end, the calling_api.py will no longer work due to the backend’s need to correct for the differences. Who on your team can lead on collaborating with us to write and upkeep a common flow of how the backend connects to the front and how to front connects to the back?",
+    "user_id": "73039282",
+    "platform": "gm"
+  },
+  {
+    "attachments": [],
+    "avatar_url": null,
+    "created_at": 1565358376,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156535837632129962",
+    "name": "Mg",
+    "sender_id": "73039282",
+    "sender_type": "user",
+    "source_guid": "F23FCF24-50CE-4B84-A8B4-4502E1E5BDD5",
+    "system": false,
+    "text": "Hey, on which template is the register new account  form? ",
+    "user_id": "73039282",
+    "platform": "gm"
+  },
+  {
+    "attachments": [
+      {
+        "loci": [
+          [
+            0,
+            3
+          ],
+          [
+            34,
+            12
+          ]
+        ],
+        "type": "mentions",
+        "user_ids": [
+          "73039282",
+          "73713638"
+        ]
+      }
+    ],
+    "avatar_url": "https://i.groupme.com/2464x1632.jpeg.3e7778f39c2c43f698817188ab0d4431",
+    "created_at": 1565316461,
+    "favorited_by": [],
+    "group_id": "51738438",
+    "id": "156531646160609631",
+    "name": "Miriam Briskman",
+    "sender_id": "73038271",
+    "sender_type": "user",
+    "source_guid": "a2bac06a88d201579130256bb530d278",
+    "system": false,
+    "text": "@Mg , thank you for adding Derick @Derick 3140  to the group!",
+    "user_id": "73038271",
+    "platform": "gm"
+  },
+  {
     "attachments": [],
     "avatar_url": null,
     "created_at": 1565302656,
