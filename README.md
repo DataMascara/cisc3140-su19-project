@@ -4,8 +4,8 @@ This is the repository for the group project in CISC 3140 Summer Session 2 2019 
 ## UnderDogs
 UnderDogs is an information hub for Brooklyn College Computer Science students and faculty. Users can share original content, ask for assistance from other students, find collaborators, and have discussions across an array of curated communities.
 
-### [Alpha Site](https://bc-app-class.herokuapp.com/)
-
+## Alpha Site : [https://bc-app-class.herokuapp.com/](https://bc-app-class.herokuapp.com/)
+## Launch Form/Feedback : [https://forms.gle/DWKj28iPHTBTwDvK8](https://forms.gle/DWKj28iPHTBTwDvK8)
 ## Setup
 ### Installation
 - [Python3](https://www.python.org/downloads/) 
@@ -44,4 +44,14 @@ First, make sure you have the API running and you note down the url ie `localhos
 - Password: `password`
 
 ## Contributing
-Please keep check for recent pushes before pushing your work.
+### Before Pushing
+- Please run `git fetch` in order to update your current working branch with any recent commits pushed to the repo. This will help minimize the frequency at which your old code from another file overwrites the code that was recently updated in that file.
+
+### Suggested Flow
+The following method, known as Git Workflow, is ideally the way we should be approaching updates to the repo:
+- When you are working on a new feature or issue or anything, create a new branch with: ` git checkout -b <branch-name>`. Essentially, the branch name tends to be a short but descriptive name of the task being done in that branch. 
+- When you are finished with your code, commit and push your branch to the repo using: ```git commit -am "<commit-message>"
+git push origin <branch-name>```
+- Lastly, create a pull request from your branch to the master branch, then the update is discussed and then merged through the pull request.
+
+This method of updating the app, known as the Git Workflow, decreases the oppourtunity for old code to rewrite new code.

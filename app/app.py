@@ -60,6 +60,11 @@ def login_api():
                     session.pop("trending", None)
                     trending = trending_ports()
                     return redirect("/home/")
+
+                    # AB1: This return statement is never reached. Consider deleting.
+                    # return render_template(
+                    #     "base.html", title="Logged In", user=session["user"]
+                    # )
                 else:
                     return render_template(
                         "base.html", title="", errLogIn=True, trendPorts=trending
