@@ -54,9 +54,10 @@ def login_api():
                         f"{api}/votes-for-username/", json={"username": username}
                     ).json()["voted_data"]
                     return redirect("/home/")
-                    return render_template(
-                        "base.html", title="Logged In", user=session["user"]
-                    )
+                    # AB1: This return statement is never reached. Consider deleting.
+                    # return render_template(
+                    #     "base.html", title="Logged In", user=session["user"]
+                    # )
                 else:
                     session["votes"]
                     return render_template(
