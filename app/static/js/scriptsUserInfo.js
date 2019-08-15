@@ -41,14 +41,6 @@ function openEdit()
     }
 }
 
-// Submit the Bio form
-function submitBio()
-{
-    if (document.getElementsByClassName("descriptionTextArea")[0].innerHTML != document.getElementsByClassName("descriptionText")[0].innerHTML
-        || document.getElementsByClassName("imageUpload")[0].value != "")
-    document.getElementsByClassName("descriptionForm")[0].submit(); // Submit the form
-}
-
 // Submit a 'checkbox' form
 function submitCheckboxForm (theForm)
 {
@@ -154,4 +146,36 @@ function subscribePortIndex(object)
    }
 
    document.getElementsByClassName("subscriptionForm" + id)[0].submit(); // Now submit this information
+}
+
+// Make Received URLs no longer than 300 chars:
+function URLLength ()
+{
+     if (document.getElementsByClassName("avatarURL")[0].value.length > 0)
+     {
+          document.getElementsByClassName("avatarURL")[0].required = true;
+          if (document.getElementsByClassName("avatarURL")[0].value.length > 300)
+               document.getElementsByClassName("avatarURL")[0].setCustomValidity("URL must be no longer than 300 chars!");
+          else
+               document.getElementsByClassName("avatarURL")[0].setCustomValidity("");
+     }
+     else
+          document.getElementsByClassName("avatarURL")[0].required = false;
+}
+
+// Submit the Bio form
+function submitBio()
+{
+    URLLength (); // Check this again, just in case the user deleted the field with mouse instead of keyboard.
+    if (document.getElementsByClassName("descriptionTextArea")[0].value == document.getElementsByClassName("descriptionText")[0].innerHTML &&
+         document.getElementsByClassName("avatarURL")[0].value.length == 0)
+    {
+         document.getElementsByClassName("descriptionTextArea")[0].required = true;
+         document.getElementsByClassName("descriptionTextArea")[0].setCustomValidity("Please fill out this field!");
+    }
+    else
+    {
+         document.getElementsByClassName("descriptionTextArea")[0].required = false;
+         document.getElementsByClassName("descriptionTextArea")[0].setCustomValidity("");
+    }
 }
