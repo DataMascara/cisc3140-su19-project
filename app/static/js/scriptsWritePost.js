@@ -36,7 +36,10 @@ function escapeChars (x)
     {
         if (x.value[i] == "\\")
         {
-            x.value = x.value.slice(0, i) + "\\\\" + x.value.slice(0, i+1);
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\\" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\\";
             i++;
         }
         else if (x.value[i] == "\n")
