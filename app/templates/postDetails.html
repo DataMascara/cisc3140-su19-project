@@ -135,7 +135,7 @@
          {% endif %}
 
           {%- if user %}
-              <form class = "writeCommentToPost" method = "post" action = "">
+              <form class = "writeCommentToPost" method = "post" action = "" onsubmit = "submitWithEscapeCommentToPost ();">
                   <textarea rows = "7" 
                                   class = "commentToPostText" 
                                   name = "commentToPostText" 
