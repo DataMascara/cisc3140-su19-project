@@ -1,25 +1,9 @@
-﻿﻿{#- Version 1.0 - 08.12.2019 - Description: File Created #}
+﻿{#- Version 1.0 - 08.12.2019 - Description: File Created #}
 <head>
      <script src="{{ url_for('static',filename='js/scriptsPostDetails.js') }}"></script>
      <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/stylesPostDetails.css') }}">
      <! -- Website's Icon -->
-     <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
-{#     <script type='text/javascript'>#}
-{#     (function()#}
-{#     {#}
-{#             if( window.localStorage )#}
-{#             {#}
-{#                 if( !localStorage.getItem( 'firstLoad' ) )#}
-{#                 {#}
-{#                     localStorage[ 'firstLoad' ] = true;#}
-{#                     window.location.reload();#}
-{#                 }#}
-{#                 else#}
-{#                    localStorage.removeItem( 'firstLoad' );#}
-{#              }#}
-{#      })();#}
-{#      </script>#}
-          
+     <link rel="shortcut icon" href="/static/img/favicon.ico">
 </head>
 {%- extends "base.html" %}
 {%- block content %}
