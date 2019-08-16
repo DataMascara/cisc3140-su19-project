@@ -242,3 +242,11 @@ function submitWithEscapeCommentToPost ()
 {
     escapeChars(document.getElementsByClassName("commentToPostText")[0]);
 }
+
+
+// Submit the Comment to Post form w/ escaping:
+function submitWithEscapeCommentToComment (obj)
+{
+    var id = obj.className.substr(21);
+    escapeChars(document.getElementsByClassName("commentToCommentText" + id)[0]);
+}
