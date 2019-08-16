@@ -28,3 +28,9 @@ function URLLength ()
      else
           document.getElementsByClassName("addimage")[0].required = false;
 }
+
+// Escape the necessary characters:
+function escapeChars (x)
+{
+    x.value = x.value.replace(/\\/g,'\\').replace(/\n/g,'\\n').replace(/\f/g,'\\f').replace(/\r/g,'\\r').replace(/\t/g,'\\t').replace(/\v/g,'\\v').replace(/\0/g,'\\0').replace(/\'/g,'\'').replace(/\"/g,'\"');
+}
