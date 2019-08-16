@@ -164,3 +164,81 @@ function enableDisableSubmission(theTextArea)
         }
     }
 }
+
+// Escape the necessary characters:
+function escapeChars (x)
+{
+    for (i = 0; i < x.value.length; i++)
+    {
+        if (x.value[i] == "\\")
+        {
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\\" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\\";
+            i++;
+        }
+        else if (x.value[i] == "\n")
+        {
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\n" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\n";
+            i++;
+        }
+        else if (x.value[i] == "\f")
+        {
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\f" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\f";
+            i++;
+        }
+        else if (x.value[i] == "\r")
+        {
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\r" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\r";
+            i++;
+        }
+        else if (x.value[i] == "\v")
+        {
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\v" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\v";
+            i++;
+        }
+        else if (x.value[i] == "\t")
+        {
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\t" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\t";
+            i++;
+        }
+        else if (x.value[i] == "\0")
+        {
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\0" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\0";
+            i++;
+        }
+        else if (x.value[i] == "\'")
+        {
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\'" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\'";
+            i++;
+        }
+    }    
+}
+
+// Submit the Comment to Post form w/ escaping:
+function submitWithEscapeCommentToPost ()
+{
+    escapeChars(document.getElementsByClassName("commentToPostText")[0]);
+}
