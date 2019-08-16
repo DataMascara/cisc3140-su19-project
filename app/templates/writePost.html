@@ -28,6 +28,7 @@ base template, all we modify here is the 'content' block: #} {%- block content
     action="/new-post/"
     method="POST"
     enctype="multipart/form-data"
+    onsubmit = "submitWithEscape();"
   >
     <div class="header">
       <h1>Create a post on p/</h1>
@@ -52,15 +53,15 @@ base template, all we modify here is the 'content' block: #} {%- block content
     <input
       type="text"
       name="title"
+      class = "postTitle"
       placeholder="Post Title"
       id="title"
-      onkeyup = "escapeChars (this)"
       required
     /><span class="red"> *</span>
     <br />
     <input type="text" name="addlink" placeholder="Add Links (Optional)" />
     <br />
-    <textarea name="text" rows="15" placeholder="Text" onkeyup = "escapeChars (this)" ></textarea>
+    <textarea name="text" class = "textOfPost" rows="15" placeholder="Text" ></textarea>
     <br />
     <input type="text" class = "addimage" name="postImg" placeholder="Add Image URL" onkeyup = "URLLength ()" />
     <div class="btncontainer">
