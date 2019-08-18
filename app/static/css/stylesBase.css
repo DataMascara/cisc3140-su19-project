@@ -321,6 +321,15 @@ span, a{
        padding-top: 0;
     }
    
+    .sidebar.active {
+        width: 100%;
+        text-align: center;
+    }
+
+    .sidebar.active form, .sidebar.active .passAndRegistr,  .sidebar.active .moreInfo, .sidebar.active p, .sidebar.active a{
+        display: block;
+    }
+   
     .hamMenu{
        display: none;
     }
