@@ -63,7 +63,13 @@
                                                                spellcheck = "true">{{ viewedUser['description']
                                                             }}
                                                             </textarea>
-                                                <input type="text" name="avatarURL" class = "avatarURL" placeholder="Add URL to Your Avatar" title = "Add URL to Your Avatar" onkeyup = "URLLength ()">
+                                                <input type="text" 
+                                                       name="avatarURL" 
+                                                       class = "avatarURL" 
+                                                       placeholder="Add URL to Your Avatar" 
+                                                       title = "Add URL to Your Avatar" 
+                                                       onkeyup = "URLLength ()"
+                                                       value = "{{ viewedUser['avatarUrl'] | e }}">
                                                 <div class = "descriptionFormSubmitDiv">
                                                       <input type = "submit"
                                                       class = "descriptionFormSubmitBtn"
