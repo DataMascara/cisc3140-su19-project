@@ -10,8 +10,8 @@ app = Flask(__name__, template_folder="templates")
 app.secret_key = "test"
 
 # Assuming the API is running at the local ip below
-api = "https://bc-api-class.herokuapp.com"
-# api = "http://127.0.0.1:5000"
+# api = "https://bc-api-class.herokuapp.com"
+api = "http://127.0.0.1:5000"
 
 @app.route("/", methods=["GET"])
 def redirect_home():
@@ -360,8 +360,9 @@ def subscribedposts():
 def vote():
     if "loggedin" in session:
         res = request.form
+        print(res)
         value = res["value"]
-        id = res["postId"]
+        id = res["id"]
         originalValue = res["originalValue"]
         type = res['type']
         if type == 'post':
