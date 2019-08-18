@@ -29,6 +29,15 @@ function URLLength ()
           document.getElementsByClassName("addimage")[0].required = false;
 }
 
+// Ensure the Post Title is at most 100 chars
+function ValidateTitle ()
+{
+    if (document.getElementsByClassName("postTitle")[0].value.length > 100)
+        document.getElementsByClassName("postTitle")[0].setCustomValidity("Title must be of at most 100 chars!");
+    else
+        document.getElementsByClassName("postTitle")[0].setCustomValidity("");
+}
+
 // Escape the necessary characters:
 function escapeChars (x)
 {
