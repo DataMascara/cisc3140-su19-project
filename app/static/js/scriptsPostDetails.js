@@ -246,6 +246,7 @@ function submitWithEscapeCommentToComment (obj)
 // Display Post Text w/ line breaks
 function displayWithLineBreaks()
 {
+    // For the Post Text:
     var temp = document.getElementsByClassName("postDescription")[0].innerHTML;
     var temp1;
     document.getElementsByClassName("postDescription")[0].innerHTML = ""; // Clear the current paragraph
@@ -258,12 +259,32 @@ function displayWithLineBreaks()
             temp1.innerHTML = "&nbsp;";
         temp1.style.margin = "0";
         document.getElementsByClassName("postDescription")[0].appendChild(temp1); // Put the paragraph into the page for display
-        //temp1 = document.createElement("br"); // Now place a line break into temp1
-        //document.getElementsByClassName("postDescription")[0].appendChild(temp1); // Put the break after the line
         temp = temp.slice(temp.indexOf("\n")+1); // Cut the string to continue to search for additional line breaks.
     }
     temp1 = document.createElement("P"); // Create a new paragraph element
     temp1.innerHTML = temp // Place the last line into the paragraph
     temp1.style.margin = "0";
     document.getElementsByClassName("postDescription")[0].appendChild(temp1); // Put the paragraph into the page for display
+    
+    // For all the Comments (whatever level) on the page:
+    for (i = 0; i < document.getElementsByClassName("commentText").length; i++)
+    {
+            temp = document.getElementsByClassName("commentText")[i].innerHTML;
+            document.getElementsByClassName("commentText")[i].innerHTML = ""; // Clear the current paragraph
+            while (temp.indexOf("\n") != -1)
+            {
+                temp1 = document.createElement("P"); // Create a new paragraph element
+                if (temp.indexOf("\n") != 0)
+                    temp1.innerHTML = temp.slice(0, temp.indexOf("\n")); // Place a whole line into the paragraph
+                else
+                    temp1.innerHTML = "&nbsp;";
+                temp1.style.margin = "0";
+                document.getElementsByClassName("commentText")[i].appendChild(temp1); // Put the paragraph into the page for display
+                temp = temp.slice(temp.indexOf("\n")+1); // Cut the string to continue to search for additional line breaks.
+            }
+            temp1 = document.createElement("P"); // Create a new paragraph element
+            temp1.innerHTML = temp // Place the last line into the paragraph
+            temp1.style.margin = "0";
+            document.getElementsByClassName("commentText")[i].appendChild(temp1); // Put the paragraph into the page for display
+    }
 }
