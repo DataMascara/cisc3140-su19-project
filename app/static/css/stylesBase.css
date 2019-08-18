@@ -615,8 +615,8 @@ form
        display: block;
        margin-left: auto;
        margin-right: auto;
-       width: 7vw;
-       height: 7vw;
+       width: 10vw;
+       height: 10vw;
        margin-top: 5vw;
        margin-bottom: 5vw;
        border-radius: 100%;
@@ -698,26 +698,26 @@ form
     .profile, .dash, .settings{
        text-align: center;
        display: block;
-       font-size: calc(0.5vh + 0.5vw);
+       font-size: 3vw;
        color: #ECECEC;
        border: 0;
        border-bottom: solid 1px;
        border-bottom-color: #ECECEC; /* gray */
-       border-bottom-width: calc(0.08vh + 0.08vw);
+       border-bottom-width: 1px;
        background-color: #863550;
-       padding: calc(0.4vh + 0.4vw);
+       padding: 5%;
        margin: auto;
-       width: calc(6vh + 6vw);
-       margin-bottom: calc(0.5vh + 0.5vw);
-       border-top-left-radius: calc(0.3vh + 0.3vw) calc(0.3vh + 0.3vw);
-       border-top-right-radius: calc(0.3vh + 0.3vw) calc(0.3vh + 0.3vw);
+       width: 10%;
+       margin-bottom: 3vw;
+       border-top-left-radius: 3vw;
+       border-top-right-radius: 3w;
        cursor: pointer;
        overflow: hidden;
     }
 
     .signOut{
        text-align: center;
-       font-size: calc(0.5vh + 0.5vw);
+       font-size: 3vw;
        color: #ECECEC;
        margin: auto;
        position: relative;
@@ -730,7 +730,7 @@ form
     ----------------------------------------------------- */
 
     .hamMenu{
-        width: 5vw;
+        width: 7vw;
         height: 5vw;
         display: block;
         padding: 0;
@@ -747,12 +747,10 @@ form
 
     .outerShellForMenuLinks{
         display: flex;
-       /* position: absolute;
-        bottom: 0;
-        bottom: calc(1.7vh + 1.7vw);
-        left: calc(4vh + 4vw);*/
-        justify-content: space-between;
+        justify-content: space-evenly;
         text-align: center;
+        margin-top: 3vh;
+        margin-bottom: 3vh;
     }
 
     .w2{
@@ -760,8 +758,6 @@ form
     }
 
     .w1{
-     /*  margin-left: calc(-1.3vh - 1.3vw);
-       margin-right: calc(3.5vh + 3.5vw);*/
        font-size: 3vw;
     }
 
@@ -770,7 +766,7 @@ form
         padding-top: calc(0.8vh + 0.8vw);
         margin: 0;
         width: 100%;
-        height: 50vw;
+        height: auto;
         background: #7B2240;
         color: #fff;
         transition: all 0.3s;
@@ -782,12 +778,15 @@ form
     }
 
     .sidebar.active {
-        width: 7vw;
+        width: 12vw;
         height: auto;
         text-align: center;
+        border-top-right-radius: 3vw;
+        border-bottom-right-radius: 3vw;
     }
 
-    .sidebar.active form, .sidebar.active .passAndRegistr,  .sidebar.active .moreInfo, .sidebar.active p, .sidebar.active a{
+    .sidebar.active form, .sidebar.active .passAndRegistr,  .sidebar.active .moreInfo, .sidebar.active p, .sidebar.active a
+    .sidebar.active , outerShellForMenuLinks{
         display: none;
     }
 
@@ -828,6 +827,7 @@ form
         display: inline-block;
         margin: 0;
         overflow: auto;
+        transition: all 0.3s;
     }
 
     /* Attributes for Right Side:*/
