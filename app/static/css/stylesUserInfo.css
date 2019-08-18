@@ -201,6 +201,7 @@ Version 1.0
     letter-spacing: 0.5px;
     color: black;
     font-size: 13px;
+    overflow-x: auto;
 }
 
 .descriptionForm{
@@ -473,7 +474,6 @@ Version 1.0
 .commentSecondPart, .postSecondPart{
     display:flex; 
     flex-direction:column;
-    overflow-y: auto;
 }
 
 .votes{
@@ -517,20 +517,17 @@ Version 1.0
     text-align: center;
     width: 30px;
     margin-left: -8px;
-    overflow-y: auto;
 }
 
 .commentThirdPart, .postThirdPart{
     margin-left: auto;
     margin-right: 0;
     order: 2;
-    overflow-y: auto;
 }
 
 .postThirdPart{
     display:flex; 
     flex-direction:column;
-    overflow-y: auto;
 }
 
 .authorDetails{
@@ -554,7 +551,6 @@ Version 1.0
     margin: 0;
     padding: 0;
     margin-left: 5px;
-    overflow-y: auto;
     margin-top: 9px;
 }
 
@@ -579,14 +575,12 @@ Version 1.0
 .postFourthPart{
     display:flex; 
     flex-direction:column;
-    overflow-y: auto;
 }
 
 .postFifthPart{
     margin-left: auto;
     margin-right: 0;
     order: 2;
-    overflow-y: auto;
 }
 
 .thePortNameDiv{
