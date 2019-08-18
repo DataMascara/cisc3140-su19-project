@@ -10,9 +10,9 @@
 
      <div class = "flexTitle">
         {%- if user %} {#- Appears only if the user is logged in #}
-            <form method = "post" action = "" class = "savePostForm" name = "savePostForm" target = "frameForVotesAndPostSaving">
+            <form method = "post" action = "/save/" class = "savePostForm" name = "savePostForm" target = "frameForVotesAndPostSaving">
                  {%- if post['isSaved'] == True %}
-                      <input type = "button" 
+                      <input type = "submit" 
                                  class = "savePost" 
                                  name = "savePostBtn" 
                                  value = "Post Saved" 
@@ -21,7 +21,7 @@
                                               background-image: url({{ url_for('static',filename = 'img/grayFolder.png') }});"
                                  onclick = "saveOrUnsavePost ()">
                  {%- else %}
-                      <input type = "button" 
+                      <input type = "submit" 
                                  class = "savePost" 
                                  name = "savePostBtn" 
                                  value = "Save Post" 
@@ -30,7 +30,7 @@
                                               background-image: url({{ url_for('static',filename = 'img/maroonFolder.png') }});"
                                  onclick = "saveOrUnsavePost ()">
                  {% endif -%}
-                  <input type = "hidden" name = "postID" value = "{{ post['id'] }}">
+                  <input type = "hidden" name = "postId" value = "{{ post['postId'] }}">
             </form>
         {% endif -%}
      </div>

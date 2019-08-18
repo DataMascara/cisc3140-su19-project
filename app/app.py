@@ -41,7 +41,6 @@ def login_api():
             try:
                 # Make sure there is a user before we do anything with sessions
                 if api_res["user"]["username"]:
-                    session["user"] = api_res["user"]
                     # Create session data, we can access this data in other routes
                     session["loggedin"] = True
                     # session['id'] = account['id']
@@ -60,11 +59,6 @@ def login_api():
                     session.pop("trending", None)
                     trending = trending_ports()
                     return redirect("/home/")
-
-                    # AB1: This return statement is never reached. Consider deleting.
-                    # return render_template(
-                    #     "base.html", title="Logged In", user=session["user"]
-                    # )
                 else:
                     return render_template(
                         "base.html", title="", errLogIn=True, trendPorts=trending
@@ -367,10 +361,9 @@ def vote():
     if "loggedin" in session:
         res = request.form
         value = res["value"]
-        id = res["id"]
+        id = res["postId"]
         originalValue = res["originalValue"]
         type = res['type']
-        # print(res)
         if type == 'post':
             response = (
                 requests.post(
@@ -398,6 +391,24 @@ def vote():
             )["voted_data"]
             session["comment_votes"] = response
         # print(response)
+        return "UPDATED"
+    else:
+        return redirect("/home/")
+
+@app.route("/save/", methods=["POST"])
+def save():
+    if "loggedin" in session:
+        res = request.form
+        postId = res["postId"]
+        # Boolean
+        button = res["savePostBtn"]
+        print(res)
+        response = requests.post(f"{api}/save/",
+            json={
+                "username": session["username"],
+                "postId": postId,
+                "button": button
+                }).json()
         return "UPDATED"
     else:
         return redirect("/home/")
@@ -485,13 +496,18 @@ def post_by_title(postId):
     ##Get post by post ID
     post = requests.get(
         f"{api}/post-by-id/",
-        json={"id": f"{postId}"}).json()['posts'][0]
+        json={"id": postId}).json()['posts'][0]
     print(post)
     if "loggedin" in session:
         for voted in session["votes"]:
             if voted['postId'] == post['postId']:
                 post.update({"upOrDownvoted": voted['vote']})
-        post_title = post['postTitle']
+        
+        saved = requests.get(f"{api}/saved-posts-for-username/",
+            json={"username": session['username']}).json()["voted_data"]
+        for saved_posts in saved:
+            if post['postId'] == saved_posts["postId"]:
+                post.update({"isSaved": True})
         try:
             # post_dict = requests.get(
             #     f"{api}/post-by-title/",
