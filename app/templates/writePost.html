@@ -54,9 +54,11 @@ base template, all we modify here is the 'content' block: #} {%- block content
       type="text"
       name="title"
       class = "postTitle"
-      placeholder="Post Title"
+      placeholder="Post Title (max. length 100 chars)"
       id="title"
       required
+      onkeyup = "validateTitle ()"
+      onmousemove = "ValidateTitle ()"
     /><span class="red"> *</span>
     <br />
     <input type="text" name="addlink" placeholder="Add Links (Optional)" />
