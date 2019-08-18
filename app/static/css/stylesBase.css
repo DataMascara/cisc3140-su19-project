@@ -785,7 +785,7 @@ form
         border-bottom-right-radius: 3vw;
     }
 
-    .sidebar.active form, .sidebar.active .passAndRegistr,  .sidebar.active .moreInfo, .sidebar.active p, .sidebar.active a
+    .sidebar.active form, .sidebar.active .passAndRegistr,  .sidebar.active .moreInfo, .sidebar.active p, .sidebar.active a, 
     .sidebar.active outerShellForMenuLinks{
         display: none;
     }
