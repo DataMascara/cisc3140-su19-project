@@ -107,12 +107,12 @@ def home():
     # Use the helper method to grab "tredning ports"
     trending = trending_ports()
     posts = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
+    sort = "new"
     if request.method == "POST":
         res = request.form
         if res['sortByBtn'] == "hot":
             posts['posts'].sort(key= lambda x:x["votes"], reverse=True)
-        if res['sortByBtn'] == "new":
-            posts['posts'].sort(key=lambda x: x["dateCreated"], reverse=True)
+            sort = "hot"
     # print(post)
     if "loggedin" in session:
         update_vote_for_post(posts)
@@ -121,13 +121,13 @@ def home():
             name="Home",
             user=session["user"],
             trendPorts=trending,
-            port=posts)
+            port=posts, sort=sort)
     else:
         return render_template(
             "posts.html",
             name="Log In",
             trendPorts=trending,
-            port=posts
+            port=posts, sort=sort
         )
 
 """
@@ -138,12 +138,12 @@ def home():
 @app.route("/p/<portname>/", methods=["GET", "POST"])
 def portpost(portname):
     port = requests.get(f"{api}/posts-by-portname/", json={"portname": portname}).json()
+    sort = "new"
     if request.method == "POST":
         res = request.form
         if res['sortByBtn'] == "hot":
             port['posts'].sort(key= lambda x:x["votes"], reverse=True)
-        if res['sortByBtn'] == "new":
-            port['posts'].sort(key=lambda x: x["dateCreated"], reverse=True)
+            sort = "hot"
     print(type(port))
     trending = trending_ports()
     if "loggedin" in session:
@@ -153,14 +153,14 @@ def portpost(portname):
             name="p/" + portname,
             user=session["user"],
             trendPorts=trending,
-            port=port
+            port=port, sort=sort
         )
     else:
         return render_template(
             "posts.html",
             name="p/" + portname,
             trendPorts=trending,
-            port=port
+            port=port, sort=sort
         )
 
 '''
@@ -347,19 +347,19 @@ def subscribedposts():
             f"{api}/posts-from-subscribed-ports/",
             json={"username": session["username"]},
         ).json()
+        sort = "new"
         if request.method == "POST":
             res = request.form
             if res['sortByBtn'] == "hot":
                 posts['posts'].sort(key=lambda x: x["votes"], reverse=True)
-            if res['sortByBtn'] == "new":
-                posts['posts'].sort(key=lambda x: x["dateCreated"], reverse=True)
+                sort = 'hot'
         update_vote_for_post(post)
         return render_template(
             "posts.html",
             name="Your feed",
             user=session["user"],
             trendPorts=trending,
-            port=posts
+            port=posts, sort=sort
         )
     else:
         return redirect("/login/")

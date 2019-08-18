@@ -27,10 +27,10 @@
         {#- the posts in which port to sort! #}
         <form method = "post" action = "" class = "sortByForm">
             <select name = "sortByBtn" title = "Sort Posts" onchange="this.form.submit()">
-               {%- if new %}
+               {%- if sort == 'new' %}
                   <option value="new" selected="selected" >Sort By: New</option>
                   <option value="hot">Sort By: Hot</option>
-               {%- elif hot %}
+               {%- elif sort == 'hot' %}
                   <option value="new">Sort By: New</option>
                   <option value="hot" selected="selected" >Sort By: Hot</option>
                {% endif %}
