@@ -41,6 +41,7 @@ function validateUserNameLength()
 // 'validateNames' checks if the first name and the last name are at most 30 chars.
 function validateNames(object)
 {
+    object.value = object.value.replace(/[^a-zA-Z]+/g," "); // Erase all the non-alphabetic chars.
     if(object.value.length > 30)
         object.setCustomValidity("A name must be of at most 30 characters!");
     else
