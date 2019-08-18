@@ -47,6 +47,7 @@ base template, all we modify here is the 'content' block: #} {%- block content
             title = "First Name"
             onkeyup = "validateNames(this)"
             onmousemove = "validateNames(this)"
+            pattern = "[a-zA-Z]"
           />
           <input
             type="text"
@@ -56,6 +57,7 @@ base template, all we modify here is the 'content' block: #} {%- block content
             title = "Last Name"
             onkeyup = "validateNames(this)"
             onmousemove = "validateNames(this)"
+            pattern = "[a-zA-Z]"
           />
         </div>
         <div class="row2">
