@@ -730,8 +730,8 @@ form
     ----------------------------------------------------- */
 
     .hamMenu{
-        width: calc(1.7vh + 1.7vw);
-        height: calc(1vh + 1vw);
+        width: 5vw;
+        height: 5vw;
         display: block;
         padding: 0;
         margin: 0;
@@ -747,21 +747,22 @@ form
 
     .outerShellForMenuLinks{
         display: flex;
-        position: absolute;
+       /* position: absolute;
         bottom: 0;
         bottom: calc(1.7vh + 1.7vw);
-        left: calc(4vh + 4vw);
-        justify-content: space-around;
+        left: calc(4vh + 4vw);*/
+        justify-content: space-between;
+        text-align: center;
     }
 
     .w2{
-       font-size: calc(0.45vh + 0.45vw);
+       font-size: 3vw;
     }
 
     .w1{
-       margin-left: calc(-1.3vh - 1.3vw);
-       margin-right: calc(3.5vh + 3.5vw);
-       font-size: calc(0.45vh + 0.45vw);
+     /*  margin-left: calc(-1.3vh - 1.3vw);
+       margin-right: calc(3.5vh + 3.5vw);*/
+       font-size: 3vw;
     }
 
     .sidebar {
@@ -781,7 +782,8 @@ form
     }
 
     .sidebar.active {
-        width: 100%;
+        width: 7vw;
+        height: auto;
         text-align: center;
     }
 
@@ -816,19 +818,19 @@ form
         margin: auto;
         width: calc(13vh + 13vw);
     }
+   
+    /* Attributes for Middle Container: */
 
+    .midContainer
+    {
+        width: 100%;
+        height: 90vh;
+        display: inline-block;
+        margin: 0;
+        overflow: auto;
+    }
 
     /* Attributes for Right Side:*/
-
-    .middleContainer
-    {
-       /* position: absolute;
-        left: 21vw;*/
-        width: 100%;
-        height: 100vh;
-        display: inline-block;
-        margin-right: 0;
-    }
 
     .portIndex
     {
@@ -1057,17 +1059,7 @@ form
         display: block;
         text-align: center;
     }
-
-    /* Attributes for Middle Container: */
-
-    .midContainer
-    {
-        float: right;
-        width: 60vmax;
-        height: 90vh;
-        overflow: auto;
-    }
-
+   
     form
     {
         margin-bottom: 0;
