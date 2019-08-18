@@ -299,7 +299,7 @@ span, a{
 /* ---------------------------------------------------
     MEDIA QUERIES: Portrait
 ----------------------------------------------------- */
-@media only screen and (orientation: portrait) {
+@media screen and (orientation: portrait) {
     body {
        flex-direction: column;
     }
