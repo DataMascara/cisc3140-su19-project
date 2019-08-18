@@ -566,24 +566,167 @@ form
 ----------------------------------------------------- */
 @media screen and (orientation: portrait) {
     body {
+       font-family: 'Roboto', sans-serif;
+       background-color: #ECECEC;
+       display: inline-block;
+       margin: 0;
+       padding: 0;
+       border: 0;
+       display: flex;
        flex-direction: column;
+    }
+   
+    html{
+       padding: 0;
+       margin: 0;
+    }
+
+    .leftContainer{
+       display: inline-block;
+       margin: 0;
+       padding: 0;
+       font-size: 0px;
     }
    
     .siteLogo{
        margin: auto;
        display: block;
        margin-bottom: 3vh;
+       position: relative;
+       padding: 0;
+       font-size: 0px;
+       transition: all 0.3s;
+    }
+   
+    .siteLogo a{
+       text-decoration: none;
     }
    
     .a{
+       font-family: "Times New Roman", Times, serif;
+       font-weight: bold;
        font-size: 10vw;
+       color: #7B2240;
+    }
+   
+    .logo{
+       display: block;
+       margin-left: auto;
+       margin-right: auto;
+       width: 7vw;
+       height: 7vw;
+       margin-top: 5vw;
+       margin-bottom: 5vw;
+       border-radius: 100%;
+    }
+
+    a, a:hover, a:focus {
+       color: inherit;
+       text-decoration: none;
+       transition: all 0.3s;
+    }
+   
+   .button1, .button2{
+       text-align: center;
+       display: block;
+       position: absolute;
+       border-radius: calc(0.15vh + 0.15vw);
+       border: 0;
+       background-color: #757575;
+       color: white;
+       font-size: calc(0.43vh + 0.43vw);
+       width: calc(4.3vh + 4.3vw);
+       padding-top: calc(0.35vh + 0.35vw);
+       padding-bottom: calc(0.35vh + 0.35vw);
+       padding-left: calc(0.35vh + 0.35vw);
+       padding-right: calc(0.35vh + 0.35vw);
+       letter-spacing: calc(0.03vh + 0.03vw);
+       cursor: pointer;
+       overflow: hidden;
+       transition: all 1s;
+    }
+
+    .button1{
+       top: calc(13.8vh + 13.8vw);
+       left: calc(6.7vh + 6.7vw);
+    }
+
+    .button2{
+       top: calc(16vh + 16vw);
+       left: calc(6.7vh + 6.7vw);
+    }
+
+    .text{
+       border: 0;
+       width: calc(8.2vh + 8.2vw);
+       border-radius: calc(0.15vh + 0.15vw);
+       padding: calc(0.6vh + 0.6vw);
+       color: black;
+       background: #fcfcfc;
+       font-size: calc(0.58vh + 0.58vw);
+       margin: calc(1vh + 1vw);
+       margin-top: calc(0.55vh + 0.55vw);
+       margin-bottom: calc(0.55vh + 0.55vw);
+       transition: all 1s;
+    }
+
+    .text::placeholder {
+       color: black; !important
+    }
+
+    .sidebarCollapse{
+       background-color: #7B2240;
+       padding: 0;
+       border: none;
+    }
+
+    span, a{
+       padding: 0;
+    }
+
+    .username{
+       font-size: 5vw;
+       text-align: center;
+       text-decoration: none;
+       color: white;
+       position: relative;
+       top: calc(-1vh - 1vw);
+    }
+
+    .profile, .dash, .settings{
+       text-align: center;
+       display: block;
+       font-size: calc(0.5vh + 0.5vw);
+       color: #ECECEC;
+       border: 0;
+       border-bottom: solid 1px;
+       border-bottom-color: #ECECEC; /* gray */
+       border-bottom-width: calc(0.08vh + 0.08vw);
+       background-color: #863550;
+       padding: calc(0.4vh + 0.4vw);
+       margin: auto;
+       width: calc(6vh + 6vw);
+       margin-bottom: calc(0.5vh + 0.5vw);
+       border-top-left-radius: calc(0.3vh + 0.3vw) calc(0.3vh + 0.3vw);
+       border-top-right-radius: calc(0.3vh + 0.3vw) calc(0.3vh + 0.3vw);
+       cursor: pointer;
+       overflow: hidden;
+    }
+
+    .signOut{
+       text-align: center;
+       font-size: calc(0.5vh + 0.5vw);
+       color: #ECECEC;
+       margin: auto;
+       position: relative;
+       top: calc(0.5vh + 0.5vw);
+       text-decoration: none;
     }
    
     .sidebar{
        width: 100%;
        border-bottom-right-radius: 0;
        border-top-right-radius: 0;
-       padding-top: 0;
     }
    
     .sidebar.active {
@@ -593,10 +736,6 @@ form
 
     .sidebar.active form, .sidebar.active .passAndRegistr,  .sidebar.active .moreInfo, .sidebar.active p, .sidebar.active a{
         display: block;
-    }
-   
-    .hamMenu{
-       display: none;
     }
    
     .midContainer{
