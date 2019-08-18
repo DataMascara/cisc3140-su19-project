@@ -15,9 +15,9 @@ api = "https://bc-api-class.herokuapp.com"
 
 @app.route("/", methods=["GET"])
 def redirect_home():
-    if "loggedin" in session:
-        return redirect("/home/")
-    return redirect("/login/")
+    # if "loggedin" in session:
+    #     return redirect("/home/")
+    return redirect("/home/")
 
 """
 -------------LOGIN-------------
@@ -74,12 +74,7 @@ def login_api():
                     "base.html", title="", errLogIn=True, trendPorts=trending
                 )
         else:
-            main = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
-            return render_template(
-            "posts.html",
-            name="Log In",
-            trendPorts=trending,
-            port=main )
+            return redirect('/home/')
 
 
 
@@ -97,7 +92,7 @@ def logout():
     session.pop("trending", None)
     session.pop("comment_votes", None)
     # Redirect to login page
-    return redirect("/login/")
+    return redirect("/home/")
 
 """
 -------------HOMEPAGE-------------
@@ -333,7 +328,7 @@ def post():
             )
 
     else:
-        return redirect("/login/")
+        return redirect("/home/")
 
 """
 -------------USER SUBSCRIBED POSTS-------------
@@ -362,7 +357,7 @@ def subscribedposts():
             port=posts, sort=sort
         )
     else:
-        return redirect("/login/")
+        return redirect("/home/")
 
 '''
 ----VOTE ON POST----
@@ -405,7 +400,7 @@ def vote():
         # print(response)
         return "UPDATED"
     else:
-        return redirect("/login/")
+        return redirect("/home/")
 
 """
 -------------PORT INDEX-------------
@@ -479,7 +474,7 @@ def subscribe():
         trending_ports()
         return res
     else:
-        return redirect("/login/")
+        return redirect("/home/")
 
 '''
 --- POST ---
@@ -549,9 +544,9 @@ def post_by_title(postId):
                         json={"id": postId}).json()
                     return render_template('postDetails.html', user = session['user'], name = "Post", post=post, comments = comments_and_reps, commentSubmittedMessage = True, trendPorts=trending)
                 except:
-                    return redirect("/login/")
+                    return redirect("/home/")
     else:
-         return redirect("/login/")
+         return redirect("/home/")
 
 """
  ------PROFILE-----
@@ -625,7 +620,7 @@ def profile():
         )
     else:
         print("Not loggin yet.")
-        return redirect("/login/")
+        return redirect("/home/")
 
 """
 ------UPDATE-----
@@ -731,7 +726,7 @@ def update():
             )
     else:
         print("Not loggin yet.")
-        return redirect("/login/")
+        return redirect("/home/")
 
 """
 ------DASHBOARD-----
@@ -916,7 +911,7 @@ def dashBoard():
         )
     else:
         print("Not loggin yet.")
-        return redirect("/login/")
+        return redirect("/home/")
 
 """
 ------OUR TEAM PAGE-----
