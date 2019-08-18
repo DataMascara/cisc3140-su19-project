@@ -613,12 +613,13 @@ form
    
     .logo{
        display: block;
+       margin: 0;
        margin-left: auto;
        margin-right: auto;
        width: 10vw;
        height: 10vw;
-       margin-top: 5vw;
-       margin-bottom: 5vw;
+       padding-top: 5vw;
+       padding-bottom: 5vw;
        border-radius: 100%;
     }
 
@@ -770,6 +771,7 @@ form
         background: #7B2240;
         color: #fff;
         transition: all 0.3s;
+        -webkit-transition: all 0.3s;
         text-align: center;
         border-radius: 0;
         position: relative;
@@ -826,6 +828,7 @@ form
         margin: 0;
         overflow: auto;
         transition: all 0.3s;
+        -webkit-transition: all 0.3s;
     }
 
     /* Attributes for Right Side:*/
@@ -845,6 +848,7 @@ form
         width: 100%;
         height: 100vh;
         transition: all 0.3s;
+        -webkit-transition: all 0.3s;
         background-color: #E3E3E3;
         top: 0px;
         overflow-y: auto;
@@ -854,21 +858,21 @@ form
 
     .searchform
     {
-        position: relative;
-        margin: 0;
-        padding: 0;
-        font-size: 0px;
+        margin: auto;
+        margin-block-end: 0px;
+        display: block;
+        text-align: center;
     }
 
     .search
     {
         margin: auto;
-        margin-top: 3vh;
+        margin-top: 4vh;
         font-family: 'Roboto', Sans-Serif;
-        font-size: 2vw;
+        font-size: 3vw;
         padding: 3vw;
         color: black;
-        border-radius: 3vw;
+        border-radius: 1vw;
         border-width: 0.5px;
         border-style: solid;
         border-color: rgb(192,192,192);
@@ -899,7 +903,7 @@ form
         border-bottom-width: calc(0.08vh + 0.08vw);
         display: flex;
         justify-content: center;
-        margin-top: 3vw;
+        margin-top: 4vw;
         word-spacing: 1vw;
     }
 
@@ -965,19 +969,19 @@ form
     {
         float: right;
         position: relative;
-       /* top: calc(-2.0vh - 2.0vw);
-        left: calc(-1.2vh - 1.2vw);*/
-        border-radius: 3vw;
+        top: calc(-2.0vh - 2.0vw);
+        /*left: calc(-1.2vh - 1.2vw);*/
+        border-radius: 1vw;
         border: 0;
         background-color: rgb(117, 117, 117);
         color: white;
         font-size: 2vw;
         width: 34%;
-        padding-top: calc(0.3vh + 0.3vw);
-        padding-bottom: calc(0.3vh + 0.3vw);
-        padding-left: calc(0.4vh + 0.4vw);
-        padding-right: calc(0.4vh + 0.4vw);
-        letter-spacing: calc(0.03vh + 0.03vw);
+        padding-top: 2vw;
+        padding-bottom: 2vw;
+        padding-left: 3vw;
+        padding-right: 3vw;
+        letter-spacing: 0.5vw;
         cursor: pointer;
         overflow: hidden;
         text-align: center;
@@ -996,8 +1000,8 @@ form
         margin-bottom: 2vh;
         overflow-x: auto;
         overflow-y: auto;
-        border-top-right-radius: 2vw;
-        border-bottom-right-radius: 2vw;
+        border-top-right-radius: 1vw;
+        border-bottom-right-radius: 1vw;
     }
 
     .ad
@@ -1015,7 +1019,7 @@ form
     .theAdYouCantRemoveThis p
     {
         color:  black; 
-        font-size: 1vw;
+        font-size: 2vw;
         letter-spacing: 0.2vw;
         margin-left: 3%;
         margin-top: 2%;
