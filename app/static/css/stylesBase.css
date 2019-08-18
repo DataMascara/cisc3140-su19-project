@@ -705,12 +705,12 @@ form
        border-bottom-color: #ECECEC; /* gray */
        border-bottom-width: 1px;
        background-color: #863550;
-       padding: 5%;
+       padding: 3%;
        margin: auto;
-       width: 10%;
+       width: 40%;
        margin-bottom: 3vw;
        border-top-left-radius: 3vw;
-       border-top-right-radius: 3w;
+       border-top-right-radius: 3vw;
        cursor: pointer;
        overflow: hidden;
     }
@@ -749,8 +749,8 @@ form
         display: flex;
         justify-content: space-evenly;
         text-align: center;
-        margin-top: 3vh;
-        margin-bottom: 3vh;
+        padding-top: 3vh;
+        padding-bottom: 3vh;
     }
 
     .w2{
@@ -763,7 +763,7 @@ form
 
     .sidebar {
         padding: 0;
-        padding-top: calc(0.8vh + 0.8vw);
+        padding-top: 3vh;
         margin: 0;
         width: 100%;
         height: auto;
@@ -786,7 +786,7 @@ form
     }
 
     .sidebar.active form, .sidebar.active .passAndRegistr,  .sidebar.active .moreInfo, .sidebar.active p, .sidebar.active a
-    .sidebar.active , outerShellForMenuLinks{
+    .sidebar.active outerShellForMenuLinks{
         display: none;
     }
 
