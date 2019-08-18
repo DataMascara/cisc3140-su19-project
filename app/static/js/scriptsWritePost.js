@@ -107,4 +107,6 @@ function submitWithEscape ()
 {
     escapeChars(document.getElementsByClassName("postTitle")[0]);
     escapeChars(document.getElementsByClassName("textOfPost")[0]);
+    // Create "new line" breaks in actual post text:
+    document.getElementsByClassName("textOfPost")[0] = document.getElementsByClassName("textOfPost")[0].replace(/\\n/g,"<br/>"); 
 }
