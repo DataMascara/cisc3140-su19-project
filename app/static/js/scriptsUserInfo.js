@@ -255,3 +255,27 @@ function submitWithEscape ()
 {
     //escapeChars(document.getElementsByClassName("descriptionTextArea")[0]);
 }
+
+// Display Description Text w/ line breaks
+function displayWithLineBreaks()
+{
+    // For the Description Text:
+    var temp = document.getElementsByClassName("descriptionText")[0].innerHTML;
+    var temp1;
+    document.getElementsByClassName("descriptionText")[0].innerHTML = ""; // Clear the current paragraph
+    while (temp.indexOf("\n") != -1)
+    {
+        temp1 = document.createElement("P"); // Create a new paragraph element
+        if (temp.indexOf("\n") != 0)
+            temp1.innerHTML = temp.slice(0, temp.indexOf("\n")); // Place a whole line into the paragraph
+        else
+            temp1.innerHTML = "&nbsp;";
+        temp1.style.margin = "0";
+        document.getElementsByClassName("descriptionText")[0].appendChild(temp1); // Put the paragraph into the page for display
+        temp = temp.slice(temp.indexOf("\n")+1); // Cut the string to continue to search for additional line breaks.
+    }
+    temp1 = document.createElement("P"); // Create a new paragraph element
+    temp1.innerHTML = temp // Place the last line into the paragraph
+    temp1.style.margin = "0";
+    document.getElementsByClassName("descriptionText")[0].appendChild(temp1); // Put the paragraph into the page for display
+}
