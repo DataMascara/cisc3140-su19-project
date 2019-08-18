@@ -36,7 +36,7 @@
                          {% endif -%}
                           <div class = "profileContent">
                              {#- Since 'viewedUser['avatarUrl']' is optional, we must have the following 'if' statement. #}
-                             {%- if viewedUser['avatarUrl'] != None %}
+                             {%- if viewedUser['avatarUrl'] | length > 1 %}
                                   <img src = "{{ viewedUser['avatarUrl'] | e }}" class = "roundImage" alt = "the user {{ viewedUser['username'] }}" title = "{{ viewedUser['username'] }}'s profile">
                              {%- else %}
                                   <img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ viewedUser['username'] }}" title = "{{ viewedUser['username'] }}'s profile">
