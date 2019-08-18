@@ -5,6 +5,7 @@
      <! -- Website's Icon -->
      <link rel="shortcut icon" href="/static/img/favicon.ico">
 </head>
+<body {%- block onload %} onload = "displayWithLineBreaks();displayYear();" {%- endblock %} >
 {%- extends "base.html" %}
 {%- block content %}
 
@@ -301,3 +302,4 @@
          
     </div> <!-- End of 'mainScreen' -->
 {%- endblock content %}
+</body>
