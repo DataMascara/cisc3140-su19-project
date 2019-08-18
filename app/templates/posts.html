@@ -108,7 +108,7 @@
                         <a href = "" class = "portOfPostName" title = "See all posts in {{ post['portName'] }}">p/{{ post['portName'] }}</a>
                         <a href = "/post/{{post['postId']}}" class = "nameOfPost" title = "{{ post['postTitle'] | e }}">{{ post['postTitle']  | e }}</a>
                         {%- if post['postText'] != None %}
-                              <p class = "postDescription">{{ post['postText']  | e }}</p>
+                              <p class = "postDescription" title = "{{ post['postText']  | e }}">{{ post['postText']  | e }}</p>
                         {% endif -%}
                         <p class = "numberOfComments">{{ post['numComments'] }} comments</p>
                  </div>
