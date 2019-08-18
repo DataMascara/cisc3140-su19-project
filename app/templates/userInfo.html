@@ -9,6 +9,7 @@
               <!-- Scripts -->
               <script src="{{ url_for('static',filename='js/scriptsUserInfo.js') }}"></script>
 </head>
+<body {%- block onload %} onload = "displayWithLineBreaks();displayYear();" {%- endblock %}>
 {%- extends "base.html" %}
 
 {#- Since this template inherits everything from a base template, all we modify here is the 'content' block: #}
@@ -472,3 +473,4 @@
             </div> <!-- End of 'middleScreen' -->
        {% endif -%}
 {% endblock content -%}
+</body>
