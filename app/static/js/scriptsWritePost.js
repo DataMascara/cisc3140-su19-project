@@ -30,7 +30,7 @@ function URLLength ()
 }
 
 // Ensure the Post Title is at most 100 chars
-function ValidateTitle ()
+function validateTitle ()
 {
     if (document.getElementsByClassName("postTitle")[0].value.length > 100)
         document.getElementsByClassName("postTitle")[0].setCustomValidity("Title must be of at most 100 chars!");
