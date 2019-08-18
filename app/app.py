@@ -504,7 +504,7 @@ def post_by_title(postId):
                 post.update({"upOrDownvoted": voted['vote']})
         
         saved = requests.get(f"{api}/saved-posts-for-username/",
-            json={"username": session['username']}).json()["voted_data"]
+            json={"username": session['username']}).json()["posts"]
         for saved_posts in saved:
             if post['postId'] == saved_posts["postId"]:
                 post.update({"isSaved": True})
@@ -836,7 +836,7 @@ def dashBoard():
                 )
             #show user's saved posts.
             elif "savedPosts" in form.keys():
-                posts = requests.get(f"{api}/my-posts/", json={"username": session["user"]["username"]}).json()
+                posts = requests.get(f"{api}/saved-posts-for-username/", json={"username": session["user"]["username"]}).json()
                 print(posts)
                 user = session["user"]
                 user["savedPosts"] = []
