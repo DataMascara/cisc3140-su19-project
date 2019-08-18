@@ -297,7 +297,7 @@ span, a{
 }
 
 /* ---------------------------------------------------
-    MEDIA QUERIES
+    MEDIA QUERIES: Portrait
 ----------------------------------------------------- */
 @media only screen and (orientation: portrait) {
     body {
@@ -306,10 +306,15 @@ span, a{
    
     .siteLogo{
        margin: auto;
+       display: block;
     }
    
     .a{
-       font-size: 20%;
+       font-size: 10vw;
+    }
+   
+    .rightContainer{
+       width: 100%;
     }
     
 } /*Close the Media Query*/
