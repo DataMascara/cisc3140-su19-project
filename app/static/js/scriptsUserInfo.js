@@ -173,9 +173,85 @@ function submitBio()
          document.getElementsByClassName("descriptionTextArea")[0].required = true;
          document.getElementsByClassName("descriptionTextArea")[0].setCustomValidity("Please fill out this field!");
     }
+    else if (document.getElementsByClassName("descriptionTextArea")[0].value.length > 1000)
+    {
+         document.getElementsByClassName("descriptionTextArea")[0].required = true;
+         document.getElementsByClassName("descriptionTextArea")[0].setCustomValidity("Bio can contain at most 1000 chars!");
+    }
     else
     {
          document.getElementsByClassName("descriptionTextArea")[0].required = false;
+         submitWithEscape ();
          document.getElementsByClassName("descriptionTextArea")[0].setCustomValidity("");
     }
+}
+
+// Escape the necessary characters:
+function escapeChars (x)
+{
+    for (i = 0; i < x.value.length; i++)
+    {
+        if (x.value[i] == "\\")
+        {
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\\" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\\";
+            i++;
+        }
+        else if (x.value[i] == "\f")
+        {
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\f" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\f";
+            i++;
+        }
+        else if (x.value[i] == "\r")
+        {
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\r" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\r";
+            i++;
+        }
+        else if (x.value[i] == "\v")
+        {
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\v" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\v";
+            i++;
+        }
+        else if (x.value[i] == "\t")
+        {
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\t" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\t";
+            i++;
+        }
+        else if (x.value[i] == "\0")
+        {
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\0" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\0";
+            i++;
+        }
+        else if (x.value[i] == "\'")
+        {
+            if (i != x.value.length-1)
+               x.value = x.value.slice(0, i) + "\\\'" + x.value.slice(i+1);
+            else
+               x.value = x.value.slice(0, i) + "\\\'";
+            i++;
+        }
+    }    
+}
+
+// Submit the form w/ escaping:
+function submitWithEscape ()
+{
+    escapeChars(document.getElementsByClassName("descriptionTextArea")[0]);
 }
