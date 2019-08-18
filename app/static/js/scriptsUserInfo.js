@@ -63,6 +63,11 @@ function validateEmail(email)
         email.setCustomValidity("Email is not of the form what@email.com");
         email.required = true;
     }
+    else if (email.value.length > 128)
+    {
+        email.setCustomValidity("Email must be of at most 128 characters!");
+        email.required = true;
+    }
     else if (document.getElementsByClassName("emailSetting")[0].value != document.getElementsByClassName("emailSetting")[1].value)
     {
         document.getElementsByClassName("emailSetting")[0].setCustomValidity("");
@@ -82,20 +87,20 @@ function validatePassword()
     var password = document.getElementsByClassName("passwordSetting")[0];
     var confirm_password = document.getElementsByClassName("passwordSetting")[1];
 
-    if (current_password.value.length < 7)
+    if (current_password.value.length < 7 || current_password.value.length > 128)
     {
-        password.setCustomValidity("Passwords must be of at least 7 characters!");
+        password.setCustomValidity("Passwords must be between 7 and 128 characters!");
     }
-    else if (password.value.length < 7)
+    else if (password.value.length < 7 || password.value.length > 128)
     {
         current_password.setCustomValidity("");
-        password.setCustomValidity("Passwords must be of at least 7 characters!");
+        password.setCustomValidity("Passwords must be between 7 and 128 characters!");
     }
-    else if (confirm_password.value.length < 7)
+    else if (confirm_password.value.length < 7 || confirm_password.value.length > 128)
     {
         current_password.setCustomValidity("");
         password.setCustomValidity("");
-        confirm_password.setCustomValidity("Passwords must be of at least 7 characters!");
+        confirm_password.setCustomValidity("Passwords must be between 7 and 128 characters!");
     }
     else if(password.value != confirm_password.value)
     {
