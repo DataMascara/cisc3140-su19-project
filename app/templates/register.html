@@ -43,17 +43,19 @@ base template, all we modify here is the 'content' block: #} {%- block content
             type="text"
             class="first_name"
             name="first"
-            placeholder="First Name (length max 30)"
+            placeholder="First Name (max. length 30)"
             title = "First Name"
             onkeyup = "validateNames(this)"
+            onmousemove = "validateNames(this)"
           />
           <input
             type="text"
             class="last_name"
             name="last"
-            placeholder="Last Name (length max 30)"
+            placeholder="Last Name (max. length 30)"
             title = "Last Name"
             onkeyup = "validateNames(this)"
+            onmousemove = "validateNames(this)"
           />
         </div>
         <div class="row2">
@@ -65,6 +67,7 @@ base template, all we modify here is the 'content' block: #} {%- block content
             title = "Username (length 7-30)"
             required
             onkeyup="validateUserNameLength()"
+            onmousemove = "validateUserNameLength()"
           /><label class="required">*</label>
           {%- if username_error %}
              <span class="errorMessages">Error: Username already in use!</span>
@@ -75,10 +78,11 @@ base template, all we modify here is the 'content' block: #} {%- block content
             type="email"
             class="email"
             name="email"
-            placeholder="Email Address"
-            title = "Email Address"
+            placeholder="Email Address (max. length 128)"
+            title = "Email Address (max. length 128)"
             required
             onkeyup="validateEmail()"
+            onmousemove = "validateEmail()"
           /><label class="required">*</label>
           {%- if email_error %}
              <span class="errorMessages">Error: Email address already in use!</span>
@@ -89,9 +93,10 @@ base template, all we modify here is the 'content' block: #} {%- block content
             type="password"
             name="password"
             class="password"
-            placeholder="Password (min. length 7)"
-            title = "Password (min. length 7)"
+            placeholder="Password (length 7 - 128)"
+            title = "Password (length 7 - 128)"
             onkeyup="validatePassword(this)"
+            onmousemove = "validatePassword(this)"
             required
           /><label class="required">*</label>
           <input
@@ -101,6 +106,7 @@ base template, all we modify here is the 'content' block: #} {%- block content
             placeholder="Re-enter Password"
             title = "Re-enter Password"
             onkeyup="validatePassword(this)"
+            onmousemove = "validatePassword(this)"
             required
           /><label class="required">*</label>
         </div>
