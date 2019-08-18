@@ -1021,13 +1021,18 @@ def trending_ports():
         return session['trending']
     except:
         # will only occur when a user first comes to the site or a user logs in or subscribes
+        print("GOTE HERE")
         ports = requests.get(f"{api}/allports/").json()
-        if "loggedin" in session:
-            for subscribe_ports in session['subscriptions']:
-                for port in ports['all_ports']:
+        for port in ports['all_ports']:
+            users = requests.get(
+                            f"{api}/users-in-port/", json={"portname": port["name"]}
+                        ).json()["all_subscriptions for {data_value}"]
+            port.update({"mem": len(users)})
+            if "loggedin" in session:   
+                for subscribe_ports in session['subscriptions']:
                     if port['id'] == subscribe_ports['portId']:
                         port.update({"isSubscribed": True})
-                        break
+                        break              
         session['trending'] = ports['all_ports']
         return session['trending']
 
