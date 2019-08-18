@@ -354,6 +354,7 @@ Version 1.0
 .changeEmailInnerDiV, .changePasswordInnerDiv{
     display: flex;
     flex-direction: column;
+    overflow-x: auto;
 }
 
 .emailsDiv, .passwordsDiv{
@@ -368,7 +369,7 @@ Version 1.0
 }
 
 .emailSetting, .passwordSetting, .currentPassword{
-    width: calc(15.5vmax - 4vmin);
+    width: 180px;
     padding: 12px 11px 11px 11px;
     margin-top: 7.5px;
     margin-bottom: 12px;
