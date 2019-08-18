@@ -4,14 +4,14 @@ function validatePassword()
     var password = document.getElementsByClassName("password")[0];
     var confirm_password = document.getElementsByClassName("confirm_password")[0];
 
-    if (password.value.length < 7)
+    if (password.value.length < 7 || password.value.length > 128)
     {
-        password.setCustomValidity("Passwords must be of at least 7 characters!");
+        password.setCustomValidity("Passwords must be between 7 and 128 characters!");
     }
-    else if (confirm_password.value.length < 7)
+    else if (confirm_password.value.length < 7 || confirm_password.value.length > 128)
     {
         password.setCustomValidity("");
-        confirm_password.setCustomValidity("Passwords must be of at least 7 characters!");
+        confirm_password.setCustomValidity("Passwords must be between 7 and 128 characters!");
     }
     else if(password.value != confirm_password.value)
     {
@@ -54,6 +54,8 @@ function validateEmail()
     //alert(email.value);
     if(!email.value.match(/(.*)@(.*)\.(.+)(.+)(.+)/))
         email.setCustomValidity("Email is not of the form what@email.com");
+    else if (email.value.length > 128)
+        email.setCustomValidity("Email must be of at most 128 characters!");
     else
         email.setCustomValidity("");
 }
