@@ -89,7 +89,7 @@ function validatePassword()
 
     if (current_password.value.length < 7 || current_password.value.length > 128)
     {
-        password.setCustomValidity("Passwords must be between 7 and 128 characters!");
+        current_password.setCustomValidity("Passwords must be between 7 and 128 characters!");
     }
     else if (password.value.length < 7 || password.value.length > 128)
     {
