@@ -255,7 +255,7 @@ function displayWithLineBreaks()
         if (temp.indexOf("\n") != 0)
             temp1.innerHTML = temp.slice(0, temp.indexOf("\n")); // Place a whole line into the paragraph
         else
-            temp1.innerHTML = " ";
+            temp1.innerHTML = "&nbsp;";
         temp1.style.margin = "0";
         document.getElementsByClassName("postDescription")[0].appendChild(temp1); // Put the paragraph into the page for display
         //temp1 = document.createElement("br"); // Now place a line break into temp1
