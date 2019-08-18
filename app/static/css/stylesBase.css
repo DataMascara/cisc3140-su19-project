@@ -778,15 +778,13 @@ form
     }
 
     .sidebar.active {
-        width: 12vw;
+        width: 100%;
         height: auto;
         text-align: center;
-        border-top-right-radius: 3vw;
-        border-bottom-right-radius: 3vw;
     }
 
     .sidebar.active form, .sidebar.active .passAndRegistr,  .sidebar.active .moreInfo, .sidebar.active p, .sidebar.active a, 
-    .sidebar.active outerShellForMenuLinks{
+    .sidebar.active .outerShellForMenuLinks{
         display: none;
     }
 
@@ -864,14 +862,14 @@ form
 
     .search
     {
-        margin-top: calc(1.9vh + 1.9vw);
-        margin-left: calc(1.3vh + 1.3vw);
+        margin: auto;
+        margin-top: 3vh;
         font-family: 'Roboto', Sans-Serif;
-        font-size: calc(0.6vh + 0.6vw);
-        padding: calc(0.5vh + 0.5vw);
+        font-size: 2vw;
+        padding: 3vw;
         color: black;
-        border-radius: calc(0.15vh + 0.15vw);
-        border-width: calc(0.05vh + 0.05vw);
+        border-radius: 3vw;
+        border-width: 0.5px;
         border-style: solid;
         border-color: rgb(192,192,192);
         border-image: none;
@@ -886,36 +884,36 @@ form
     .viewPortIndex
     {
         font-family: 'Roboto', sans-serif;
-        padding: calc(0.5vh + 0.5vw);
-        font-size: calc(0.65vh + 0.65vw);
+        padding: 3vw;
+        font-size: 3vw;
         font-weight: bold;
         margin: auto;
         width: 65%;
         background-color: rgb(222, 211, 215);
         color: #7B2240; /* maroon */
         text-align: center;
-        letter-spacing: calc(0.05vh + 0.05vw);
+        letter-spacing: 0.5vw;
         border: 0;
         border-bottom: solid 1px;
         border-bottom-color: #7B2240; /* maroon */
         border-bottom-width: calc(0.08vh + 0.08vw);
         display: flex;
         justify-content: center;
-        margin-top: 12%;
-        word-spacing: calc(0.1vh + 0.1vw);
+        margin-top: 3vw;
+        word-spacing: 1vw;
     }
 
     .viewPortIndex:hover
     {
-        background-color: lightgray !important;
-        cursor: pointer !important;
-        -webkit-transition: all 0.25s !important; /* Safari */
-        transition: all 0.25s !important;
+        background-color: lightgray; !important
+        cursor: pointer; !important
+        -webkit-transition: all 0.25s; !important /* Safari */
+        transition: all 0.25s; !important
     }
 
     .trending
     {
-        font-size: calc(0.65vh + 0.65vw);
+        font-size: 3vw;
         margin: auto;
         width: 65%;
         background-color: rgb(222, 211, 215);
@@ -930,29 +928,29 @@ form
     .trendingTitle
     {
         font-weight: bold;
-        padding-top: calc(0.65vh + 0.65vw);
-        padding-left: calc(0.8vh + 0.8vw);
+        padding-top: 3vw;
+        padding-left: 2vw;
         color: #7B2240; /* maroon */
-        margin-bottom: calc(0.5vh + 0.5vw);
-        margin-top: 0px;
+        margin-bottom: 3vw;
+        margin-top: 0;
     }
 
     .trendingName, .trendingMem
     {
         color: rgb(80, 80, 80);
-        margin-top: 0px;
-        margin-bottom: 0px;
-        margin-left: calc(1.2vh + 1.2vw);
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 3.4vw;
     }
 
     .trendingName
     {
-        font-size: calc(0.56vh + 0.56vw);
+        font-size: 3vw;
     }
 
     .trendingMem
     {
-        font-size: calc(0.45vh + 0.45vw);
+        font-size: 2.5vw;
         margin-top: 0%;
         margin-bottom: 8%;
     }
@@ -967,13 +965,13 @@ form
     {
         float: right;
         position: relative;
-        top: calc(-2.0vh - 2.0vw);
-        left: calc(-1.2vh - 1.2vw);
-        border-radius: calc(0.15vh + 0.15vw);
+       /* top: calc(-2.0vh - 2.0vw);
+        left: calc(-1.2vh - 1.2vw);*/
+        border-radius: 3vw;
         border: 0;
         background-color: rgb(117, 117, 117);
         color: white;
-        font-size: calc(0.45vh + 0.45vw);
+        font-size: 2vw;
         width: 34%;
         padding-top: calc(0.3vh + 0.3vw);
         padding-bottom: calc(0.3vh + 0.3vw);
@@ -990,16 +988,16 @@ form
         display: block;
         background-color: white;
         margin: auto;
-        width: 18vw;
+        width: 80%;
         font-size: 12px;
         border: 0;
         box-shadow: 0.5px 0px 2px lightgray, -0.5px 0px 2px lightgray, 0px 8px 8px 0px rgb(175, 175, 175);
-        margin-top: 16%;
-        margin-bottom: calc(2.5vh + 2.5vw);
+        margin-top: 3vh;
+        margin-bottom: 2vh;
         overflow-x: auto;
         overflow-y: auto;
-        border-top-right-radius: calc(0.1vh + 0.1vw);
-        border-bottom-right-radius: calc(0.1vh + 0.1vw);
+        border-top-right-radius: 2vw;
+        border-bottom-right-radius: 2vw;
     }
 
     .ad
@@ -1009,7 +1007,7 @@ form
         width: 96%;
         height: auto;
         border: solid gray 0.5px;
-        border-width: calc(0.05vh + 0.05vw);
+        border-width: 0.5px;
         margin-top: 1%;
         margin-bottom: 1%;
     }
@@ -1017,8 +1015,8 @@ form
     .theAdYouCantRemoveThis p
     {
         color:  black; 
-        font-size: calc(0.5vh + 0.5vw);
-        letter-spacing: calc(0.06vh + 0.06vw);
+        font-size: 1vw;
+        letter-spacing: 0.2vw;
         margin-left: 3%;
         margin-top: 2%;
         margin-bottom: 0;
@@ -1028,7 +1026,7 @@ form
 
     .copyrightParag
     {
-        font-size: calc(0.65vh + 0.65vw);
+        font-size: 1vw;
         text-align: center;
         margin: 0;
         padding: 0;
@@ -1036,10 +1034,11 @@ form
 
     .copyright
     {
-        position: absolute;
-        bottom: calc(1vh + 1vw);
-        width: 58vw;
-        display: inline-block;
+       /* position: absolute;
+        bottom: calc(1vh + 1vw);*/
+        margin: auto;
+        width: 100%;
+        display: block;
         margin: 0;
         padding: 0;
     }
@@ -1048,14 +1047,14 @@ form
 
     .bottomLinks
     {
-        margin-top: 10px;
+        margin-top: 2vh;
     }
 
     .termsConds, .ourTeam, .contactUs
     {
         text-decoration: none;
         color: #7B2240;
-        font-size: calc(0.45vh + 0.45vw);
+        font-size: 1vw;
         display: block;
         text-align: center;
     }
