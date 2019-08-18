@@ -43,7 +43,13 @@ Version 1.0
 - Front End Team
 */
 
+/* ---------------------------------------------------
+    MEDIA QUERIES: Landscape
+----------------------------------------------------- */
+
 /*Attributes for Left Side:*/
+
+@media screen and (orientation: landscape) {
 
 body {
     font-family: 'Roboto', sans-serif;
@@ -296,53 +302,6 @@ span, a{
     width: calc(13vh + 13vw);
 }
 
-/* ---------------------------------------------------
-    MEDIA QUERIES: Portrait
------------------------------------------------------ */
-@media screen and (orientation: portrait) {
-    body {
-       flex-direction: column;
-    }
-   
-    .siteLogo{
-       margin: auto;
-       display: block;
-       margin-bottom: 3vh;
-    }
-   
-    .a{
-       font-size: 10vw;
-    }
-   
-    .sidebar{
-       width: 100%;
-       border-bottom-right-radius: 0;
-       border-top-right-radius: 0;
-       padding-top: 0;
-    }
-   
-    .sidebar.active {
-        width: 100%;
-        text-align: center;
-    }
-
-    .sidebar.active form, .sidebar.active .passAndRegistr,  .sidebar.active .moreInfo, .sidebar.active p, .sidebar.active a{
-        display: block;
-    }
-   
-    .hamMenu{
-       display: none;
-    }
-   
-    .midContainer{
-       width: 100%;
-    }
-   
-    .rightContainer{
-       width: 100%;
-    }
-    
-} /*Close the Media Query*/
 
 /* Attributes for Right Side:*/
 
@@ -598,3 +557,54 @@ form
 {
     margin-bottom: 0;
 }
+
+} /* Close Media Query */
+
+
+/* ---------------------------------------------------
+    MEDIA QUERIES: Portrait
+----------------------------------------------------- */
+@media screen and (orientation: portrait) {
+    body {
+       flex-direction: column;
+    }
+   
+    .siteLogo{
+       margin: auto;
+       display: block;
+       margin-bottom: 3vh;
+    }
+   
+    .a{
+       font-size: 10vw;
+    }
+   
+    .sidebar{
+       width: 100%;
+       border-bottom-right-radius: 0;
+       border-top-right-radius: 0;
+       padding-top: 0;
+    }
+   
+    .sidebar.active {
+        width: 100%;
+        text-align: center;
+    }
+
+    .sidebar.active form, .sidebar.active .passAndRegistr,  .sidebar.active .moreInfo, .sidebar.active p, .sidebar.active a{
+        display: block;
+    }
+   
+    .hamMenu{
+       display: none;
+    }
+   
+    .midContainer{
+       width: 100%;
+    }
+   
+    .rightContainer{
+       width: 100%;
+    }
+    
+} /*Close the Media Query*/
