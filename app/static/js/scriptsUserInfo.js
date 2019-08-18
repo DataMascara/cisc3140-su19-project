@@ -253,5 +253,5 @@ function escapeChars (x)
 // Submit the form w/ escaping:
 function submitWithEscape ()
 {
-    escapeChars(document.getElementsByClassName("descriptionTextArea")[0]);
+    //escapeChars(document.getElementsByClassName("descriptionTextArea")[0]);
 }
