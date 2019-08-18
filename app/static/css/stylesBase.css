@@ -307,10 +307,26 @@ span, a{
     .siteLogo{
        margin: auto;
        display: block;
+       margin-bottom: 3vh;
     }
    
     .a{
        font-size: 10vw;
+    }
+   
+    .sidebar{
+       width: 100%;
+       border-bottom-right-radius: 0;
+       border-top-right-radius: 0;
+       padding-top: 0;
+    }
+   
+    .hamMenu{
+       display: none;
+    }
+   
+    .midContainer{
+       width: 100%;
     }
    
     .rightContainer{
