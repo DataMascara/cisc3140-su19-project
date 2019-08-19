@@ -830,6 +830,7 @@ form
         overflow: auto;
         transition: all 0.3s;
         -webkit-transition: all 0.3s;
+        order: 2; /* Push it to bottom of page */
     }
 
     /* Attributes for Right Side:*/
@@ -869,6 +870,7 @@ form
     {
         margin: auto;
         margin-top: 4vh;
+        margin-bottom: 4vh;
         font-family: 'Roboto', Sans-Serif;
         font-size: 3vw;
         padding: 3vw;
@@ -904,7 +906,6 @@ form
         border-bottom-width: calc(0.08vh + 0.08vw);
         display: flex;
         justify-content: center;
-        margin-top: 4vw;
         word-spacing: 1vw;
     }
 
@@ -970,8 +971,8 @@ form
     {
         float: right;
         position: relative;
-        top: calc(-2.0vh - 2.0vw);
-        /*left: calc(-1.2vh - 1.2vw);*/
+        top: -12vw;
+        left: calc(-1.2vh - 1.2vw);
         border-radius: 1vw;
         border: 0;
         background-color: rgb(117, 117, 117);
@@ -1031,7 +1032,7 @@ form
 
     .copyrightParag
     {
-        font-size: 2vw;
+        font-size: 1vw;
         text-align: center;
         margin: 0;
         padding: 0;
@@ -1058,7 +1059,7 @@ form
     {
         text-decoration: none;
         color: #7B2240;
-        font-size: 2vw;
+        font-size: 3vw;
         display: block;
         text-align: center;
     }
