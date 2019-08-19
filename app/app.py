@@ -93,7 +93,16 @@ def logout():
 def home():
     # Use the helper method to grab "tredning ports"
     trending = trending_ports()
-    posts = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
+    # if loggedin home will show users subscribed posts
+    if "loggedin" in session:
+        posts = requests.get(
+            f"{api}/posts-from-subscribed-ports/",
+            json={"username": session["username"]},
+        ).json()
+    # else will show main port
+    else:
+        posts = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
+    # sort by new is the default
     sort = "new"
     if request.method == "POST":
         res = request.form
