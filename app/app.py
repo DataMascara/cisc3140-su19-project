@@ -6,7 +6,7 @@ import webbrowser
 
 # Relative path to reach the templates folder
 app = Flask(__name__, template_folder="templates")
-##Regen secret before production level
+# Re-gen secret before production level
 app.secret_key = "test"
 
 # Assuming the API is running at the local ip below
@@ -15,8 +15,6 @@ api = "https://bc-api-class.herokuapp.com"
 
 @app.route("/", methods=["GET"])
 def redirect_home():
-    # if "loggedin" in session:
-    #     return redirect("/home/")
     return redirect("/home/")
 
 """
