@@ -256,7 +256,8 @@ span, a{
     height: 80vh;
     background: #7B2240;
     color: #fff;
-    transition: all 0.3s;
+    transition: all 0.3s !important;
+    -webkit-transition: all 0.3s !important;
     text-align: center;
     border-bottom-right-radius: calc(1.8vh + 1.8vw) calc(1.7vh + 1.7vw);
     border-top-right-radius: calc(1.8vh + 1.8vw) calc(1.7vh + 1.7vw);
@@ -718,7 +719,7 @@ form
 
     .signOut{
        text-align: center;
-       font-size: 3vw;
+       font-size: 2vw;
        color: #ECECEC;
        margin: auto;
        position: relative;
@@ -770,8 +771,8 @@ form
         height: auto;
         background: #7B2240;
         color: #fff;
-        transition: all 0.3s;
-        -webkit-transition: all 0.3s;
+        transition: all 0.3s !important;
+        -webkit-transition: all 0.3s !important;
         text-align: center;
         border-radius: 0;
         position: relative;
@@ -823,7 +824,7 @@ form
     .midContainer
     {
         width: 100%;
-        height: 90vh;
+        height: auto;
         display: inline-block;
         margin: 0;
         overflow: auto;
@@ -846,7 +847,7 @@ form
     {
         font-family: 'Roboto', Sans-Serif;
         width: 100%;
-        height: 100vh;
+        height: auto;
         transition: all 0.3s;
         -webkit-transition: all 0.3s;
         background-color: #E3E3E3;
@@ -1030,7 +1031,7 @@ form
 
     .copyrightParag
     {
-        font-size: 1vw;
+        font-size: 2vw;
         text-align: center;
         margin: 0;
         padding: 0;
@@ -1038,13 +1039,12 @@ form
 
     .copyright
     {
-       /* position: absolute;
-        bottom: calc(1vh + 1vw);*/
         margin: auto;
         width: 100%;
         display: block;
         margin: 0;
         padding: 0;
+        padding-bottom: 2vw;
     }
 
     /* Attributes for General Links: */
@@ -1058,7 +1058,7 @@ form
     {
         text-decoration: none;
         color: #7B2240;
-        font-size: 1vw;
+        font-size: 2vw;
         display: block;
         text-align: center;
     }
