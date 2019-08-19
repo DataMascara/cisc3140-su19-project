@@ -14,6 +14,9 @@
               <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
               <!-- Custom CSS -->
               <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/stylesBase.css') }}">
+              <!-- Notifications -->
+              <script src = "{{ url_for('/',filename='OneSignalSDKUpdaterWorker.js') }}"></script>
+              <script src = "{{ url_for('/',filename='OneSignalSDKWorker.js') }}"></script>
               <link rel="manifest" href="/manifest.json" />
               <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
               <script>
