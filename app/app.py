@@ -250,9 +250,6 @@ def sign_up():
         session["user"]["avatarUrl"] = avatarurl
         print(session)
         return redirect("/home/")
-        # return render_template(
-        #     "base.html", name="Bla", user=session["user"], trendPorts=trending
-        # )
     else:
         return render_template("register.html", trendPorts=trending)
 
@@ -263,7 +260,6 @@ def sign_up():
 def post():
     trending = trending_ports()
     # Make sure the user is logged in
-
     if "loggedin" in session:
         # If we are making a post
 
@@ -295,7 +291,6 @@ def post():
                         "image":img
                     },
                 ).json()
-                trending = trending_ports()
                 session["votes"] = requests.get(
                     f"{api}/votes-for-username/", json={"username": session['username']}
                 ).json()["voted_data"]
@@ -313,14 +308,14 @@ def post():
                     error="Invalid Post",
                     trendPorts=trending,
                 )
-        # If it's  a get
+        # If it's a GET request
         else:
             ports = trending_ports()
             print(ports)
             return render_template(
                 "writePost.html", user=session["user"], trendPorts=trending, ports=ports
             )
-
+    # If we're not logged in...
     else:
         return redirect("/home/")
 
@@ -354,7 +349,7 @@ def subscribedposts():
         return redirect("/home/")
 
 '''
-----VOTE ON POST----
+---------VOTE ON POST--------
 '''
 @app.route("/vote/", methods=["POST"])
 def vote():
@@ -391,7 +386,6 @@ def vote():
                 ).json()
             )["voted_data"]
             session["comment_votes"] = response
-        # print(response)
         return "UPDATED"
     else:
         return redirect("/home/")
@@ -429,15 +423,15 @@ def portindex():
         ).json()["all_subscriptions for {data_value}"]
 
         # this will iterate through all the ports that existing
-        for p in ports:
+        for port in ports:
             # this will iterate through all the ports that the user is subscribed
-            for sp in subscribed_ports:
+            for subscribed_port in subscribed_ports:
                 # if the ids match then the user is subscribed to the port so 'isSubscribed'
                 #  will be set to True
-                if p["id"] == sp["portId"]:
+                if port["id"] == subscribed_port["portId"]:
                     # "isSubscribed" notifies the html page what
                     # state the button should be in
-                    p.update({"isSubscribed": True})
+                    port.update({"isSubscribed": True})
                     break
         return render_template(
             "portIndex.html",
@@ -510,9 +504,7 @@ def post_by_title(postId):
             if post['postId'] == saved_posts["postId"]:
                 post.update({"isSaved": True})
         try:
-            # post_dict = requests.get(
-            #     f"{api}/post-by-title/",
-            #     json={"title": title}).json()
+            # Grab all the comments and reply's from ONE api call
             comments_and_reps = requests.get(
                 f"{api}/comments-by-post/",
                 json={"id": postId}).json()
@@ -524,8 +516,6 @@ def post_by_title(postId):
                     if replies['commentId'] == votes['postId']:
                         replies.update({"upOrDownvoted": votes['vote']})
         except Exception as e:
-            print("EXCEPT")
-            print(e)
             redirect("/home/")
         if(request.method == "GET"):
             # If you click on subscribe(you just joined the port),
@@ -566,7 +556,7 @@ def post_by_title(postId):
          return redirect("/home/")
 
 """
- ------PROFILE-----
+ ---------PROFILE--------
 """
 @app.route("/profile/", methods=["GET", "POST"])
 def profile():
@@ -892,7 +882,7 @@ def dashBoard():
                     dashboard=True,
                     myPosts=True
                 )
-        #defaul display Dashboard
+        #Default Dashboard
         try:
             res = requests.get(
                 f"{api}/ports-for-username/", json={"username": session["user"]["username"]}
@@ -944,7 +934,7 @@ def ourteam():
         return render_template("genLinks.html", about=True, trendPorts=trending)
 
 """
-------CONTCT PAGE-----
+------CONTACT PAGE-----
 """
 @app.route("/contact/")
 def contact():
@@ -1011,6 +1001,11 @@ def search():
 
 
 
+
+'''
+----HELPER FUNCTIONS---
+'''
+
 # helper function to get "trending posts"
 # WIll do this by just getting three three random ports
 def trending_ports():
@@ -1035,9 +1030,6 @@ def trending_ports():
                         break              
         session['trending'] = ports['all_ports']
         return session['trending']
-
-
-
 
 def update_vote_for_post(port):
     if "loggedin" in session:
