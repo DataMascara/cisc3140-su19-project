@@ -14,4 +14,14 @@
               <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
               <!-- Custom CSS -->
               <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/stylesBase.css') }}">
+              <link rel="manifest" href="/manifest.json" />
+              <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+              <script>
+                 var OneSignal = window.OneSignal || [];
+                 OneSignal.push(function() {
+                    OneSignal.init({
+                       appId: "550def7b-133e-441b-b537-4a541c82e74d",
+                    });
+                 });
+               </script>
           {% endblock linkedStatics -%}
