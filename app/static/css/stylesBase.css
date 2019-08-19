@@ -633,44 +633,33 @@ form
    .button1, .button2{
        text-align: center;
        display: block;
-       position: absolute;
-       border-radius: calc(0.15vh + 0.15vw);
+       /*position: absolute;*/
+       border-radius: 1vw;
        border: 0;
        background-color: #757575;
        color: white;
-       font-size: calc(0.43vh + 0.43vw);
-       width: calc(4.3vh + 4.3vw);
-       padding-top: calc(0.35vh + 0.35vw);
-       padding-bottom: calc(0.35vh + 0.35vw);
-       padding-left: calc(0.35vh + 0.35vw);
-       padding-right: calc(0.35vh + 0.35vw);
-       letter-spacing: calc(0.03vh + 0.03vw);
+       font-size: 2vw;
+       width: 20%;
+       margin: auto;
+       margin-top: 2vw;
+       margin-bottom: 2vw;
+       padding-top: 2vw;
+       padding-bottom: 2vw;
+       letter-spacing: 0.2vw;
        cursor: pointer;
        overflow: hidden;
        transition: all 1s;
     }
 
-    .button1{
-       top: calc(13.8vh + 13.8vw);
-       left: calc(6.7vh + 6.7vw);
-    }
-
-    .button2{
-       top: calc(16vh + 16vw);
-       left: calc(6.7vh + 6.7vw);
-    }
-
     .text{
        border: 0;
-       width: calc(8.2vh + 8.2vw);
-       border-radius: calc(0.15vh + 0.15vw);
-       padding: calc(0.6vh + 0.6vw);
+       width: 70%;
+       border-radius: 1vw;
+       padding: 3vw;
        color: black;
        background: #fcfcfc;
-       font-size: calc(0.58vh + 0.58vw);
-       margin: calc(1vh + 1vw);
-       margin-top: calc(0.55vh + 0.55vw);
-       margin-bottom: calc(0.55vh + 0.55vw);
+       font-size: 3vw;
+       margin: 2vw;
        transition: all 1s;
     }
 
@@ -792,22 +781,16 @@ form
     }
 
     .forgotPass{
-        position: absolute;
         text-decoration: none;
         display: block;
-        text-align: left;
-        font-size: calc(0.45vh + 0.45vw);
-        left: calc(2vh + 2vw);
-        top: calc(14.1vh + 14.1vw);
+        text-align: center;
+        font-size: 3vw;
     }
 
     .notAMem{
-        position: absolute;
-        text-align: left;
-        top: calc(15.85vh + 15.85vw);
-        left: calc(2.2vh + 2.2vw);
+        text-align: center;
         display: block;
-        font-size: calc(0.45vh + 0.45vw);
+        font-size: 3vw;
     }
 
     .errLogIn{
