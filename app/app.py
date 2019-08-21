@@ -431,6 +431,11 @@ def portindex():
 
         # this will iterate through all the ports that existing
         for port in ports:
+            # gets the number of members
+            users = requests.get(
+                            f"{api}/users-in-port/", json={"portname": port["name"]}
+                        ).json()["all_subscriptions for {data_value}"]
+            port.update({"mem": len(users)})
             # this will iterate through all the ports that the user is subscribed
             for subscribed_port in subscribed_ports:
                 # if the ids match then the user is subscribed to the port so 'isSubscribed'
@@ -1019,8 +1024,8 @@ def trending_ports():
     except:
         # will only occur when a user first comes to the site or a user logs in or subscribes
         print("GOTE HERE")
-        ports = requests.get(f"{api}/allports/").json()
-        for port in ports['all_ports']:
+        ports = requests.get(f"{api}/allports/").json()['all_ports']
+        for port in ports:
             users = requests.get(
                             f"{api}/users-in-port/", json={"portname": port["name"]}
                         ).json()["all_subscriptions for {data_value}"]
@@ -1029,8 +1034,9 @@ def trending_ports():
                 for subscribe_ports in session['subscriptions']:
                     if port['id'] == subscribe_ports['portId']:
                         port.update({"isSubscribed": True})
-                        break              
-        session['trending'] = ports['all_ports']
+                        break
+        ports.sort(key=lambda x: x["mem"], reverse=True)        
+        session['trending'] = ports[:5]
         return session['trending']
 
 def update_vote_for_post(port):
