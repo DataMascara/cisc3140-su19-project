@@ -515,13 +515,7 @@ def post_by_title(postId):
             comments_and_reps = requests.get(
                 f"{api}/comments-by-post/",
                 json={"id": postId}).json()
-            for votes in session['comment_votes']:
-                for comments in comments_and_reps["comments"]:
-                    if comments['commentId'] == votes['postId']:
-                        comments.update({"upOrDownvoted": votes['vote']})
-                for replies in comments_and_reps["replies"]:
-                    if replies['commentId'] == votes['postId']:
-                        replies.update({"upOrDownvoted": votes['vote']})
+            update_vote_for_comment(comments_and_reps)
         except Exception as e:
             redirect("/home/")
         if(request.method == "GET"):
@@ -556,6 +550,7 @@ def post_by_title(postId):
                     comments_and_reps = requests.get(
                         f"{api}/comments-by-post/",
                         json={"id": postId}).json()
+                    update_vote_for_comment(comments_and_reps)
                     return render_template('postDetails.html', user = session['user'], name = "Post", post=post, comments = comments_and_reps, commentSubmittedMessage = True, trendPorts=trending)
                 except:
                     return redirect("/home/")
@@ -1050,6 +1045,21 @@ def update_vote_for_post(port):
             return port
         except:
 
+            return redirect('/home/')
+    else:
+        return None
+
+def update_vote_for_comment(comments_and_reps):
+    if "loggedin" in session:
+        try:
+            for votes in session['comment_votes']:
+                for comments in comments_and_reps["comments"]:
+                    if comments['commentId'] == votes['postId']:
+                        comments.update({"upOrDownvoted": votes['vote']})
+                for replies in comments_and_reps["replies"]:
+                    if replies['commentId'] == votes['postId']:
+                        replies.update({"upOrDownvoted": votes['vote']})
+        except:
             return redirect('/home/')
     else:
         return None
