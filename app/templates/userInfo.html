@@ -449,8 +449,10 @@
                                         </div>
                                         <div class = "post3rdPart">
                                               {#- Since 'post['imageUrl']' is optional, we must have the following 'if' statement. #}
-                                              {%- if post['imageUrl'] | length > 1 %}
-                                                    <a href = "/post/{{ post['postId'] }}"><img src = "{{ post['imageUrl'] | e }}" class = "squareImage" title = "See post details" alt = "the post {{ post['title'] | e }}"></a>
+                                              {%- if post['imageUrl'] != None %}
+                                                {%- if post['imageUrl'] | length > 1 %}
+                                                        <a href = "/post/{{ post['postId'] }}"><img src = "{{ post['imageUrl'] | e }}" class = "squareImage" title = "See post details" alt = "the post {{ post['title'] | e }}"></a>
+                                                {% endif %}
                                               {% endif %}
                                         </div>
                                         <div class = "postFourthPart">
