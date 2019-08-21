@@ -89,7 +89,7 @@
                  {% endif -%}
              </span>
              <div class = "description">
-                        <a href = "" class = "portOfPostName" title = "See all posts in {{ post['portname'] }}">p/{{ post['portname'] }}</a>
+                        <a href = "../p/{{post["portName"]}}" class = "portOfPostName" title = "See all posts in {{ post['portName'] }}">p/{{ post['portName'] }}</a>
                         <p class = "nameOfPost" title = "{{ post['postTitle'] | e }}">{{ post['postTitle']  | e }}</p>
               </div>
               <div class = "timeAndAuthor">
