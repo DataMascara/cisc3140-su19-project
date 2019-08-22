@@ -1,239 +1,482 @@
 /* Middle Part---------------Johnny */
 
-.flexTitle{
-    display: flex;
-    position: relative;
-    margin-bottom: 15px;
-    margin-left: 7vmin;
-}
+@media screen and (min-aspect-ratio: 13/9) {
 
-.page
-{
-    background-color: #d2bdc5; /* Slight Maroon */
-    margin-top: calc(4.5vh + 4.5vw);
-    border-bottom: solid #7B2240;
-    border-bottom-width: 1px;
-    text-align: center;
-    padding: 9px;
-    padding-left: 15px;
-    padding-right: 15px;
-    width: auto;
-    height: auto;
-    font-family: inherit;
-    font-size: 0;
-    font-weight: bold;
-    color: #7B2240;
-    display: inline-block;
-}
+    .flexTitle{
+        display: flex;
+        position: relative;
+        margin-bottom: 15px;
+        margin-left: 7vmin;
+    }
 
-.pageTitle{
-     margin: 0;
-     font-size: 9px;
-     letter-spacing: 1px;
-}
+    .page
+    {
+        background-color: #d2bdc5; /* Slight Maroon */
+        margin-top: calc(4.5vh + 4.5vw);
+        border-bottom: solid #7B2240;
+        border-bottom-width: 1px;
+        text-align: center;
+        padding: 9px;
+        padding-left: 15px;
+        padding-right: 15px;
+        width: auto;
+        height: auto;
+        font-family: inherit;
+        font-size: 0;
+        font-weight: bold;
+        color: #7B2240;
+        display: inline-block;
+    }
 
-.searchResultsMessage{
-    margin: 0;
-    margin-bottom: 10px;
-    padding: 0;
-    text-align: center;
-    color: black;
-    font-size: 15px;
-}
+    .pageTitle{
+         margin: 0;
+         font-size: 9px;
+         letter-spacing: 1px;
+    }
 
-.createPostBtn{
-    font-family: 'Roboto', Sans-Serif;
-    margin-top: calc(4.8vh + 4.8vw);
-    text-align: center;
-    border-radius: 3px;
-    border: 0;
-    background-color: #757575;
-    color: #ececec;
-    font-size: 9px;
-    font-weight: normal;
-    letter-spacing: 0.5px;
-    padding: 8.5px;
-    padding-left: 20px;
-    padding-right: 20px;
-    cursor: pointer;
-    overflow: hidden;
-    width: auto;
-    position: absolute;
-    bottom: 0;
-    left: 260px;
-}
+    .searchResultsMessage{
+        margin: 0;
+        margin-bottom: 10px;
+        padding: 0;
+        text-align: center;
+        color: black;
+        font-size: 15px;
+    }
 
-.sortByForm{
-    margin-top: calc(4.8vh + 4.8vw);
-    position: absolute;
-    bottom: 0;
-    left: 380px;
-}
+    .createPostBtn{
+        font-family: 'Roboto', Sans-Serif;
+        margin-top: calc(4.8vh + 4.8vw);
+        text-align: center;
+        border-radius: 3px;
+        border: 0;
+        background-color: #757575;
+        color: #ececec;
+        font-size: 9px;
+        font-weight: normal;
+        letter-spacing: 0.5px;
+        padding: 8.5px;
+        padding-left: 20px;
+        padding-right: 20px;
+        cursor: pointer;
+        overflow: hidden;
+        width: auto;
+        position: absolute;
+        bottom: 0;
+        left: 260px;
+    }
 
-select{
-    font-family: 'Roboto', Sans-Serif;
-    background-color: #dbdbdb;
-    color: black;
-    margin: 0;
-    padding: 7px;
-    border: 0;
-    border-radius: 3px;
-    box-shadow: 1px 1px 1px gray;
-    width: auto;
-    font-size: 12px;
-}
+    .sortByForm{
+        margin-top: calc(4.8vh + 4.8vw);
+        position: absolute;
+        bottom: 0;
+        left: 380px;
+    }
 
-.btn{
-   height: 40px;
-   width: 150px;
-}
+    select{
+        font-family: 'Roboto', Sans-Serif;
+        background-color: #dbdbdb;
+        color: black;
+        margin: 0;
+        padding: 7px;
+        border: 0;
+        border-radius: 3px;
+        box-shadow: 1px 1px 1px gray;
+        width: auto;
+        font-size: 12px;
+    }
 
-.right-btn{
-    background-color: #e5e3e3;
-    width: 250px;
-    height: 60px;
-    border-bottom-color: red;
-    border-bottom-style: groove;
-    text-align: center;
-    padding-top: 16px;
-}
+    .btn{
+       height: 40px;
+       width: 150px;
+    }
 
-.post-section{
-    margin: 0;
-    width: 500px;
-    height: auto;
-    background-color: #ded3d7;
-    border-radius: 5px;
-    position: relative;
-    margin-left: 7vmin;
-    box-shadow: 1px 1px 1px gray;
-    display: flex;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-bottom: 15px;
-}
+    .right-btn{
+        background-color: #e5e3e3;
+        width: 250px;
+        height: 60px;
+        border-bottom-color: red;
+        border-bottom-style: groove;
+        text-align: center;
+        padding-top: 16px;
+    }
 
-.votes{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin-top: 25px;
-    margin-right: 20px;
-}
+    .post-section{
+        margin: 0;
+        width: 500px;
+        height: auto;
+        background-color: #ded3d7;
+        border-radius: 5px;
+        position: relative;
+        margin-left: 7vmin;
+        box-shadow: 1px 1px 1px gray;
+        display: flex;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-bottom: 15px;
+    }
 
-.numOfVotes{
-    padding: 0;
-    margin: 0;
-    font-size: 15px;
-}
+    .votes{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 25px;
+        margin-right: 20px;
+    }
 
-.upvote, .downvote{
-    margin: 0;
-    padding: 0;
-    font-size: 0;
-    display: inline-block;
-}
+    .numOfVotes{
+        padding: 0;
+        margin: 0;
+        font-size: 15px;
+    }
 
-.upvoteBtn, .downvoteBtn{
-    letter-spacing: 1px;
-    margin: 0;
-    padding: 0;
-    font-size: 12px;
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
-}
+    .upvote, .downvote{
+        margin: 0;
+        padding: 0;
+        font-size: 0;
+        display: inline-block;
+    }
 
-.squareImage{
-    width: 80px;
-    height: 80px;
-    border: 0;
-    border-radius: 3px;
-    margin: 10px;
-    margin-right: 20px;
-    margin-left: 0;
-    padding: 0;
-}
+    .upvoteBtn, .downvoteBtn{
+        letter-spacing: 1px;
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+        border: 0;
+        background-color: transparent;
+        cursor: pointer;
+    }
 
-.description{
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
+    .squareImage{
+        width: 80px;
+        height: 80px;
+        border: 0;
+        border-radius: 3px;
+        margin: 10px;
+        margin-right: 20px;
+        margin-left: 0;
+        padding: 0;
+    }
 
-.portOfPostName, .postDescription, .numberOfComments{
-    margin: 0;
-    font-size: 9px;
-    color: rgb(80, 80, 80);
-    padding-right: 20px;
-    margin-top: 9px;
-    overflow-y: auto;
-}
+    .description{
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+    }
 
-.numberOfComments{
-    margin-bottom: 15px;
-}
+    .portOfPostName, .postDescription, .numberOfComments{
+        margin: 0;
+        font-size: 9px;
+        color: rgb(80, 80, 80);
+        padding-right: 20px;
+        margin-top: 9px;
+        overflow-y: auto;
+    }
 
-.portOfPostName{
-    margin: 0;
-    margin-top: 11px;
-}
+    .numberOfComments{
+        margin-bottom: 15px;
+    }
 
-.nameOfPost{
-    font-size: 14px;
-    color: black;
-    padding-right: 20px;
-    margin-top: 9px;
-    overflow-y: auto;
-}
+    .portOfPostName{
+        margin: 0;
+        margin-top: 11px;
+    }
 
-.timeAndAuthor{
-    display: flex;
-    flex-direction: column;
-    width: auto;
-    margin-left: auto;
-    order: 2;
-}
+    .nameOfPost{
+        font-size: 14px;
+        color: black;
+        padding-right: 20px;
+        margin-top: 9px;
+        overflow-y: auto;
+    }
 
-.dateOfWriting{
-    font-size: 7px;
-    color: rgb(80, 80, 80);
-    margin: 0;
-    padding: 0;
-    margin-top: 15px;
-    margin-left: auto;
-}
+    .timeAndAuthor{
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        margin-left: auto;
+        order: 2;
+    }
 
-.postedBy{
-    margin: 0;
-    padding: 0;
-    margin-top: 30px;
-    font-size: 7px;
-    color: rgb(80, 80, 80);
-}
+    .dateOfWriting{
+        font-size: 7px;
+        color: rgb(80, 80, 80);
+        margin: 0;
+        padding: 0;
+        margin-top: 15px;
+        margin-left: auto;
+    }
 
-.authorDetails{
-    display: flex;
-}
+    .postedBy{
+        margin: 0;
+        padding: 0;
+        margin-top: 30px;
+        font-size: 7px;
+        color: rgb(80, 80, 80);
+    }
 
-.roundImage{
-    margin: 0;
-    padding: 0;
-    margin-top: 3px;
-    margin-bottom: 15px;
-    font-size: 0;
-    border: 0;
-    border-radius: 100%;
-    width: 25px;
-    height: 25px;
-}
+    .authorDetails{
+        display: flex;
+    }
 
-.usernameOfAuthor{
-    color: #7b2240;
-    font-size: 9px;
-    margin: 0;
-    padding: 0;
-    margin-left: 5px;
-    overflow-y: auto;
-    margin-top: 9px;
-}
+    .roundImage{
+        margin: 0;
+        padding: 0;
+        margin-top: 3px;
+        margin-bottom: 15px;
+        font-size: 0;
+        border: 0;
+        border-radius: 100%;
+        width: 25px;
+        height: 25px;
+    }
+
+    .usernameOfAuthor{
+        color: #7b2240;
+        font-size: 9px;
+        margin: 0;
+        padding: 0;
+        margin-left: 5px;
+        overflow-y: auto;
+        margin-top: 9px;
+    }
+    
+} /* Close Media Query */
+
+@media screen and (max-aspect-ratio: 13/9) {
+
+    .flexTitle{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin: auto;
+        margin-bottom: 4vh;
+        text-align: center;
+    }
+
+    .page
+    {
+        margin: auto;
+        background-color: #d2bdc5; /* Slight Maroon */
+        margin-top: 4vh;
+        border-bottom: solid #7B2240;
+        border-bottom-width: 1px;
+        text-align: center;
+        padding: 9px;
+        padding-left: 15px;
+        padding-right: 15px;
+        width: 30%;
+        height: auto;
+        font-family: inherit;
+        font-size: 0;
+        font-weight: bold;
+        color: #7B2240;
+        display: inline-block;
+    }
+
+    .pageTitle{
+         margin: 0;
+         font-size: 9px;
+         letter-spacing: 1px;
+    }
+
+    .searchResultsMessage{
+        margin: 0;
+        margin-bottom: 10px;
+        padding: 0;
+        text-align: center;
+        color: black;
+        font-size: 15px;
+    }
+
+    .createPostBtn{
+        font-family: 'Roboto', Sans-Serif;
+        margin-top: 3vh;
+        text-align: center;
+        border-radius: 3px;
+        border: 0;
+        background-color: #757575;
+        color: #ececec;
+        font-size: 9px;
+        font-weight: normal;
+        letter-spacing: 0.5px;
+        padding: 8.5px;
+        padding-left: 20px;
+        padding-right: 20px;
+        cursor: pointer;
+        overflow: hidden;
+        width: auto;
+    }
+
+    .sortByForm{
+        margin-top: 3vh;
+    }
+
+    select{
+        font-family: 'Roboto', Sans-Serif;
+        background-color: #dbdbdb;
+        color: black;
+        margin: 0;
+        padding: 7px;
+        border: 0;
+        border-radius: 3px;
+        box-shadow: 1px 1px 1px gray;
+        width: auto;
+        font-size: 12px;
+    }
+
+    .btn{
+       height: 40px;
+       width: 150px;
+    }
+
+    .right-btn{
+        background-color: #e5e3e3;
+        width: 250px;
+        height: 60px;
+        border-bottom-color: red;
+        border-bottom-style: groove;
+        text-align: center;
+        padding-top: 16px;
+    }
+
+    .post-section{
+        margin: 0;
+        width: 500px;
+        height: auto;
+        background-color: #ded3d7;
+        border-radius: 5px;
+        position: relative;
+        margin-left: 7vmin;
+        box-shadow: 1px 1px 1px gray;
+        display: flex;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-bottom: 15px;
+    }
+
+    .votes{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 25px;
+        margin-right: 20px;
+    }
+
+    .numOfVotes{
+        padding: 0;
+        margin: 0;
+        font-size: 15px;
+    }
+
+    .upvote, .downvote{
+        margin: 0;
+        padding: 0;
+        font-size: 0;
+        display: inline-block;
+    }
+
+    .upvoteBtn, .downvoteBtn{
+        letter-spacing: 1px;
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+        border: 0;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    .squareImage{
+        width: 80px;
+        height: 80px;
+        border: 0;
+        border-radius: 3px;
+        margin: 10px;
+        margin-right: 20px;
+        margin-left: 0;
+        padding: 0;
+    }
+
+    .description{
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .portOfPostName, .postDescription, .numberOfComments{
+        margin: 0;
+        font-size: 9px;
+        color: rgb(80, 80, 80);
+        padding-right: 20px;
+        margin-top: 9px;
+        overflow-y: auto;
+    }
+
+    .numberOfComments{
+        margin-bottom: 15px;
+    }
+
+    .portOfPostName{
+        margin: 0;
+        margin-top: 11px;
+    }
+
+    .nameOfPost{
+        font-size: 14px;
+        color: black;
+        padding-right: 20px;
+        margin-top: 9px;
+        overflow-y: auto;
+    }
+
+    .timeAndAuthor{
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        margin-left: auto;
+        order: 2;
+    }
+
+    .dateOfWriting{
+        font-size: 7px;
+        color: rgb(80, 80, 80);
+        margin: 0;
+        padding: 0;
+        margin-top: 15px;
+        margin-left: auto;
+    }
+
+    .postedBy{
+        margin: 0;
+        padding: 0;
+        margin-top: 30px;
+        font-size: 7px;
+        color: rgb(80, 80, 80);
+    }
+
+    .authorDetails{
+        display: flex;
+    }
+
+    .roundImage{
+        margin: 0;
+        padding: 0;
+        margin-top: 3px;
+        margin-bottom: 15px;
+        font-size: 0;
+        border: 0;
+        border-radius: 100%;
+        width: 25px;
+        height: 25px;
+    }
+
+    .usernameOfAuthor{
+        color: #7b2240;
+        font-size: 9px;
+        margin: 0;
+        padding: 0;
+        margin-left: 5px;
+        overflow-y: auto;
+        margin-top: 9px;
+    }
+    
+} /* Close Media Query */
