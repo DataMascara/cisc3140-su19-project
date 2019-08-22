@@ -101,7 +101,7 @@
                  <div class = "postImage">
                         {#- Since 'post['image']' is optional, we must have the following 'if' statement. #}
                         {%- if post['image'] != None %}
-                            <a href = ""><img src = "{{ post['image'] | e }}" class = "squareImage" title = "See post details" alt = "the post {{ post['postTitle'] | e }}"></a>
+                            <a href = "/post/{{post['postId']}}"><img src = "{{ post['image'] | e }}" class = "squareImage" title = "See post details" alt = "the post {{ post['postTitle'] | e }}"></a>
                         {% endif %}
                  </div>
                  <div class = "description">
