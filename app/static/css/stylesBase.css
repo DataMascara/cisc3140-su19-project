@@ -48,7 +48,7 @@ Version 1.0
 
 /*Attributes for Left Side:*/
 
-@media screen and (orientation: landscape) {
+@media screen and (min-aspect-ratio: 13/9) {
 
     body {
         font-family: 'Roboto', sans-serif;
@@ -552,7 +552,7 @@ Version 1.0
 /* ---------------------------------------------------
     MEDIA QUERY: Portrait
 ----------------------------------------------------- */
-@media screen and (orientation: portrait) {
+@media screen and (max-aspect-ratio: 13/9) {
    
     body {
        font-family: 'Roboto', sans-serif;
