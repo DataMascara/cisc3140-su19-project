@@ -428,27 +428,26 @@
         display: flex;
         flex-direction: column;
         text-align: left;
-        margin-left: 5px;
         order: 2;
         flex-shrink: 0;
-        width: 100%;
+        width: 95%;
     }
 
     .portOfPostName{
         margin: 0;
         padding: 0;
-        font-size: 12px;
+        font-size: 3vw;
         font-weight: normal;
         color: black;
     }
 
     .nameOfPost{
         margin: 0;
-        font-size: 18px;
+        font-size: 6vw;
         color: black;
         padding: 0;
-        padding-bottom: 20px;
-        padding-top: 10px;
+        padding-bottom: 3vw;
+        padding-top: 2vw;
     }
 
     .timeAndAuthor{
@@ -503,39 +502,41 @@
         margin: 0;
         color: black;
         text-align: left;
-        font-size: 12px;
+        font-size: 3.5vw;
         letter-spacing: 0.2vw;
-        border-left: solid 1px black;
+        border-left: solid 0.3vw black;
         padding-left: 2vw;
         margin-bottom: 3vw;
         margin-left: 2vw;
     }
 
     .postImageDiv{
-        width: auto;
+        width: 96%;
         background-color: #e3e3e3;
         border-radius: 3px;
         box-shadow: 1px 1px 1px gray;
-        margin-bottom: 10px;
+        margin: auto;
+        margin-bottom: 2vw;
     }
 
     .squareImage{
-        width: 300px;
-        height: 300px;
+        width: 60vw;
+        height: 60vw;
         border: 0;
         padding: 0;
         display: block;
         margin: auto;
-        margin-top: 7px;
-        margin-bottom: 7px;
+        margin-top: 2vw;
+        margin-bottom: 2vw;
     }
-
+    
     .writeCommentToPost{
-        margin-left: 2vw;
+        margin: auto;
+        width: 96%;
     }
 
     .commentToPostText{
-       margin: 0;
+       margin: auto;
        margin-top: 10px;
        margin-bottom: 10px;
        border: 0.5px solid LightGray;
@@ -547,6 +548,7 @@
        border-radius: 3px;
        font-family: 'Roboto', Sans-Serif;
        font-size: 12px;
+       /*height: 30vw;*/
     }
 
     .commentToPostText::placeholder{
