@@ -1,3 +1,9 @@
+/* CSS for `posts.html`
+   Version 2.0
+   08.22.2019
+   Description: media queries added!
+*/
+
 /* Middle Part---------------Johnny */
 
 @media screen and (min-aspect-ratio: 13/9) {
@@ -377,27 +383,24 @@
 
     .portOfPostName, .postDescription, .numberOfComments{
         margin: 0;
-        font-size: 9px;
+        font-size: 3vw;
         color: rgb(80, 80, 80);
-        padding-right: 20px;
-        margin-top: 9px;
+        margin-top: 2vw;
         overflow-y: auto;
     }
 
     .numberOfComments{
-        margin-bottom: 15px;
+        margin-bottom: 2vw;
     }
 
     .portOfPostName{
         margin: 0;
-        margin-top: 11px;
     }
 
     .nameOfPost{
-        font-size: 14px;
+        font-size: 4.5vw;
         color: black;
-        padding-right: 20px;
-        margin-top: 9px;
+        margin-top: 2vw;
         overflow-y: auto;
     }
 
@@ -418,7 +421,7 @@
     .postedBy{
         margin: 0;
         padding: 0;
-        margin-top: 15vw;
+        margin-top: 13vw;
         font-size: 3vw;
         color: rgb(80, 80, 80);
     }
@@ -430,23 +433,22 @@
     .roundImage{
         margin: 0;
         padding: 0;
-        margin-top: 3px;
-        margin-bottom: 15px;
+        margin-top: 1vw;
         font-size: 0;
         border: 0;
         border-radius: 100%;
-        width: 25px;
-        height: 25px;
+        width: 8.5vw;
+        height: 8.5vw;
     }
 
     .usernameOfAuthor{
         color: #7b2240;
-        font-size: 9px;
+        font-size: 3vw;
         margin: 0;
         padding: 0;
-        margin-left: 5px;
+        margin-left: 1vw;
         overflow-y: auto;
-        margin-top: 9px;
+        margin-top: 4vw;
     }
     
 } /* Close Media Query */
