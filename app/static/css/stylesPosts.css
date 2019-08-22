@@ -250,11 +250,11 @@
         background-color: #d2bdc5; /* Slight Maroon */
         margin-top: 4vh;
         border-bottom: solid #7B2240;
-        border-bottom-width: 1px;
+        border-bottom-width: 0.5vw;
         text-align: center;
-        padding: 9px;
-        padding-left: 15px;
-        padding-right: 15px;
+        padding: 2.5vw;
+        padding-left: 3vw;
+        padding-right: 3vw;
         width: 50%;
         height: auto;
         font-family: inherit;
@@ -290,7 +290,7 @@
         font-size: 3vw;
         font-weight: normal;
         letter-spacing: 0.2vw;
-        padding: 8.5px;
+        padding: 2.5vw;
         cursor: pointer;
         overflow: hidden;
         width: 30%;
@@ -306,7 +306,7 @@
         background-color: #dbdbdb;
         color: black;
         margin: 0;
-        padding: 7px;
+        padding: 2vw;
         border: 0;
         border-radius: 1vw;
         box-shadow: 1px 1px 1px gray;
@@ -324,9 +324,9 @@
         position: relative;
         box-shadow: 1px 1px 1px gray;
         display: flex;
-        padding-left: 20px;
-        padding-right: 20px;
-        margin-bottom: 15px;
+        padding-left: 5%;
+        padding-right: 5%;
+        margin-bottom: 5vw;
         justify-content: space-evenly;
         flex-wrap: wrap;
     }
@@ -352,7 +352,7 @@
     }
 
     .upvoteBtn, .downvoteBtn{
-        letter-spacing: 1px;
+        letter-spacing: 0.2vw;
         margin: 0;
         padding: 0;
         font-size: 3vw;
