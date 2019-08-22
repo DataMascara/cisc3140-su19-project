@@ -345,41 +345,36 @@
 /* Portrait Media Query */
 @media screen and (max-aspect-ratio: 13/9)
 {
-
     .commentSubmittedMessage{
         margin: 0;
-        font-size: 14px;
+        font-size: 5vw;
         color: green;
-        margin-left: 7vmin;
-        padding-left: 70px;
-        margin-bottom: 15px;
+        text-align: center;
+        margin-bottom: 3vw;
     }
 
     .flexTitle{
-        display: flex;
         position: relative;
-        margin-bottom: 15px;
-        margin-left: 7vmin;
-        margin-top: calc(4.5vh + 4.5vw);
+        float: right;
+        margin-right: 3vw;
+        margin-top: 3vw;
+        margin-bottom: 3vw;
     }
 
     .savePost{
         background-repeat: no-repeat;
-        background-position: 7px 6px;
-        border-radius: 3px;
+        background-position: 2vw 2.5vw;
+        background-size: 3.2vw 2.6vw;
+        border-radius: 0.5vw;
         border: none;
         cursor: pointer;
         color: white;
-        font-size: 8.5px;
+        font-size: 2.5vw;
         font-weight: normal;
-        letter-spacing: 0.5px;
-        padding: 7px;
-        padding-left: 20px;
-        padding-right: 5px;
-        width: 85;
-        position: absolute;
-        bottom: 0;
-        left: 455px;
+        letter-spacing: 0.2vw;
+        padding: 2.5vw;
+        padding-left: 6vw;
+        width: 22vw;
         font-family: 'Roboto', Sans-Serif;
         text-align: center;
     }
