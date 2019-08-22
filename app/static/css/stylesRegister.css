@@ -82,35 +82,11 @@ Version 1.0
       color: black;
     }
 
-    .space{
-      margin-left: 1em;
-    }
-
-    .bottom{
-      text-align: center;
-    }
-
     .errorMessages{
       color: red;
       font-size: 12px;
     }
 
-    .imageLabel{
-      background-color: #757575;
-      color: white;
-      cursor: pointer;
-      font-size: 8px;
-      font-weight: normal;
-      border: 0;
-      border-radius: 3px;
-      letter-spacing: 0.55px;
-      padding-top: 7px;
-      padding-bottom: 7px;
-      padding-left: 17px;
-      padding-right: 17px;
-      text-align: center;
-      margin-left: 0.5em;
-    }
 } /* Close Media Query */
 
 /* Portrait Media Query */
@@ -153,64 +129,39 @@ Version 1.0
     }
 
     .first_name, .last_name, .usernameForm, .email, .password, .confirm_password, .addimage{
-      width: 50%;
-      padding: 12px 11px 11px 11px;
-      margin-top: 7.5px;
-      margin-bottom: 12px;
-      margin-right: 10px;
+      width: 80%;
+      padding: 3vw;
+      margin-top: 2.5vw;
+      margin-bottom: 2.5vw;
       border: 0.5px solid #8c918d;
-      border-radius: 3px;
-      font-size: 11px;
+      border-radius: 1vw;
+      font-size: 4vw;
     }
 
     .registFormButton{
-      margin-left: 0.5em;
-      margin-top: 20px;
-      padding: 7px;
+      margin-top: 4vw;
+      margin-bottom: 4vw;
+      padding: 3vw;
       border: 1px solid #8c918d;
-      border-radius: 3px;
+      border-radius: 1vw;
       text-align: center;
-      display: block;
       border: 0;
       background-color: #757575;
       color: white;
-      font-size: 8px;
-      width: 80px;
-      letter-spacing: 0.5px;
+      font-size: 4vw;
+      width: 30%;
+      letter-spacing: 0.2vw;
       cursor: pointer;
+      box-shadow: 1px 1px 1px lightgrey;
     }
 
     ::placeholder{
       color: black;
     }
 
-    .space{
-      margin-left: 1em;
-    }
-
-    .bottom{
-      text-align: center;
-    }
-
     .errorMessages{
       color: red;
-      font-size: 12px;
+      font-size: 4vw;
     }
 
-    .imageLabel{
-      background-color: #757575;
-      color: white;
-      cursor: pointer;
-      font-size: 8px;
-      font-weight: normal;
-      border: 0;
-      border-radius: 3px;
-      letter-spacing: 0.55px;
-      padding-top: 7px;
-      padding-bottom: 7px;
-      padding-left: 17px;
-      padding-right: 17px;
-      text-align: center;
-      margin-left: 0.5em;
-    }
 } /* Close Media Query */
