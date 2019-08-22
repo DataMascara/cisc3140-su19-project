@@ -9,102 +9,208 @@ Version 1.0
 
 - Front End Team
 */
+/* Landscape Media Query */
+@media screen and (min-aspect-ratio: 13/9)
+{
 
-.signup-wrap{
-  margin: 2em auto 2em;
-  width: 70%;
-}
+    .signup-wrap{
+      margin: 2em auto 2em;
+      width: 70%;
+    }
 
-.panel-frame{
-  width: auto;
-  height: auto;
-  margin-top: 100px;
-  padding: 0;
-  border: 0;
-  text-align: center;
-}
+    .panel-frame{
+      width: auto;
+      height: auto;
+      margin-top: 100px;
+      padding: 0;
+      border: 0;
+      text-align: center;
+    }
 
-.header-wrapper{
-  margin-top: 12px;
-  margin-bottom: 12px;
-}
+    .header-wrapper{
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
 
-.panel-content{
-  text-align: left;
-}
+    .panel-content{
+      text-align: left;
+    }
 
-h1{
-  margin-bottom: -10px;
-  font-size: 25px;
-  font-weight: normal;
-}
+    h1{
+      margin-bottom: -10px;
+      font-size: 25px;
+      font-weight: normal;
+    }
 
-.required{
-  color: red;
-  font-size: 9px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  margin-top: 15px;
-}
+    .required{
+      color: red;
+      font-size: 9px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-top: 15px;
+    }
 
-.first_name, .last_name, .usernameForm, .email, .password, .confirm_password, .addimage{
-  width: 200px;
-  padding: 12px 11px 11px 11px;
-  margin-top: 7.5px;
-  margin-bottom: 12px;
-  margin-right: 10px;
-  border: 0.5px solid #8c918d;
-  border-radius: 3px;
-  font-size: 11px;
-}
+    .first_name, .last_name, .usernameForm, .email, .password, .confirm_password, .addimage{
+      width: 200px;
+      padding: 12px 11px 11px 11px;
+      margin-top: 7.5px;
+      margin-bottom: 12px;
+      margin-right: 10px;
+      border: 0.5px solid #8c918d;
+      border-radius: 3px;
+      font-size: 11px;
+    }
 
-.registFormButton{
-  margin-left: 0.5em;
-  margin-top: 20px;
-  padding: 7px;
-  border: 1px solid #8c918d;
-  border-radius: 3px;
-  text-align: center;
-  display: block;
-  border: 0;
-  background-color: #757575;
-  color: white;
-  font-size: 8px;
-  width: 80px;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-}
+    .registFormButton{
+      margin-left: 0.5em;
+      margin-top: 20px;
+      padding: 7px;
+      border: 1px solid #8c918d;
+      border-radius: 3px;
+      text-align: center;
+      display: block;
+      border: 0;
+      background-color: #757575;
+      color: white;
+      font-size: 8px;
+      width: 80px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+    }
 
-::placeholder{
-  color: black;
-}
+    ::placeholder{
+      color: black;
+    }
 
-.space{
-  margin-left: 1em;
-}
+    .space{
+      margin-left: 1em;
+    }
 
-.bottom{
-  text-align: center;
-}
+    .bottom{
+      text-align: center;
+    }
 
-.errorMessages{
-  color: red;
-  font-size: 12px;
-}
+    .errorMessages{
+      color: red;
+      font-size: 12px;
+    }
 
-.imageLabel{
-  background-color: #757575;
-   color: white;
-   cursor: pointer;
-   font-size: 8px;
-   font-weight: normal;
-   border: 0;
-   border-radius: 3px;
-   letter-spacing: 0.55px;
-   padding-top: 7px;
-   padding-bottom: 7px;
-   padding-left: 17px;
-   padding-right: 17px;
-   text-align: center;
-   margin-left: 0.5em;
-}
+    .imageLabel{
+      background-color: #757575;
+      color: white;
+      cursor: pointer;
+      font-size: 8px;
+      font-weight: normal;
+      border: 0;
+      border-radius: 3px;
+      letter-spacing: 0.55px;
+      padding-top: 7px;
+      padding-bottom: 7px;
+      padding-left: 17px;
+      padding-right: 17px;
+      text-align: center;
+      margin-left: 0.5em;
+    }
+} /* Close Media Query */
+
+/* Portrait Media Query */
+@media screen and (max-aspect-ratio: 13/9)
+{
+
+    .signup-wrap{
+      margin: auto;
+    }
+
+    .panel-frame{
+      width: auto;
+      height: auto;
+      margin-top: 5vw;
+      padding: 0;
+      border: 0;
+      text-align: center;
+    }
+
+    .header-wrapper{
+      margin-bottom: 3vw;
+    }
+
+    .panel-content{
+      text-align: center;
+      margin: auto;
+    }
+
+    h1{
+      margin-bottom: -2vw;
+      font-size: 8vw;
+      font-weight: normal;
+    }
+
+    .required{
+      color: red;
+      font-size: 3vw;
+      font-weight: bold;
+      letter-spacing: 0.2vw;
+    }
+
+    .first_name, .last_name, .usernameForm, .email, .password, .confirm_password, .addimage{
+      width: 50%;
+      padding: 12px 11px 11px 11px;
+      margin-top: 7.5px;
+      margin-bottom: 12px;
+      margin-right: 10px;
+      border: 0.5px solid #8c918d;
+      border-radius: 3px;
+      font-size: 11px;
+    }
+
+    .registFormButton{
+      margin-left: 0.5em;
+      margin-top: 20px;
+      padding: 7px;
+      border: 1px solid #8c918d;
+      border-radius: 3px;
+      text-align: center;
+      display: block;
+      border: 0;
+      background-color: #757575;
+      color: white;
+      font-size: 8px;
+      width: 80px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+    }
+
+    ::placeholder{
+      color: black;
+    }
+
+    .space{
+      margin-left: 1em;
+    }
+
+    .bottom{
+      text-align: center;
+    }
+
+    .errorMessages{
+      color: red;
+      font-size: 12px;
+    }
+
+    .imageLabel{
+      background-color: #757575;
+      color: white;
+      cursor: pointer;
+      font-size: 8px;
+      font-weight: normal;
+      border: 0;
+      border-radius: 3px;
+      letter-spacing: 0.55px;
+      padding-top: 7px;
+      padding-bottom: 7px;
+      padding-left: 17px;
+      padding-right: 17px;
+      text-align: center;
+      margin-left: 0.5em;
+    }
+} /* Close Media Query */
