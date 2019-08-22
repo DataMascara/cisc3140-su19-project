@@ -351,6 +351,8 @@
         padding-left: 20px;
         padding-right: 20px;
         margin-bottom: 15px;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
     }
 
     .votes{
@@ -399,6 +401,9 @@
         display: flex;
         flex-direction: column;
         text-align: left;
+        order: 2;
+        flex-shrink: 0;
+        width: 100%;
     }
 
     .portOfPostName, .postDescription, .numberOfComments{
@@ -430,9 +435,7 @@
     .timeAndAuthor{
         display: flex;
         flex-direction: column;
-        width: auto;
-        margin-left: auto;
-        order: 2;
+        width: max-content;
     }
 
     .dateOfWriting{
