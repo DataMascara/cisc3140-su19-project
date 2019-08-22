@@ -264,7 +264,7 @@
         padding: 9px;
         padding-left: 15px;
         padding-right: 15px;
-        width: 30%;
+        width: 50%;
         height: auto;
         font-family: inherit;
         font-size: 0;
@@ -275,7 +275,7 @@
 
     .pageTitle{
          margin: 0;
-         font-size: 9px;
+         font-size: 3vw;
          letter-spacing: 1px;
     }
 
@@ -292,19 +292,18 @@
         font-family: 'Roboto', Sans-Serif;
         margin-top: 3vh;
         text-align: center;
-        border-radius: 3px;
+        border-radius: 1vw;
         border: 0;
         background-color: #757575;
         color: #ececec;
-        font-size: 9px;
+        font-size: 3vw;
         font-weight: normal;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.5vw;
         padding: 8.5px;
-        padding-left: 20px;
-        padding-right: 20px;
         cursor: pointer;
         overflow: hidden;
-        width: auto;
+        width: 30%;
+        box-shadow: 1px 1px 1px grey;
     }
 
     .sortByForm{
@@ -318,10 +317,11 @@
         margin: 0;
         padding: 7px;
         border: 0;
-        border-radius: 3px;
+        border-radius: 1vw;
         box-shadow: 1px 1px 1px gray;
-        width: auto;
-        font-size: 12px;
+        width: 40%;
+        font-size: 4vw;
+        text-align-last: center;
     }
 
     .btn{
@@ -340,13 +340,12 @@
     }
 
     .post-section{
-        margin: 0;
-        width: 500px;
+        margin: auto;
+        width: 85%;
         height: auto;
         background-color: #ded3d7;
-        border-radius: 5px;
+        border-radius: 1vw;
         position: relative;
-        margin-left: 7vmin;
         box-shadow: 1px 1px 1px gray;
         display: flex;
         padding-left: 20px;
