@@ -358,7 +358,7 @@
         float: right;
         margin-right: 3vw;
         margin-top: 3vw;
-        margin-bottom: 3vw;
+        margin-bottom: 5vw;
     }
 
     .savePost{
@@ -382,9 +382,7 @@
     .mainScreen{
         display: flex;
         flex-direction: column;
-        width: 550px;
-        margin-bottom: 15px;
-        margin-left: 7vmin;
+        clear: both;
     }
 
     .votes{
@@ -392,13 +390,13 @@
         flex-direction: column;
         text-align: center;
         margin: 0;
-        width: 80px;
+        margin-top: 7vw;
     }
 
     .numOfVotes{
         padding: 0;
         margin: 0;
-        font-size: 15px;
+        font-size: 4vw;
     }
 
     .upvote, .downvote{
@@ -409,10 +407,10 @@
     }
 
     .upvoteBtn, .downvoteBtn{
-        letter-spacing: 1px;
+        letter-spacing: 0.5vw;
         margin: 0;
         padding: 0;
-        font-size: 12px;
+        font-size: 3vw;
         border: 0;
         background-color: transparent;
         cursor: pointer;
@@ -421,8 +419,9 @@
     .postData{
         display: flex;
         flex-direction: row;
-        position: relative;
-        margin-bottom: 15px;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        margin-top: 3vw;
     }
 
     .description{
@@ -430,6 +429,9 @@
         flex-direction: column;
         text-align: left;
         margin-left: 5px;
+        order: 2;
+        flex-shrink: 0;
+        width: 100%;
     }
 
     .portOfPostName{
@@ -452,10 +454,7 @@
     .timeAndAuthor{
         display: flex;
         flex-direction: column;
-        width: auto;
-        margin-left: auto;
-        margin-right: 10px;
-        order: 2;
+        width: max-content;
     }
 
     .dateOfWriting{
@@ -470,8 +469,8 @@
     .postedBy{
         margin: 0;
         padding: 0;
-        margin-top: 30px;
-        font-size: 7px;
+        margin-top: 10vw;
+        font-size: 3vw;
         color: black;
     }
 
@@ -482,23 +481,22 @@
     .roundImage{
         margin: 0;
         padding: 0;
-        margin-top: 3px;
-        margin-bottom: 15px;
+        margin-top: 1vw;
         font-size: 0;
         border: 0;
         border-radius: 100%;
-        width: 25px;
-        height: 25px;
+        width: 8.5vw;
+        height: 8.5vw;
     }
 
     .usernameOfAuthor{
         color: #7b2240;
-        font-size: 9px;
+        font-size: 3vw;
         margin: 0;
         padding: 0;
-        margin-left: 5px;
+        margin-left: 1vw;
         overflow-y: auto;
-        margin-top: 9px;
+        margin-top: 3vw;
     }
 
     .postDescription{
@@ -506,11 +504,11 @@
         color: black;
         text-align: left;
         font-size: 12px;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.2vw;
         border-left: solid 1px black;
-        padding-left: 10px;
-        margin-bottom: 15px;
-        margin-left: 80px;
+        padding-left: 2vw;
+        margin-bottom: 3vw;
+        margin-left: 2vw;
     }
 
     .postImageDiv{
@@ -518,7 +516,6 @@
         background-color: #e3e3e3;
         border-radius: 3px;
         box-shadow: 1px 1px 1px gray;
-        margin-left: 80px;
         margin-bottom: 10px;
     }
 
@@ -534,7 +531,7 @@
     }
 
     .writeCommentToPost{
-        margin-left: 80px;
+        margin-left: 2vw;
     }
 
     .commentToPostText{
@@ -581,7 +578,7 @@
         display: flex;
         flex-direction: column;
         text-align: left;
-        margin-left: 80px;
+        margin-left: 2vw;
     }
 
     .numberOfComments{
