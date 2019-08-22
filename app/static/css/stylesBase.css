@@ -330,7 +330,7 @@ Version 1.0
     .rightContainer
     {
         font-family: 'Roboto', Sans-Serif;
-        width: calc(17vh + 17vw);
+        width: calc(20vh + 20vw);
         height: 100vh;
         transition: all 0.3s;
         background-color: #E3E3E3;
@@ -687,8 +687,8 @@ Version 1.0
        margin: auto;
        width: 40%;
        margin-bottom: 3vw;
-       border-top-left-radius: 3vw;
-       border-top-right-radius: 3vw;
+       border-top-left-radius: 1vw;
+       border-top-right-radius: 1vw;
        cursor: pointer;
        overflow: hidden;
     }
