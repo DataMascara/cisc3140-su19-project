@@ -670,6 +670,7 @@ Version 1.0
         width: auto;
         margin-bottom: 3vw;
         overflow-y: auto;
+        height: 7.5vw;
     }
 
     .userProfileTitle, .emailAndPasswordDiv, .notificationsDiv, .subscriptionsDiv, .commentsDiv, .savedDiv, .postsDiv{
@@ -964,16 +965,24 @@ Version 1.0
         text-align: center;
     }
     
+    .currentPasswordDiv {
+        margin: auto;
+        margin-top: 3vw;
+        margin-bottom: -1.5vw;
+        width: 96%;
+        text-align: center;
+    }
+    
     .buttonDiv{
         order: 2;
         margin: auto;
-        margin-top: 3vw;
     }
 
     .emailSetting, .passwordSetting, .currentPassword{
         width: 95%;
         padding: 3vw;
         margin-right: 2vw;
+        margin-bottom: 3vw;
         border: 0.5px solid #8c918d;
         border-radius: 1vw;
         font-size: 3.5vw;
