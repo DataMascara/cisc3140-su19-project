@@ -122,22 +122,20 @@
     .flexTitle{
         display: flex;
         position: relative;
-        margin-bottom: 15px;
-        margin-left: 7vmin;
+        margin-bottom: 3vw;
     }
 
     .page
     {
-        background-color: #ded3d7; /* Slight Maroon */
-        margin-top: calc(6vh + 6vw);
+        background-color: #ded3d7;
+        margin: auto;
+        margin-top: 4vh;
         border-bottom: solid #7B2240;
-        border-bottom-width: 1px;
+        border-bottom-width: 0.5vw;
         text-align: center;
-        padding: 9px;
-        padding-left: 65px;
-        padding-right: 65px;
-        width: auto;
-        height: auto;
+        padding: 3vw;
+        padding-left: 12vw;
+        padding-right: 12vw;
         font-family: inherit;
         font-size: 0;
         font-weight: bold;
@@ -147,22 +145,20 @@
 
     .pageTitle{
          margin: 0;
-         font-size: 11.5px;
-         letter-spacing: 1.5px;
+         font-size: 3vw;
+         letter-spacing: 0.75vw;
     }
 
     .port-section{
         margin: 0;
-        width: 450px;
-        height: auto;
-        border-radius: 5px;
+        margin: auto;
+        width: 87%;
+        border-radius: 1vw;
         position: relative;
-        margin-left: 7vmin;
-        box-shadow: 1px 1px 1px gray;
+        box-shadow: 0.3vw 0.3vw 0.3vw grey;
         display: flex;
-        padding: 20px;
-        padding-left: 20px;
-        margin-bottom: 15px;
+        padding: 3vw;
+        margin-bottom: 3vw;
     }
 
     .portFirstPart, .portSecondPart, .portThirdPart{
@@ -174,7 +170,7 @@
 
     .portFirstPart, .portSecondPart{
         margin: 0;
-        margin-right: 15px;
+        margin-right: 3vw;
     }
 
     .portThirdPart{
@@ -186,23 +182,23 @@
     .portName{
         margin: 0;
         padding: 0;
-        padding-bottom: 10px;
-        font-size: 15px;
+        padding-bottom: 2vw;
+        font-size: 4vw;
         color: rgb(80, 80, 80);
     }
 
     .portMembersNumber{
         margin: 0;
         padding: 0;
-        font-size: 8.5px;
+        font-size: 2vw;
         color: rgb(80, 80, 80);
     }
 
     .portDescription{
         margin: 0;
         padding: 0;
-        font-size: 9.5px;
-        letter-spacing: 0.5px;
+        font-size: 2.5vw;
+        letter-spacing: 0.25vw;
         color: rgb(80, 80, 80);
     }
 
@@ -214,14 +210,14 @@
 
     .subscribeIndex{
         text-align: center;
-        border-radius: 3px;
+        border-radius: 1vw;
         border: 0;
         color: white;
-        font-size: 8.5px;
-        width: 70px;
+        font-size: 2vw;
+        width: 20vw;
         height: auto;
-        padding: 6px;
-        letter-spacing: 0.5px;
+        padding: 2vw;
+        letter-spacing: 0.5vw;
         cursor: pointer;
     }
     
