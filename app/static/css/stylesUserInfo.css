@@ -1032,9 +1032,9 @@ Version 1.0
     }
 
     .comment-section, .post-section{
-        padding: 5px;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding: 1vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
     }
 
     .portName{
@@ -1086,49 +1086,48 @@ Version 1.0
     .commentSecondPart, .postSecondPart{
         display:flex; 
         flex-direction:column;
+        width: 80%;
     }
 
     .votes{
-       margin: 0;
-       font-size: 12px;
-       color: rgb(77, 208, 191);
-       margin-top: 5px;
-       margin-right: 5px;
+        margin: 0;
+        font-size: 3vw;
+        color: rgb(77, 208, 191);
+        margin-top: 0.8vw;
+        margin-right: 2vw;
     }
 
     .thePortName{
-       color: rgb(80, 80, 80);
-       font-size: 7px;
-       margin-right: 10px;
-       margin-top: 8px;
+        color: rgb(80, 80, 80);
+        font-size: 2vw;
+        margin-right: 2vw;
     }
 
     .thePostName{
         margin: 0;
         color: black;
-        font-size: 11px;
+        font-size: 3vw;
     }
 
     .commentText, .postText{
         margin: 0;
         color: black;
-        font-size: 8px;
-        margin-left: 10px;
+        font-size: 2vw;
+        margin-left: 3vw;
         overflow-y: auto;
-        padding-top: 5px;
+        padding-top: 1vw;
     }
 
 
     .dateAndTime{
         margin: 0;
         color: rgb(80, 80, 80);
-        font-size: 8px;
+        font-size: 2vw;
+        min-width: max-content;
     }
 
     .commentFirstPart, .postFirstPart{
         text-align: center;
-        width: 30px;
-        margin-left: -8px;
     }
 
     .commentThirdPart, .postThirdPart{
