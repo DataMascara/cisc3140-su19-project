@@ -121,13 +121,12 @@
 
           {%- if user %}
               <form class = "writeCommentToPost" method = "post" action = "" onsubmit = "submitWithEscapeCommentToPost ();">
-                  <textarea rows = "7" 
-                                  class = "commentToPostText" 
-                                  name = "commentToPostText" 
-                                  title = "Write a comment to {{ post['author'] }}'s post" 
-                                  placeholder = "Comment"
-                                  spellcheck = "true" 
-                                  onkeyup = "enableDisableSubmission(this)"></textarea>
+                  <textarea class = "commentToPostText" 
+                            name = "commentToPostText" 
+                            title = "Write a comment to {{ post['author'] }}'s post" 
+                            placeholder = "Comment"
+                            spellcheck = "true" 
+                            onkeyup = "enableDisableSubmission(this)"></textarea>
                    <div class = "commentToPostDiv">
                         <input type = "submit" class = "CommentToPostBtn" name = "CommentToPostBtn" title = "Submit your comment!" value = "✖   Submit Comment" disabled>
                    </div>
@@ -215,13 +214,12 @@
                    <div class = "hiddenArea    for{{ comment1['commentId'] }}" style = "display:none;">
                        <form class = "writeCommentToComment{{ comment1['commentId'] }}" onsubmit = "submitWithEscapeCommentToComment (this);" method = "post" action = "/post/{{ post['postId'] }}">
                            <input type="hidden" name="parentId" value="{{ comment1['commentId'] }}">
-                           <textarea rows = "4"
-                                           class = "commentToPostText commentToCommentText{{ comment1['commentId'] }}" 
-                                           name = "commentToPostText"
-                                           title = "Write a comment to {{ comment1['author'] }}'s comment" 
-                                           placeholder = "Comment & ENTER"
-                                           spellcheck = "true"
-                                           onkeyup="enableDisableSubmission(this)"></textarea>
+                           <textarea class = "commentToPostText commentToCommentText{{ comment1['commentId'] }}" 
+                                     name = "commentToPostText"
+                                     title = "Write a comment to {{ comment1['author'] }}'s comment" 
+                                     placeholder = "Comment & ENTER"
+                                     spellcheck = "true"
+                                     onkeyup="enableDisableSubmission(this)"></textarea>
                            <div class = "commentToCommentDiv">
                                  <input type = "submit" class = "commentToCommentBtn buttonComment{{ comment1['commentId'] }}" name = "commentToCommentBtn" title = "Submit your comment!" value = "✖   Submit Comment" disabled>
                            </div>
