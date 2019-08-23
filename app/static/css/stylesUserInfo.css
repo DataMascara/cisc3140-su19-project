@@ -720,16 +720,16 @@ Version 1.0
     .editProfileBtn, .descriptionFormSubmitBtn, .changeEmailBtn, .changePasswordBtn{
         text-align: center;
         background-color: #757575;
-        border-radius: 3px;
+        border-radius: 1vw;
         border: 0;
         color: white;
-        font-size: 8.5px;
+        font-size: 3vw;
         width: auto;
         height: auto;
-        padding: 6px;
-        padding-left: 10px;
-        padding-right: 10px;
-        letter-spacing: 0.5px;
+        padding: 2vw;
+        padding-left: 3vw;
+        padding-right: 3vw;
+        letter-spacing: 0.1vw;
         cursor: pointer;
         margin-left: auto;
         margin-right: 0;
@@ -751,50 +751,51 @@ Version 1.0
     .roundImage{
         margin: 0;
         padding: 0;
+        margin-top: 1vw;
         font-size: 0;
         border: 0;
         border-radius: 100%;
-        width: 35px;
-        height: 35px;
+        width: 6vw;
+        height: 6vw;
     }
 
     .usernameAndEmailFlex{
         display: flex;
         flex-direction: column;
-        margin-left: 7px;
+        margin-left: 1vw;
     }
 
     .viewedUserUsername{
         color: #b78296;
-        font-size: 14px;
+        font-size: 4vw;
         margin: 0;
         padding: 0;
-        margin-left: 5px;
-        margin-bottom: 7px;
+        margin-left: 1vw;
+        margin-bottom: 1.5vw;
         overflow-y: auto;
     }
 
     .viewedUserEmail{
         margin: 0;
         color: black;
-        font-size: 9px;
-        margin-left: 5px;
+        font-size: 2.5vw;
+        margin-left: 1vw;
         overflow-y: auto;
     }
 
     .viewedUserDescription{
         margin: 0;
         width: auto;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        padding-left: 55px;
-        padding-right: 55px;
+        padding-top: 5vw;
+        padding-bottom: 5vw;
+        padding-left: 12.5vw;
+        padding-right: 12.5vw;
     }
 
     .descriptionText{
-        letter-spacing: 0.5px;
+        letter-spacing: 0.2vw;
         color: black;
-        font-size: 13px;
+        font-size: 3.5vw;
         overflow-x: auto;
     }
 
@@ -803,18 +804,19 @@ Version 1.0
     }
 
     .descriptionTextArea, .avatarURL{
-       margin: 0;
-       margin-top: 10px;
-       margin-bottom: 10px;
-       border: 0.5px solid LightGray;
-       padding-left: 10px;
-       padding-top: 5px;
-       padding-right: 10px;
-       padding-bottom: 5px;
-       width: 100%;
-       border-radius: 3px;
-       font-family: 'Roboto', Sans-Serif;
-       font-size: 13px;
+        margin: 0;
+        margin-top: 2.5vw;
+        margin-bottom: 2.5vw;
+        border: 0.15vw solid LightGray;
+        padding-left: 2.5vw;
+        padding-top: 1.75vw;
+        padding-right: 2.5vw;
+        padding-bottom: 1.75vw;
+        width: 100%;
+        border-radius: 1vw;
+        font-family: 'Roboto', Sans-Serif;
+        font-size: 3.5vw;
+        letter-spacing: 0.2vw;
     }
 
     .descriptionTextArea::placeholder{
@@ -1127,17 +1129,6 @@ Version 1.0
 
     .authorDetails{
         display: flex;
-    }
-
-    .roundImage{
-        margin: 0;
-        padding: 0;
-        margin-top: 3px;
-        font-size: 0;
-        border: 0;
-        border-radius: 100%;
-        width: 25px;
-        height: 25px;
     }
 
     .usernameOfAuthor{
