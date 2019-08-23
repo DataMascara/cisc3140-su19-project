@@ -663,11 +663,11 @@
     }
 
     .blackline{
-      margin-left: 6px;
+      margin-left: 2vw;
       width: 0px;
-      border-left: 1px solid black;
+      border-left: 0.5vw solid black;
       height: auto;
-      margin-right: 25px;
+      margin-right: 6vw;
     }
      
 } /* Close Media Query */
