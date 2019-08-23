@@ -676,7 +676,7 @@ Version 1.0
         margin: 0;
         padding: 0;
         background-color: #863550;
-        width: 47vw;
+        width: 42vw;
         border-bottom: 0.5vw solid #d2c4c9;
         text-align: center;
         border-top-left-radius: 0.5vw;
@@ -736,11 +736,11 @@ Version 1.0
     }
 
     .descriptionFormSubmitBtn{
-        margin-top: 15px;
+        margin-top: 3vw;
     }
 
     .changeEmailBtn, .changePasswordBtn{
-        margin-bottom: 30px;
+        margin-bottom: 4vw;
     }
 
     .profileContent{
@@ -842,48 +842,49 @@ Version 1.0
     .privateEmailLabel{
         display: flex;
         flex-direction: column;
+        margin-left: 3vw;
     }
 
     .requiredFieldsMessage{
-        /*order: 2;*/
         margin-left: auto;
         margin-right: 0;
     }
 
     .requiredFieldsMessageText{
         margin: 0;
-        margin-top: 10px;
-        font-size: 9px;
-        letter-spacing: 0.5px;
+        margin-top: 3vw;
+        font-size: 2.5vw;
+        letter-spacing: 0.2vw;
         font-weight: bold;
         color: red;
     }
 
     .emailChangeTitle, .passwordChangeTitle{
         margin: 0;
+        margin-top: 2vw;
         border: 0;
-        border-bottom: 0.5px solid black;
-        font-size: 9px;
+        border-bottom: 0.3vw solid black;
+        font-size: 3vw;
         font-weight: bold;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.1vw;
     }
 
     .privateEmailLabelTextUpperLabel, .privateEmailLabelTextLowerLabel{
         margin: 0;
         padding: 0;
-        margin-left: 10px;
+        margin-left: 2.5vw;
     }
 
     .privateEmailLabelTextUpperLabel{
-        font-size: 13px;
-        margin-bottom: 3px;
-        margin-top: -3px;
-        letter-spacing: 0.5px;
+        font-size: 4vw;
+        margin-bottom: 0.8vw;
+        margin-top: -0.9vw;
+        letter-spacing: 0.2vw;
     }
 
     .privateEmailLabelTextLowerLabel{
-        font-size: 9px;
-        letter-spacing: 0.5px;
+        font-size: 3vw;
+        letter-spacing: 0.2vw;
     }
 
     .privateEmailCheckbox{
@@ -892,13 +893,13 @@ Version 1.0
 
     /* The container */
     .container {
-      display: block;
-      position: relative;
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+        display: block;
+        position: relative;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
     .container input[type="checkbox"]{
@@ -911,40 +912,39 @@ Version 1.0
         position: absolute;
         top: 0;
         left: 0;
-        height: 15px;
-        width: 15px;
-        border: 2px solid #7B2240;
+        height: 6vw;
+        width: 6vw;
+        border: 0.8vw solid #7B2240;
     }
 
     /* When the checkbox is checked, add a blue background */
     .container input[type="checkbox"]:checked ~ .checkmark {
-      background-color: transparent;
+        background-color: transparent;
     }
 
     /* Create the checkmark/indicator (hidden when not checked) */
     .container .checkmark:after {
-      content: "";
-      position: absolute;
-      display: none;
+        content: "";
+        position: absolute;
+        display: none;
     }
 
     /* Show the checkmark when checked */
     .container input[type="checkbox"]:checked ~ .checkmark:after {
-      display: block;
+        display: block;
     }
 
     /* Style the checkmark/indicator */
     .checkmark:after {
-      left: 4px;
-      top: 1px;
-      width: 4px;
-      height: 8px;
-      color: #7B2240;
-      border: solid #7B2240;;
-      border-width: 0 3px 3px 0;
-      -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-      transform: rotate(45deg);
+        left: 1.5vw;
+        width: 2vw;
+        height: 4vw;
+        color: #7B2240;
+        border: solid #7B2240;
+        border-width: 0 0.8vw 0.8vw 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
     }
 
     .changeEmailInnerDiV, .changePasswordInnerDiv{
@@ -955,24 +955,28 @@ Version 1.0
 
     .emailsDiv, .passwordsDiv{
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
+        margin: auto;
+        margin-top: 2.5vw;
+        margin-bottom: 2.5vw;
+        width: 96%;
+        text-align: center;
     }
-
+    
     .buttonDiv{
         order: 2;
-        margin-left: auto;
-        margin-right: 0;
+        margin: auto;
+        margin-top: 3vw;
     }
 
     .emailSetting, .passwordSetting, .currentPassword{
-        width: 180px;
-        padding: 12px 11px 11px 11px;
-        margin-top: 7.5px;
-        margin-bottom: 12px;
-        margin-right: 10px;
+        width: 95%;
+        padding: 3vw;
+        margin-right: 2vw;
         border: 0.5px solid #8c918d;
-        border-radius: 3px;
-        font-size: 11px;
+        border-radius: 1vw;
+        font-size: 3.5vw;
     }
 
     ::placeholder{
@@ -981,7 +985,7 @@ Version 1.0
 
     .red{
         color: red;
-        font-size: 9px;
+        font-size: 2.5vw;
         font-weight: bold;
     }
 
