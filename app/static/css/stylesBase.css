@@ -620,7 +620,6 @@ Version 1.0
    .button1, .button2{
        text-align: center;
        display: block;
-       /*position: absolute;*/
        border-radius: 1vw;
        border: 0;
        background-color: #757575;
@@ -670,7 +669,7 @@ Version 1.0
        text-decoration: none;
        color: white;
        position: relative;
-       top: calc(-1vh - 1vw);
+       top: -2.5vw;
     }
 
     .profile, .dash, .settings{
@@ -699,7 +698,7 @@ Version 1.0
        color: #ECECEC;
        margin: auto;
        position: relative;
-       top: calc(0.5vh + 0.5vw);
+       top: 1vw;
        text-decoration: none;
     }
    
@@ -781,12 +780,12 @@ Version 1.0
     }
 
     .errLogIn{
-        font-size: calc(0.75vh + 0.75vw);
-        position: absolute;
-        top: calc(5.8vh + 5.8vw);
+        font-size: 3vw;
+        position: relative;
+        text-align: center;
         color: red;
         margin: auto;
-        width: calc(13vh + 13vw);
+        width: 95%;
     }
    
     /* Attributes for Middle Container: */
@@ -872,7 +871,7 @@ Version 1.0
         border: 0;
         border-bottom: solid 0.5vw;
         border-bottom-color: #7B2240; /* maroon */
-        border-bottom-width: calc(0.08vh + 0.08vw);
+        border-bottom-width: 0.5vw;
         display: flex;
         justify-content: center;
         word-spacing: 1vw;
@@ -893,7 +892,7 @@ Version 1.0
         width: 65%;
         background-color: rgb(222, 211, 215);
         border: 0;
-        border-radius: calc(0.2vh + 0.2vw);
+        border-radius: 1vw;
         box-shadow: 0.5vw 0.5vw 1vw lightgray;
         margin-top: 2.5%;
         overflow-x: hidden;
@@ -964,7 +963,6 @@ Version 1.0
         background-color: white;
         margin: auto;
         width: 80%;
-        font-size: 12px;
         border: 0;
         box-shadow: 0.25vw 0px 1vw lightgray, -0.25vw 0px 1vw lightgray, 0px 4vw 4vw 0px rgb(175, 175, 175);
         margin-top: 3vh;
@@ -990,7 +988,7 @@ Version 1.0
     .theAdYouCantRemoveThis p
     {
         color:  black; 
-        font-size: 2vw;
+        font-size: 3vw;
         letter-spacing: 0.2vw;
         margin-left: 3%;
         margin-top: 2%;
