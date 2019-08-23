@@ -194,7 +194,7 @@
                             {% endif -%}
                         </div>
                         <div class = "commentUserImage">
-                             {%- if (comment1['authorImg']) and (comment1['authorImg']|length > 1) %}
+                             {%- if (comment1['authorImg']) and (comment1['authorImg']|length > 5) %}
                                   <a href = "" title = "{{ comment1['author'] }}'s profile"><img src = "{{ comment1['authorImg'] | e }}" class = "roundImage commentsImage" alt = "the user {{ comment1['author'] }}"></a>
                              {%- else %}
                                   <a href = "" title = "{{ comment1['author'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage commentsImage" alt = "the user {{ comment1['author'] }}"></a>
@@ -275,7 +275,7 @@
                                    {% endif -%}
                                </div>
                                <div class = "commentUserImage">
-                                    {%- if (comment2['authorImg']) and (comment2['authorImg']|length > 1) %}
+                                    {%- if (comment2['authorImg']) and (comment2['authorImg']|length > 5) %}
                                          <a href = "" title = "{{ comment2['author'] }}'s profile"><img src = "{{ comment2['authorImg'] | e }}" class = "roundImage commentsImage" alt = "the user {{ comment2['author'] }}"></a>
                                     {%- else %}
                                          <a href = "" title = "{{ comment2['author'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage commentsImage" alt = "the user {{ comment2['author'] }}"></a>
