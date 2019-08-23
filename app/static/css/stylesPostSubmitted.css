@@ -53,7 +53,7 @@ Version 1.0
 } /* Close Media Query */
 
 /* Portrait Media Query */
-@media screen and (min-aspect-ratio: 13/9) {
+@media screen and (max-aspect-ratio: 13/9) {
 
     .page
     {
