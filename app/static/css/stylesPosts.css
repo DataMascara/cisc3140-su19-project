@@ -267,16 +267,16 @@
     .pageTitle{
          margin: 0;
          font-size: 3vw;
-         letter-spacing: 1px;
+         letter-spacing: 0.25vw;
     }
 
     .searchResultsMessage{
         margin: 0;
-        margin-bottom: 10px;
+        margin-bottom: 2.5vw;
         padding: 0;
         text-align: center;
         color: black;
-        font-size: 15px;
+        font-size: 3vw;
     }
 
     .createPostBtn{
@@ -294,7 +294,7 @@
         cursor: pointer;
         overflow: hidden;
         width: 30%;
-        box-shadow: 1px 1px 1px grey;
+        box-shadow: 0.3vw 0.3vw 0.3vw grey;
     }
 
     .sortByForm{
@@ -309,7 +309,7 @@
         padding: 2vw;
         border: 0;
         border-radius: 1vw;
-        box-shadow: 1px 1px 1px gray;
+        box-shadow: 0.3vw 0.3vw 0.3vw gray;
         width: 40%;
         font-size: 4vw;
         text-align-last: center;
@@ -322,7 +322,7 @@
         background-color: #ded3d7;
         border-radius: 1vw;
         position: relative;
-        box-shadow: 1px 1px 1px gray;
+        box-shadow: 0.3vw 0.3vw 0.3vw gray;
         display: flex;
         padding-left: 5%;
         padding-right: 5%;
