@@ -27,8 +27,8 @@
 
 
 {%- block leftContainer %}
-    <div class = "leftContainer"> <!-- Beginning of the Left (Logo and Menu) Container -->
-
+    <div style="outline:none;" id = "pagetop" class = "leftContainer"> <!-- Beginning of the Left (Logo and Menu) Container -->
+        <a class = "skip" href="#content" >Skip to the main content.</a>
         <div class = "siteLogo" ><a href = "/" title = "Go to Homepage" class="a" >UnderDogs</a></div>
 
         <!-- Sidebar Holder -->
@@ -114,12 +114,12 @@
             </nav>
 
     </div> <!-- End of the Left (Logo and Menu) Container -->
-
+    <a class = "skip-to-content" href="#searchAndTrending" >Skip to Search Bar and Trending Ports.</a>
  {% endblock leftContainer -%}
 
  {#- All the content from the templates that will inherit this 'base.html' will go into the 'content' block: #}
  {%- block midContainer %}
-     <div class = "midContainer"> <!-- Beginning of the Middle Container -->
+     <div id="content" style="outline: none;" class = "midContainer"> <!-- Beginning of the Middle Container -->
          {%- block content %}
               {#- All the content will come here! #}
 
@@ -140,8 +140,8 @@
  {% endblock midContainer -%}
 
  {%- block rightContainer %}
-
-    <div class = "rightContainer"> <!-- Beginning of the Right Container -->
+    <a class = "skip-to-content" href="#content" >Return to the Top of the Content</a>
+    <div id="searchAndTrending" style="outline: none;" class = "rightContainer"> <!-- Beginning of the Right Container -->
 
         <form class = "searchform"
                    name = "searchform"
@@ -233,7 +233,7 @@
         </div>
 
     </div> <!-- End of the Right Container -->
-
+    <a class = "skip" href="#pagetop" >Go to the top of the page.</a>
  {% endblock rightContainer -%}
 
 </body>
