@@ -59,6 +59,16 @@ Version 1.0
         border: 0;
         display: flex;
     }
+   
+    a.skip, a.skip-to-content{
+       left:-999px;
+       position:absolute;
+       top:auto;
+       width:1px;
+       height:1px;
+       overflow:hidden;
+       z-index:-999;
+   }
 
     html{
         padding: 0;
@@ -564,6 +574,23 @@ Version 1.0
        display: flex;
        flex-direction: column;
     }
+   
+    a.skip{
+       left:-999px;
+       position:absolute;
+       top:auto;
+       width:1px;
+       height:1px;
+       overflow:hidden;
+       z-index:-999;
+   }
+   
+   a.skip-to-content{
+      position: relative;
+      text-align: center;
+      font-size: 4vw;
+      color: blue;
+   }
    
     html{
        padding: 0;
