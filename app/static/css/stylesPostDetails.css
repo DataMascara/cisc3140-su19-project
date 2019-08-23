@@ -431,6 +431,7 @@
         order: 2;
         flex-shrink: 0;
         width: 95%;
+        margin-top: 3vw;
     }
 
     .portOfPostName{
@@ -457,12 +458,11 @@
     }
 
     .dateOfWriting{
-        font-size: 9px;
+        font-size: 3vw;
         color: black;
         margin: 0;
         padding: 0;
         margin-left: auto;
-        width: 86px;
     }
 
     .postedBy{
@@ -513,8 +513,8 @@
     .postImageDiv{
         width: 96%;
         background-color: #e3e3e3;
-        border-radius: 3px;
-        box-shadow: 1px 1px 1px gray;
+        border-radius: 1vw;
+        box-shadow: 0.3vw 0.3vw 0.3vw gray;
         margin: auto;
         margin-bottom: 2vw;
     }
@@ -536,19 +536,18 @@
     }
 
     .commentToPostText{
-       margin: auto;
-       margin-top: 10px;
-       margin-bottom: 10px;
-       border: 0.5px solid LightGray;
-       padding-left: 10px;
-       padding-top: 5px;
-       padding-right: 10px;
-       padding-bottom: 5px;
-       width: 100%;
-       border-radius: 3px;
-       font-family: 'Roboto', Sans-Serif;
-       font-size: 12px;
-       /*height: 30vw;*/
+        margin: auto;
+        margin-bottom: 2vw;
+        border: 0.2vw solid LightGray;
+        padding-left: 3vw;
+        padding-top: 2vw;
+        padding-right: 3vw;
+        padding-bottom: 2vw;
+        width: 100%;
+        border-radius: 1vw;
+        font-family: 'Roboto', Sans-Serif;
+        font-size: 3vw;
+        height: 30vw;
     }
 
     .commentToPostText::placeholder{
@@ -559,20 +558,20 @@
         display: flex;
         justify-content: flex-end;
         margin: 0;
-        margin-bottom: 10px;
+        margin-bottom: 2vw;
     }
 
     .CommentToPostBtn, .commentToCommentBtn{
         text-align: center;
         background-color: #757575;
-        border-radius: 3px;
+        border-radius: 0.5vw;
         border: 0;
         color: white;
-        font-size: 8.5px;
+        font-size: 2.5vw;
         width: auto;
         height: auto;
-        padding: 6px;
-        letter-spacing: 0.5px;
+        padding: 2vw;
+        letter-spacing: 0.2vw;
         cursor: pointer;
     }
 
@@ -580,29 +579,30 @@
         display: flex;
         flex-direction: column;
         text-align: left;
-        margin-left: 2vw;
+        width: 96%;
+        margin: auto;
     }
 
     .numberOfComments{
         padding: 0;
         margin: 0;
-        margin-bottom: 15px;
+        margin-bottom: 3vw;
         color: black;
-        font-size: 14px;
+        font-size: 3.5vw;
     }
 
     .commentTree{
         width: auto;
         background-color: #e3e3e3;
-        border-radius: 3px;
-        box-shadow: 1px 1px 1px gray;
-        padding: 10px;
+        border-radius: 1vw;
+        box-shadow: 0.3vw 0.3vw 0.3vw gray;
+        padding: 2vw;
     }
 
     .firstLevelComment, .secondLevelComment{
         display: flex;
         margin: 0;
-        margin-bottom: 10px;
+        margin-bottom: 2vw;
     }
 
     .votesComments{
@@ -610,44 +610,43 @@
     }
 
     .commentsImage{
-        margin-left: 10px;
+        margin-left: 2vw;
     }
 
     .commentUsernameOfAuthor{
         margin: 0;
-        margin-top: 5px;
     }
 
-    .upvoteBtnComments, .upvoteBtnComments{
+  /*  .upvoteBtnComments, .upvoteBtnComments{
         font-size: 10px;
     }
 
     .numOfVotesComments{
         font-size: 12px;
-    }
+    }*/
 
     .commentUserNameTextAndReply{
-        margin-left: 10px;
+        margin-left: 2vw;
     }
 
     .commentText{
         margin: 0;
-        font-size: 11px;
+        font-size: 2.5vw;
         color: black;
-        margin-top: 5px;
-        margin-right: 10px;
+        margin-top: 1vw;
+        margin-right: 2vw;
     }
 
     .commentReply{
-        letter-spacing: 1px;
+        letter-spacing: 0.2vw;
         margin: 0;
         padding: 0;
-        font-size: 9px;
+        font-size: 2.5vw;
         border: 0;
         background-color: transparent;
         color: #7b2240;
         cursor: pointer;
-        margin-top: 5px;
+        margin-top: 1vw;
     }
 
     .commentDate{
@@ -655,13 +654,12 @@
         order: 2;
         margin-left: auto;
         margin-right: 0;
-        width: 83px;
     }
 
     .commentDateOfWriting{
         margin: 0;
-        font-size:9px;
-        width: 83px;
+        font-size: 2.5vw;
+        width: max-content;
     }
 
     .blackline{
