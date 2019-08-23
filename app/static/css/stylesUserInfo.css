@@ -650,7 +650,6 @@ Version 1.0
     }
 
     .divText1{
-        height: 400px;
         overflow-y: auto;
     }
 
@@ -699,6 +698,10 @@ Version 1.0
         line-height: normal;
         letter-spacing: 0.25vw;
     }
+    
+    .subscriptionsText, .commentsText, .savedText, .postsText{
+        font-size: 2.5vw;
+    }
 
     .emailAndPasswordText, .notificationsText, .subscriptionsText, .commentsText, .savedText, .postsText{
          cursor: pointer;
@@ -706,8 +709,8 @@ Version 1.0
 
     .subscriptionsDiv, .commentsDiv, .savedDiv, .postsDiv{
         width: auto;
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 2.5vw;
+        padding-right: 2.5vw;
     }
 
     .editProfile{
@@ -1016,16 +1019,16 @@ Version 1.0
 
     .port-section, .comment-section, .post-section{
         margin: 0;
-        padding: 10px;
-        padding-left: 25px;
-        padding-right: 25px;
-        border-radius: 3px;
-        box-shadow: 1px 1px 1px gray;
-        margin-bottom: 10px;
+        padding: 2vw;
+        padding-left: 5vw;
+        padding-right: 5vw;
+        border-radius: 1vw;
+        box-shadow: 0.3vw 0.3vw 0.3vw grey;
+        margin-bottom: 3vw;
         overflow-y: auto;
         display: flex;
         justify-content: flex-start;
-        min-height: 30px;
+        min-height: 5vw;
     }
 
     .comment-section, .post-section{
@@ -1037,9 +1040,7 @@ Version 1.0
     .portName{
         margin: 0;
         padding: 0;
-        margin-top: 2px;
-        padding-bottom: 10px;
-        font-size: 16px;
+        font-size: 3.5vw;
         color: rgb(80, 80, 80);
         overflow-y: auto;
     }
@@ -1047,8 +1048,8 @@ Version 1.0
     .portMembersNumber{
         margin: 0;
         padding: 0;
-        margin-top: 7px;
-        font-size: 8.5px;
+        margin-top: 1.2vw;
+        font-size: 2.5vw;
         color: rgb(80, 80, 80);
         overflow-y: auto;
     }
@@ -1061,19 +1062,20 @@ Version 1.0
 
     .subscribeIndex{
         text-align: center;
-        border-radius: 3px;
+        border-radius: 1vw;
         border: 0;
         color: white;
-        font-size: 8.5px;
-        width: 70px;
+        font-size: 2vw;
         height: auto;
-        padding: 6px;
-        letter-spacing: 0.5px;
+        padding: 4vw;
+        padding-top: 1.5vw;
+        padding-bottom: 1.5vw;
+        letter-spacing: 0.3vw;
         cursor: pointer;
     }
 
     .portFirstPart{
-        width: 150px;
+        width: 40%;
     }
 
     .portThirdPart{
