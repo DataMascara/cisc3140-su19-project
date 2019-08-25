@@ -31,13 +31,3 @@ function URLLength ()
           document.getElementsByClassName("addimage")[0].required = false;
 }
 
-// Write the data that the user submitted into the text file 'appOfTheMonthRequests.txt' in the static folder:
-function submitIt ()
-{
-     var myFile, fso;
-     var ForReading = 1, ForWriting = 2;
-     fso = new ActiveXObject("Scripting.FileSystemObject");
-     myFile = fso.OpenTextFile("..\static\appOfTheMonthRequests.txt", ForWriting, true);
-     myFile.WriteLine("Hello world!");
-     myFile.Close();
-}
