@@ -1029,10 +1029,10 @@ def appOfTheMonthFormSubmitted ():
         theForm = request.form
         my_path = os.path.abspath(os.path.dirname(__file__))
         path = os.path.join(my_path, "../static/appOfTheMonthRequests.txt")
-        #myFile = open(path, "a")
+        myFile = open(path, "a")
         #myFile.write ("\n" + theForm['first'] + "\t" + theForm['last'] + "\t" + theForm['email'] + "\t\t" + theForm['appname'] + "\t\t\t" + theForm['addimage'] + "\n")
         #myFile.write ("----------------------------------------------------------------------------------------------------------------------------------------------------------")
-        #myFile.close ()
+        myFile.close ()
         return render_template('appSubmitted.html', name = "App Submitted!", trendPorts = trending, user = user)
     else:
         return redirect('/home/')
