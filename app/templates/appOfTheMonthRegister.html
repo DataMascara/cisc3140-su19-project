@@ -33,7 +33,8 @@ base template, all we modify here is the 'content' block: #} {%- block content
       <span></span>
       <form
         class="appRegisterForm"
-        onsubmit = "submitIt();alert('submitted');"
+        action = "/"
+        method = "post"
       >
         <div class="row1">
           <input
