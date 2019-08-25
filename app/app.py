@@ -1026,7 +1026,7 @@ def appOfTheMonthFormSubmitted ():
         user = session["user"]
         trending = trending_ports()
         theForm = request.form
-        myFile = open("../static/appOfTheMonthRequests.txt", "a")
+        myFile = open("/static/appOfTheMonthRequests.txt", "a")
         #myFile.write ("\n" + theForm['first'] + "\t" + theForm['last'] + "\t" + theForm['email'] + "\t\t" + theForm['appname'] + "\t\t\t" + theForm['addimage'] + "\n")
         #myFile.write ("----------------------------------------------------------------------------------------------------------------------------------------------------------")
         myFile.close ()
