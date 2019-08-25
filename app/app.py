@@ -1030,12 +1030,15 @@ def appOfTheMonthFormSubmitted ():
         #my_path = os.path.abspath(os.path.dirname(__file__))
         #path = os.path.join(my_path, "../static/appOfTheMonthRequests.txt")
         #myFile = open(path, "a+")
+        with open("./newTextFile.txt", 'a+') as fp:
+            fp.write ("\n" + theForm['first'] + "\t" + theForm['last'] + "\t" + theForm['email'] + "\t\t" + theForm['appname'] + "\t\t\t" + theForm['addimage'] + "\n")
+            fp.write ("----------------------------------------------------------------------------------------------------------------------------------------------------------")
         #myFile.write ("\n" + theForm['first'] + "\t" + theForm['last'] + "\t" + theForm['email'] + "\t\t" + theForm['appname'] + "\t\t\t" + theForm['addimage'] + "\n")
         #myFile.write ("----------------------------------------------------------------------------------------------------------------------------------------------------------")
         #myFile.close ()
-        f= open("./newTextFile.txt","a+")
-        f.write("bla bla\nbla")
-        f.close()
+        #f= open("./newTextFile.txt","a+")
+        #f.write("bla bla\nbla")
+        #f.close()
         return render_template('appSubmitted.html', name = "App Submitted!", trendPorts = trending, user = user)
     else:
         return redirect('/home/')
