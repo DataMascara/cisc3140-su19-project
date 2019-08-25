@@ -1013,9 +1013,12 @@ def search():
 
 @app.route('/app-of-the-month-register/')
 def appOfTheMonth():
-    user = session["user"]
-    trending = trending_ports()
-    return render_template('appOfTheMonthRegister.html', name = "App Registration", trendPorts = trending, user = user)
+    if 'loggedin' in session:
+        user = session["user"]
+        trending = trending_ports()
+        return render_template('appOfTheMonthRegister.html', name = "App Registration", trendPorts = trending, user = user)
+    else:
+        return redirect('/home/')
 
 
 '''
