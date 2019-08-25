@@ -227,7 +227,7 @@
                   <a href = "{{ ad['adurl']|e }}" title = "{{ ad['adtext'] }}">
                   <div class = "ad" style = "content: url({{ad['imageurl']|e}})"></div></a>
             {%- else %}{# If argument ad was not passed, a demo ad of Brooklyn College is shown: #}
-                  <a href = "" title = "Learn more about the App of the Month">
+                  <a href = "/app-of-the-month-register" title = "Learn more about the App of the Month">
                   <div class = "ad" style = "content: url('../static/img/App-on-UnderDogs-Ad.gif');"></div></a>
             {% endif -%}
         </div>
