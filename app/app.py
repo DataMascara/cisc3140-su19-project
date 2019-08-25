@@ -3,6 +3,7 @@ import requests
 import json
 import urllib.request
 import webbrowser
+import os.path
 
 # Relative path to reach the templates folder
 app = Flask(__name__, template_folder="templates")
@@ -1026,10 +1027,12 @@ def appOfTheMonthFormSubmitted ():
         user = session["user"]
         trending = trending_ports()
         theForm = request.form
-        myFile = open("/static/appOfTheMonthRequests.txt", "a")
+        my_path = os.path.abspath(os.path.dirname(__file__))
+        path = os.path.join(my_path, "../static/appOfTheMonthRequests.txt")
+        #myFile = open(path, "a")
         #myFile.write ("\n" + theForm['first'] + "\t" + theForm['last'] + "\t" + theForm['email'] + "\t\t" + theForm['appname'] + "\t\t\t" + theForm['addimage'] + "\n")
         #myFile.write ("----------------------------------------------------------------------------------------------------------------------------------------------------------")
-        myFile.close ()
+        #myFile.close ()
         return render_template('appSubmitted.html', name = "App Submitted!", trendPorts = trending, user = user)
     else:
         return redirect('/home/')
