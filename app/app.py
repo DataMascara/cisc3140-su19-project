@@ -1007,6 +1007,13 @@ def search():
     return render_template('_404Error.html', name = "404", trendPorts = trending, user = user)
 
 
+"""
+**** App of the Month Registration Form: ****
+"""
+
+@app.route('/app-of-the-month-register')
+def appOfTheMonth():
+    return render_template('appOfTheMonthRegister.html', name = "App Registration", trendPorts = trending, user = user)
 
 
 '''
