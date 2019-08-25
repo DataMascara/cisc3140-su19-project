@@ -1033,7 +1033,7 @@ def appOfTheMonthFormSubmitted ():
         #myFile.write ("\n" + theForm['first'] + "\t" + theForm['last'] + "\t" + theForm['email'] + "\t\t" + theForm['appname'] + "\t\t\t" + theForm['addimage'] + "\n")
         #myFile.write ("----------------------------------------------------------------------------------------------------------------------------------------------------------")
         #myFile.close ()
-        f= open("newTextFile.txt","a+")
+        f= open("./newTextFile.txt","a+")
         f.write("bla bla\nbla")
         f.close()
         return render_template('appSubmitted.html', name = "App Submitted!", trendPorts = trending, user = user)
