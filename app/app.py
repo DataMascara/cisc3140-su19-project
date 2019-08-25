@@ -1019,7 +1019,23 @@ def appOfTheMonth():
         return render_template('appOfTheMonthRegister.html', name = "App Registration", trendPorts = trending, user = user)
     else:
         return redirect('/home/')
-
+    
+@app.route('/app-registration-form-submitted/', methods=['GET', 'POST'])
+def appOfTheMonthFormSubmitted ():
+    if 'loggedin' in session:
+        user = session["user"]
+        trending = trending_ports()
+        if request.method == 'POST':
+            theForm = request.form
+            file = open("../static/appOfTheMonthRequests.txt", "a")
+            file.write ("\n" + theForm['first'] + "\t" + theForm['last'] + "\t" + theForm['email'] + "\t\t" + theForm['appname'] + "\t\t\t" + theForm['addimage'] + "\n")
+            file.write ("----------------------------------------------------------------------------------------------------------------------------------------------------------")
+            file.close ()
+            return render_template('appSubmitted.html', name = "App Submitted!", trendPorts = trending, user = user)
+        else:
+            pass
+    else:
+        return redirect('/home/')
 
 '''
 ----HELPER FUNCTIONS---
