@@ -1026,19 +1026,8 @@ def appOfTheMonthFormSubmitted ():
     if 'loggedin' in session and request.method == 'POST':
         user = session["user"]
         trending = trending_ports()
-        theForm = request.form
-        #my_path = os.path.abspath(os.path.dirname(__file__))
-        #path = os.path.join(my_path, "../static/appOfTheMonthRequests.txt")
-        #myFile = open(path, "a+")
-        with open("./newTextFile.txt", 'a+') as fp:
-            fp.write ("\n" + theForm['first'] + "\t" + theForm['last'] + "\t" + theForm['email'] + "\t\t" + theForm['appname'] + "\t\t\t" + theForm['addimage'] + "\n")
-            fp.write ("----------------------------------------------------------------------------------------------------------------------------------------------------------")
-        #myFile.write ("\n" + theForm['first'] + "\t" + theForm['last'] + "\t" + theForm['email'] + "\t\t" + theForm['appname'] + "\t\t\t" + theForm['addimage'] + "\n")
-        #myFile.write ("----------------------------------------------------------------------------------------------------------------------------------------------------------")
-        #myFile.close ()
-        #f= open("./newTextFile.txt","a+")
-        #f.write("bla bla\nbla")
-        #f.close()
+        theForm = request.form # Holds the dictionary of the form. Has 5 keys: 'first', 'last', 'email', 'appname' and 'addimage'.
+        # ---> Back End code to retrieve info from form and process it.
         return render_template('appSubmitted.html', name = "App Submitted!", trendPorts = trending, user = user)
     else:
         return redirect('/home/')
