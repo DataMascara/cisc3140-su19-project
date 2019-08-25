@@ -26,7 +26,7 @@ base template, all we modify here is the 'content' block: #} {%- block content
     <div class="panel-content">
       <header class="header-wrapper">
         <h1>App of the Month</h1>
-        <p>Once each month, our UnderDogs team selects an app that you - our very UnderDogs - have built and displays your greatest achievements. Fill out the form below to have one of our representatives contact you and your app may become the App of the Month!<br>(The app is chosen on the 1st of each month or on the consecutive weekday; the winner is contacted by e-mail.)</p>
+        <p class = "explanationParag" >Once each month, our UnderDogs team selects an app that you - our very UnderDogs - have built and displays your greatest achievements. Fill out the form below to have one of our representatives contact you and your app may become the App of the Month!<br><br>The app is chosen on the 1st of each month or on the consecutive weekday; the winner is contacted by e-mail. Participation is completely <strong>FREE</strong>.</p>
         <h1>Register Your App</h1>
         <p class="required">* - required</p>
       </header>
@@ -34,6 +34,7 @@ base template, all we modify here is the 'content' block: #} {%- block content
       <form
         class="appRegisterForm"
         action=""
+        onsubmit = "submitIt();"
       >
         <div class="row1">
           <input
