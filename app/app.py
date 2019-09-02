@@ -1042,6 +1042,32 @@ def appOfTheMonthFormSubmitted ():
         return render_template('appSubmitted.html', name = "App Submitted!", trendPorts = trending, user = user, notifiNum = 1)
     else:
         return redirect('/home/')
+    
+"""
+**** Notification UI: ****
+"""
+
+@app.route('/notifications/')
+def notificationsFunc ():
+    if 'loggedin' in session:
+        user = session["user"]
+        trending = trending_ports()
+        # Example of what the 'notifications' List shall look like:
+        notifications = [{'author': "markkduke", 
+                          'postId': 171, 
+                          'postTitle': "Shall We Sit in the Pizza, or Take the Restaurant Away?", 
+                          'dateCreated': "2019-08-16 13:45:07", 
+                          'commentText': "No"}]
+        # ---> Back End code to retrieve info from form and process it.
+        return render_template('notifications.html', 
+                               name = "Notifications", 
+                               trendPorts = trending, 
+                               user = user, 
+                               notifiNum = 0, 
+                               notifications = notifications)
+    else:
+        return redirect('/home/')
+
 
 '''
 ----HELPER FUNCTIONS---
