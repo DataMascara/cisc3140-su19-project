@@ -58,7 +58,7 @@
                                         {%- endif -%}
                                         name = "loggedIn" 
                                         class="notifications" 
-                                        value = "Notifications: {%- if (notifiNum) and (notifiNum >= 0) and (notifiNum <= 100) %}{{ notifiNum }}{%- elif (notifiNum) and (notifiNum > 100) %}100+{%- else %}0{%- endif -%}" 
+                                        value = "Notifications:&nbsp;{%- if (notifiNum) and (notifiNum >= 0) and (notifiNum <= 100) %}{{ notifiNum }}{%- elif (notifiNum) and (notifiNum > 100) %}100+{%- else %}0{%- endif -%}" 
                                         title = "Go to your Notifications">
                         </form>
                         <form method = "GET" action = "/profile/">
