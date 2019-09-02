@@ -24,6 +24,12 @@
              <p class = "pageTitle" >NOTIFICATIONS</p>
         </div>
      </div>
+     
+     <div class = "welcomeDiv">
+         <p class = "welcomeToNotifications">{{ user['username'] }}, welcome to your new notifications panel!</p>
+         <p class = "welcomeToNotifications">Here you can see who has commented to your posts and comments on UnderDogs, and visit these posts and comments by clicking on the corresponding links. You can always click on the "Notification" button on the menu to access this page. When you enter this page, all the new notifications will be marked as "read", and the button will display zero new notifications.<p>
+         <p class = "welcomeToNotifications">Currently, the panel displays example notifications, but once this feature is completely integrated, you would see your personal, up-to-date notifications.</p>
+     </div>
 
      {%- for notific in notifications %}
          {#- Display alternating colors for odd and even-numbered items: #}
