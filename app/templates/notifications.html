@@ -14,18 +14,18 @@
      <! -- Website's Icon -->
      <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
 </head>
-{%- extends "base.html" %}
 <body {%- block onload %} onload = "cutIt (); displayYear();" {%- endblock %}>
+{%- extends "base.html" %}
 
 {%- block content %}
 
      <div class = "flexTitle">
         <div class = "page">
-                  <p class = "pageTitle" >NOTIFICATIONS</p>
+             <p class = "pageTitle" >NOTIFICATIONS</p>
         </div>
      </div>
 
-     {%- for notific in notifications %}
+  <!--   {%- for notific in notifications %}
          {#- Display alternating colors for odd and even-numbered items: #}
          {%- if loop.index % 2 != 0 %}
             <div class="notifications-section" style = "background-color: #ded3d7;">
@@ -34,28 +34,28 @@
          {% endif -%}
                 <div class = "noteFirstPart">
                     <p class = "whoCommented" ><a href = "" 
-                                                                          class = "usernameOfAuthor" 
-                                                                          title = "{{ notific['author'] }}'s profile">{{ notific['author'] }}</a>
-                                                                          commented on your&nbsp;{%- if notific['postTitle'] %}post{%- else %}comment{%- endif %}</p>
+                                                  class = "usernameOfAuthor" 
+                                                  title = "{{ notific['author'] }}'s profile">{{ notific['author'] }}</a>
+                                                commented on your&nbsp;{%- if notific['postTitle'] %}post{%- else %}comment{%- endif %}</p>
                  </div>
                  <div class = "noteSecondPart">
                    {%- if message-type == "post" %} {#- Either the title of the post or the text of the comment to which the comment was received: #}
                         <a href = "/post/{{notific['postId']}}" 
                              class = "nameOfPostOrComment"
-                             title = "{{ notific['postTitle'] | e }}">{{ notific['postTitle']  | e }}</a>
+                             title = "{{ notific['postTitle'] | e }}">{{ notific['postTitle'] | e }}</a>
                    {%- else %}
                         <a href = "/post/{{notific['postId']}}" 
                              class = "nameOfPostOrComment" 
-                             title = "{{ notific['yourCommentsText'] | e }}">{{ notific['yourCommentsText']  | e }}</a>
+                             title = "{{ notific['yourCommentsText'] | e }}">{{ notific['yourCommentsText'] | e }}</a>
                    {%- endif %}
                  </div>
                  <div class = "noteThirdPart">
                     <p class = "theNoteDate" >from {{ notific['dateCreated'] }}:</p>
                  </div>
                  <div class = "noteFourthPart">
-                    <a href = "/post/{{notific['postId']}}" class = "theNoteContent" >"{{ notific['commentText']  | e }}"</a>
+                    <a href = "/post/{{notific['postId']}}" class = "theNoteContent" >"{{ notific['commentText'] | e }}"</a>
                  </div>
          </div>
-    {% endfor -%}
+    {% endfor -%} -->
 {%- endblock content %}
 </body>
