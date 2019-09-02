@@ -58,6 +58,7 @@
     .welcomeToNotifications{
         font-weight: bold;
         text-align: center;
+        font-size: 20px !important;
     }
 
     .notifications-section{
@@ -161,6 +162,8 @@
         padding: 3vw;
         border: dashed 0.3vw green;
         width: 87%;
+        margin: auto;
+        margin-bottom: 3vw;
     }
     
     .welcomeDiv p{
@@ -171,6 +174,7 @@
     .welcomeToNotifications{
         font-weight: bold;
         text-align: center;
+        font-size: 4vw !important;
     }
 
     .notifications-section{
