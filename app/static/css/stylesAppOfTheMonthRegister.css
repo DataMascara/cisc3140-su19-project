@@ -1,0 +1,162 @@
+/* CSS Styles for the template: 'appOfTheMonthRegister.html'
+Version 1.0
+    08.25.2019
+    Description: Creation of file
+- Front End Team
+*/
+
+/* Landscape Media Query */
+@media screen and (min-aspect-ratio: 13/9)
+{
+
+    .signup-wrap{
+      margin: 2em auto 2em;
+      width: 70%;
+    }
+
+    .panel-frame{
+      width: auto;
+      height: auto;
+      margin-top: 100px;
+      padding: 0;
+      border: 0;
+      text-align: center;
+    }
+
+    .header-wrapper{
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+
+    .panel-content{
+      text-align: left;
+    }
+
+    h1{
+      margin-bottom: -10px;
+      font-size: 25px;
+    }
+
+    .explanationParag{
+      font-size: 12px;
+    }
+
+    .required{
+      color: red;
+      font-size: 9px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-top: 15px;
+    }
+
+    input[type="text"], input[type="email"]{
+      width: 90%;
+      padding: 12px 11px 11px 11px;
+      margin-top: 7.5px;
+      margin-bottom: 12px;
+      margin-right: 10px;
+      border: 0.5px solid #8c918d;
+      border-radius: 3px;
+      font-size: 11px;
+    }
+
+    .registFormButton{
+      margin-left: 0.5em;
+      margin-top: 20px;
+      padding: 7px;
+      border: 1px solid #8c918d;
+      border-radius: 3px;
+      text-align: center;
+      display: block;
+      border: 0;
+      background-color: #757575;
+      color: white;
+      font-size: 8px;
+      width: 80px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+    }
+
+    ::placeholder{
+      color: black;
+    }
+
+} /* Close Media Query */
+
+/* Portrait Media Query */
+@media screen and (max-aspect-ratio: 13/9)
+{
+
+    .signup-wrap{
+      margin: auto;
+    }
+
+    .panel-frame{
+      width: auto;
+      height: auto;
+      margin-top: 5vw;
+      padding: 0;
+      border: 0;
+      text-align: center;
+    }
+
+    .header-wrapper{
+      margin-bottom: 3vw;
+    }
+
+    .panel-content{
+      text-align: center;
+      margin: auto;
+    }
+
+    h1{
+      margin-bottom: -2vw;
+      font-size: 8vw;
+    }
+
+    .explanationParag{
+      text-align: left;
+      font-size: 3vw;
+      padding-left: 2vw;
+      padding-right: 2vw;
+    }
+
+    .required{
+      color: red;
+      font-size: 3vw;
+      font-weight: bold;
+      letter-spacing: 0.2vw;
+    }
+
+    input[type="text"], input[type="email"]{
+      width: 90%;
+      padding: 3vw;
+      margin-top: 2.5vw;
+      margin-bottom: 2.5vw;
+      border: 0.5px solid #8c918d;
+      border-radius: 1vw;
+      font-size: 4vw;
+    }
+
+    .registFormButton{
+      margin-top: 4vw;
+      margin-bottom: 4vw;
+      padding: 3vw;
+      border: 1px solid #8c918d;
+      border-radius: 1vw;
+      text-align: center;
+      border: 0;
+      background-color: #757575;
+      color: white;
+      font-size: 4vw;
+      width: 30%;
+      letter-spacing: 0.2vw;
+      cursor: pointer;
+      box-shadow: 1px 1px 1px lightgrey;
+    }
+
+    ::placeholder{
+      color: black;
+    }
+
+} /* Close Media Query */

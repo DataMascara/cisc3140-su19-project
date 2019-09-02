@@ -1,115 +1,185 @@
 /* CSS Styles for the template: 'writePost.html'
 Version 1.0
-
     08.08.2019
-
     Description: Creation of file
 
 - Front End Team
 */
 
-.container
-{
-                 margin-top: 25vmin;
-                 margin-bottom: calc(1vh + 1vw);
-                 margin-left: 11vmin;
-                 padding: 40px;
-                 padding-top: 25px;
-                 padding-bottom: 10px;
-                 width: 55%;
-                 height: auto;
-                 background-color: #E3E3E3;
-                 border-radius: calc(0.2vh + 0.2vw);
-                 box-shadow: 1px 1px 1px lightgray, -1px -1px 1px lightgray;
-}
+/* Landscape Media Query */
+@media screen and (min-aspect-ratio: 13/9) {
 
-input, textarea{
-                 font-size: 8px;
-                 font-weight: normal;
-                 border-width: 0.5px;
-                 border-radius: 3px;
-                 border-style: solid;
-                 border-color: rgb(192,192,192);
-                 font-family: 'Roboto';
-                 position: relative;
-                 margin: 0;
-                 padding: 10px 10px;
-                 margin-bottom: 10px;
-                 width: 98%;
-}
+	.container
+	{
+		margin-top: 25vmin;
+		margin-bottom: calc(1vh + 1vw);
+		margin-left: 11vmin;
+		padding: 40px;
+		padding-top: 25px;
+		padding-bottom: 10px;
+		width: 55%;
+		height: auto;
+		background-color: #E3E3E3;
+		border-radius: calc(0.2vh + 0.2vw);
+		box-shadow: 1px 1px 1px lightgray, -1px -1px 1px lightgray;
+	}
 
-.header {
-	display: flex;
-	flex-direction: row;
-                 justify-content: space-around;
-}
+	input, textarea{
+		font-size: 8px;
+		font-weight: normal;
+		border-width: 0.5px;
+		border-radius: 3px;
+		border-style: solid;
+		border-color: rgb(192,192,192);
+		font-family: 'Roboto';
+		position: relative;
+		margin: 0;
+		padding: 10px 10px;
+		margin-bottom: 10px;
+		width: 98%;
+	}
 
-.header h1 {
-	font-weight: normal;
-                 font-size: 20px;
-                 text-align: center;
-                 margin: 0;
-}
+	.header {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+	}
 
-.header input {
-	width: 200px;
-                 height: 30px;
-                 margin-left: 10px;
-                 padding-left: 10px;
-}
+	.header h1 {
+		font-weight: normal;
+		font-size: 20px;
+		text-align: center;
+		margin: 0;
+	}
+	
+	.communities {
+		font-family: 'Roboto', sans-serif;
+	}
 
-.btn {
-	margin-bottom: 5px;
-	background-color: grey;
-	color: white;
-                 width: 74.45px;
-                 padding: 10px;
-                 padding-top: 7px;
-                 padding-bottom: 7px;
-                 letter-spacing: 0.55px;
-                 margin-left:auto; 
-                 margin-right:0;
-                 text-align: center;
-}
+	.btn {
+		margin-bottom: 5px;
+		background-color: grey;
+		color: white;
+		width: 74.45px;
+		padding: 10px;
+		padding-top: 7px;
+		padding-bottom: 7px;
+		letter-spacing: 0.55px;
+		margin-left:auto; 
+		margin-right:0;
+		text-align: center;
+	}
 
-.btncontainer{
-	display: flex;
-                 flex-direction: column;
-	justify-content: flex end;
-}
+	.btncontainer{
+		display: flex;
+		flex-direction: column;
+		justify-content: flex end;
+	}
 
-label{
-                 	background-color: grey;
-	color: white;
-                 cursor: pointer;
-                 font-size: 8px;
-                 font-weight: normal;
-                 border-width: 0.5px;
-                 border-radius: 3px;
-                 border-style: solid;
-                 border-color: rgb(192,192,192);
-                 letter-spacing: 0.55px;
-                 padding-top: 7px;
-                 padding-bottom: 7px;
-                 padding-left: 15px;
-                 padding-right: 15px;
-                 width: auto;
-                 margin-left:auto; 
-                 margin-right:0;
-                 text-align: center;
-}
+	.red{
+		color: red;
+		font-size: 8px;
+		font-weight: bold;
+		letter-spacing: 0.5px;
+		display: inline;
+		padding: 0;
+		margin: 0;
+		margin-top: 10px;
+	}
 
-.red{
-                 color: red;
-                 font-size: 8px;
-                 font-weight: bold;
-                 letter-spacing: 0.5px;
-                 display: inline;
-                 padding: 0;
-                 margin: 0;
-                 margin-top: 10px;
-}
+	input::placeholder, textarea::placeholder{
+		color: black; important!
+	}
+	
+} /* Close Media Query */
 
-input::placeholder, textarea::placeholder{
-                 color: black; important!
-}
+/* Portrait Media Query */
+@media screen and (max-aspect-ratio: 13/9) {
+
+	.container
+	{
+		margin: auto;
+		margin-top: 3vw;
+		margin-bottom: 3vw;
+		padding: 3vw;
+		width: 90%;
+		height: auto;
+		background-color: #E3E3E3;
+		border-radius: 1vw;
+		box-shadow: 0.3vw 0.3vw 0.3vw lightgrey, -0.3vw -0.3vw 0.3vw lightgrey;
+	}
+
+	input, textarea{
+		font-size: 3vw;
+		font-weight: normal;
+		border-width: 0.1vw;
+		border-radius: 1vw;
+		border-style: solid;
+		border-color: rgb(192,192,192);
+		font-family: 'Roboto';
+		position: relative;
+		margin: 0;
+		padding: 2vw;
+		margin-bottom: 3vw;
+		width: 97.5%;
+	}
+
+	.header {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.header h1 {
+		font-weight: normal;
+		font-size: 6vw;
+		text-align: center;
+		margin: 0;
+	}
+	
+	.communities {
+		width: 30vw;
+		font-size: 2.5vw;
+		font-family: 'Roboto', sans-serif;
+	}
+	
+	.posttitle {
+		margin-top: 3vw;
+	}
+
+	.btn {
+		margin-bottom: 1vw;
+		background-color: grey;
+		color: white;
+		width: auto;
+		padding: 2vw;
+		padding-top: 2vw;
+		padding-bottom: 2vw;
+		letter-spacing: 0.24vw;
+		margin-left: auto;
+		margin-right: 0;
+		text-align: center;
+	}
+
+	.btncontainer{
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+
+	.red{
+		color: red;
+		font-size: 2vw;
+		font-weight: bold;
+		letter-spacing: 0.3vw;
+		display: inline;
+		padding: 0;
+		margin: 0;
+		margin-top: 2.3vw;
+	}
+
+	input::placeholder, textarea::placeholder{
+		color: black; important!
+	}
+	
+} /* Close Media Query */

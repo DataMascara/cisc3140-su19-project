@@ -1,388 +1,1209 @@
 /* CSS Styles for the template: 'userInfo.html'
 Version 1.0
-
     08.12.2019
-
     Description: Creation of file
 
 - Front End Team
 */
 
-.middleScreen{
-    display: flex;
-    width: 63%;
-    flex-direction: column;
-    margin-top: calc(6vh + 6vw);
-    margin-left: 14vmin;
-}
+/* Landscape Media Query */
+@media screen and (min-aspect-ratio: 13/9) {
 
-.page
-{
-    background-color: #d2bdc5; /* Slightly Dark Pink */
-    border-bottom: solid #7B2240;
-    border-bottom-width: 1px;
-    text-align: center;
-    padding: 10px;
-    padding-left: 25px;
-    padding-right: 25px;
-    max-width: 110px;
-    width: auto;
-    font-family: inherit;
-    font-size: 9px;
-    font-weight: bold;
-    color: #7B2240;
-    letter-spacing: 1px;
-}
+    .middleScreen{
+        display: flex;
+        width: 63%;
+        flex-direction: column;
+        margin-top: calc(6vh + 6vw);
+        margin-left: 14vmin;
+    }
 
-.pageTitle{
-    padding: 0;
-    margin: 0;
-}
+    .page
+    {
+        background-color: #d2bdc5; /* Slightly Dark Pink */
+        border-bottom: solid #7B2240;
+        border-bottom-width: 1px;
+        text-align: center;
+        padding: 10px;
+        padding-left: 25px;
+        padding-right: 25px;
+        max-width: 110px;
+        width: auto;
+        font-family: inherit;
+        font-size: 9px;
+        font-weight: bold;
+        color: #7B2240;
+        letter-spacing: 1px;
+    }
 
-.divText
-{
-     margin: 0;
-     margin-top: 10px;
-     margin-bottom: 15px;
-     padding: 25px;
-     padding-bottom: 0;
-     width: auto;
-     height: auto;
-     background-color: #E3E3E3;
-     border-radius: 5px;
-     box-shadow: 1px 1px 1px lightgray, -1px -1px 1px lightgray;
-     display: flex;
-     flex-direction: column;
-}
+    .pageTitle{
+        padding: 0;
+        margin: 0;
+    }
 
-.maroonButtons{
-     margin: 0;
-     margin-top: -25px;
-     margin-left: -25px;
-     margin-right: -25px;
-     padding: 3px;
-     padding-left: 15px;
-     padding-right: 15px;
-     display: flex;
-     justify-content: space-between;
-     background-color: #7B2240;
-     border-top-left-radius: 5px;
-     border-top-right-radius: 5px;
-     width: auto;
-     margin-bottom: 25px;
-}
+    .divText, .divText1
+    {
+         margin: 0;
+         margin-top: 10px;
+         margin-bottom: 15px;
+         padding: 25px;
+         padding-bottom: 0;
+         width: auto;
+         height: auto;
+         background-color: #E3E3E3;
+         border-radius: 5px;
+         box-shadow: 1px 1px 1px lightgray, -1px -1px 1px lightgray;
+         display: flex;
+         flex-direction: column;
+    }
 
-.userProfileTitle, .emailAndPasswordDiv, .notificationsDiv{
-     margin: 0;
-     padding: 0;
-     background-color: #863550;
-     width: 210px;
-     height: 25px;
-     border-bottom: 1px solid #d2c4c9;
-     text-align: center;
-     border-top-left-radius: 3px;
-     border-top-right-radius: 3px;
-     margin-bottom: -3px;
-}
+    .divText1{
+        height: 400px;
+        overflow-y: auto;
+    }
 
-.userProfileTitleText, .emailAndPasswordText, .notificationsText{
-     border: 0;
-     background-color: #863550;
-     margin: 0;
-     padding: 0;
-     font-size: 11px;
-     padding-top: 4px;
-     color:  #d2c4c9;
-     display: inline-block;
-     vertical-align: middle;
-     line-height: normal;
-     letter-spacing: 0.5px;
-}
+    .maroonButtons{
+         margin: 0;
+         margin-top: -25px;
+         margin-left: -25px;
+         margin-right: -25px;
+         padding: 3px;
+         padding-left: 15px;
+         padding-right: 15px;
+         display: flex;
+         justify-content: space-between;
+         background-color: #7B2240;
+         border-top-left-radius: 5px;
+         border-top-right-radius: 5px;
+         width: auto;
+         margin-bottom: 25px;
+         overflow-y: auto;
+    }
 
-.emailAndPasswordText, .notificationsText{
-     cursor: pointer;
-}
+    .userProfileTitle, .emailAndPasswordDiv, .notificationsDiv, .subscriptionsDiv, .commentsDiv, .savedDiv, .postsDiv{
+         margin: 0;
+         padding: 0;
+         background-color: #863550;
+         width: 210px;
+         height: 25px;
+         border-bottom: 1px solid #d2c4c9;
+         text-align: center;
+         border-top-left-radius: 3px;
+         border-top-right-radius: 3px;
+         margin-bottom: -3px;
+    }
 
-.editProfile{
-     margin: 0;
-     padding: 0;
-     order: 2;
-     margin-left: auto;
-     margin-right: 0;
-}
+    .userProfileTitleText, .emailAndPasswordText, .notificationsText, .subscriptionsText, .commentsText, .savedText, .postsText{
+         border: 0;
+         background-color: #863550;
+         margin: 0;
+         padding: 0;
+         font-size: 11px;
+         padding-top: 4px;
+         color:  #d2c4c9;
+         display: inline-block;
+         vertical-align: middle;
+         line-height: normal;
+         letter-spacing: 0.5px;
+    }
 
-.editProfileBtn, .descriptionFormSubmitBtn, .changeEmailBtn, .changePasswordBtn{
-    text-align: center;
-    background-color: #757575;
-    border-radius: 3px;
-    border: 0;
-    color: white;
-    font-size: 8.5px;
-    width: auto;
-    height: auto;
-    padding: 6px;
-    padding-left: 10px;
-    padding-right: 10px;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    margin-left: auto;
-    margin-right: 0;
-}
+    .emailAndPasswordText, .notificationsText, .subscriptionsText, .commentsText, .savedText, .postsText{
+         cursor: pointer;
+    }
 
-.descriptionFormSubmitBtn{
-    margin-top: 15px;
-}
+    .subscriptionsDiv, .commentsDiv, .savedDiv, .postsDiv{
+        width: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 
-.changeEmailBtn, .changePasswordBtn{
-    margin-bottom: 30px;
-}
+    .editProfile{
+         margin: 0;
+         padding: 0;
+         order: 2;
+         margin-left: auto;
+         margin-right: 0;
+    }
 
-.profileContent{
-    margin: 0;
-    display: flex;
-}
+    .editProfileBtn, .descriptionFormSubmitBtn, .changeEmailBtn, .changePasswordBtn{
+        text-align: center;
+        background-color: #757575;
+        border-radius: 3px;
+        border: 0;
+        color: white;
+        font-size: 8.5px;
+        width: auto;
+        height: auto;
+        padding: 6px;
+        padding-left: 10px;
+        padding-right: 10px;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: 0;
+    }
 
-.roundImage{
-    margin: 0;
-    padding: 0;
-    font-size: 0;
-    border: 0;
-    border-radius: 100%;
-    width: 35px;
-    height: 35px;
-}
+    .descriptionFormSubmitBtn{
+        margin-top: 15px;
+    }
 
-.usernameAndEmailFlex{
-    display: flex;
-    flex-direction: column;
-    margin-left: 7px;
-}
+    .changeEmailBtn, .changePasswordBtn{
+        margin-bottom: 30px;
+    }
 
-.viewedUserUsername{
-    color: #b78296;
-    font-size: 14px;
-    margin: 0;
-    padding: 0;
-    margin-left: 5px;
-    margin-bottom: 7px;
-    overflow-y: auto;
-}
+    .profileContent{
+        margin: 0;
+        display: flex;
+    }
 
-.viewedUserEmail{
-    margin: 0;
-    color: black;
-    font-size: 9px;
-    margin-left: 5px;
-    overflow-y: auto;
-}
+    .roundImage{
+        margin: 0;
+        padding: 0;
+        font-size: 0;
+        border: 0;
+        border-radius: 100%;
+        width: 35px;
+        height: 35px;
+    }
 
-.viewedUserDescription{
-    margin: 0;
-    width: auto;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 55px;
-    padding-right: 55px;
-}
+    .usernameAndEmailFlex{
+        display: flex;
+        flex-direction: column;
+        margin-left: 7px;
+    }
 
-.descriptionText{
-    letter-spacing: 0.5px;
-    color: black;
-    font-size: 13px;
-}
+    .viewedUserUsername{
+        color: #b78296;
+        font-size: 14px;
+        margin: 0;
+        padding: 0;
+        margin-left: 5px;
+        margin-bottom: 7px;
+        overflow-y: auto;
+    }
 
-.descriptionForm{
-     display: none;
-}
+    .viewedUserEmail{
+        margin: 0;
+        color: black;
+        font-size: 9px;
+        margin-left: 5px;
+        overflow-y: auto;
+    }
 
-.descriptionTextArea, .avatarURL{
-   margin: 0;
-   margin-top: 10px;
-   margin-bottom: 10px;
-   border: 0.5px solid LightGray;
-   padding-left: 10px;
-   padding-top: 5px;
-   padding-right: 10px;
-   padding-bottom: 5px;
-   width: 100%;
-   border-radius: 3px;
-   font-family: 'Roboto', Sans-Serif;
-   font-size: 13px;
-}
+    .viewedUserDescription{
+        margin: 0;
+        width: auto;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 55px;
+        padding-right: 55px;
+    }
 
-.descriptionTextArea::placeholder{
-    color: black; important!
-}
+    .descriptionText{
+        letter-spacing: 0.5px;
+        color: black;
+        font-size: 13px;
+        overflow-x: auto;
+    }
 
-.descriptionFormSubmitDiv{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
+    .descriptionForm{
+         display: none;
+    }
 
-.settingsContent{
-    display: flex;
-    flex-direction: column;
-}
+    .descriptionTextArea, .avatarURL{
+       margin: 0;
+       margin-top: 10px;
+       margin-bottom: 10px;
+       border: 0.5px solid LightGray;
+       padding-left: 10px;
+       padding-top: 5px;
+       padding-right: 10px;
+       padding-bottom: 5px;
+       width: 100%;
+       border-radius: 3px;
+       font-family: 'Roboto', Sans-Serif;
+       font-size: 13px;
+    }
 
-.privateEmail, .privateEmailFlex{
-    display: flex;
-    flex-direction: row;
-}
+    .descriptionTextArea::placeholder{
+        color: black; important!
+    }
 
-.privateEmailLabel{
-    display: flex;
-    flex-direction: column;
-}
+    .descriptionFormSubmitDiv{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
 
-.requiredFieldsMessage{
-    /*order: 2;*/
-    margin-left: auto;
-    margin-right: 0;
-}
+    .settingsContent{
+        display: flex;
+        flex-direction: column;
+    }
 
-.requiredFieldsMessageText{
-    margin: 0;
-    margin-top: 10px;
-    font-size: 9px;
-    letter-spacing: 0.5px;
-    font-weight: bold;
-    color: red;
-}
+    .privateEmail, .privateEmailFlex{
+        display: flex;
+        flex-direction: row;
+    }
 
-.emailChangeTitle, .passwordChangeTitle{
-    margin: 0;
-    border: 0;
-    border-bottom: 0.5px solid black;
-    font-size: 9px;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-}
+    .privateEmailLabel{
+        display: flex;
+        flex-direction: column;
+    }
 
-.privateEmailLabelTextUpperLabel, .privateEmailLabelTextLowerLabel{
-    margin: 0;
-    padding: 0;
-    margin-left: 10px;
-}
+    .requiredFieldsMessage{
+        /*order: 2;*/
+        margin-left: auto;
+        margin-right: 0;
+    }
 
-.privateEmailLabelTextUpperLabel{
-    font-size: 13px;
-    margin-bottom: 3px;
-    margin-top: -3px;
-    letter-spacing: 0.5px;
-}
+    .requiredFieldsMessageText{
+        margin: 0;
+        margin-top: 10px;
+        font-size: 9px;
+        letter-spacing: 0.5px;
+        font-weight: bold;
+        color: red;
+    }
 
-.privateEmailLabelTextLowerLabel{
-    font-size: 9px;
-    letter-spacing: 0.5px;
-}
+    .emailChangeTitle, .passwordChangeTitle{
+        margin: 0;
+        border: 0;
+        border-bottom: 0.5px solid black;
+        font-size: 9px;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+    }
 
-.privateEmailCheckbox{
-    position: relative;
-}
+    .privateEmailLabelTextUpperLabel, .privateEmailLabelTextLowerLabel{
+        margin: 0;
+        padding: 0;
+        margin-left: 10px;
+    }
 
-/* The container */
-.container {
-  display: block;
-  position: relative;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+    .privateEmailLabelTextUpperLabel{
+        font-size: 13px;
+        margin-bottom: 3px;
+        margin-top: -3px;
+        letter-spacing: 0.5px;
+    }
 
-.container input[type="checkbox"]{
-     opacity: 0;
-     cursor: pointer;
-}
+    .privateEmailLabelTextLowerLabel{
+        font-size: 9px;
+        letter-spacing: 0.5px;
+    }
 
-/* Create a custom checkbox */
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 15px;
-    width: 15px;
-    border: 2px solid #7B2240;
-}
+    .privateEmailCheckbox{
+        position: relative;
+    }
 
-/* When the checkbox is checked, add a blue background */
-.container input[type="checkbox"]:checked ~ .checkmark {
-  background-color: transparent;
-}
+    /* The container */
+    .container {
+      display: block;
+      position: relative;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
 
-/* Create the checkmark/indicator (hidden when not checked) */
-.container .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
+    .container input[type="checkbox"]{
+         opacity: 0;
+         cursor: pointer;
+    }
 
-/* Show the checkmark when checked */
-.container input[type="checkbox"]:checked ~ .checkmark:after {
-  display: block;
-}
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 15px;
+        width: 15px;
+        border: 2px solid #7B2240;
+    }
 
-/* Style the checkmark/indicator */
-.checkmark:after {
-  left: 4px;
-  top: 1px;
-  width: 4px;
-  height: 8px;
-  color: #7B2240;
-  border: solid #7B2240;;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
+    /* When the checkbox is checked, add a blue background */
+    .container input[type="checkbox"]:checked ~ .checkmark {
+      background-color: transparent;
+    }
 
-.changeEmailInnerDiV, .changePasswordInnerDiv{
-    display: flex;
-    flex-direction: column;
-}
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .container .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
 
-.emailsDiv, .passwordsDiv{
-    display: flex;
-    justify-content: space-between;
-}
+    /* Show the checkmark when checked */
+    .container input[type="checkbox"]:checked ~ .checkmark:after {
+      display: block;
+    }
 
-.buttonDiv{
-    order: 2;
-    margin-left: auto;
-    margin-right: 0;
-}
+    /* Style the checkmark/indicator */
+    .checkmark:after {
+      left: 4px;
+      top: 1px;
+      width: 4px;
+      height: 8px;
+      color: #7B2240;
+      border: solid #7B2240;;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
 
-.emailSetting, .passwordSetting, .currentPassword{
-    width: calc(15.5vmax - 4vmin);
-    padding: 12px 11px 11px 11px;
-    margin-top: 7.5px;
-    margin-bottom: 12px;
-    margin-right: 10px;
-    border: 0.5px solid #8c918d;
-    border-radius: 3px;
-    font-size: 11px;
-}
+    .changeEmailInnerDiV, .changePasswordInnerDiv{
+        display: flex;
+        flex-direction: column;
+        overflow-x: auto;
+    }
 
-::placeholder{
-  color: black; important!
-}
+    .emailsDiv, .passwordsDiv{
+        display: flex;
+        justify-content: space-between;
+    }
 
-.red{
-    color: red;
-    font-size: 9px;
-    font-weight: bold;
-}
+    .buttonDiv{
+        order: 2;
+        margin-left: auto;
+        margin-right: 0;
+    }
 
-.notify{
-    margin-bottom: 20px;
-}
+    .emailSetting, .passwordSetting, .currentPassword{
+        width: 180px;
+        padding: 12px 11px 11px 11px;
+        margin-top: 7.5px;
+        margin-bottom: 12px;
+        margin-right: 10px;
+        border: 0.5px solid #8c918d;
+        border-radius: 3px;
+        font-size: 11px;
+    }
 
-.errIncorrectPassword{
-    color: red;
-    font-size: 12px;
-    margin: 0;
-    padding: 0;
-    margin-left: 15px;
-}
+    ::placeholder{
+      color: black; important!
+    }
+
+    .red{
+        color: red;
+        font-size: 9px;
+        font-weight: bold;
+    }
+
+    .notify{
+        margin-bottom: 20px;
+    }
+
+    .errIncorrectPassword{
+        color: red;
+        font-size: 12px;
+        margin: 0;
+        padding: 0;
+        margin-left: 15px;
+    }
+
+    .portMembersNumber{
+        margin: 0;
+    }
+
+    .port-section, .comment-section, .post-section{
+        margin: 0;
+        padding: 10px;
+        padding-left: 25px;
+        padding-right: 25px;
+        border-radius: 3px;
+        box-shadow: 1px 1px 1px gray;
+        margin-bottom: 10px;
+        overflow-y: auto;
+        display: flex;
+        justify-content: flex-start;
+        min-height: 30px;
+    }
+
+    .comment-section, .post-section{
+        padding: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .portName{
+        margin: 0;
+        padding: 0;
+        margin-top: 2px;
+        padding-bottom: 10px;
+        font-size: 16px;
+        color: rgb(80, 80, 80);
+        overflow-y: auto;
+    }
+
+    .portMembersNumber{
+        margin: 0;
+        padding: 0;
+        margin-top: 7px;
+        font-size: 8.5px;
+        color: rgb(80, 80, 80);
+        overflow-y: auto;
+    }
+
+    .indexForm{
+        margin: 0;
+        padding: 0;
+        font-size: 0;
+    }
+
+    .subscribeIndex{
+        text-align: center;
+        border-radius: 3px;
+        border: 0;
+        color: white;
+        font-size: 8.5px;
+        width: 70px;
+        height: auto;
+        padding: 6px;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+    }
+
+    .portFirstPart{
+        width: 150px;
+    }
+
+    .portThirdPart{
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .commentSecondPart, .postSecondPart{
+        display:flex; 
+        flex-direction:column;
+        width: 80%;
+    }
+
+    .votes{
+       margin: 0;
+       font-size: 12px;
+       color: rgb(77, 208, 191);
+       margin-top: 5px;
+    }
+
+    .thePortName{
+       color: rgb(80, 80, 80);
+       font-size: 7px;
+       margin-right: 10px;
+       margin-top: 8px;
+    }
+
+    .thePostName{
+        margin: 0;
+        color: black;
+        font-size: 11px;
+    }
+
+    .commentText, .postText{
+        margin: 0;
+        color: black;
+        font-size: 8px;
+        overflow-y: auto;
+        padding-top: 5px;
+    }
+
+
+    .dateAndTime{
+        margin: 0;
+        color: rgb(80, 80, 80);
+        font-size: 8px;
+        min-width: max-content;
+    }
+
+    .commentFirstPart, .postFirstPart{
+        text-align: center;
+        width: 30px;
+        margin-left: -8px;
+    }
+
+    .commentThirdPart, .postThirdPart{
+        margin-left: auto;
+        margin-right: 0;
+        order: 2;
+    }
+
+    .postThirdPart{
+        display:flex; 
+        flex-direction:column;
+    }
+
+    .authorDetails{
+        display: flex;
+    }
+
+    .roundImage{
+        margin: 0;
+        padding: 0;
+        margin-top: 3px;
+        font-size: 0;
+        border: 0;
+        border-radius: 100%;
+        width: 25px;
+        height: 25px;
+    }
+
+    .usernameOfAuthor{
+        color: #7b2240;
+        font-size: 9px;
+        margin: 0;
+        padding: 0;
+        margin-left: 5px;
+        margin-top: 9px;
+    }
+
+    .numOfComments{
+        margin: 0;
+        color: rgb(80, 80, 80);
+        font-size: 7px;
+        margin-right: 10px;
+        margin-top: 8px;
+    }
+
+    .squareImage{
+        width: 30px;
+        height: 30px;
+        border: 0;
+        border-radius: 3px;
+        margin-right: 10px;
+        margin-left: 0;
+        padding: 0;
+    }
+
+    .postFourthPart{
+        display:flex; 
+        flex-direction:column;
+    }
+
+    .postFifthPart{
+        margin-left: auto;
+        margin-right: 0;
+        order: 2;
+    }
+
+    .thePortNameDiv{
+        margin-top: 3px;
+    }
+
+    .postDescription{
+        margin: 0;
+        font-size: 8px;
+        color: black;
+        margin-left: 5px;
+        margin-top: 6px;
+    }
+    
+} /* Close Media Query */
+
+/* Portrait Media Query */
+@media screen and (max-aspect-ratio: 13/9) {
+
+    .middleScreen{
+        display: flex;
+        width: 96%;
+        margin: auto;
+        flex-direction: column;
+        margin-top: 3vw;
+    }
+
+    .page
+    {
+        margin: auto;
+        background-color: #d2bdc5;
+        border-bottom: solid #7B2240;
+        border-bottom-width: 0.5vw;
+        text-align: center;
+        padding: 2.5vw;
+        padding-left: 3vw;
+        padding-right: 3vw;
+        width: 50%;
+        font-family: inherit;
+        font-size: 3vw;
+        font-weight: bold;
+        color: #7B2240;
+        letter-spacing: 0.3vw;
+    }
+
+    .pageTitle{
+        padding: 0;
+        margin: 0;
+    }
+
+    .divText, .divText1
+    {
+        margin: 0;
+        margin-top: 3vw;
+        margin-bottom: 3vw;
+        padding: 3vw;
+        padding-bottom: 0;
+        width: auto;
+        height: auto;
+        background-color: #E3E3E3;
+        border-radius: 1vw;
+        box-shadow: 0.3vw 0.3vw 0.3vw lightgrey, -0.3vw -0.3vw 0.3vw lightgrey;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .divText1{
+        overflow-y: auto;
+    }
+
+    .maroonButtons{
+        margin: 0;
+        margin-top: -3vw;
+        margin-left: -3vw;
+        margin-right: -3vw;
+        padding: 1vw;
+        padding-left: 3vw;
+        padding-right: 3vw;
+        display: flex;
+        justify-content: space-between;
+        background-color: #7B2240;
+        border-top-left-radius: 1vw;
+        border-top-right-radius: 1vw;
+        width: auto;
+        margin-bottom: 3vw;
+        overflow-y: auto;
+        height: 7.5vw;
+    }
+
+    .userProfileTitle, .emailAndPasswordDiv, .notificationsDiv, .subscriptionsDiv, .commentsDiv, .savedDiv, .postsDiv{
+        margin: 0;
+        padding: 0;
+        background-color: #863550;
+        width: 42vw;
+        border-bottom: 0.5vw solid #d2c4c9;
+        text-align: center;
+        border-top-left-radius: 0.5vw;
+        border-top-right-radius: 0.5vw;
+        margin-bottom: -1vw;
+    }
+
+    .userProfileTitleText, .emailAndPasswordText, .notificationsText, .subscriptionsText, .commentsText, .savedText, .postsText{
+        border: 0;
+        background-color: #863550;
+        margin: 0;
+        padding: 0;
+        font-size: 3.5vw;
+        height: 6vw;
+        padding-top: 2vw;
+        color: #d2c4c9;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: normal;
+        letter-spacing: 0.25vw;
+    }
+    
+    .subscriptionsText, .commentsText, .savedText, .postsText{
+        font-size: 2.5vw;
+    }
+
+    .emailAndPasswordText, .notificationsText, .subscriptionsText, .commentsText, .savedText, .postsText{
+         cursor: pointer;
+    }
+
+    .subscriptionsDiv, .commentsDiv, .savedDiv, .postsDiv{
+        width: auto;
+        padding-left: 2.5vw;
+        padding-right: 2.5vw;
+    }
+
+    .editProfile{
+         margin: 0;
+         padding: 0;
+         order: 2;
+         margin-left: auto;
+         margin-right: 0;
+    }
+
+    .editProfileBtn, .descriptionFormSubmitBtn, .changeEmailBtn, .changePasswordBtn{
+        text-align: center;
+        background-color: #757575;
+        border-radius: 1vw;
+        border: 0;
+        color: white;
+        font-size: 3vw;
+        width: auto;
+        height: auto;
+        padding: 2vw;
+        padding-left: 3vw;
+        padding-right: 3vw;
+        letter-spacing: 0.1vw;
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .descriptionFormSubmitBtn{
+        margin-top: 3vw;
+    }
+
+    .changeEmailBtn, .changePasswordBtn{
+        margin-bottom: 4vw;
+    }
+
+    .profileContent{
+        margin: 0;
+        display: flex;
+    }
+
+    .roundImage{
+        margin: 0;
+        padding: 0;
+        margin-top: 1vw;
+        font-size: 0;
+        border: 0;
+        border-radius: 100%;
+        width: 6vw;
+        height: 6vw;
+    }
+
+    .usernameAndEmailFlex{
+        display: flex;
+        flex-direction: column;
+        margin-left: 1vw;
+    }
+
+    .viewedUserUsername{
+        color: #b78296;
+        font-size: 4vw;
+        margin: 0;
+        padding: 0;
+        margin-left: 1vw;
+        margin-bottom: 1.5vw;
+        overflow-y: auto;
+    }
+
+    .viewedUserEmail{
+        margin: 0;
+        color: black;
+        font-size: 2.5vw;
+        margin-left: 1vw;
+        overflow-y: auto;
+    }
+
+    .viewedUserDescription{
+        margin: 0;
+        width: auto;
+        padding-top: 5vw;
+        padding-bottom: 5vw;
+        padding-left: 12.5vw;
+        padding-right: 12.5vw;
+    }
+
+    .descriptionText{
+        letter-spacing: 0.2vw;
+        color: black;
+        font-size: 3.5vw;
+        overflow-x: auto;
+    }
+
+    .descriptionForm{
+         display: none;
+    }
+
+    .descriptionTextArea, .avatarURL{
+        margin: 0;
+        margin-top: 2.5vw;
+        margin-bottom: 2.5vw;
+        border: 0.15vw solid LightGray;
+        padding-left: 2.5vw;
+        padding-top: 1.75vw;
+        padding-right: 2.5vw;
+        padding-bottom: 1.75vw;
+        width: 100%;
+        border-radius: 1vw;
+        font-family: 'Roboto', Sans-Serif;
+        font-size: 3.5vw;
+        letter-spacing: 0.2vw;
+    }
+
+    .descriptionTextArea::placeholder{
+        color: black; important!
+    }
+
+    .descriptionFormSubmitDiv{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .settingsContent{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .privateEmail, .privateEmailFlex{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .privateEmailLabel{
+        display: flex;
+        flex-direction: column;
+        margin-left: 3vw;
+    }
+
+    .requiredFieldsMessage{
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .requiredFieldsMessageText{
+        margin: 0;
+        margin-top: 3vw;
+        font-size: 2.5vw;
+        letter-spacing: 0.2vw;
+        font-weight: bold;
+        color: red;
+    }
+
+    .emailChangeTitle, .passwordChangeTitle{
+        margin: 0;
+        margin-top: 2vw;
+        border: 0;
+        border-bottom: 0.3vw solid black;
+        font-size: 3vw;
+        font-weight: bold;
+        letter-spacing: 0.1vw;
+    }
+
+    .privateEmailLabelTextUpperLabel, .privateEmailLabelTextLowerLabel{
+        margin: 0;
+        padding: 0;
+        margin-left: 2.5vw;
+    }
+
+    .privateEmailLabelTextUpperLabel{
+        font-size: 4vw;
+        margin-bottom: 0.8vw;
+        margin-top: -0.9vw;
+        letter-spacing: 0.2vw;
+    }
+
+    .privateEmailLabelTextLowerLabel{
+        font-size: 3vw;
+        letter-spacing: 0.2vw;
+    }
+
+    .privateEmailCheckbox{
+        position: relative;
+    }
+
+    /* The container */
+    .container {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .container input[type="checkbox"]{
+         opacity: 0;
+         cursor: pointer;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 6vw;
+        width: 6vw;
+        border: 0.8vw solid #7B2240;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container input[type="checkbox"]:checked ~ .checkmark {
+        background-color: transparent;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .container .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container input[type="checkbox"]:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .checkmark:after {
+        left: 1.5vw;
+        width: 2vw;
+        height: 4vw;
+        color: #7B2240;
+        border: solid #7B2240;
+        border-width: 0 0.8vw 0.8vw 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    .changeEmailInnerDiV, .changePasswordInnerDiv{
+        display: flex;
+        flex-direction: column;
+        overflow-x: auto;
+    }
+
+    .emailsDiv, .passwordsDiv{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: auto;
+        margin-top: 2.5vw;
+        margin-bottom: 2.5vw;
+        width: 96%;
+        text-align: center;
+    }
+    
+    .currentPasswordDiv {
+        margin: auto;
+        margin-top: 3vw;
+        margin-bottom: -1.5vw;
+        width: 96%;
+        text-align: center;
+    }
+    
+    .buttonDiv{
+        order: 2;
+        margin: auto;
+    }
+
+    .emailSetting, .passwordSetting, .currentPassword{
+        width: 95%;
+        padding: 3vw;
+        margin-right: 2vw;
+        margin-bottom: 3vw;
+        border: 0.5px solid #8c918d;
+        border-radius: 1vw;
+        font-size: 3.5vw;
+    }
+
+    ::placeholder{
+      color: black; important!
+    }
+
+    .red{
+        color: red;
+        font-size: 2.5vw;
+        font-weight: bold;
+    }
+
+    .notify{
+        margin-bottom: 5vw;
+    }
+
+    .errIncorrectPassword{
+        color: red;
+        font-size: 3vw;
+        margin: 0;
+        padding: 0;
+    }
+
+    .portMembersNumber{
+        margin: 0;
+    }
+
+    .port-section, .comment-section, .post-section{
+        margin: 0;
+        padding: 2vw;
+        padding-left: 5vw;
+        padding-right: 5vw;
+        border-radius: 1vw;
+        box-shadow: 0.3vw 0.3vw 0.3vw grey;
+        margin-bottom: 3vw;
+        overflow-y: auto;
+        display: flex;
+        justify-content: flex-start;
+        min-height: 5vw;
+        flex-wrap: wrap;
+    }
+
+    .comment-section, .post-section{
+        padding: 1vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
+    }
+
+    .portName{
+        margin: 0;
+        padding: 0;
+        font-size: 3.5vw;
+        color: rgb(80, 80, 80);
+        overflow-y: auto;
+    }
+
+    .portMembersNumber{
+        margin: 0;
+        padding: 0;
+        margin-top: 1.2vw;
+        font-size: 2.5vw;
+        color: rgb(80, 80, 80);
+        overflow-y: auto;
+    }
+
+    .indexForm{
+        margin: 0;
+        padding: 0;
+        font-size: 0;
+    }
+
+    .subscribeIndex{
+        text-align: center;
+        border-radius: 1vw;
+        border: 0;
+        color: white;
+        font-size: 2vw;
+        height: auto;
+        padding: 4vw;
+        padding-top: 1.5vw;
+        padding-bottom: 1.5vw;
+        letter-spacing: 0.3vw;
+        cursor: pointer;
+    }
+
+    .portFirstPart{
+        width: 40%;
+    }
+
+    .portThirdPart{
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .commentSecondPart, .postSecondPart{
+        display: flex; 
+        flex-direction: column;
+        width: 80%;
+    }
+    
+    .second{
+        width: auto;
+    }
+
+    .votes{
+        margin: 0;
+        font-size: 3vw;
+        color: rgb(77, 208, 191);
+        margin-top: 0.8vw;
+        margin-right: 2vw;
+    }
+
+    .thePortName{
+        color: rgb(80, 80, 80);
+        font-size: 2vw;
+        margin-right: 2vw;
+        min-width: max-content;
+    }
+
+    .thePostName{
+        margin: 0;
+        color: black;
+        font-size: 3vw;
+        min-width: max-content;
+    }
+
+    .commentText, .postText{
+        margin: 0;
+        color: black;
+        font-size: 2vw;
+        margin-left: 3vw;
+        overflow-y: auto;
+        padding-top: 1vw;
+        min-width: max-content;
+    }
+
+
+    .dateAndTime{
+        margin: 0;
+        color: rgb(80, 80, 80);
+        font-size: 2vw;
+        min-width: max-content;
+    }
+
+    .commentFirstPart, .postFirstPart{
+        text-align: center;
+    }
+
+    .commentThirdPart, .postThirdPart{
+        margin-left: auto;
+        margin-right: 0;
+        order: 2;
+    }
+
+    .postThirdPart{
+        display: flex; 
+        flex-direction: column;
+    }
+
+    .authorDetails{
+        display: flex;
+    }
+
+    .usernameOfAuthor{
+        color: #7b2240;
+        font-size: 2vw;
+        margin: 0;
+        padding: 0;
+        margin-left: 1vw;
+        margin-top: 2vw;
+    }
+
+    .numOfComments{
+        margin: 0;
+        color: rgb(80, 80, 80);
+        font-size: 2vw;
+        margin-right: 2vw;
+        margin-top: 2vw;
+        min-width: max-content;
+    }
+
+    .squareImage{
+        width: 8vw;
+        height: 8vw;
+        border: 0;
+        border-radius: 1vw;
+        margin-right: 2vw;
+        margin-left: 0;
+        padding: 0;
+    }
+
+    .postFourthPart{
+        display: flex;
+        flex-direction: column;
+        order: 2;
+        flex-shrink: 0;
+        width: 100%;
+        margin-top: 2vw;
+    }
+
+    .postFifthPart{
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .thePortNameDiv{
+        margin-top: 0.7vw;
+    }
+
+    .postDescription{
+        margin: 0;
+        font-size: 2.5vw;
+        letter-spacing: 0.1vw;
+        color: black;
+        margin-top: 1vw;
+    }
+    
+} /* Close Media Query */

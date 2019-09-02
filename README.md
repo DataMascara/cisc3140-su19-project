@@ -1,65 +1,57 @@
-# CISC 3140 - Summer 2019 Project
-This is the repository for the group project in CISC 3140 class at Brooklyn College.
+# CISC 3140 - Summer 2019 Project [![Build Status](https://travis-ci.org/DataMascara/cisc3140-su19-project.svg?branch=master)](https://travis-ci.org/DataMascara/cisc3140-su19-project)
+This is the repository for the group project in CISC 3140 Summer Session 2 2019 class at Brooklyn College.
 
 ## UnderDogs
-
 UnderDogs is an information hub for Brooklyn College Computer Science students and faculty. Users can share original content, ask for assistance from other students, find collaborators, and have discussions across an array of curated communities.
 
-## Team-Specific ReadMe
-- [Product Team README](https://github.com/DataMascara/cisc3140-su19-project/blob/master/product/README.md)
-- Backend
-- ect.
+## Alpha Site : [https://bc-app-class.herokuapp.com/](https://bc-app-class.herokuapp.com/)
+## Launch Form/Feedback : [https://forms.gle/DWKj28iPHTBTwDvK8](https://forms.gle/DWKj28iPHTBTwDvK8)
+## Setup
+### Installation
+- [Python3](https://www.python.org/downloads/) 
+- Flask Web Framework (`pip3 install flask`)
 
-# Setup
+### Requirements
+- To install dependencies from the `requirements.txt` file: 
+```pip3 install -r requirements.txt```
+- When new Python libraries are required, update the `requirements.txt` file using the command and push the file to Github.
+```pip3 freeze > requirements.txt```
 
-## Installation
+## Deployment
+### Running
+***NOTE:** API connectivity is implemented. Please be careful when editting files as some files are necessary in order to keep the connection running.*
 
-Base-requirements: Python3, Flask Web Framework
+- Alpha release will be served on a server soon so that features can be continuously implemented.
+- Navigate to the `/app` folder and execute `python3 app.py`
 
-## Installing dependencies from the `requirements.txt` file.
+## Usage
+### Notes 
+- Make sure that the dependencies are up to date.
+- Make sure that UnderDogs website is running in your web browser.
 
-- To install dependencies from the `requirements.txt` file. - `pip3 install -r requirements.txt`
-- When new Python libraries are required, update the `requirements.txt` file using the command. - `pip3 freeze > requirements.txt` and push the file to Github. (or `pip` instead of `pip3`
+### Registration
+*Alternatively, you can fast track to the [**Signing In**](#Login) section*
 
-## Running
+- Open the tab on the left side of the browser
+- Select the `Register` button
+- Enter your registration details into the fields.
 
-- **NOTE:** MinimalAPI functionality is currently implemented, with no VIEW/connecting link to the front end.
-- Alpha release will be served on a server soon so that features can be continuously implemented
-- Navigate to the `app/` folder and execute `python main.py` or `python3 main.py` (depending on your setup)
-- Use postman ([https://www.getpostman.com/](https://www.getpostman.com/)) to test the API.
-- Debug user that already exists is :chalshaff12 (it returns their full record) - Currently, the API is just working in some cases and not linked to a view page
-  yet 
-    - Server hosting for live demo is coming soon.
+### Login
+First, make sure you have the API running and you note down the url ie `localhost:8080`
 
-## Try a GET Request
+- Open the tab on the left and enter the following information into the fields:
+- Username: `username`
+- Password: `password`
 
-First, make sure you have the API running and you note down the url ie `127.0.0.0:5000`
+## Contributing
+### Before Pushing
+- Please run `git fetch` in order to update your current working branch with any recent commits pushed to the repo. This will help minimize the frequency at which your old code from another file overwrites the code that was recently updated in that file.
 
-- Open Postman and go to the header tab and your header Content-Type to "application/json"
-- Go to the "Body" tab and check the "raw" and "JSON(application/json) options under that tab
-- Now put `{"user":"chalshaff12"}` into the raw body (if chalshaff12 exists, so you should get a response that indicates that )
-- Set the request to GET and the URL `http://YOURLOCALHOSTURL:5000/user` 
-  - TADA! You should see a json response with that user's information in the response body below with a status of 200!
-  - Currently looks like this, but will be cleaned up for easy data getting. 
-``` 
-{
-  "users": [
-    {
-      "avatarUrl": null,
-      "dateCreated": "2019-07-25 23:46:14",
-      "dateModified": null,
-      "email": "chalshaff12@gmail.com",
-      "first": "Michal",
-      "isActive": 1,
-      "last": "Shaffer",
-      "password": "hashedpassword",
-      "userid": 246815,
-      "username": "chalshaff12"
-    }
-  ]
-}
-```
+### Suggested Flow
+The following method, known as Git Workflow, is ideally the way we should be approaching updates to the repo:
+- When you are working on a new feature or issue or anything, create a new branch with: ` git checkout -b <branch-name>`. Essentially, the branch name tends to be a short but descriptive name of the task being done in that branch. 
+- When you are finished with your code, commit and push your branch to the repo using: ```git commit -am "<commit-message>"
+git push origin <branch-name>```
+- Lastly, create a pull request from your branch to the master branch, then the update is discussed and then merged through the pull request.
 
-### Test on a user that doesn't exist
-
-- Follow the above steps but put `{"user":"notrealuser13"}` into the raw body (notrealuser13 does NOT exist, so you should get a response that indicates that) - TADA! You should see `{"error": "User Not found!"}` in the response body below with a status of 404!
+This method of updating the app, known as the Git Workflow, decreases the oppourtunity for old code to rewrite new code.

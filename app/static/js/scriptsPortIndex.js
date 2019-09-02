@@ -1,4 +1,12 @@
 ﻿/* JavaScript file
+    version 1.1.1
+    08.13.2019
+    Description: `subscribePortIndex` was modified to fix the button coordination bug. Bug fixed!
+    
+    version 1.1
+    08.13.2019
+    Description: Pressing 'subscribe' on the port index will change the color of the corresponding button in 'Trending Ports'. Bug fixed!
+    
     version 1.0
     08.11.2019
     Description: Creation of File
@@ -25,5 +33,19 @@ function subscribePortIndex(object)
        subscribeButton.value = 'Subscribe'; // Change the text on the button to 'Subscribe'.
        subscribeButton.title = 'Subscribe'; // Change the title text on the button to 'Subscribe'.
    }
+    
+   // Now check if this port is also in the 'trending ports' section, and change the color of the button accordingly:
+   for (i = 0; i < document.getElementsByClassName("trendingName").length; i+=2)
+   {
+        if (document.getElementsByClassName("trendingName")[i].innerHTML == document.getElementsByClassName("portName" + id)[0].innerHTML)
+        {
+                // Note that the index below is 'i/2'. The reason is that another element has the classname "trendingName", which is
+                // why we need to skip over the odd numbers to get to the corresponding button!
+                document.getElementsByClassName("subscribe")[i/2].style.backgroundColor = subscribeButton.style.backgroundColor;
+                document.getElementsByClassName("subscribe")[i/2].value = subscribeButton.value;
+                document.getElementsByClassName("subscribe")[i/2].title = subscribeButton.title;
+        }
+   }
+    
    document.getElementsByClassName("subscriptionForm" + id)[0].submit(); // Now submit this information
 }

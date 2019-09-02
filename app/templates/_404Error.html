@@ -1,0 +1,14 @@
+﻿<head>
+              <! -- Website's Icon -->
+              <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
+</head>
+{#- A Typical 404 Error Template #}
+
+{% extends "base.html" %}
+{% block content %}
+    <div style = "margin-left: 7vmin; margin-top: calc(4.5vh + 4.5vw);">
+        <h1>Sorry ...</h1>
+        <p>There's nothing here! (Well, what do you expect from a 404 Error?!?)</p>
+        <p><a href="/" style = "color: blue; text-decoration: underline;" title = "Go back to Homepage">Back to Homepage</a></p>
+    </div>
+{% endblock %}

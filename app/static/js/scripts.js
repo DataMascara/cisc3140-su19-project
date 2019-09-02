@@ -1,4 +1,8 @@
 ﻿/* JavaScript file
+version 1.1
+    08.13.2019
+    Description: Clicking on subscribe buttons changes colors of other subscribe buttons for the corresponding port.
+    
 version 1.0
     08.02.2019
     Description: These are functions operating on the 2 base templates 'baseLoggedIn.html' and 'baseLoggedOut.html'
@@ -28,17 +32,38 @@ function submitSearch ()
 // Change the color of the subscription button and what is written on it if it is pressed. Then, submit the form:
 function subscribe(x)
 {
-   var temp = x.id.substr(x.id.length - 1); // Fetch the last char. of the id of the calling button. This is its serial number given as a string.
+   var temp = x.className.substr(x.className.length - 1); // Fetch the last char of the class name of the calling button. This is its serial number given as a string.
    if (x.value ==  'Subscribe')
    {
        x.style.backgroundColor = 'rgb(123, 34, 64)'; // It means the user is subscribed to the particular port. Color the calling button maroon, and
        x.value = 'Joined'; // Change the text on the button to 'joined'.
+       x.title = 'Joined';
    }
    else // Otherwise, if the user clicked again (to unsubscribe):
    {
        x.style.backgroundColor = 'rgb(117, 117, 117)'; // Turn the color back to gray,
        x.value = 'Subscribe'; // Change the text on the button to 'Subscribe'.
+       x.title = 'Subscribe';
    }
+
+   // Now, change the style of the parallel button (if it exists) on the Port Index section ('portIndex.html') or the Subscribed Ports section ('userInfo.html'):
+   // Retrieve the name of the port to which `x` is a button (notice the '-1' that is due to the enumeration of the buttons starting from 1):
+   temp = parseInt(temp)-1;
+   temp *= 2; // Get only the even numbers since another element has the class 'trendingName' in 'base.html'.
+   var portName = document.getElementsByClassName("trendingName")[temp].innerHTML;
+   // Now we loop through existing port info:
+   for (i = 0; i < document.getElementsByClassName("portName").length; i++)
+   {
+         if (document.getElementsByClassName("portName")[i].innerHTML == portName)
+         {
+                // Note that the index below is 'i-1'. The reason is that we enumerate the 'trending ports' starting from 1 and not from ,
+                // which is why here we have to subtract 1 to get to the right button!
+                document.getElementsByClassName("subscribeIndex")[i].style.backgroundColor = x.style.backgroundColor;
+                document.getElementsByClassName("subscribeIndex")[i].value = x.value;
+                document.getElementsByClassName("subscribeIndex")[i].title = x.title;
+         }
+   }
+
    document.getElementsByClassName("trendingForm")[0].submit(); // Now submit this information
 }
 
@@ -65,3 +90,21 @@ function displayYear()
 {
      document.getElementsByClassName("year")[0].innerHTML = (new Date()).getFullYear();
 }
+
+// When the user scrolls down 100px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    document.getElementById("myBtn").style.display = "block";
+  } else {
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+

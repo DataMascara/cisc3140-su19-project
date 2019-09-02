@@ -1,0 +1,67 @@
+﻿{#- Version 1.0 - 09.01.2019 - Description: 'notifications.html' File Created #}
+
+     {#- This Template accepts a List of `notifications` dictionary, in which each items has the mandatory keys: 
+          (1) 'author': the username of the user who replied to the post / comment,
+          (2) 'postId': the id of the post in which this activity is going on, 
+          (3) 'postTitle' or 'yourCommentsText': either the title of the post (if the comment is to the user's post) 
+                or the content of the comment (if the comment is to the user's comment),
+          (4) 'dateCreated': the date when the other user replied to the post / comment, and 
+          (5) 'commentText': the content of that comment. #}
+
+<head>
+     <script src="{{ url_for('static',filename='js/scriptsNotifications.js') }}"></script>
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/stylesNotifications.css') }}">
+     <! -- Website's Icon -->
+     <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
+</head>
+<body {%- block onload %} onload = "cutIt (); displayYear();" {%- endblock %}>
+{%- extends "base.html" %}
+
+{%- block content %}
+
+     <div class = "flexTitle">
+        <div class = "page">
+             <p class = "pageTitle" >NOTIFICATIONS</p>
+        </div>
+     </div>
+     
+     <div class = "welcomeDiv">
+         <p class = "welcomeToNotifications">{{ user['username'] }}, welcome to your new notifications panel!</p>
+         <p>Here you can see who has commented to your posts and comments on UnderDogs, and visit these posts and comments by clicking on the corresponding links. You can always click on the "Notification" button on the menu to access this page. When you enter this page, all the new notifications will be marked as "read", and the button will display zero new notifications.<p>
+         <p>Currently, the panel displays example notifications, but once this feature is completely integrated, you would see your personal, up-to-date notifications.</p>
+     </div>
+
+     {%- for notific in notifications %}
+         {#- Display alternating colors for odd and even-numbered items: #}
+         {%- if loop.index % 2 != 0 %}
+            <div class="notifications-section" style = "background-color: #ded3d7;">
+         {%- else %}
+            <div class="notifications-section" style = "background-color: #eae8e8;">
+         {% endif -%}
+                <div class = "noteFirstPart">
+                    <p class = "whoCommented" ><a href = "" 
+                                                  class = "usernameOfAuthor" 
+                                                  title = "{{ notific['author'] }}'s profile">{{ notific['author'] }}</a>
+                                                commented on your&nbsp;{%- if notific['postTitle'] %}post{%- else %}comment{%- endif %}</p>
+                 </div>
+                 <div class = "noteSecondPart">
+                   {%- if notific['postTitle'] %} {#- Either the title of the post or the text of the comment to which the comment was received: #}
+                        <a href = "/post/{{notific['postId']}}" 
+                             class = "nameOfPostOrComment"
+                             title = "{{ notific['postTitle'] | e }}">{{ notific['postTitle'] | e }}</a>
+                   {%- else %}
+                        <a href = "/post/{{notific['postId']}}" 
+                             class = "nameOfPostOrComment" 
+                             title = "{{ notific['yourCommentsText'] | e }}">{{ notific['yourCommentsText'] | e }}</a>
+                   {%- endif %}
+                 </div>
+                 <div class = "noteThirdPart">
+                    <p class = "theNoteDate" >at {{ notific['dateCreated'] }}:</p>
+                 </div>
+                 <div class = "noteFourthPart">
+                    <a href = "/post/{{notific['postId']}}" class = "theNoteContent" >"{{ notific['commentText'] | e }}"</a>
+                 </div>
+         </div>
+    {% endfor -%}
+{%- endblock content %}
+</body>

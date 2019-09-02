@@ -28,18 +28,22 @@ base template, all we modify here is the 'content' block: #} {%- block content
     action="/new-post/"
     method="POST"
     enctype="multipart/form-data"
+    onsubmit = "submitWithEscape();"
   >
     <div class="header">
       <h1>Create a post on p/</h1>
-      
-      <select class = "communities"
-              required
-              name = "communitysearch">
-           <option selected="selected" value = "" title = "Search Communities" >Search Communities</option>
-           {#- Please pass here an array of dicts called 'ports' of all existing ports, each of which dict has the attribute: 'name' #}
-           {%- for port in ports %} 
-                <option value="{{  port['name']  }}" title = "{{  port['name']  }}" >{{  port['name']  }}</option>
-           {% endfor -%}
+
+      <select class="communities" required name="communitysearch">
+        <option selected="selected" value="" title="Search Communities"
+          >Search Communities</option
+        >
+        {#- Please pass here an array of dicts called 'ports' of all existing
+        ports, each of which dict has the attribute: 'name' #} {%- for port in
+        ports %}
+        <option value="{{ port['name'] }}" title="{{ port['name'] }}">{{
+          port["name"]
+        }}</option>
+        {% endfor -%}
       </select>
 
       <p class="red">*</p>
@@ -49,17 +53,19 @@ base template, all we modify here is the 'content' block: #} {%- block content
     <input
       type="text"
       name="title"
-      placeholder="Post Title"
+      class = "postTitle"
+      placeholder="Post Title (max. length 100 chars)"
       id="title"
       required
+      onkeyup = "validateTitle ()"
+      onmousemove = "validateTitle ()"
     /><span class="red"> *</span>
     <br />
-    <input type="text" name="username" placeholder="Username" required />
-    <input type="text" name="addlink" placeholder="Add Link (optional)" />
+    <input type="text" name="addlink" placeholder="Add Links (Optional)" />
     <br />
-    <textarea name="text" rows="15" placeholder="Text"></textarea>
+    <textarea name="text" class = "textOfPost" rows="15" placeholder="Text" ></textarea>
     <br />
-    <input type="text" name="addimage" placeholder="Add Image URL">
+    <input type="text" class = "addimage" name="postImg" placeholder="Add Image URL" onkeyup = "URLLength ()" />
     <div class="btncontainer">
       <input type="submit" class="btn" name="submit" value="Submit Post" />
     </div>

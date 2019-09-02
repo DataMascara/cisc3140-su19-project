@@ -1,29 +1,59 @@
 /* CSS Styles for the template: 'registPending.html'
 Version 1.0
-
     08.05.2019
-
     Description: Creation of file
 
 - Front End Team
 */
 
-.page
-{
-    width: 70%;
-    margin-top: 23vmin;
-    margin-left: 21.5vmin;
-}
+/* Landscape Media Query */
+@media screen and (min-aspect-ratio: 13/9) {
 
-.welcome
-{
-     font-size: 24px;
-     text-align: left;
-     padding-bottom: 5px;
-}
+    .page
+    {
+        width: 70%;
+        margin-top: 23vmin;
+        margin-left: 21.5vmin;
+    }
 
-.parag
-{
-     font-size: 12px;
-     text-align: left;
-}
+    .welcome
+    {
+         font-size: 24px;
+         text-align: left;
+         padding-bottom: 5px;
+    }
+
+    .parag
+    {
+         font-size: 12px;
+         text-align: left;
+    }
+    
+} /* Close Media Query */
+
+/* Portrait Media Query */
+@media screen and (max-aspect-ratio: 13/9) {
+
+    .page
+    {
+        margin: auto;
+        margin-top: 3vw;
+        width: 96%;
+    }
+
+    .welcome
+    {
+        margin-top: 0.5vw;
+        margin-bottom: 2vw;
+        font-size: 6vw;
+        text-align: left;
+        padding-bottom: 1vw;
+    }
+
+    .parag
+    {
+        font-size: 3vw;
+        text-align: left;
+    }
+    
+} /* Close Media Query */

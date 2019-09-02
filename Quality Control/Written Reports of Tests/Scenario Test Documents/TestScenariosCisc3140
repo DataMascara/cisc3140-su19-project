@@ -1,0 +1,88 @@
+Feature: Automated/manual test
+  Using cisc3140 group app developement
+
+  Background:
+    Given I use dev url to navigate to login page
+
+
+  @Functional  #pass scenario
+  Scenario: Hamburger menu expand for login page
+    Given user navigate to application login page
+    When I am not logged in to the app
+    Then I can see sign in and register button display
+    Then I can see username and password field display
+
+  @Functional    #pass scenario
+  Scenario: Hamburger menu hide for logged in user
+    Given I navigate to application login page
+    When I am not logged in to the app
+    When I type valid <userName> and <password> to login
+    Then menu is in hidden state
+
+@Regression    #pass scenario
+  Scenario Outline: invalid user cannot login to the app
+    Given I navigate to application login page
+    When I type valid <userName> and <password> to login
+    Then error message should display for invalid user
+
+    Examples:
+      | userName         | password         |
+      | ahkdahsj         | jsadhjhdsjjasdja |
+      | 20hdjhadss       | 55651/3^%$,`~*   |
+      | &^.#-?jhadss     | 1545645*sd       |
+      | 20hdjhadss.hhd d | 12k              |
+
+  @Functional   #Failed scenario
+  Scenario: able to like the post
+    Given I login to the app
+    When I click on like button on post
+    Then total like is added next to post
+
+  @Functional  #Failed scenario
+  Scenario: able to dislike the post
+    Given I login to the app
+    When I click on like button on post
+    Then total dislike is added next to post
+
+  @Functional  #Failed scenario
+  Scenario: able to add comments on the post
+    Given I login to the app
+    When I click on comment button on post
+    When I type some comments on the text field
+    Then I can see my comments added to the post
+
+  @Functional  #Failed scenario
+  Scenario: sort the post by hot or new
+    Given I login to the app
+    When I click on sort by dropdown
+    Then I select hot post
+    Then post display for hot
+    Then I select new post
+    Then post is display for new
+
+  @EndToEnd  #Failed scenario
+  Scenario: create a post and view the created post
+    Given I login to the app
+    When I click on create post button
+    And I select communities from dropdown
+    And I type all required field and submit
+    Then I can see my post on my profile
+
+  @EndToEnd  #pass scenario under condition, need to rework, i don't wanna see json output in email
+  Scenario: get notification on email after register
+    Given I login to the app
+    When I register for new user
+    And I type all required fields
+    And I click on register button
+    Then I get an email notification
+
+    @Functional  #pass scenario
+  Scenario: user successfully logout from the application
+    Given I login with valid username and password
+    When I click on logout button
+    Then I see signIn and register button again
+
+
+
+
+

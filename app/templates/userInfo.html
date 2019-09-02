@@ -9,6 +9,7 @@
               <!-- Scripts -->
               <script src="{{ url_for('static',filename='js/scriptsUserInfo.js') }}"></script>
 </head>
+<body {%- block onload %} onload = "displayWithLineBreaks();displayYear();" {%- endblock %}>
 {%- extends "base.html" %}
 
 {#- Since this template inherits everything from a base template, all we modify here is the 'content' block: #}
@@ -36,7 +37,7 @@
                          {% endif -%}
                           <div class = "profileContent">
                              {#- Since 'viewedUser['avatarUrl']' is optional, we must have the following 'if' statement. #}
-                             {%- if viewedUser['avatarUrl'] != None %}
+                             {%- if viewedUser['avatarUrl'] | length > 1 %}
                                   <img src = "{{ viewedUser['avatarUrl'] | e }}" class = "roundImage" alt = "the user {{ viewedUser['username'] }}" title = "{{ viewedUser['username'] }}'s profile">
                              {%- else %}
                                   <img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ viewedUser['username'] }}" title = "{{ viewedUser['username'] }}'s profile">
@@ -54,18 +55,32 @@
                               {%- else %}
                                      <p class = "descriptionText">(No description added)</p>
                               {% endif -%}
-                               <form class = "descriptionForm" method = "post" action = "" enctype="multipart/form-data">
-                                               <textarea rows = "10" 
-                                                               class = "descriptionTextArea" 
-                                                               name = "descriptionTextArea" 
-                                                               title = "Describe yourself, {{ viewedUser['username']}}!" 
-                                                               placeholder = "Your description here"
-                                                               spellcheck = "true">{{ viewedUser['description'] }}</textarea>
-                                                <input type="text" name="avatarURL" class = "avatarURL" placeholder="Add URL to Your Avatar">
+                               <form class = "descriptionForm" method = "post" action = "/profile/" enctype="multipart/form-data">
+                                               <textarea rows = "10"
+                                                               class = "descriptionTextArea"
+                                                               name = "descriptionTextArea"
+                                                               title = "Describe yourself, {{ viewedUser['username']}}! (max. length 1000 chars)"
+                                                               placeholder = "Your description here (max. length 1000 chars)"
+                                                               spellcheck = "true">{{ viewedUser['description']
+                                                            }}
+                                                            </textarea>
+                                                <input type="text" 
+                                                       name="avatarURL" 
+                                                       class = "avatarURL" 
+                                                       placeholder="Add URL to Your Avatar" 
+                                                       title = "Add URL to Your Avatar" 
+                                                       onkeyup = "URLLength ()"
+                                                       value = "{{ viewedUser['avatarUrl'] | e }}">
                                                 <div class = "descriptionFormSubmitDiv">
-                                                      <input type = "button" class = "descriptionFormSubmitBtn" name = "descriptionFormSubmitBtn" title = "Save your bio!" value = "Save Bio" onclick = "submitBio()">
+                                                      <input type = "submit"
+                                                      class = "descriptionFormSubmitBtn"
+                                                      name = "descriptionFormSubmitBtn"
+                                                      title = "Save your bio!"
+                                                      value = "Save Bio"
+                                                      onclick = "submitBio()"
+                                                      >
                                                 </div>
-                                </form> 
+                                </form>
                           </div>
                   </div> <!-- End of 'divText' -->
               </div> <!-- End of 'middleScreen' -->
@@ -78,17 +93,17 @@
                         <form action = "" method = "post" class = "accountSettingsButtons">
                             <div class = "maroonButtons">
                                 <div class = "emailAndPasswordDiv">
-                                     <input type = "submit" 
-                                                 class = "emailAndPasswordText"  
-                                                 name = "emailAndPassword" 
-                                                 value = "Email and Password" 
+                                     <input type = "submit"
+                                                 class = "emailAndPasswordText"
+                                                 name = "emailAndPassword"
+                                                 value = "Email and Password"
                                                  title = "Email and password settings" >
                                 </div>
                                 <div class = "notificationsDiv">
-                                      <input type = "submit" 
-                                                  class = "notificationsText" 
-                                                  name = "notifications" 
-                                                  value = "Notifications" 
+                                      <input type = "submit"
+                                                  class = "notificationsText"
+                                                  name = "notifications"
+                                                  value = "Notifications"
                                                   title = "Notifications settings"></p>
                                 </div>
                              </div>
@@ -129,18 +144,18 @@
                                       <div class = "changeEmailInnerDiv">
                                          <div class = "emailsDiv">
                                             <div class = "emailDiv">
-                                                 <input type = "email" 
-                                                             class = "emailSetting" 
-                                                             name = "emailSetting" 
-                                                             title = "Type the new email"
-                                                             placeholder = "New Email"
+                                                 <input type = "email"
+                                                             class = "emailSetting"
+                                                             name = "emailSetting"
+                                                             title = "Type the new email (max. length 128 chars)"
+                                                             placeholder = "New Email (max. length 128 chars)"
                                                              onkeyup = "validateEmail(this)"
                                                              required><span class = "red">*</span>
                                             </div>
                                             <div class = "emailDiv">
-                                                 <input type = "email" 
-                                                             class = "emailSetting" 
-                                                             name = "emailConfirmSetting" 
+                                                 <input type = "email"
+                                                             class = "emailSetting"
+                                                             name = "emailConfirmSetting"
                                                              title = "Re-type the new email"
                                                              placeholder = "Re-enter New Email"
                                                              onkeyup = "validateEmail(this)"
@@ -148,23 +163,23 @@
                                             </div>
                                          </div>
                                          <div class = "buttonDiv">
-                                               <input type = "submit" 
-                                                          class = "changeEmailBtn" 
-                                                          name = "changeEmailBtn" 
-                                                          title = "Confirm Change Email" 
+                                               <input type = "submit"
+                                                          class = "changeEmailBtn"
+                                                          name = "changeEmailBtn"
+                                                          title = "Confirm Change Email"
                                                           value = "Confirm Change Email">
                                          </div>
                                       </div>
                                   </form>
-                             </div>                             
+                             </div>
                              <div class = "passwordChange">
                                   <p class = "passwordChangeTitle">CHANGE PASSWORD</p>
                                   <form action = "" method = "post" class = "changePasswordForm">
                                       <div class = "changePasswordInnerDiv">
                                          <div class = "currentPasswordDiv">
-                                            <input type = "password" 
-                                                        class = "currentPassword" 
-                                                        name = "currentPassword" 
+                                            <input type = "password"
+                                                        class = "currentPassword"
+                                                        name = "currentPassword"
                                                         title = "Type your current password"
                                                         placeholder = "Current Password"
                                                         onkeyup = "validatePassword()"
@@ -175,18 +190,18 @@
                                          </div>
                                          <div class = "passwordsDiv">
                                             <div class = "passwordDiv">
-                                                 <input type = "password" 
-                                                             class = "passwordSetting" 
-                                                             name = "passwordSetting" 
-                                                             title = "Type the new password"
-                                                             placeholder = "New Password"
+                                                 <input type = "password"
+                                                             class = "passwordSetting"
+                                                             name = "passwordSetting"
+                                                             title = "Type the new password (length 7-128 chars)"
+                                                             placeholder = "New Password (length 7-128 chars)"
                                                              onkeyup = "validatePassword()"
                                                              required><span class = "red">*</span>
                                             </div>
                                             <div class = "emailDiv">
-                                                 <input type = "password" 
-                                                             class = "passwordSetting" 
-                                                             name = "passwordConfirmSetting" 
+                                                 <input type = "password"
+                                                             class = "passwordSetting"
+                                                             name = "passwordConfirmSetting"
                                                              title = "Re-type the new password"
                                                              placeholder = "Re-enter New Password"
                                                              onkeyup = "validatePassword()"
@@ -194,10 +209,10 @@
                                             </div>
                                          </div>
                                          <div class = "buttonDiv">
-                                               <input type = "submit" 
-                                                          class = "changePasswordBtn" 
-                                                          name = "changePasswordBtn" 
-                                                          title = "Confirm Change Password" 
+                                               <input type = "submit"
+                                                          class = "changePasswordBtn"
+                                                          name = "changePasswordBtn"
+                                                          title = "Confirm Change Password"
                                                           value = "Confirm Change Password">
                                          </div>
                                       </div>
@@ -260,5 +275,204 @@
                          {% endif -%}
                   </div> <!-- End of 'divText' -->
               </div> <!-- End of 'middleScreen' -->
+       {%- elif dashboard %}
+        <div class = "middleScreen">
+              <div class = "page">
+                     <p class = "pageTitle" >DASHBOARD</p>
+              </div>
+              <div class = "divText1">
+                    <form action = "" method = "post" class = "accountSettingsButtons">
+                            <div class = "maroonButtons">
+                                <div class = "subscriptionsDiv">
+                                     <input type = "submit"
+                                                 class = "subscriptionsText"
+                                                 name = "subscriptions"
+                                                 value = "Subscriptions"
+                                                 title = "Your port subscriptions" >
+                                </div>
+                                <div class = "commentsDiv">
+                                      <input type = "submit"
+                                                  class = "commentsText"
+                                                  name = "comments"
+                                                  value = "Comments"
+                                                  title = "Comments you wrote">
+                                </div>
+                                <div class = "savedDiv">
+                                     <input type = "submit"
+                                                 class = "savedText"
+                                                 name = "savedPosts"
+                                                 value = "Saved Posts"
+                                                 title = "Posts you saved">
+                                </div>
+                                <div class = "postsDiv">
+                                      <input type = "submit"
+                                                  class = "postsText"
+                                                  name = "myPosts"
+                                                  value = "My Posts"
+                                                  title = "Posts you wrote">
+                                </div>
+                             </div>
+                   </form>
+                   {%- if (subscrptions) and (user) %}
+                       {%- for port in user['myPorts'] %}
+                               {#- Display alternating colors for odd and even-numbered posts: #}
+                               {%- if loop.index % 2 != 0 %}
+                                   <div class="port-section" style = "background-color: #ded3d7;">
+                               {%- else %}
+                                   <div class="port-section" style = "background-color: #eae8e8;">
+                               {% endif -%}
+                                <div class = "portFirstPart">
+                                    <a href = "/p/{{port['name']}}" class = "portName portName{{ port['id'] }}" title = "{{ port['name'] }}" >{{ port['name'] }}</a>
+                                 </div>
+                                 <div class = "portSecondPart">
+                                     <p class = "portMembersNumber">{{ port['mem'] }} members</p>
+                                 </div>
+                                 <div class = "portThirdPart">
+                                             <form class = "indexForm subscriptionForm{{ port['id'] }}"
+                                                        action = "/subscribe/"
+                                                        method = "post"
+                                                        target="frameForUserInfo"
+                                                        name = "subscriptionForm{{ port['id'] }}">
+                                              <input type="hidden" name="portname" value="{{port['name']}}">
+                                                    {%- if port['isSubscribed'] == True %}
+                                                        <input type="submit"
+                                                                    style = "background-color: #7B2240"
+                                                                    class = "subscribeIndex subscribe{{ port['id'] }}"
+                                                                    name  = "value"
+                                                                    title="Joined"
+                                                                    value = "Joined"
+                                                                    onclick="subscribePortIndex(this)" >
+                                                    {%- else %} {#- if it is False: #}
+                                                        <input type="submit"
+                                                                     style = "background-color: rgb(117, 117, 117)"
+                                                                     class = "subscribeIndex subscribe{{ port['id'] }}"
+                                                                     name  = "value"
+                                                                     title="Subscribe"
+                                                                     value = "Subscribe"
+                                                                     onclick="subscribePortIndex(this)" >
+                                                    {% endif -%} {#- the one of 'port['isSubscribed']' #}
+                                             </form>
+                                 </div>
+                         </div>
+                       {% endfor -%}
+                    {%- elif (comments) and (user) %}
+                         {%- for comment in user['myComments'] %}
+                               {#- Display alternating colors for odd and even-numbered posts: #}
+                               {%- if loop.index % 2 != 0 %}
+                                   <div class="comment-section" style = "background-color: #ded3d7;">
+                               {%- else %}
+                                   <div class="comment-section" style = "background-color: #eae8e8;">
+                               {% endif -%}
+                                 <div class = "commentFirstPart">
+                                    <p class = "votes" >{{ comment['totalVotes'] }}</p>
+                                 </div>
+                                 <div class = "commentSecondPart">
+                                     <div style = "display:flex;">
+                                          <div>
+                                              <a href = "/p/{{ comment['portname'] }}" class = "thePortName" title = "Go to {{ comment['portname'] }}">{{ comment['portname'] }}</a>
+                                          </div>
+                                          <div>
+                                              <a href = "/post/{{ comment['postId'] }}" class = "thePostName" title = "See {{ comment['postname'] }}">{{ comment['postname'] }}</a>
+                                          </div>
+                                     </div>
+                                     <div>
+                                        <p class = "commentText">{{ comment['text'] }}</p>
+                                     </div>
+                                 </div>
+                                 <div class = "commentThirdPart">
+                                         <p class = "dateAndTime">{{ comment['dateCreated'] }}</p>
+                                 </div>
+                         </div>
+                      {% endfor -%}
+                    {%- elif (savedPosts) and (user) %}
+                         {%- for post in user['savedPosts'] %}
+                               {#- Display alternating colors for odd and even-numbered posts: #}
+                               {%- if loop.index % 2 != 0 %}
+                                   <div class="post-section" style = "background-color: #ded3d7;">
+                               {%- else %}
+                                   <div class="post-section" style = "background-color: #eae8e8;">
+                               {% endif -%}
+                                 <div class = "postFirstPart">
+                                    <p class = "votes" >{{ post['totalVotes'] }}</p>
+                                 </div>
+                                 <div class = "postSecondPart">
+                                     <div style = "display:flex;">
+                                          <div>
+                                              <a href = "/p/{{ post['portname'] }}" class = "thePortName" title = "Go to {{ post['portname'] }}" >{{ post['portname'] }}</a>
+                                          </div>
+                                          <div>
+                                              <a href = "/post/{{ post['postId'] }}" class = "thePostName" title = "See {{ post['title'] }}" >{{ post['title'] }}</a>
+                                          </div>
+                                     </div>
+                                     <div>
+                                        {%- if post['text'] %}
+                                         <p class = "postText">{{ post['text'] }}</p>
+                                        {% else %}
+                                         <p class = "postText">(No text content)</p>
+                                        {% endif -%}
+                                     </div>
+                                 </div>
+                                 <div class = "postThirdPart">
+                                         <div class = "dateAndTimeDiv">
+                                             <p class = "dateAndTime">{{ post['dateCreated'] }}</p>
+                                         </div>
+                                         <div class = "authorDetails">
+                                               {#- Since 'post['avatarUrl']' is optional, we must have the following 'if' statement. #}
+                                               {%- if post['avatarUrl'] | length > 1 %}
+                                                       <a href = "/post/{{ post['postId'] }}" title = "See {{ post['title'] }}"><img src = "{{ post['avatarUrl'] | e }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
+                                               {%- else %}
+                                                       <a href = "" title = "See {{ post['title'] }}"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
+                                               {% endif -%}
+                                                       <a href = "" class = "usernameOfAuthor" title = "{{ post['username'] }}'s profile">{{ post['username'] }}</a>
+                                         </div>
+                                 </div>
+                         </div>
+                      {% endfor -%}
+                        {%- elif (myPosts) and (user) %}
+                         {%- for post in user['myPosts'] %}
+                               {#- Display alternating colors for odd and even-numbered posts: #}
+                               {%- if loop.index % 2 != 0 %}
+                                   <div class="post-section" style = "background-color: #ded3d7;">
+                               {%- else %}
+                                   <div class="post-section" style = "background-color: #eae8e8;">
+                               {% endif -%}
+                                       <div class = "postFirstPart">
+                                          <p class = "votes" >{{ post['totalVotes'] }}</p>
+                                       </div>
+                                       <div class = "postSecondPart">
+                                           <div class = "thePortNameDiv">
+                                               <a href = "/p/{{ post['portname'] }}" class = "thePortName" title = "Go to {{ post['portname'] }}" >{{ post['portname'] }}</a>
+                                           </div>
+                                           <div>
+                                               <p class = "numOfComments">{{ post['commentNum'] }} comments</p>
+                                           </div>
+                                        </div>
+                                        <div class = "post3rdPart">
+                                              {#- Since 'post['imageUrl']' is optional, we must have the following 'if' statement. #}
+                                              {%- if post['imageUrl'] != None %}
+                                                {%- if post['imageUrl'] | length > 1 %}
+                                                        <a href = "/post/{{ post['postId'] }}"><img src = "{{ post['imageUrl'] | e }}" class = "squareImage" title = "See post details" alt = "the post {{ post['title'] | e }}"></a>
+                                                {% endif %}
+                                              {% endif %}
+                                        </div>
+                                        <div class = "postFourthPart">
+                                            <div>
+                                                <a href = "/post/{{ post['postId'] }}" class = "thePostName" title = "See {{ post['title'] }}" >{{ post['title'] }}</a>
+                                            </div>
+                                            <div>
+                                            {%- if post['text'] != None %}
+                                                 <p class = "postDescription">{{ post['text']  | e }}</p>
+                                            {% endif -%}
+                                             </div>
+                                        </div>
+                                        <div class = "postFifthPart">
+                                             <p class = "dateAndTime">{{ post['dateCreated'] }}</p>
+                                        </div>
+                                     </div> <!-- Closing `post-section` -->
+                      {% endfor -%}
+                    {% endif -%}
+                </div> <!-- End of 'divText' -->
+            </div> <!-- End of 'middleScreen' -->
        {% endif -%}
 {% endblock content -%}
+</body>

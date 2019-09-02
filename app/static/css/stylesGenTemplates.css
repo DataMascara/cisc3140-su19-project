@@ -8,47 +8,106 @@ Version 1.0
 - Front End Team
 */
 
-.page
-{
-    background-color: #d2bdc5; /* Slightly Dark Pink */
-    margin-top: calc(4.5vh + 4.5vw);
-    margin-left: 7vmin;
-    border-bottom: solid #7B2240;
-    border-bottom-width: calc(0.08vh + 0.08vw);
-    text-align: center;
-    padding: calc(0.05vh + 0.05vw);
-    width: calc(8vh + 8vw);
-    font-family: inherit;
-    font-size: calc(0.5vh + 0.5vw);
-    font-weight: bold;
-    color: #7B2240;
-    letter-spacing: calc(0.05vh + 0.05vw);
-}
+/* Landscape Media Query */
+@media screen and (min-aspect-ratio: 13/9) {
 
-.divText
-{
-     margin-top: calc(0.5vh + 0.5vw);
-     margin-bottom: calc(1vh + 1vw);
-     margin-left: 7vmin;
-     padding: 20px;
-     padding-top: 10px;
-     padding-bottom: 10px;
-     width: 63%;
-     height: auto;
-     background-color: #E3E3E3;
-     border-radius: calc(0.2vh + 0.2vw);
-     box-shadow: 1px 1px 1px lightgray, -1px -1px 1px lightgray;
-}
+    .page
+    {
+        background-color: #d2bdc5; /* Slightly Dark Pink */
+        margin-top: calc(4.5vh + 4.5vw);
+        margin-left: 7vmin;
+        border-bottom: solid #7B2240;
+        border-bottom-width: calc(0.08vh + 0.08vw);
+        text-align: center;
+        padding: calc(0.05vh + 0.05vw);
+        width: calc(8vh + 8vw);
+        font-family: inherit;
+        font-size: calc(0.5vh + 0.5vw);
+        font-weight: bold;
+        color: #7B2240;
+        letter-spacing: calc(0.05vh + 0.05vw);
+    }
 
-.theText
-{
-     font-family: 'Libre Baskerville', serif;
-     font-size: 12px;
-     text-align: left;
-}
+    .divText
+    {
+         margin-top: calc(0.5vh + 0.5vw);
+         margin-bottom: calc(1vh + 1vw);
+         margin-left: 7vmin;
+         padding: 20px;
+         padding-top: 10px;
+         padding-bottom: 10px;
+         width: 63%;
+         height: auto;
+         background-color: #E3E3E3;
+         border-radius: calc(0.2vh + 0.2vw);
+         box-shadow: 1px 1px 1px lightgray, -1px -1px 1px lightgray;
+    }
 
-.theText a
-{
-    text-decoration-line: underline;
-    color: blue;
-}
+    .theText
+    {
+         font-family: 'Libre Baskerville', serif;
+         font-size: 12px;
+         text-align: left;
+    }
+
+    .theText a
+    {
+        text-decoration-line: underline;
+        color: blue;
+    }
+
+} /* Close Media Query */
+
+/* Portrait Media Query */
+@media screen and (max-aspect-ratio: 13/9) {
+
+    .page
+    {
+        background-color: #d2bdc5;
+        margin: auto;
+        margin-top: 4vh;
+        border-bottom: solid #7B2240;
+        border-bottom-width: 0.5vw;
+        text-align: center;
+        padding: 3vw;
+        width: 50%;
+        font-family: inherit;
+        font-size: 3vw;
+        font-weight: bold;
+        color: #7B2240;
+        letter-spacing: 0.5vw;
+    }
+    
+    .pageTitle{
+        margin: 0;   
+    }
+
+    .divText
+    {
+        margin: auto;
+        margin-top: 2vw;
+        margin-bottom: 2vw;
+        padding: 4vw;
+        padding-top: 2vw;
+        padding-bottom: 2vw;
+        width: 90%;
+        height: auto;
+        background-color: #E3E3E3;
+        border-radius: 1vw;
+        box-shadow: 0.3vw 0.3vw 0.3vw lightgrey, -0.3vw -0.3vw 0.3vw lightgrey;
+    }
+
+    .theText
+    {
+         font-family: 'Libre Baskerville', serif;
+         font-size: 3vw;
+         text-align: left;
+    }
+
+    .theText a
+    {
+        text-decoration-line: underline;
+        color: blue;
+    }
+
+} /* Close Media Query */
