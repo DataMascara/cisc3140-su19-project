@@ -103,6 +103,7 @@ def home():
     # else will show main port
     else:
         posts = requests.get(f"{api}/posts-by-portname/", json={"portname": "Main"}).json()
+    posts['name'] = "all"
     # sort by new is the default
     sort = "new"
     if request.method == "POST":
