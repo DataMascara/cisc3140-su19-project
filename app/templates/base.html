@@ -51,6 +51,15 @@
                        {% endif -%}
                         <a href = "/profile/" class = "username" title = "Go to your User Profile" >{{ user['username'] }}</a>
 
+                        <form method = "GET" action = "/notifications/">
+                                 <input type = "submit" name = "loggedIn" class="notifications" value = "Notifications: {%- if (notifiNum) and (notifiNum >= 0) and (notifiNum <= 100) %}
+                                                                                                                        {{ notifiNum }}
+                                                                                                                        {%- elif (notifiNum) and (notifiNum > 100) %}
+                                                                                                                        100+
+                                                                                                                        {%- else %}
+                                                                                                                        0
+                                                                                                                        {%- endif -%}" title = "Go to your Notifications">
+                        </form>
                         <form method = "GET" action = "/profile/">
                                  <input type = "submit" name = "loggedIn" class="profile" value = "User Profile" title = "Go to your User Profile">
                         </form>
