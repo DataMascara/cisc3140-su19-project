@@ -555,6 +555,12 @@ Version 1.0
         display: block;
         text-align: center;
     }
+   
+    @keyframes blinker {
+        50% {
+              text-shadow: 0 0 4px #FFFFFF; /* Make notifications button's text glow */
+        }
+    }
 
 } /* Close Media Query */
 
@@ -1066,6 +1072,12 @@ Version 1.0
     form
     {
         margin-bottom: 0;
+    }
+   
+    @keyframes blinker {
+        50% {
+              text-shadow: 0 0 4px #FFFFFF; /* Make notifications button's text glow */
+        }
     }
     
 } /*Close the Media Query*/
