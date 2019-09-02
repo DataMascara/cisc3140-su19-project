@@ -25,7 +25,7 @@
         </div>
      </div>
 
-  <!--   {%- for notific in notifications %}
+     {%- for notific in notifications %}
          {#- Display alternating colors for odd and even-numbered items: #}
          {%- if loop.index % 2 != 0 %}
             <div class="notifications-section" style = "background-color: #ded3d7;">
@@ -39,7 +39,7 @@
                                                 commented on your&nbsp;{%- if notific['postTitle'] %}post{%- else %}comment{%- endif %}</p>
                  </div>
                  <div class = "noteSecondPart">
-                   {%- if message-type == "post" %} {#- Either the title of the post or the text of the comment to which the comment was received: #}
+                   {%- if notific['postTitle'] %} {#- Either the title of the post or the text of the comment to which the comment was received: #}
                         <a href = "/post/{{notific['postId']}}" 
                              class = "nameOfPostOrComment"
                              title = "{{ notific['postTitle'] | e }}">{{ notific['postTitle'] | e }}</a>
@@ -56,6 +56,6 @@
                     <a href = "/post/{{notific['postId']}}" class = "theNoteContent" >"{{ notific['commentText'] | e }}"</a>
                  </div>
          </div>
-    {% endfor -%} -->
+    {% endfor -%}
 {%- endblock content %}
 </body>
