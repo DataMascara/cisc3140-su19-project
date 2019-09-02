@@ -558,7 +558,8 @@ Version 1.0
    
     @keyframes blinker {
         50% {
-              text-shadow: 0 0 4px #FFFFFF; /* Make notifications button's text glow */
+              text-shadow: 0 0 8px #FFFF00; /* Make notifications button's text glow */
+              font-weight: bold;
         }
     }
 
@@ -1076,7 +1077,8 @@ Version 1.0
    
     @keyframes blinker {
         50% {
-              text-shadow: 0 0 4px #FFFFFF; /* Make notifications button's text glow */
+              text-shadow: 0 0 1vw #FFFF00; /* Make notifications button's text glow */
+              font-weight: bold;
         }
     }
     
