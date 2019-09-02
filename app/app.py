@@ -1047,7 +1047,7 @@ def appOfTheMonthFormSubmitted ():
 **** Notification UI: ****
 """
 
-@app.route('/notifications/')
+@app.route('/notifications/', methods=["POST", "GET"])
 def notificationsFunc ():
     if 'loggedin' in session:
         user = session["user"]
