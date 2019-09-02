@@ -1057,7 +1057,12 @@ def notificationsFunc ():
                           'postId': 171, 
                           'postTitle': "Shall We Sit in the Pizza, or Take the Restaurant Away?", 
                           'dateCreated': "2019-08-16 13:45:07", 
-                          'commentText': "No"}]
+                          'commentText': "No"},
+                         {'author': "mary060196", 
+                          'postId': 229,
+                          'yourCommentsText': "bla\nbla\nbla",
+                          'dateCreated': "2019-08-18 04:39:04",
+                          'commentText': "bla\n\nbla\n\nbla (ENTER hit twice in-between each)"}]
         # ---> Back End code to retrieve info from form and process it.
         return render_template('notifications.html', 
                                name = "Notifications", 
