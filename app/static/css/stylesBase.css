@@ -60,6 +60,10 @@ Version 1.0
         display: flex;
     }
    
+    html {
+      scroll-behavior: smooth;
+    }
+   
     #myBtn {
         display: none;
     }
@@ -584,6 +588,10 @@ Version 1.0
        border: 0;
        display: flex;
        flex-direction: column;
+    }
+   
+    html {
+      scroll-behavior: smooth;
     }
    
     #myBtn {
