@@ -75,10 +75,11 @@ def hello7():
     )
 
 
+# Two new optional agruments: `username_error` and `email_error` (08.12.2019)
 @app.route("/register/")
 def hello8():
     return render_template(
-        "register.html", name="Bla", trendPorts=trendPorts, errUsernameInUse=True
+        "register.html", name="Bla", trendPorts=trendPorts, username_error = True, email_error = True
     )
 
 
@@ -214,12 +215,68 @@ def hello11():
 # Examples of Post Details Template
 
 # Create a post dictionary. It will look like this:
-postDict = {'id': 257, 'title': 'Want to Order Some Pizza on the Last Day of Classes?', 'portname': "CISCRocks", 'totalVotes': 1000, 'image': 'https://cdn.apartmenttherapy.info/image/fetch/f_auto,q_auto:eco/https%3A%2F%2Fstorage.googleapis.com%2Fgen-atmedia%2F3%2F2018%2F03%2F55cd28cae8ee78fe1e52ab1adc9eafff24c9af92.jpeg', 'text': "Why shouldn't we?", 'commentNum': 5, 'dateCreated': '2019-08-11 02:23:04', 'username': 'mary060196', 'avatarUrl': 'https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Up_Hand_Sign_Emoji_large.png?v=1480481047', 'upOrDownvoted': 1,
-            'comments': [{'id': 1, 'totalVotes': 64, 'dateCreated': '2019-08-11 10:10:10', 'username': 'jtroia', 'avatarUrl': 'https://cdn.sandals.com/beaches/v12/images/general/destinations/home/beach.jpg', 'text': "How hadn't I thought of it myself? Great idea!", 'upOrDownvoted': 1,
-                          'comments' : [{'id': 4, 'totalVotes': 24, 'dateCreated': '2019-08-11 15:15:15', 'username': 'mary060196', 'avatarUrl': 'https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Up_Hand_Sign_Emoji_large.png?v=1480481047', 'text': "Yea! We'll just have to find a good pizzeria and notify the class.", 'upOrDownvoted': 0}, 
-                                        {'id': 5, 'totalVotes': 15, 'dateCreated': '2019-08-11 15:20:15', 'username': 'jtroia', 'avatarUrl': 'https://cdn.sandals.com/beaches/v12/images/general/destinations/home/beach.jpg', 'text': "I will send everyone a message on Slack (if anybody even opens it.)", 'upOrDownvoted': 0}]}, 
-                         {'id': 2, 'totalVotes': 59, 'dateCreated': '2019-08-11 10:20:36', 'username': 'bla-bla', 'avatarUrl': 'https://www.designrepublic.com/27631-large_default/blabla-big-plexi.jpg', 'text': "Bla bla bla bla bla. Bla bla bla bla!", 'upOrDownvoted': -1, 'comments': {}}, 
-                         {'id': 3, 'totalVotes': 12, 'dateCreated': '2019-08-11 10:20:36', 'username': 'wowwow1', 'avatarUrl': None, 'text': "Wow wow wow wow wow. Wow wow wow wow!", 'upOrDownvoted': 0, 'comments': {}}]}
+postDict = {
+    'id': 257, 
+    'title': 'Want to Order Some Pizza on the Last Day of Classes?', 
+    'portname': "CISCRocks", 
+    'totalVotes': 1000, 
+    'image': 'https://cdn.apartmenttherapy.info/image/fetch/f_auto,q_auto:eco/https%3A%2F%2Fstorage.googleapis.com%2Fgen-atmedia%2F3%2F2018%2F03%2F55cd28cae8ee78fe1e52ab1adc9eafff24c9af92.jpeg', 
+    'text': "Why shouldn't we?", 
+    'commentNum': 5, 
+    'dateCreated': '2019-08-11 02:23:04', 
+    'username': 'mary060196', 
+    'avatarUrl': 'https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Up_Hand_Sign_Emoji_large.png?v=1480481047', 
+    'upOrDownvoted': 1,
+    'comments': [
+    {
+        'id': 1, 
+        'totalVotes': 64, 
+        'dateCreated': '2019-08-11 10:10:10', 
+        'username': 'jtroia', 
+        'avatarUrl': 'https://cdn.sandals.com/beaches/v12/images/general/destinations/home/beach.jpg', 
+        'text': "How hadn't I thought of it myself? Great idea!", 
+        'upOrDownvoted': 1,
+        'comments' : [
+        {
+            'id': 4, 
+            'totalVotes': 24, 
+            'dateCreated': '2019-08-11 15:15:15', 
+            'username': 'mary060196', 
+            'avatarUrl': 'https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Up_Hand_Sign_Emoji_large.png?v=1480481047', 
+            'text': "Yea! We'll just have to find a good pizzeria and notify the class.", 
+            'upOrDownvoted': 0
+        }, 
+        {
+            'id': 5, 
+            'totalVotes': 15, 
+            'dateCreated': '2019-08-11 15:20:15', 
+            'username': 'jtroia', 
+            'avatarUrl': 'https://cdn.sandals.com/beaches/v12/images/general/destinations/home/beach.jpg', 
+            'text': "I will send everyone a message on Slack (if anybody even opens it.)", 
+            'upOrDownvoted': 0
+        }]
+    }, 
+    {
+        'id': 2, 
+        'totalVotes': 59, 
+        'dateCreated': '2019-08-11 10:20:36', 
+        'username': 'bla-bla', 
+        'avatarUrl': 'https://www.designrepublic.com/27631-large_default/blabla-big-plexi.jpg', 
+        'text': "Bla bla bla bla bla. Bla bla bla bla!", 
+        'upOrDownvoted': -1, 
+        'comments': []
+    }, 
+    {
+        'id': 3, 
+        'totalVotes': 12, 
+        'dateCreated': '2019-08-11 10:20:36', 
+        'username': 'wowwow1', 
+        'avatarUrl': None, 
+        'text': "Wow wow wow wow wow. Wow wow wow wow!", 
+        'upOrDownvoted': 0, 
+        'comments': []
+    }]
+}
 
 # 'user' is logged in, and optional argument 'commentSubmittedMessage' is passed:
 @app.route('/post-details1')
@@ -234,7 +291,7 @@ def hello13():
 #---------------------------------- User Info Template --------------------------
 
 # What the 'viewedUser' object must have (this is other than the 'user' dict)
-viewedUser1 = {'username': 'mary060196', 'email': 'mary060196@gmail.com', 'avatarUrl': 'https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Up_Hand_Sign_Emoji_large.png?v=1480481047', 'description': "I love CISC since I was a child.", 'isEmailPrivate': False}
+viewedUser1 = {'username': 'mary060196', 'email': 'mary060196@gmail.com', 'avatarUrl': '', 'description': "I love CISC since I was a child.", 'isEmailPrivate': False}
 viewedUser2 = {'username': 'jtroia', 'email': 'jtroia@joetroia.com', 'avatarUrl': 'https://cdn.sandals.com/beaches/v12/images/general/destinations/home/beach.jpg', 'description': "Lorem Ipsum ... and other stuff.", 'isEmailPrivate': False}
 
 # We also want to update the 'user' to contain the following:
@@ -265,7 +322,153 @@ def hello16():
 def hello17():
     return render_template('userInfo.html', name = "Bla", trendPorts = trendPorts, user = user, accountSettings = True, notifications = True)
 
+# ------------------------------------- 08.13.2019 Dashboard -----------------------------
 
+# We need to update the 'user' one more time to contain (1) subscribed port data:
+myPorts = [ 
+  { 
+     'id': 1,
+     'name': 'port2',
+     'mem': 17
+   },
+  { 
+     'id': 2,
+     'name': 'CISCRocks',
+     'mem': 223
+   },  
+   { 
+     'id': 3,
+     'name': 'bcNews',
+     'mem': 523
+   }
+]
+# (2) Written comments:
+myComments = [ 
+   { 
+     'postname': "What I Love about CISC",
+     'portname': "CISCRocks",
+     'totalVotes': 12,
+     'text': "There is no more of a professional than you to write such a great post!",
+     'dateCreated': '2019-08-19 21:21:21'
+   },
+  { 
+     'postname': "What Classes Do You Take Next Semester?",
+     'portname': "bcNews",
+     'totalVotes': 19,
+     'text': "Computer and Ethics CISC 2820W",
+     'dateCreated': '2019-08-15 14:03:45'
+   },  
+  { 
+     'postname': "How Can I deploy an App with Travis CI?",
+     'portname': "CISCRocks",
+     'totalVotes': 6,
+     'text': "Why doing this with Travis CI? Google Cloud is better!",
+     'dateCreated': '2019-08-13 07:58:24'
+   }
+]
+
+# (3) Saved Posts
+savedPosts = [ 
+   { 
+     'title': "What I Love about CISC",
+     'portname': "CISCRocks",
+     'totalVotes': 36,
+     'text': "What a wonderful world!",
+     'dateCreated': '2019-08-11 02:23:04',
+     'username': 'jtroia',
+     'avatarUrl': 'https://cdn.sandals.com/beaches/v12/images/general/destinations/home/beach.jpg'
+   },
+  { 
+     'title': "OK I am Lazy Enough to Write This Post",
+     'portname': "offTopic",
+     'totalVotes': 10000,
+     'text': "Bla Bla squared . . . Bla Bla squared . . . Bla Bla squared . . . Bla Bla squared . . .",
+     'dateCreated': '2019-08-11 02:23:04',
+     'username': 'bla-bla',
+     'avatarUrl': 'https://www.designrepublic.com/27631-large_default/blabla-big-plexi.jpg'
+   },  
+  { 
+     'title': "What to Write about Now?",
+     'portname': "offTopic",
+     'totalVotes': 100,
+     'text': "Bla Bla cubed . . . Bla Bla cubed . . . Bla Bla cubed . . . Bla Bla cubed . . .",
+     'dateCreated': '2019-08-11 02:23:04',
+     'username': 'bla-bla',
+     'avatarUrl': 'https://www.designrepublic.com/27631-large_default/blabla-big-plexi.jpg'
+   }
+]
+
+# and, finally, written posts:
+
+myPosts = [ 
+   { 
+     'title': "Bla Bla Post",
+     'portname': "CISCRocks",
+     'totalVotes': 3,
+     'imageUrl': 'https://dxxbxu0f802py.cloudfront.net/wp-content/uploads/2016/07/28093037/feature_are_you_blabla.jpg',
+     'commentNum': 55,
+     'text': "Just a post",
+     'dateCreated': '2019-08-11 02:23:04'
+   },
+  { 
+     'title': "Foo Post",
+     'portname': "CISCRocks",
+     'totalVotes': 30,
+     'imageUrl': None,
+     'commentNum': 50,
+     'text': "Just a post",
+     'dateCreated': '2019-08-11 02:23:04'
+   },  
+  { 
+     'title': "YAML Post",
+     'portname': "CISCRocks",
+     'imageUrl': None,
+     'commentNum': 1000,
+     'totalVotes': 300,
+     'text': "Just a post",
+     'dateCreated': '2019-08-11 02:23:04'
+   }
+]
+
+# And we put all of these into the user object:
+user['myPorts'] = myPorts
+user['myComments'] = myComments
+user['savedPosts'] = savedPosts
+user['myPosts'] = myPosts
+
+# Examples for Dashboard:
+
+# 'user' is logged in and is looking at the "Dashboard" in the section "Subscriptions":
+@app.route('/dashboard1')
+def hello18():
+    return render_template('userInfo.html', name = "Bla", trendPorts = trendPorts, user = user, dashboard = True, subscrptions = True)
+
+# 'user' is logged in and is looking at the "Dashboard" in the section "Comments":
+@app.route('/dashboard2')
+def hello19():
+    return render_template('userInfo.html', name = "Bla", trendPorts = trendPorts, user = user, dashboard = True, comments = True)
+
+# 'user' is logged in and is looking at the "Dashboard" in the section "Saved Posts":
+@app.route('/dashboard3')
+def hello20():
+    return render_template('userInfo.html', name = "Bla", trendPorts = trendPorts, user = user, dashboard = True, savedPosts = True)
+
+# 'user' is logged in and is looking at the "Dashboard" in the section "My Posts":
+@app.route('/dashboard4')
+def hello21():
+    return render_template('userInfo.html', name = "Bla", trendPorts = trendPorts, user = user, dashboard = True, myPosts = True)
+
+#-------------------------- 404 Error & No Password Reminders -------------
+
+# 404 Error Template:
+@app.route('/404-error')
+def hello22():
+    return render_template('_404Error.html', name = "Bla", trendPorts = trendPorts, user = user)
+
+# No "Forgot Password?" Reminders!:
+@app.route('/no-such-thing-forgot-password')
+def hello23():
+    return render_template('noPasswordReminders.html', name = "Bla", trendPorts = trendPorts, user = user)
 
 if __name__ == "__main__":
     # webbrowser.open_new("http://localhost:8181/")
@@ -283,9 +486,15 @@ if __name__ == "__main__":
     # webbrowser.open_new("http://localhost:8181/post-details1")
     # webbrowser.open_new("http://localhost:8181/post-details2")
     # webbrowser.open_new("http://localhost:8181/newsfeed2/")
-    webbrowser.open_new("http://localhost:8181/user-profile1")
-    webbrowser.open_new("http://localhost:8181/user-profile2")
-    webbrowser.open_new("http://localhost:8181/account-settings1")
-    webbrowser.open_new("http://localhost:8181/account-settings2")
+    # webbrowser.open_new("http://localhost:8181/user-profile1")
+    # webbrowser.open_new("http://localhost:8181/user-profile2")
+    # webbrowser.open_new("http://localhost:8181/account-settings1")
+    # webbrowser.open_new("http://localhost:8181/account-settings2")
+    # webbrowser.open_new("http://localhost:8080/dashboard1")
+    # webbrowser.open_new("http://localhost:8080/dashboard2")
+    # webbrowser.open_new("http://localhost:8080/dashboard3")
+    # webbrowser.open_new("http://localhost:8080/dashboard4")
+    webbrowser.open_new("http://localhost:8080/404-error")
+    # webbrowser.open_new("http://localhost:8080/no-such-thing-forgot-password")
     app.run("localhost", 8181, True, use_reloader=False)
 

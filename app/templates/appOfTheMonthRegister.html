@@ -1,0 +1,105 @@
+﻿{#- Version 1.0 - 08.25.2019, 00:00 #} {#- This is the 'appOfTheMonthRegister.html' template.
+A user can register his or her app. Once a month, a winning app is chosen and displayed at that 
+bottom, right corner of the screen (or bottom part of the mobile devices.) The information submitted
+through this form is written into a text file located in the static folder. #}
+<head>
+  <! -- Website's Icon -->
+  <link
+    rel="shortcut icon"
+    href="{{ url_for('static',filename='img/favicon.ico') }}"
+  />
+  <!-- CSS files: -->
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static',filename='css/stylesAppOfTheMonthRegister.css') }}"
+  />
+  <!-- Script files: -->
+  <script src="{{ url_for('static',filename='js/scriptsAppOfTheMonthRegister.js') }}"></script>
+</head>
+{%- extends "base.html" %} {#- Since this template inherits everything from a
+base template, all we modify here is the 'content' block: #} {%- block content
+%}
+<!-- <div class = "container"> -->
+<div class="signup-wrap">
+  <div class="panel-frame">
+    <div class="panel-content">
+      <header class="header-wrapper">
+        <h1>App of the Month</h1>
+        <p class = "explanationParag" >Once each month, our UnderDogs team selects an app that you - our very UnderDogs - have built and displays your greatest achievements. Fill out the form below to have one of our representatives contact you and your app may become the App of the Month!<br><br>The app is chosen on the 1st of each month or on the consecutive weekday; the winner is contacted by e-mail. Participation is completely <strong>FREE</strong>.</p>
+        <h1>Register Your App</h1>
+        <p class="required">* - required</p>
+      </header>
+      <span></span>
+      <form
+        class="appRegisterForm"
+        action = "/app-registration-form-submitted/"
+        method = "POST"
+      >
+        <div class="row1">
+          <input
+            type="text"
+            class="first_name"
+            name="first"
+            placeholder="First Name"
+            title = "First Name"
+            onkeyup = "validateNames(this)"
+            onmousemove = "validateNames(this)"
+            required
+          /><label class="required">*</label>
+        </div>
+        <div class="row2">
+          <input
+            type="text"
+            class="last_name"
+            name="last"
+            placeholder="Last Name"
+            title = "Last Name"
+            onkeyup = "validateNames(this)"
+            onmousemove = "validateNames(this)"
+            required
+          /><label class="required">*</label>
+        </div>
+        <div class="row3">
+          <input
+            type="email"
+            class="email"
+            name="email"
+            placeholder="Email Address"
+            title = "Email Address"
+            required
+            onkeyup="validateEmail()"
+            onmousemove = "validateEmail()"
+          /><label class="required">*</label>
+        </div>
+        <div class="row4">
+          <input
+            type="text"
+            name="appname"
+            placeholder="Your App's Name"
+            title = "Your App's Name"
+          />
+        </div>
+        <div class = "row5">
+          <input 
+            type="text" 
+            name="addimage" 
+            class = "addimage" 
+            placeholder="URL to Your App's Image (1 image only)"
+            title = "URL to Your App's Image (1 image only)"
+            onkeyup = "URLLength ()"
+          />
+        </div>
+        <input
+          type = "submit"
+          title = "Register"
+          value = "Register"
+          class = "registFormButton"
+          name = "registFormButton"
+        />
+      </form>
+    </div>
+  </div>
+</div>
+<!-- </div> -->
+{% endblock content -%}

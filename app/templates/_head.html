@@ -2,12 +2,12 @@
             <meta charset="UTF-8">
         {% endblock meta -%}
         {%- block theTitle %}
-            {%- if name %}<title>{{ name }}</title> {% else %}<title>logicPort</title>{% endif -%}
+            {%- if name %}<title>{{ name }}</title> {% else %}<title>Underdogs</title>{% endif -%}
          {% endblock theTitle -%}
          {%- block linkedStatics %}
-              <! -- JavaScript -->
+              <!-- JavaScript -->
               <script src="{{ url_for('static',filename='js/scripts.js') }}"></script>
-              <! -- Website's Icon -->
+              <!-- Website's Icon -->
               <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
               <!-- Imported Google Font Source Code Pro & Roboto -->
               <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">

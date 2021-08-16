@@ -18,7 +18,7 @@
         </div>
         {#- If user presses the button, he or she will be redirected to create a new post! #}
         {%- if user %}
-            <form method = "post" action = "/new-post/" class = "createPostForm">
+            <form method = "get" action = "/new-post/" class = "createPostForm">
                   <input type = "submit" class = "createPostBtn" name = "createPostBtn" value = "CREATE POST" title = "Create New Post">
             </form>
         {% endif -%}
@@ -27,8 +27,13 @@
         {#- the posts in which port to sort! #}
         <form method = "post" action = "" class = "sortByForm">
             <select name = "sortByBtn" title = "Sort Posts" onchange="this.form.submit()">
-                  <option value="new" selected="selected">Sort By: New</option>
+               {%- if sort == 'new' %}
+                  <option value="new" selected="selected" >Sort By: New</option>
                   <option value="hot">Sort By: Hot</option>
+               {%- elif sort == 'hot' %}
+                  <option value="new">Sort By: New</option>
+                  <option value="hot" selected="selected" >Sort By: Hot</option>
+               {% endif %}
             </select>
             <input type = "hidden" name = "postsAndPortToSort" value = "{{ port['name'] }}">
         </form>
@@ -54,7 +59,7 @@
 
                 <div class = "votes">
                    {%- if user %} {#- Appears only if the user is logged in #}
-                     <form class = "upvote" action = "" method = "post" target = "frameForVotes">
+                     <form class = "upvote" action = "/vote/" method = "post" target = "frameForVotes">
                             <input type = "submit" 
                                        class = "upvoteBtn post{{ post['postId'] }}"
                                        value = "++" 
@@ -67,7 +72,9 @@
                                        {#- do nothing #}
                                        {% endif -%}>
                    {% endif -%}
-                    <input type="hidden" name="portId" value="{{ post['postId'] }}">
+                    <input type="hidden" name="id" value="{{ post['postId'] }}">
+                    <input type="hidden" name="originalValue" value="{{ post['upOrDownvoted'] }}">
+                    <input type="hidden" name="type" value="post">
                     <p class = "numOfVotes post{{ post['postId'] }}"
                        {%- if (post['upOrDownvoted'] == 1) and (user) %}
                        style = "color: rgb(77, 208, 191);"
@@ -94,14 +101,14 @@
                  <div class = "postImage">
                         {#- Since 'post['image']' is optional, we must have the following 'if' statement. #}
                         {%- if post['image'] != None %}
-                            <a href = ""><img src = "{{ post['image'] | e }}" class = "squareImage" title = "See post details" alt = "the post {{ post['postTitle'] | e }}"></a>
+                            <a href = "/post/{{post['postId']}}"><img src = "{{ post['image'] | e }}" class = "squareImage" title = "See post details" alt = "the post {{ post['postTitle'] | e }}"></a>
                         {% endif %}
                  </div>
                  <div class = "description">
                         <a href = "" class = "portOfPostName" title = "See all posts in {{ post['portName'] }}">p/{{ post['portName'] }}</a>
-                        <a href = "" class = "nameOfPost" title = "{{ post['postTitle'] | e }}">{{ post['postTitle']  | e }}</a>
+                        <a href = "/post/{{post['postId']}}" class = "nameOfPost" title = "{{ post['postTitle'] | e }}">{{ post['postTitle']  | e }}</a>
                         {%- if post['postText'] != None %}
-                              <p class = "postDescription">{{ post['postText']  | e }}</p>
+                              <p class = "postDescription" title = "{{ post['postText']  | e }}">{{ post['postText']  | e }}</p>
                         {% endif -%}
                         <p class = "numberOfComments">{{ post['numComments'] }} comments</p>
                  </div>
@@ -110,10 +117,11 @@
                         <p class = "postedBy">Posted by:</p>
                         <div class = "authorDetails">
                              {#- Since 'post['avatarUrl']' is optional, we must have the following 'if' statement. #}
-                             {%- if post['avatarUrl'] != None %}
-                                  <a href = "" title = "{{ post['username'] }}'s profile"><img src = "{{ post['avatarUrl'] | e }}" class = "roundImage" alt = "the user {{ post['username'] }}"></a>
-                             {%- else %}
-                                  <a href = "" title = "{{ post['username'] }}'s profile"><img src = "{{ url_for('static',filename='img/profile_logo.png') }}" class = "roundImage" alt = "the user {{ post['author'] }}"></a>
+                             {%- if post['authorImg']|length > 10 %}
+                                 <a href="" title="{{ post['author'] }}'s profile"> <img src="{{ post['authorImg'] }}" class="roundImage"> </a>
+                             {% else %}
+                                 <a href="" title="{{ post['author'] }}'s profile"> <img src="{{ url_for('static',filename='img/profile_logo.png') }}"
+                                       class="roundImage"> </a>
                              {% endif -%}
                              <a href = "" class = "usernameOfAuthor" title = "{{ post['author'] }}'s profile">{{ post['author'] }}</a>
                         </div>
